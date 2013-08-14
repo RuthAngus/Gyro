@@ -33,13 +33,13 @@ class Period_measurements(object):
         y = self.measured_p
         x = model_ages
         result = fmin(self.residuals, self.p0, args = (y, x))
-        print plsq[0]
+        print result
             
      def residuals(self, p, y, x):
         # y = self.measured_p, x = model_ages
         #n, a, b = p
         #model_p = self.model_periods(p0)
-        err = (y - self.model_periods(x))/self.errors
+        err = sum((y - self.model_periods(x))/self.errors)
         return err
 
      def peval(self, x, p):
