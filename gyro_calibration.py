@@ -3,7 +3,7 @@
 
 import numpy as np
 import pylab as p
-# from scipy.optimize import minimize
+from scipy.optimize import leastsq
 import mpfit
 
 ''' Load data '''
@@ -22,35 +22,65 @@ class Period_measurements(object):
         self.errors = errors
         self.B_Vs = B_Vs
 
+    def residuals(self, p, model_p):
+        #n, a, b = p
+        #model_p = self.model_periods(p0)
+        err = self.measured_p - model_p
+        return err
+
+    def peval(self, p):
+        return self.model_periods(p[0], p[1], p[2])
+
+    def model_ages(self):
+        nf = 0.5189; af = 0.7725; bf = 0.601 # Don't worry about these - just here for fake ages
+        return 1.2*(self.convert_Barnes(nf, af, bf) + 0.2) # FIXME: actually want to change the params
+        
+    def model_periods(self, n, a, b):
+        return self.age_period(self.model_ages(), n, a, b)
 
     def minimise(self):
-
-        n = 0.5189; a = 0.7725; b = 0.601
-        ages_Gyr = Period_measurements.convert_Barnes(self, n, a, b)
-        model_ages = 1.2*(ages_Gyr*10**3 + 0.2)
-
-        # A total of 3 parameters, with starting values of 0.5189, 0.7725 and 0.601 are given.
-        # all constrained to be between 0 and 1
         
-        parinfo = [{'value':0., 'fixed':0, 'limited':[0,0], 'limits':[0.,0.]}]*3
-        parinfo[0]['limited'][0] = 1; parinfo[0]['limited'][1] = 1
-        parinfo[1]['limited'][0] = 1; parinfo[1]['limited'][1] = 1
-        parinfo[2]['limited'][0] = 1; parinfo[2]['limited'][1] = 1
-        parinfo[0]['limits'][0]  = 0.; parinfo[0]['limits'][1]  = 1.
-        parinfo[1]['limits'][0]  = 0.; parinfo[1]['limits'][1]  = 1.  # FIXME: do I need to specify B_Vs as a param
-        parinfo[2]['limits'][0]  = 0.; parinfo[2]['limits'][1]  = 1.  # to be held fixed?
-        values = [0.5189, 0.7725, 0.601]
-        for i in range(3): parinfo[i]['value']=values[i]
+        ''' scipy.optimize.leastsq '''
 
-        
-        x = self.measured_p
         p0 = [0.5189, 0.7725, 0.601]
-        y = 10**((1./p0[0])*(np.log10(measured_p)-np.log10(p0[1])- p0[2]*(np.log10(self.B_Vs-0.4))))
-        fa = {'x':x, 'y':y, 'err':self.errors}
-        m = mpfit('myfunct', p0, functkw=fa)
-        print 'status = ', m.status
-        if (m.status <= 0): print 'error message = ', m.errmsg
-        print 'parameters = ', m.params
+
+        # This should be a scalar value
+        print type(self.residuals(p0, self.model_periods(p0[0], p0[1], p0[2])))
+        print type(p0)
+        print type(self.measured_p)
+        print type(self.model_ages())
+
+        plsq = leastsq(self.residuals(p0, self.model_periods(p0[0], p0[1], p0[2])), p0, \
+                       args = (self.measured_p, self.model_ages()))
+        print plsq[0]
+
+        # x0 = np.array[0.5189, 0.7725, 0.601]
+        # res = scipy.optimize.minimize(convert_Barnes(
+
+        ''' mpfit '''
+
+        # # A total of 3 parameters, with starting values of 0.5189, 0.7725 and 0.601 are given.
+        # # all constrained to be between 0 and 1
+        
+        # parinfo = [{'value':0., 'fixed':0, 'limited':[0,0], 'limits':[0.,0.]}]*3
+        # parinfo[0]['limited'][0] = 1; parinfo[0]['limited'][1] = 1
+        # parinfo[1]['limited'][0] = 1; parinfo[1]['limited'][1] = 1
+        # parinfo[2]['limited'][0] = 1; parinfo[2]['limited'][1] = 1
+        # parinfo[0]['limits'][0]  = 0.; parinfo[0]['limits'][1]  = 1.
+        # parinfo[1]['limits'][0]  = 0.; parinfo[1]['limits'][1]  = 1.  # FIXME: do I need to specify B_Vs as a param
+        # parinfo[2]['limits'][0]  = 0.; parinfo[2]['limits'][1]  = 1.  # to be held fixed?
+        # values = [0.5189, 0.7725, 0.601]
+        # for i in range(3): parinfo[i]['value']=values[i]
+
+        
+        # x = self.measured_p
+        # p0 = [0.5189, 0.7725, 0.601]
+        # y = 10**((1./p0[0])*(np.log10(measured_p)-np.log10(p0[1])- p0[2]*(np.log10(self.B_Vs-0.4))))
+        # fa = {'x':x, 'y':y, 'err':self.errors}
+        # m = mpfit.mpfit('myfunct', p0, functkw=fa)
+        # print 'status = ', m.status
+        # if (m.status <= 0): print 'error message = ', m.errmsg
+        # print 'parameters = ', m.params
  
 
     def calibrate(self):
@@ -58,9 +88,9 @@ class Period_measurements(object):
         n = 0.5189; a = 0.7725; b = 0.601
         
         # Calculate ages from measured periods with Barnes 2007
-        ages_Gyr = Period_measurements.convert_Barnes(self, n, a, b, doplot = False)
+        ages = Period_measurements.convert_Barnes(self, n, a, b, doplot = False)
 
-        model_ages = 1.2*(ages_Gyr*10**3 + 0.2)
+        model_ages = 1.2*(ages + 0.2)
 
         # Calculate the periods these fake ages would give you with Barnes 2007
         # Imagine that the self.B_Vs colours are the asteroseismic colours (v. small uncertainties)
@@ -84,8 +114,8 @@ class Period_measurements(object):
         ages_Gyr = np.zeros(len(self.KIDs))
         errors = np.zeros(len(self.KIDs))
 
-        print self.B_Vs
-        print self.B_Vs-0.4
+        # print self.B_Vs
+        # print self.B_Vs-0.4
         log_age = (1./n)*(np.log10(measured_p)-np.log10(a)- b*(np.log10(self.B_Vs-0.4)))
         ages = 10**log_age
         ages_Gyr = ages/10.**3
@@ -117,7 +147,7 @@ class Period_measurements(object):
             p.savefig('/Users/angusr/Documents/rotation/Gyro_results')
             p.savefig('/Users/angusr/Documents/rotation/Gyro_results.ps')
             
-        return ages_Gyr
+        return ages
 
     def age_period(self, ages, n, a, b):
         log_periods = n*(np.log10(ages)) + np.log10(a) + b*(np.log10(self.B_Vs - 0.4)) 
