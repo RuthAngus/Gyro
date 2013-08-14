@@ -5,6 +5,7 @@
 
 import numpy as np
 import gyro_calibration
+import random
 
 # ''' Load data '''
 # data = np.genfromtxt('/Users/angusr/Documents/rotation/final_catalogue.txt').T
@@ -26,4 +27,10 @@ def totls2d():
 
     y = data[1]
     yerr = data[2]
+
+    # for each x, draw from gausssian
+    ndraws = 100
+    for i in range(len(x)):
+        for j in ndraws:
+            new_x = random.gauss(x[i], x_err[i])
     
