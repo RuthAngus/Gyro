@@ -60,5 +60,10 @@ class Period_measurements(object):
         return 10**(self.p0[0]*(np.log10(age)) + np.log10(self.p0[1]) + \
                     self.p0[2]*(np.log10(self.B_Vs - 0.4)))
 
+     def x_values(self):
+          # nf = 0.5189; af = 0.7725; bf = 0.601
+          nf = 0.56; af = 0.72; bf = 0.53 # Don't worry about these - just here for fake ages
+          return self.period_age(nf, af, bf)   
+
 find_params = Period_measurements(KIDs, measured_p, errors, B_Vs, p0)
 find_params.minimise()

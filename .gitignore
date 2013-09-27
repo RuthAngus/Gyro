@@ -1,4 +1,13 @@
 *.py[cod]
+*.bbl
+*.aux
+*.blg
+*.pdf
+*.synctex*
+*.log
+Makefile
+mpfit_example.py
+mpfit.py
 
 # C extensions
 *.so
