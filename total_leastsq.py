@@ -9,8 +9,7 @@ import random
 import pylab as p
 from scipy.optimize import fmin
 
-
-''' Load data '''
+# Load data
 data = np.genfromtxt('/Users/angusr/Documents/rotation/final_catalogue.txt').T
 KIDs = data[0]
 measured_p = data[1]
@@ -112,3 +111,9 @@ F = totls2d(x, x_err, measured_p, errors, p0)
 # p.plot(F.x, model_periods(p_true, F.x, B_Vs), 'cx')
 #print F.residuals(p0)
 F.minimise(F.residuals)
+                          
+                          
+                          
+                      
+                          
+                          
