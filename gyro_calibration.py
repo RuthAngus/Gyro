@@ -67,3 +67,11 @@ class Period_measurements(object):
 
 find_params = Period_measurements(KIDs, measured_p, errors, B_Vs, p0)
 find_params.minimise()
+
+
+def model_ages():
+    data = np.genfromtxt('/Desktop/aster_ages.txt')
+    kicic = data[0]
+    ages = data[-1]
+    print ages
+    return ages

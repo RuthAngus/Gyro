@@ -16,6 +16,8 @@ measured_p = data[1]
 errors = data[2]
 B_Vs = data[3]
 B_Vs = 0.5 #FIXME
+
+# Gyro parameters: n, a, b
 p0 = np.array([0.5189, 0.7725, 0.601])
 
 
@@ -33,13 +35,11 @@ class totls2d(object):
             p0 = self.p0
         else:
             self.p0 = p0            
+
         # Optimise parameters
         new_p = fmin(func, p0)
         final_resid = self.residuals(new_p)
-        # print 'MINIMISE...'
         print new_p
-        # print final_resid
-        # print '...MINIMISE'
         self.params = new_p
 
         # Plotting
@@ -97,6 +97,17 @@ def model_periods(params, x, B_Vs):
     # print '...MODEL_PERIODS'
     return 10.0**c
 
+def measured_ages(params, x, B_Vs):
+    ages = 10** ((1./params[0]) * (np.log10(x) - np.log10(params[1]) - \
+params[2]*np.log10(B_Vs - 0.4)))
+    
+def model_ages():
+    data = np.genfromtxt('/Desktop/aster_ages.txt')
+    kicic = data[0]
+    ages = data[-1]
+    print ages
+    return ages
+
 # Define x
 B_Vs = 0.5 # FIXME
 gyro_cal = gc.Period_measurements(KIDs, measured_p, errors, B_Vs, p0)
@@ -105,10 +116,10 @@ x_err = 0.05*x # make up uncertainties
 p_true = np.array([0.56, 0.72, 0.53])
 
 F = totls2d(x, x_err, measured_p, errors, p0)
-# p.clf()
-# p.errorbar(F.x, F.y, xerr = F.x_err, yerr = F.y_err, fmt = 'ko')
-# p.plot(F.x, model_periods(p0, F.x, B_Vs), 'r+')
-# p.plot(F.x, model_periods(p_true, F.x, B_Vs), 'cx')
+p.clf()
+p.errorbar(F.x, F.y, xerr = F.x_err, yerr = F.y_err, fmt = 'ko')
+p.plot(F.x, model_periods(p0, F.x, B_Vs), 'r+')
+p.plot(F.x, model_periods(p_true, F.x, B_Vs), 'cx')
 #print F.residuals(p0)
 F.minimise(F.residuals)
                           
