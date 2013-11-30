@@ -22,117 +22,82 @@
 
 Measuring ages for intermediate and low-mass stars on the main
 sequence is challenging, but important for a wide range of studies,
-from Galactic dynamics to stellar and planetary evolution. Among the
-available methods, gyrochronology is a powerful one, because it
-requires knowledge of only the star's mass (or colour) and its
-rotation period. However, it is not well calibrated at late ages, and
-suffers from large uncertainties. The continuous, high precision light
-curves obtained by Kepler mission are ideally suited to measuring
-photometric rotation periods. For a few hundred of the brighter Kepler
-targets,  asteroseismology will also provide precise masses and
-ages. We searched for periodic variability in the light curves of
-165 stars in which the Kepler Asteroseismology Consortium have
-detected Sun-like oscillations. We hope to use the resulting sample of
-stars with precise asteroseismic masses and ages and photometric
-rotation periods to improve the calibration of the gyrochronology
-relations, and to apply them to a wide range of systems, including
-planet-host stars.
-
+from Galactic dynamics to stellar and planetary evolution. Among the available methods, gyrochronology is a powerful one, because it re- quires knowledge of only the star’s mass (or colour) and its rotation period. However, it is not well calibrated at late ages, and suffers from large uncertainties. Asteroseismology provides relatively precise age measurements for some of the brightest stars observed by Kepler. We measured the photometric rotation periods of 144 stars with asteroseismic ages and compare our results to the existing gyrochronology relations.
+We find that the current relations over-predict stellar rotation periods for low-mass stars.   
 
 \section{Introduction}
 \label{intro}
 
 
-Stellar ages are important for our understanding of the evolution of
-a range of astrophysical objects, from galaxies to planetary
-systems. However, the ages of main-sequence (MS) stars are difficult to measure --- the observational properties of stars change very little on the MS --- and
-highly model dependent \citep{Soderblom_2010}. 
-Ages for field stars are most often measured via isochrone fitting to spectroscopic parameters, however ages derived via this method can have uncertainties of 100\% or more. 
-Asteroseismology provides an estimate of the age of a star, as well as other stellar parameters such as mass and radius. 
-Stars oscillate at different frequency modes, the frequency of each depending on the integrated sound speed along the path travelled through the star. 
-A measurement of the mean large frequency separation can be used, via a scaling relation, (equation \ref{eq:delta_nu}) to estimate the mean density of a star which, when combined with spectroscopic Teff and compared with a theoretical model, can yield an age measurement. 
+The ages of main-sequence (MS) stars are difficult to measure as the majority of their observational properties are not a strong function of age. 
+hromospheric activity is often used as an age indicator, as well as lithium depletion, but the evolution of these properties on the main-sequence is poorly understood, plus, high resolution spectra are required to measure either of these properties. 
+Isochrone placement for field stars is a notoriously model-dependent and imprecise dating method, often producing age estimates with uncertainties of order 100 \% or more. 
+The gain in precision achieved for fitting isochrones to cluster members is substantial, cluster ages can have uncertainties as low as 10\% (CITATION). 
+However, the majority of nearby clusters are young, and measuring the rotational velocity of cluster members is extremely difficult for distant clusters. 
+It is for this reason that the existing gyrochronology relations remain poorly calibrated for old stars - they rely chiefly on ages of nearby, young clusters. 
+Photometrically determined rotation periods for stars in the older Kepler clusters will provide excellent anchors for gyrochronology, however extracting rotation periods for these stars is difficult due, in part, to Kepler's large pixels. 
+The gyrochronology relations of Mamajek and Hillenbrand have been calibrated using activity measurements of older field stars as well as cluster stars. 
+The evolution of stellar activity is currently poorly understood, especially for older stars and whilst the Mamajek and Hillenbrand relation is a revision of the Barnes (2007) relation, it remains poorly calibrated at late ages. 
+Chromospheric activity and rotation period are undoubtably linked (CITATION) and with the photometric precision provided by Kepler, rotation periods are easily measurable for many stars without the need for spectroscopic data. 
+
+\subsection{Angular momentum loss in Main Sequence stars}
+Stars lose angular momentum over their MS lifetimes via a magnetised wind that is constrained to rotate with the stellar surface out to the alfven radius (CITATION). 
+The strength of the magnetic field at the stellar surface, and therefore the rate of angular momentum loss, depends on the mass and
+ rotation period of a star. 
+ Due to this dependence rapid rotators spin down faster than slow rotators and all F, G and K stars converge onto
+ a unique mass-period-age relation after $\sim$ the age of the Hyades: 650 Myrs \citep{Irwin_2009}.
+The gyrochronology paradigm implies that stellar age can be inferred from mass (or colour) and rotation period measurements alone. 
+The gyrochronology relation of \citet{Barnes_2007} was determined empirically from observations of the Hyades and other young clusters and tested on binary stars. 
+It can be written:
+
+\begin{equation}
+\mbox{log}~ t_{gyro} = \frac{1}{n}\left[\mbox{log}~ P - \mbox{log}~ a - b~\mbox{log}(B-V-c)\right] ,
+\label{eq:Barnes2007_2}
+\end{equation}
+
+where t, B, V and P are time (in Myr), B and V band colours and rotation period 
+(in days), respectively. The values of n, a, b and c are tabulated in ...
+This relation was further calibrated by Mamajek and Hillenbrand (2008) with chromospheric activity measurements of field stars.
+Their relation takes the same form as Barnes (2007) with revised parameters shown in table ....
+
+\subsection{Asteroseismic ages}
+Asteroseismically determined ages can be very precise, with uncertainties as low as 10\%, and, unlike activity diagnostics, and rotation period measurements the precision of asteroseismic ages are not, themselves age dependent. 
+Pressure waves propagating through stars produce periodic brightening and dimming of the stellar surface on timescales of $\approx$ 5 minutes for solar-like stars.
+These oscillations can be detected in short-cadence Kepler data, and a fourier transform of the time-series shows a series of peaks, corresponding to each oscillation mode. 
+This series of peaks is modulated by a gaussian envelope, the maximum of which is another fundamental asteroseismic observable, $\nu_{max}$
+The frequency of each oscillation mode depends on the integrated sound speed along the path through the star and measuring the frequency separation between oscillation modes yields an estimate of the stellar density. 
+When combined with spectroscopic observations and compared with theoretical stellar evolution models, measurements of the oscillation mode frequencies can yield stellar ages.  
+The asteroseismic properties of 505 stars published in Chaplin et al (2013) were calculated from measurements of the mean large frequency separation, $\Delta\nu$ and the maximum of the gaussian envelope, $\nu_{max}$
+These two fundamental asteroseismic parameters can be used, via the scaling relations below, to derive stellar ages, masses and radii.
+
 
 \begin{equation}
 \frac{\Delta\nu}{\Delta\nu_{\odot}} \approx \sqrt{\frac{M/M_{\odot}}{R/R_{\odot}^3}}
 \label{eq:delta_nu}
 \end{equation}
 
-
-Asteroseismic ages calculated from the mean large frequency separation and this scaling relation often have uncertainties of  35\% (CITE CHAPLIN).
-This uncertainty can be reduced by measuring the individual oscillation frequency of each mode separately, thus building up a density profile of the star. 
-This provides a tighter constraint on the evolutionary stage of the star and can provide an age measurement with an uncertainty of 10\% (CITE VICTOR OR TRAVIS).
-Asteroseismology is a relatively precise dating method, however it can only be applied to the brightest stars observed by missions like Kepler and only those that show asteroseismic
-oscillations \citep{Chaplin_2011}. 
-Gyrochronology, the technique of estimating stellar ages via their rotation periods, can potentially be applied to any star with a measurable mass and rotation period, but currently suffers from poor calibration, particularly for older
-MS stars. 
-The basic principals behind gyrochronology are the following. 
-Stars lose angular momentum over their MS lifetimes via a magnetised wind. 
-The strength of the magnetic field at the stellar surface, and
- therefore the rate of angular momentum loss, depends on the mass and
- rotation period of a star. 
- Due to this dependence rapid rotators spin
- down faster than slow rotators and all F, G and K stars converge onto
- a unique mass-period-age relation after $\sim$ the age of the Hyades: 650 Myrs \citep{Irwin_2009}.
-Kepler offers the perfect opportunity to perform a
-gyrochronology calibration as it will provide asteroseismology for
-hundreds of stars and photometric rotation periods for tens of
-thousands of stars, with some cross-over between the two.
-
-The gyrochronology relation presented in \citet{Barnes_2007} was determined empirically
-from observations of the Hyades and other young clusters and can be written:
-
-%\begin{equation}
-%P(B-V, t) = t^{0.5189 \pm 0.0070} (0.7725 \pm 0.011)(B-V- 0.4)^{0.601 \pm 0.024}
-%\label{eq:Barnes2007_1}
-%\end{equation}
-
-%or
-
 \begin{equation}
-\mbox{log}~ t_{gyro} = \frac{1}{n}\left[\mbox{log}~ P - \mbox{log}~ a - b~\mbox{log}(B-V-0.4)\right] ,
-\label{eq:Barnes2007_2}
+\frac{\Delta\nu}{\Delta\nu_{\odot}} \approx \sqrt{\frac{M/M_{\odot}}{R/R_{\odot}^3}}
+\label{eq:delta_nu}
 \end{equation}
 
-where t, B, V and P are time (in Myr), B and V band colours and rotation period 
-(in days), respectively. n $= 0.5189$, a $ = 0.7725 \pm 0.011$, and b $ = 0.601 \pm 0.024$. 
-Note that this equation can only be applied to stars with B - V less than 0.4. 
-
-This relation was further calibrated by (CITE MAMAJEK AND HILLENBRAND) using some other data, but again is not applicable to massive stars. 
-
-%We measured rotation periods by monitoring variations in stellar light curves
-%induced by the motion of star spots moving with the stellar
-%surface. Historically vsini measurements were used, however this
-%method is obviously flawed as, without information
-%about the star's inclination, periods measured are only maximum
-%periods. Star spots produce periodic variations in stellar
-%light curves. These variations can be sinusoidal, or superpositions of
-%sinusoids, or irregular in shape and they can evolve over time. The younger a
-%star, the more active and the faster it spins, so periods of younger
-%stars tend to easier to measure. The precision of flux measurements in
-%Kepler light curves is such that star spot induced variability is easily
-%detectable and it is this precisely measured variation that we rely
-%upon here. 
-
-%5Stellar ages can be measured very precisely (to within 10\%) using asteroseismology \citep{Chaplin_2011}. Stars oscillate at a range of frequency modes; the frequency of each mode being related to the integrated sound speed along the path through the star. Different modes penetrate to different depths within the star. By measuring the frequency of each mode one can build up a density profile of a star and compare it to a theoretical model to estimate its age. In practise, measuring the individual frequency of each mode is a manual process and often, only the mean frequency separation between modes is calculated. This `bulk analysis' method produces ages with a precision of 35\%.
+Ages provided in Chaplin et al (2013), calculated from the mean large frequency separation and this scaling relation have uncertainties of  $\approx$ 35\%.
+If the frequency of each oscillation mode is measured individually, one can build a density profile of the star and provide a tighter constraint on the evolutionary stage of the star. 
+Ages derived from individual oscillation mode measurements can have uncertainties as small as 10\% (CITATION), however this is a still a manual process and therefore takes time.
+Although asteroseismology is a potentially precise dating method, it can only be applied to bright stars observed by missions like Kepler that show solar-like oscillations \citep{Chaplin_2011}. 
+It is therefore essential that we have a well calibrated dating method like gyrochronology which can be applied to any F, G or K star with a measurable rotation period. 
 
 \section{Rotation Period Measurement}
 \label{rotation_period_measurement}
 
-
-165 Kepler targets showing solar-like oscillations were selected by
-the Kepler Asteroseismic Consortium. These are field stars with effective
-temperatures ranging from 4500 to 6570 K and log g values ranging from 3.5 to 4.5. 
-
-The Kepler light curves of these targets display quasi-periodic variations on timescales corresponding to rotational periods of the stars due to transiting star spots. An auto-correlation function (ACF) code was used to measure rotation
-periods from Kepler light curves. As an alternative to the standard Fourier decomposition
-and least-squares fitting of
-sinusoidal models \citep{Zechmeister})
- autocorrelation is much better suited to signals that are not
- sinusoidal or strictly periodic. It is more effective at
- distinguishing a true signal from its harmonics.  For a detailed
- description of the advantages of the ACF method, see \citet{McQuillan}.
-
-The ACF method used here to measure rotation periods is the same as described in \citet{McQuillan}. 
+The Kepler light curves of these 505 asteroseismic targets display quasi-periodic variations on timescales corresponding to rotational periods of the stars due to transiting star spots. 
+The auto-correlation function (ACF) method developed by McQuillan et al (2012)  was used to measure rotation
+periods from Kepler light curves. 
+As an alternative to the standard Fourier decomposition and least-squares fitting of
+sinusoidal models \citep{Zechmeister}) autocorrelation is much better suited to signals that are not sinusoidal or strictly periodic. It is more effective at
+ distinguishing a true signal from its harmonics.  
+ For a detailed description of the advantages of the ACF method, see \citet{McQuillan}.
+ 
 An autocorrelation function describes the self-similarity of a light curve at a range of lag times and the highest peak in the ACF (usually also the first peak) is centered on the rotation period of the star. 
 In our implementation the first two peaks in the ACF were identified and the central
 value of the first peak was temporarily accepted as the period (unless
@@ -148,15 +113,6 @@ In cases where only one peak was present in the ACF, the
 central peak value was kept as the period and the error measured from
 the width of the peak.  Example ACFs are shown in figure \ref{fig:subfigures} at the end of this document.
 
-%An example ACF is shown in figure \ref{fig:7771282} with additional examples in figures \ref{fig:10016239} to \ref{fig:7871531} at the end of this document.
-
-%\begin{figure}[ht]
-%\begin{center}
-%\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{7771282_full.png}
-%\caption{Top: raw flux for quarters 3 - 6 for the star with identifier 7771282. Second from top: PDC data with interpolation across data gaps. Second from bottom: the amplitude of each peak identified in the light curve. Bottom: autocorrelation function.}
-%\label{fig:7771282}
-%\end{center}
-%\end{figure}
 
 We measured the rotation periods of the stars in our
 asteroseismic target sample from Kepler quarters 3-16. 
@@ -288,18 +244,26 @@ These new data points are shown in figure \ref{p_vs_a2}.
 
 \section{Still to do and Future}
 
-1. Plot isomass regions
-2. Check the ages of Victor's targets and plot according to mass
-3. 
+separate into age bins 
 
-2. Clean up code
+fitting
+
+replace figures
+
+Either cut out injection tests or make them better.
+
 3. More injections? / injection tests for year by year / redo injections, this time making sure that the light curves are continuous
+
 4. Ask Amy to send her latest version of her code (and automated version?)
+
 5. Figure out what's going wrong with injections
+
 6. look up what constitutes an evolved star.
-7. play with pipeline params to see if you can increase sample.
-8. PCA
+
+8. PCA?
+
 9. HARPS North targeted asteroseismology RV planet search proposal.
+
 10. Build year by year data into injection tests. 
 
 
@@ -313,59 +277,6 @@ Find the underlying trend via PCA
 
 \bibliographystyle{plainnat}
 \bibliography{Gyro_paper}
-
-%\begin{figure}[ht]
-%\begin{center}
-%\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{10016239_full.png}
-%\caption{The raw and PDC light curves, peak amplitudes and ACF of a short period, active star with a successfully measured rotation period.}
-%\label{fig:10016239}
-%\end{center}
-%\end{figure}
-
-%\begin{figure}[ht]
-%\begin{center}
-%\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{10018963_full.png}
-%\caption{The raw and PDC light curves, peak amplitudes and ACF of a quiet star with unsuccessful rotation period measurement.}
-%\label{fig:10018963}
-%\end{center}
-%\end{figure}
-
-
-%\begin{figure}[ht]
-%\begin{center}
-%\includegraphics[width=8in, clip=true, trim=0 0 0.8in 0]{7871531_full.png}
-%\caption{The raw and PDC light curves, peak amplitudes and ACF of an active, long period star with a successfully measured rotation period.}
-%\label{fig:7871531}
-%\end{center}
-%\end{figure}
-
-\begin{figure}[ht!]
-     \begin{center}
-%
-        \subfigure[An active star with a successfully measured rotation period.]{%
-            \label{fig:first}
-            \includegraphics[width=0.4\textwidth]{7771282_full.png}
-        }%
-        \subfigure[A short period, active star with a successfully measured rotation period.]{%
-           \label{fig:second}
-           \includegraphics[width=0.4\textwidth]{10016239_full.png}
-        }\\ %  ------- End of the first row ----------------------%
-        \subfigure[A quiet star with unsuccessful rotation period measurement.]{%
-            \label{fig:third}
-            \includegraphics[width=0.4\textwidth]{10018963_full.png}
-        }%
-        \subfigure[An active, long period star with a successfully measured rotation period.]{%
-            \label{fig:fourth}
-            \includegraphics[width=0.4\textwidth]{7871531_full.png}
-        }%
-%
-    \end{center}
-    \caption{%
-        Examples of autocorrelation functions for four asteroseismic Kepler targets. Top: raw flux for quarters 3 - 6. Second from top: PDC data with interpolation across data gaps. Second from bottom: the amplitude of each peak identified in the light curve. Bottom: autocorrelation function.
-     }%
-   \label{fig:subfigures}
-\end{figure}
-%%
 
 \end{document}
 
