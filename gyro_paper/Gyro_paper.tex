@@ -14,8 +14,8 @@
 
 \author{Ruth Angus$^1$, Suzanne Aigrain$^1$, Amy McQuillan$^2$, William, J. Chaplin$^3$}
 \affil{$^1$Department of Physics, University of Oxford, OX1 3RH, UK}
-\affil{$2$University of Tel Aviv, Israel}
-\affil{$3$University of Birmingham, Birmingham, UK}
+\affil{$^2$University of Tel Aviv, Israel}
+\affil{$^3$University of Birmingham, Birmingham, UK}
 
 \section{Abstract}
 \label{abs}
@@ -60,7 +60,7 @@ where t, B, V and P are time (in Myr), B and V band colours and rotation period
 This relation was further calibrated by Mamajek and Hillenbrand (2008) with chromospheric activity measurements of field stars.
 Their relation takes the same form as Barnes (2007) with revised parameters shown in table ....
 
-Gyrochronology relations can only be applied to F, G and K stars. M dwarfs are fully convective; their magnetic fields are not produced by the same dynamo as in more massive stars and they follow a different (poorly understood) spin down process Mcquillan et al (2013). M dwarf ages cannot be calculated via asteroseismology as they do not show high signal-to-noise oscillations. Stars with masses $> 1.3 M_{\odot}$ have shallow convective zones - they are almost fully radiative - and, again, they have a different dynamo-driven magnetic field. These massive stars remain rapidly rotating throughout their brief MS lifetimes and are therefore not suitable gyrochronology targets (CITE KRAFT). 
+Gyrochronology relations can only be applied to F, G and K stars. M dwarfs are fully convective; their magnetic fields are not produced by the same dynamo as in more massive stars and they follow a different (poorly understood) spin down process Mcquillan et al (2013). M dwarf ages cannot be calculated via asteroseismology as they do not show high signal-to-noise oscillations. Stars with masses $> 1.3 M_{\odot}$ have shallow convective zones - they are almost fully radiative - and, again, they have a different dynamo-driven magnetic field. These massive stars remain rapidly rotating throughout their brief MS lifetimes and are therefore not suitable gyrochronology targets \citep{Kraft1967}. 
 
 \subsection{Asteroseismic ages}
 Asteroseismically determined ages can be very precise, with uncertainties as low as 10\%, and, unlike activity diagnostics, and rotation period measurements the precision of asteroseismic ages are not, themselves age dependent. 
@@ -79,7 +79,7 @@ These two fundamental asteroseismic parameters can be used, via the scaling rela
 \end{equation}
 
 \begin{equation}
-\frac{\Delta\nu}{\Delta\nu_{\odot}} \approx \sqrt{\frac{M/M_{\odot}}{R/R_{\odot}^3}}
+\frac{\nu_{max}}{\nu_{max,\odot}} \approx \frac{M/M_{\odot}}{(R/R_{\odot})^2\sqrt{(T_{eff}/T_{eff,\odot})}}
 \label{eq:delta_nu}
 \end{equation}
 
@@ -145,17 +145,10 @@ data subsets.
 We also required that the successful period
 measurements lie within 15\% of the median period value, or a harmonic of that
 median. 
-Of the 165 targets in the original sample, rotation periods of 43 were reliably measured using the above process. 
-Results are shown for an example star (KIC 7771282) in figure \ref{fig:ind_qs}. 
+Of the 505 targets in the original sample, rotation periods of 144 were reliably measured using the above process. 
+An example light curve and ACF for KIC 322300 is shown in figure \ref{fig:lc} and quarter-by-quarter period measurements in figure \ref{fig:ind_qs}. 
 All but one of the quarters for this star produced an ACF with a significant initial peak and repeating subsequent peaks and of those, all period measurements lie within 15\% of the median value.  
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/angusr/ACF/ind_qs_figs/3223000.pdf}
-\caption{Period measurements for quarters 3 - 16 of star `KIC 7771282'. The blue solid line indicates the median value and the shaded blue region marks its 15\% margin. The blue dashed line with surrounding shaded area indicates one half of the median period measurement with 15\% margin.  More than two thirds of the period measurements were present and consistent to within 15\% of the median for this star, so it passed the selection process.}
-\label{fig:ind_qs}
-\end{center}
-\end{figure}
 
 
 Long cadence PDC-MAP data were used throughout this analysis (\citet{Smith_2012}, \citet{Stumpe_2012}). 
@@ -170,50 +163,121 @@ such as the exponential decays that appear after telescope shutdowns, which affe
 
 \section{Gyrochronology Calibration}
 
-505 stars with asteroseismically determined values of mass and age were published in Chaplin (2013) (CITE THIS PROPERLY) 
-and rotation periods were successfully measured for 144 of the 505. 
-These 144 were divided into MS and sub-giant stars based on their logg values presented in Chaplin et al (2013). Stars with logg $>$ 4.0 were classified as MS stars and those with logg $<$ 4.0 as sub-giants. 
+505 stars with asteroseismically determined values of mass and age were published in \citet{Chaplin2013} 
+and rotation periods were successfully measured for 144 of them. 
+We also obtained more precise values of mass and age, (from individual oscillation mode analysis) for 7 of the stars in this sample from (CITE VICTOR).
+The 144 stars with rotation periods were divided into MS and sub-giant stars based on their logg values presented in Chaplin et al (2013). 
+Stars with logg $>$ 4.0 were classified as MS stars and those with logg $<$ 4.0 as sub-giants. 
 Of the 144, 57 were categorised as sub-giants and 87 as MS stars. 
 The MS stars were further divided according to their mass, stars with masses above the Kraft break, $> 1.3 M_{\odot}$, were discarded as, these stars do not spin down appreciably on the MS.
 Figure \ref{fig:results} shows rotation period vs asterosiesmic age for each of the 59 MS stars with masses between 0.8 and 1.3 $M_{\odot}$. 
 Older stars do appear to be more rapidly rotating, as predicted. 
-The isomass lines of the Barnes (2007) and Mamajek and Hillenbrand (2008) gyrochronology relations appear to adequately describe the slope of the observed period-age relation, but not the y-axis offset. 
-These existing gyrochronology relations are not consistent with the observed dependence of period on mass for low-mass stars.  
+The isomass lines of the \citet{Barnes_2007} and \citet{Mamajek_2008} gyrochronology relations appear to roughly describe the slope of the observed period-age relation, but not the y-axis offset, particularly at lower masses. 
+The observed dependence of rotation period on mass is not consistent with predictions from the existing gyrochronology relations for low-mass stars.  
+The relations over-predict the rotation periods of low-mass stars for a given stellar age.
+The triangular outlier at the bottom right of figure \ref{fig:results} is a rapidly rotating, old, low mass, low metallicity object which we believe to be a synchronised binary. 
+It is unfortunate that the single high precision target that survived through the rotation period measurement, sub-giant vetting and mass categorisation processes should be a false positive.
 
+
+
+A trend between mass and age is visible in figure \ref{fig:results}, green points lie to the left and pink points to the right. 
+In figure \ref{fig:m_vs_a} this trend is clear. 
+One would expect not to find old, massive stars due to MS turn-off. 
+The lack of young, low mass stars is not surprising either as asteroseismic oscillation signals can be overwhelmed by activity. 
+
+
+
+Rotation period vs age for the sub-giants is shown in figure \ref{fig:subgiants}. Models of sub-giant rotation evolution from \citet{van_Saders_2013} are shown for comparison. 
+Qualitatively speaking the observations show good agreement with the models.  
+The relationship between age and rotation shown in these models is, unlike the empirical gyrochronology relations of MS stars, physically motivated. 
+Rotational breaking of sub-giants is a simple consequence of angular momentum conservation during the expansion phase and therefore easy to model.
+
+
+\section{A new gyrochronology relation}
+
+Following the form of Barnes (2007), we fit two separable power laws to the data: one for the age - period and one for the period - mass dependence. 
+A fit to the data was obtained using the method described in \citet{Hogg_2010}.
+
+\section{Discussion}
+
+
+We have seen that the existing gyrochronology relations over-predict the rotation periods of low-mass stars. 
+This can be understood as a consequence of core-envelope decoupling. 
+
+Contamination.
+Follow up.
+
+Would like to get more precise ages. 
+
+Would like to get more slowly rotating, lower mass stars - K2 and TESS.
+
+\section{Conclusion}
+
+
+\section{Still to do and Future}
+
+separate into age bins and produce plots. Before and after fitting.
+
+fitting - new gyrochronology relation
+
+Make the sub-giant plot better
+
+swap back to Teff
+
+make isochrones nicer.
+
+Ask Amy to send latest version of her code (and automated version?)
+
+look up what constitutes an evolved star.
+
+Think about whether you want to put any limitations on the ACF itself, or whether the 
+
+\bibliographystyle{plainnat}
+\bibliography{Gyro_paper}
+
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/angusr/ACF/ACF2/PDCQ3_output/plots_acf/3223000_full.png}
+\caption{PDC-MAP and 'processed' light curves for KIC 3223000 with the ACF.}
+\label{fig:lc}
+\end{center}
+\end{figure}
+
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/angusr/ACF/ind_qs_figs/3223000.pdf}
+\caption{Period measurements for quarters 3 - 16 of star `KIC 7771282'. The blue solid line indicates the median value and the shaded blue region marks its 15\% margin. The blue dashed line with surrounding shaded area indicates one half of the median period measurement with 15\% margin.  More than two thirds of the period measurements were present and consistent to within 15\% of the median for this star, so it passed the selection process.}
+\label{fig:ind_qs}
+\end{center}
+\end{figure}
 
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/p_vs_a6.png}
-\caption{Rotation period vs asteroseismic age for 59 MS stars. The colour scale shows mass. Isomass lines of the Barnes (2007) and Mamajek and Hillenbrand (2008) gyrochronology relations are shown for different masses as solid and dashed lines respectively.}
+\caption{Rotation period vs asteroseismic age for 59 MS stars. The colour scale shows mass. Isomass lines of the \citet{Barnes_2007} and \citet{Mamajek_2008}  gyrochronology relations are shown for different masses as solid and dashed lines respectively. The triangular point is from the Silva Aguirre (CITE) sample.}
 \label{fig:results}
 \end{center}
 \end{figure}
 
-
-We obtained more precise values of mass and age for 7 stars from (CITE VICTOR).
-These new data points are shown in figure \ref{p_vs_a2}. 
-
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/p_vs_a2.png}
-\caption{Photometric rotation period vs asteroseismic age for the 145 stars with successful rotation period measurements. The three colours show three different mass bins. Isomass lines are calculated from the Barnes (2007) gyrochronology relations. There is no isomass line for the most massive bin as the Barnes relation does not apply to stars of this mass. }
-\label{fig:p_vs_a2}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/m_vs_a.png}
+\caption{Asteroseismic mass vs asteroseismic age of the MS stars.}
+\label{fig:m_vs_a}
 \end{center}
 \end{figure}
 
-\section{Still to do and Future}
-
-separate into age bins 
-
-fitting
-
-Ask Amy to send her latest version of her code (and automated version?)
-
-look up what constitutes an evolved star.
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/a_vs_p6.png}
+\caption{Rotation period vs asteroseismic age for 57 sub-giants. Models are from \citet{van_Saders_2013}.}
+\label{fig:subgiants}
+\end{center}
+\end{figure}
 
 
-\bibliographystyle{plainnat}
-\bibliography{Gyro_paper}
 
 \end{document}
 
