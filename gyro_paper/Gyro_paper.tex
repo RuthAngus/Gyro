@@ -44,7 +44,7 @@ Chromospheric activity and rotation period are undoubtably linked (CITATION) and
 Stars lose angular momentum over their MS lifetimes via a magnetised wind that is constrained to rotate with the stellar surface out to the alfven radius (CITATION). 
 The strength of the magnetic field at the stellar surface, and therefore the rate of angular momentum loss, depends on the mass and
  rotation period of a star. 
- Due to this dependence rapid rotators spin down faster than slow rotators and all F, G and K stars converge onto
+ Due to this dependence all F, G and K stars converge onto
  a unique mass-period-age relation after $\sim$ the age of the Hyades: 650 Myrs \citep{Irwin_2009}.
 The gyrochronology paradigm implies that stellar age can be inferred from mass (or colour) and rotation period measurements alone. 
 The gyrochronology relation of \citet{Barnes_2007} was determined empirically from observations of the Hyades and other young clusters and tested on binary stars. 
@@ -59,6 +59,8 @@ where t, B, V and P are time (in Myr), B and V band colours and rotation period
 (in days), respectively. The values of n, a, b and c are tabulated in ...
 This relation was further calibrated by Mamajek and Hillenbrand (2008) with chromospheric activity measurements of field stars.
 Their relation takes the same form as Barnes (2007) with revised parameters shown in table ....
+
+Gyrochronology relations can only be applied to F, G and K stars. M dwarfs are fully convective; their magnetic fields are not produced by the same dynamo as in more massive stars and they follow a different (poorly understood) spin down process Mcquillan et al (2013). M dwarf ages cannot be calculated via asteroseismology as they do not show high signal-to-noise oscillations. Stars with masses $> 1.3 M_{\odot}$ have shallow convective zones - they are almost fully radiative - and, again, they have a different dynamo-driven magnetic field. These massive stars remain rapidly rotating throughout their brief MS lifetimes and are therefore not suitable gyrochronology targets (CITE KRAFT). 
 
 \subsection{Asteroseismic ages}
 Asteroseismically determined ages can be very precise, with uncertainties as low as 10\%, and, unlike activity diagnostics, and rotation period measurements the precision of asteroseismic ages are not, themselves age dependent. 
@@ -149,8 +151,8 @@ All but one of the quarters for this star produced an ACF with a significant ini
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/angusr/ACF/ind_qs_figs/7771282.pdf}
-\caption{Period measurements for quarters 3 - 16 of star `KIC 7771282'. The blue solid line indicates the median value and the shaded blue region marks its 15\% margin. The blue dashed line with surrounding shaded area indicates one half of the median period measurement with 15\% margin. The vertical red dashed line indicates that no period was measured for that quarter. More than two thirds of the period measurements were present and consistent to within 15\% of the median for this star, so it passed the selection process.}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/angusr/ACF/ind_qs_figs/3223000.pdf}
+\caption{Period measurements for quarters 3 - 16 of star `KIC 7771282'. The blue solid line indicates the median value and the shaded blue region marks its 15\% margin. The blue dashed line with surrounding shaded area indicates one half of the median period measurement with 15\% margin.  More than two thirds of the period measurements were present and consistent to within 15\% of the median for this star, so it passed the selection process.}
 \label{fig:ind_qs}
 \end{center}
 \end{figure}
@@ -163,73 +165,30 @@ modelling capability.
 PDC-MAP data are not, however, optimised to preserve stellar
 variability: signal is removed on timescales longer than ~ 30 days (CITATION).
 Additionally, light curves still contain large systematic features,
-such as the exponential decays that appear after telescope shutdowns, which affect our
-ability to measure accurate rotation periods. 
+such as the exponential decays that appear after telescope shutdowns, which affect period measurement precision. 
 
-\section{Method Validation}
-\label{method_validation}
-
-In order to test the completeness and reliability of our method we applied the autocorrelation and selection process outlined above to 1000 simulated light curves. 
-Synthetic stellar light curves were generated with varying rotation periods and spot lifetimes. 
-Other parameters, such as number of spots and inclination were held fixed. Differential rotation was not included in the model. 
-10 `quiet' stars were selected from the original sample (based on a visual examination of their light curves). For each of these real light curves, 100 simulated light curves with random periods (drawn from a log-space distribution, uniform between 1 and 100) and random spot lifetimes (drawn from a log-space distribution, uniform between 1 and 10) were injected with random scaling factors (uniform in log-space between 1 and 15) - generating a total of 1000 light curves with random (but documented) periods, spot lifetimes and amplitudes.
-ACFs were calculated for these light curves and the measured periods compared with their true values. 
-The results are shown in figure \ref{fig:compare}. It is clear from this figure that we are systematically underestimating rotation periods and that the offset is worse for longer periods. 
-This effect has beed noted previously and may be due to .... 
-No rotation periods greater than 23 days were measured --- this is limited by the 90 day long Kepler quarters (in fact it doesn't make sense to generate false light curves with periods longer than this!). 
-The origin of the small group of points clustered in the bottom right remains a mystery and needs further investigation.
-
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/K-ACF/method_val/Compare.png}
-\caption{A comparison of measured and true rotation periods for simulated light curves. Dotted lines show multiples and factors of 2. Rotation periods larger than 21 days were not measurable with the single quarter method. }
-\label{fig:compare}
-\end{center}
-\end{figure}
-
-Figures \ref{fig:completeness} shows the completeness, reliability and contamination of the sample as a function of period, spot lifetime and amplitude. 
-Completeness, reliability and contamination are also shown for each star in figure \ref{fig:completeness}. 
-Completeness is defined as  the percentage of the sample with successful period measurement, reliability is defined as the fraction of sample for which the period measurement lies within 20\% of the true value and contamination is the fraction of objects for which the period measurement differed from the true value by greater than 20\%.
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/K-ACF/method_val/Completeness.png}
-\caption{Completeness, reliability and contamination vs rotation period for the 1000 simulated light curves. }
-\label{fig:completeness}
-\end{center}
-\end{figure}
 
 \section{Gyrochronology Calibration}
 
-Rotational periods were successfully measured for 43 of the original
-165 stars. Figure \ref{fig:results} shows the rotation periods measured for these 43
-stars with their B - V colours, taken from \citet{catalogue}. The
-coloured lines represent isochrones of varying ages and were
-calculated using equation \ref{eq:Barnes2007_2}.
+505 stars with asteroseismically determined values of mass and age were published in Chaplin (2013) (CITE THIS PROPERLY) 
+and rotation periods were successfully measured for 144 of the 505. 
+These 144 were divided into MS and sub-giant stars based on their logg values presented in Chaplin et al (2013). Stars with logg $>$ 4.0 were classified as MS stars and those with logg $<$ 4.0 as sub-giants. 
+Of the 144, 57 were categorised as sub-giants and 87 as MS stars. 
+The MS stars were further divided according to their mass, stars with masses above the Kraft break, $> 1.3 M_{\odot}$, were discarded as, these stars do not spin down appreciably on the MS.
+Figure \ref{fig:results} shows rotation period vs asterosiesmic age for each of the 59 MS stars with masses between 0.8 and 1.3 $M_{\odot}$. 
+Older stars do appear to be more rapidly rotating, as predicted. 
+The isomass lines of the Barnes (2007) and Mamajek and Hillenbrand (2008) gyrochronology relations appear to adequately describe the slope of the observed period-age relation, but not the y-axis offset. 
+These existing gyrochronology relations are not consistent with the observed dependence of period on mass for low-mass stars.  
+
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{Gyro_results.png}
-\caption{Rotation period measurements for 43 stars shown with their
-  Kepler input catalogue colours. Isochrones were calculated from
-  equation \ref{eq:Barnes2007_2} \citep{Barnes_2007}.}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/p_vs_a6.png}
+\caption{Rotation period vs asteroseismic age for 59 MS stars. The colour scale shows mass. Isomass lines of the Barnes (2007) and Mamajek and Hillenbrand (2008) gyrochronology relations are shown for different masses as solid and dashed lines respectively.}
 \label{fig:results}
 \end{center}
 \end{figure}
 
-505 stars with asteroseismically determined values of mass and age were published in Chaplin (2013) (CITE THIS PROPERLY). 
-We successfully measured the rotation periods of 145 of these stars. 
-A plot of rotation period vs asteroseismic age is shown in figure \ref{fig:p_vs_a}.
-
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/p_vs_a.png}
-\caption{Photometric rotation period vs asteroseismic age for the 145 stars with successful rotation period measurements. The three colours show three different mass bins. Isomass lines are calculated from the Barnes (2007) gyrochronology relations. There is no isomass line for the most massive bin as the Barnes relation does not apply to stars of this mass. }
-\label{fig:p_vs_a}
-\end{center}
-\end{figure}
 
 We obtained more precise values of mass and age for 7 stars from (CITE VICTOR).
 These new data points are shown in figure \ref{p_vs_a2}. 
@@ -248,31 +207,9 @@ separate into age bins
 
 fitting
 
-replace figures
+Ask Amy to send her latest version of her code (and automated version?)
 
-Either cut out injection tests or make them better.
-
-3. More injections? / injection tests for year by year / redo injections, this time making sure that the light curves are continuous
-
-4. Ask Amy to send her latest version of her code (and automated version?)
-
-5. Figure out what's going wrong with injections
-
-6. look up what constitutes an evolved star.
-
-8. PCA?
-
-9. HARPS North targeted asteroseismology RV planet search proposal.
-
-10. Build year by year data into injection tests. 
-
-
-model star spot light curves using a quasi-periodic GP. 
-marginalise over all parameters except period. 
-If you had a good enough model you could model spot lifetimes, differential rotation, inclination, filling factor and rotation period and just marginalise over everything but period to get the maximum marginalised likelihood. 
-Since the physical model is not well understood you could effectively do the same thing but with a non-parametric model. 
-
-Find the underlying trend via PCA
+look up what constitutes an evolved star.
 
 
 \bibliographystyle{plainnat}
