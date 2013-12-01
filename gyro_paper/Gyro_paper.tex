@@ -3,9 +3,6 @@
 \usepackage{epsfig}
 \usepackage{cases}
 \usepackage[section]{placeins}
-%\usepackage[demo]{graphicx}
-%\usepackage{caption}
-%\usepackage{subcaption}
 \usepackage{graphicx, subfigure}
 
 \begin{document}
@@ -14,8 +11,8 @@
 
 \author{Ruth Angus$^1$, Suzanne Aigrain$^1$, Amy McQuillan$^2$, William, J. Chaplin$^3$}
 \affil{$^1$Department of Physics, University of Oxford, OX1 3RH, UK}
-\affil{$^2$University of Tel Aviv, Israel}
-\affil{$^3$University of Birmingham, Birmingham, UK}
+\affil{$^2$School of Physics and Astronomy, Raymond and Beverly Sackler, Faculty of Exact Sciences, Tel Aviv University, 69978, Tel Aviv, Israel}
+\affil{$^3$School of Physics and Astronomy, University of Birmingham, Edgbaston, Birmingham, B15 2TT, UK}
 
 \section{Abstract}
 \label{abs}
@@ -29,16 +26,15 @@ We find that the current relations over-predict stellar rotation periods for low
 \label{intro}
 
 
-The ages of main-sequence (MS) stars are difficult to measure as the majority of their observational properties are not a strong function of age. 
-hromospheric activity is often used as an age indicator, as well as lithium depletion, but the evolution of these properties on the main-sequence is poorly understood, plus, high resolution spectra are required to measure either of these properties. 
+Stellar ages are difficult to measure on the main sequence (MS) as their observational properties are not strong functions of age. 
+Chromospheric activity is often used as an age indicator, as well as lithium depletion, but the evolution of these properties on the main-sequence is poorly understood, plus, high resolution spectra are required to measure either of these properties. 
 Isochrone placement for field stars is a notoriously model-dependent and imprecise dating method, often producing age estimates with uncertainties of order 100 \% or more. 
-The gain in precision achieved for fitting isochrones to cluster members is substantial, cluster ages can have uncertainties as low as 10\% (CITATION). 
-However, the majority of nearby clusters are young, and measuring the rotational velocity of cluster members is extremely difficult for distant clusters. 
-It is for this reason that the existing gyrochronology relations remain poorly calibrated for old stars - they rely chiefly on ages of nearby, young clusters. 
+The gain in precision achieved for fitting isochrones to ensembles of cluster members is substantial; cluster ages can have uncertainties as low as 10\% \citep{Soderblom_2010}. 
+However, because the majority of clusters are young, there is a significant lack of precisely measured ages for old stars. 
+For this reason the current gyrochronology relations are poorly calibrated at late ages. 
 Photometrically determined rotation periods for stars in the older Kepler clusters will provide excellent anchors for gyrochronology, however extracting rotation periods for these stars is difficult due, in part, to Kepler's large pixels. 
-The gyrochronology relations of Mamajek and Hillenbrand have been calibrated using activity measurements of older field stars as well as cluster stars. 
-The evolution of stellar activity is currently poorly understood, especially for older stars and whilst the Mamajek and Hillenbrand relation is a revision of the Barnes (2007) relation, it remains poorly calibrated at late ages. 
-Chromospheric activity and rotation period are undoubtably linked (CITATION) and with the photometric precision provided by Kepler, rotation periods are easily measurable for many stars without the need for spectroscopic data. 
+The gyrochronology relations of \citet{Mamajek_2008} were calibrated using activity indicators for old field stars as well as vsini measurements of young cluster stars. 
+The evolution of stellar activity is currently poorly understood, especially for older stars and whilst the \citet{Mamajek_2008} relation is a revision of the \citet{Barnes_2007} relation, it remains poorly calibrated at late ages. 
 
 \subsection{Angular momentum loss in Main Sequence stars}
 Stars lose angular momentum over their MS lifetimes via a magnetised wind that is constrained to rotate with the stellar surface out to the alfven radius (CITATION). 
@@ -185,8 +181,6 @@ In figure \ref{fig:m_vs_a} this trend is clear.
 One would expect not to find old, massive stars due to MS turn-off. 
 The lack of young, low mass stars is not surprising either as asteroseismic oscillation signals can be overwhelmed by activity. 
 
-
-
 Rotation period vs age for the sub-giants is shown in figure \ref{fig:subgiants}. Models of sub-giant rotation evolution from \citet{van_Saders_2013} are shown for comparison. 
 Qualitatively speaking the observations show good agreement with the models.  
 The relationship between age and rotation shown in these models is, unlike the empirical gyrochronology relations of MS stars, physically motivated. 
@@ -200,6 +194,14 @@ A fit to the data was obtained using the method described in \citet{Hogg_2010}.
 
 \section{Discussion}
 
+Figure \ref{fig:p_vs_m} shows rotation period as a function of asteroseismic mass for the MS stars. 
+In practise stellar ages are estimated by fitting gyrochronological isochrones (gyrochrones) to their rotation periods and masses (or colours).
+Again, it is clear that the \citet{Barnes_2007} and \citet{Mamajek_2008} isochrones are over-predicting rotation periods. 
+Rotation period is not strongly dependent on age for the more massive stars which is why the two different age populations, shown in pink and blue in figure \ref{fig:p_vs_m} entirely overlap.
+The age of star with mass between 1.1 and 1.3 $M_{\odot}$ and rotation period between 0 and 15 days estimated from gyrochrone fitting would suffer from degeneracy: the isochrones are close together in this region of parameter space. 
+More reliable ages are obtainable for low-mass, slowly rotating stars, where there is greater separation between gyrochrones, however these stars are under-represented by our sample. 
+The larger number of rapid vs slow rotators is a consequence of rotation period measurement bias: with more revolutions per quarter it is much easier to measure short rotation periods.
+The larger number of high mass stars is an asteroseismic bias.   
 
 We have seen that the existing gyrochronology relations over-predict the rotation periods of low-mass stars. 
 This can be understood as a consequence of core-envelope decoupling. 
@@ -231,6 +233,10 @@ Ask Amy to send latest version of her code (and automated version?)
 look up what constitutes an evolved star.
 
 Think about whether you want to put any limitations on the ACF itself, or whether the 
+
+Is it more easy to measure the rotation periods for certain stars as a consequence of diff rot?
+
+Would you expect high or low mass stars to have more differential rotation?
 
 \bibliographystyle{plainnat}
 \bibliography{Gyro_paper}
@@ -277,6 +283,21 @@ Think about whether you want to put any limitations on the ACF itself, or whethe
 \end{center}
 \end{figure}
 
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/p_vs_m2.png}
+\caption{Rotation period vs asteroseismic mass.}
+\label{fig:p_vs_m}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/p_vs_m.png}
+\caption{Rotation period vs asteroseismic mass.}
+\label{fig:p_vs_m}
+\end{center}
+\end{figure}
 
 
 \end{document}
