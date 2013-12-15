@@ -103,7 +103,7 @@ the second peak was higher than the first in which case {\it its}
 central value was taken). 
 Note that an important advantage of the ACF method over a periodogram approach is in the differentiability of harmonic signals produced by multiple active regions on the stellar surface from the true periodic signal: these scenarios usually produce ACFs in which the second peak is higher than the first. 
 Subsequent peaks in the ACF lying within 10\% of
-integer multiples of the period were identified. 
+integer multiples of the period wÄere identified. 
 The final period measurement is calculated from the mean separation between peaks lying at integer multiples 
 and the error calculated from the distribution of central peak
 values. 
@@ -189,8 +189,32 @@ Rotational breaking of sub-giants is a simple consequence of angular momentum co
 
 \section{A new gyrochronology relation}
 
-Following the form of Barnes (2007), we fit two separable power laws to the data: one for the age - period and one for the period - mass dependence. 
-A fit to the data was obtained using the method described in \citet{Hogg_2010}.
+A function of the following form was fit to the data:
+
+\begin{equation}
+\log(P) = n\log(t) + \log(a) + b\log(B-V-c)
+\label{eq:fitting}
+\end{equation}
+
+where n, a, b and c are all constants between 0 and 1 and take the values: 0.5189, 0.7725, 0.601 and 0.4 respectively in \citet{Barnes_2007}.
+
+Fitting a model to the data is not straight-forward in this case as there are uncertainties on all three parameters: P, t and B-V.
+Usual least-squares or maximum likelihood approaches only allow for errors on the independent variable.
+This relation is clearly linear in log space, which is why we choose to fit it in log space, however, most standard fitting methods also assume that uncertainties are Gaussian. 
+Uncertainties on the age measurements actually *are* Gaussian in log space, a feature of the asteroseismic age determination (they probably use a logarithmic grid, something like that).
+Uncertainties on the colours, however, will not be linear in log space. 
+In fact colours are already logarithmic, so it may not be appropriate to deal with them at all. 
+It may be better to use Teffs - these are published in \citet{Chaplin2013} and are not dependent on metallicity, therefore remove another source of noise. 
+How does B-V colour depend on Teff and are the uncertainties on Teff Gaussian in log space?
+If the errors on the parameters were Gaussian in log space, a fitting approach such as the one outlined in \citet{Hogg_2010} could be taken. 
+If this function was linear and had gaussian uncertainties we could write down a likelihood function, such as the one described in \citet{Hogg_2010} but generalised to three dimensions, and maximise the likelihood to find the parameters a, b, c and n.
+The total least-squares style approach was taken because the uncertainties on t are Gaussian in log space, but uncertainties on B-V are not. 
+The total least-squares approach allows you to draw samples from any distribution you want - it doesn't have to be Gaussian. 
+The method is outlined as followed:
+For N data points with (P, t, B-V) and variances ($\sigma_P^2$, $\sigma_t^2$, $\sigma_{B-V}^2$), draw M new values of t$\prime$ from $\mathcal{N}(\log(t), \sigma_{\log(t)}^2)$ and (B-V)$\prime$ from $\mathcal{N}(B-V, \sigma_{B-V}^2)$ so that you have N $\times$ M data points.
+Fit a model to the data using MCMC. 
+We used emcee \citep{Foreman-Mackey}, an affine-invariant, ensemble walker MCMC algorithm.
+In practise we actually want to find a fit to each new set of N data points M times, rather than generating the whole new data set and fitting a model to it in one go.   
 
 \section{Discussion}
 
