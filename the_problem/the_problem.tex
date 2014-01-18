@@ -1,0 +1,40 @@
+\documentclass[12pt,preprint]{aastex}
+\usepackage{cite,natbib}
+\usepackage{epsfig}
+\usepackage{cases}
+\usepackage[section]{placeins}
+\usepackage{graphicx, subfigure}
+
+\begin{document}
+
+\title{Fitting a non-linear function with non-Gaussian uncertainties on all parameters}
+
+We have period, age and colour measurements for $\sim$ 50 stars to which we need to fit a function of the following form:
+
+\begin{equation}
+\log(P) = n\log(t) + \log(a) + b\log(B-V-c)
+\label{eq:fitting}
+\end{equation}
+
+
+where n, a, b and c have values: 0.5189, 0.7725, 0.601 and 0.4 respectively in Barnes (2007).
+
+Uncertainties lie on all three parameters: P, t and B-V and are (at least assumed) Gaussian for P and B - V in linear space. Uncertainties on t are Gaussian in log space, a feature of the asteroseismic age determination (they probably use a logarithmic grid, something like that).
+I figure if the uncertainties on the parameters were all Gaussian in log space this would be a straight forward problem, we could use the method in Ch. 7 of Hogg et al (2010), generalised to three dimensions.
+
+Instead I'm following a total least-squares style approach which allows you to account for parameter uncertainties in more than one dimension by drawing new samples from any distribution you want - it doesn't have to be a Gaussian. 
+
+There are two slightly different ways to apply total least squares. Either:
+
+For N data points with measurements P, t, B-V and variances $\sigma_P^2$, $\sigma_t^2$, $\sigma_{B-V}^2$, draw M new values of t$\prime$ from $\mathcal{N}(\log(t), \sigma_{\log(t)}^2)$ and (B-V)$\prime$ from $\mathcal{N}(B-V, \sigma_{B-V}^2)$ so that you have N $\times$ M data points, then run MCMC. 
+
+Or:
+Run MCMC for each new draw of N data points, t$\prime$ and B-V$\prime$
+
+Aside:
+In actual fact this isn't the correct thing to do because colours are already logarithmic and we probably do not want to take the log of a logarithmic quantity.
+It may be better, for a few reasons to use T$_{eff}$s - these are published in Chaplin (2013). 
+I have not yet checked into how B-V colour depends on T$_{eff}$ however I think we can assume that the uncertainties on T$_{eft}$ will be Gaussian.
+
+\end{document}
+
