@@ -1,0 +1,61 @@
+\documentclass[12pt,preprint]{aastex}
+\usepackage{cite,natbib}
+\usepackage{epsfig}
+\usepackage{cases}
+\usepackage[section]{placeins}
+\usepackage{graphicx, subfigure}
+
+\begin{document}
+
+We have period, age and T$_{eff}$ measurements for $\sim$ 145 stars to which we need to fit a function of the following form:
+
+\begin{equation}
+P = P_ot^n
+\end{equation}
+
+where
+
+\begin{equation}
+P_o = P_o(T_{eff}) = a(T_{eff} - T_{max})^b,
+\end{equation}
+
+\begin{equation}
+n = n(T_{eff}) = c(T_{eff} - T_{max})
+\end{equation}
+
+i.e.\ the current rotation period depends on time and effective temperature only (n.b.\ no longer separable!)
+
+Uncertainties lie on all three parameters: period, age and T$_{eff}$ and are (at least assumed) Gaussian for P and T$_{eff}$ in linear space.
+Uncertainties on age are Gaussian in log space, a feature of the asteroseismic age determination (they probably use a logarithmic grid, something like that).
+
+Because the uncertainties are not all well described by a Gaussian I am adopting a total least-squares approach.
+This involves drawing a number of posterior samples and marginalising over those samples, so the log likelihood for each sample is summed inside the main log likelihood summation.
+
+This solves the problem of trying to fit a linear function with non-Gaussian uncertainties on all three dimensions, however this is not the whole story\ldots
+
+Another problem is that there exists a cutoff temperature above which the above relation is no longer followed --- the \emph{Kraft break}.
+Unfortunately we don't \emph{really} know where this cutoff is, and even if we did, there is obviously a finite probability of each data point lying to the right of the Kraft break*.
+So, we can't just remove all stars that are more massive than 1.3 M$_{\odot}$ from our sample.
+A question is --- do we want to \emph{learn} about where the Kraft break is from the data?
+Or should we just assume that our data are not good enough for this kind of inference (this is probably true).
+So let's say we are going to fix the Kraft break at a certain T$_{eff}$, maybe trying a few in a grid?
+But we still know that each data point will have some probability mass to the right of the Kraft break, even if its maximum likelihood value lies to the left.
+This, again wouldn't be a problem if we had lots of computing power or patience --- by drawing enough posterior samples that every star has at least one sample to the right of the Kraft break.
+
+As if things weren't complicated enough already, we also need to decide how to deal with MS stars vs subgiants.
+The gyrochronology relations only apply to MS stars.
+Previously I have taken a cut in logg, although I should probably use a linear function of logg and T$_{eff}$, plus, of course, each star has a finite probability of being an MS star.
+
+*BTW --- when I say `to the right' of the Kraft break, I mean a star is coolwards and therefore included in the sample.
+Otherwise it lies to the left, obv.
+
+\section{total least-squares}
+
+Draw samples from your posterior distributions (doesn't matter if they're Gaussian distributed, or log normal, whatever).
+Sum Chi-squared for each of your samples (marginalise).
+Sum Chi-squared for each data point.
+You don't need the N term in your likelihood function if you always have the same number of data points.
+
+
+\end{document}
+
