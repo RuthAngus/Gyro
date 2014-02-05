@@ -49,13 +49,15 @@ Previously I have taken a cut in logg, although I should probably use a linear f
 *BTW --- when I say `to the right' of the Kraft break, I mean a star is coolwards and therefore included in the sample.
 Otherwise it lies to the left, obv.
 
-\section{total least-squares}
-
-Draw samples from your posterior distributions (doesn't matter if they're Gaussian distributed, or log normal, whatever).
-Sum Chi-squared for each of your samples (marginalise).
-Sum Chi-squared for each data point.
-You don't need the N term in your likelihood function if you always have the same number of data points.
-
+Importance sampling.
+Hierarchical inference.
+Computing the marginalised likelihood.
+Would be a straightforward problem, except the likelihood function is complicated.
+You draw samples from the posteriors as an easy way to compute the marginalisation --- to perform the integral.
+Want to model both population simultaneously with a mixture model.
+Potentially using three mixture models --- the MS, low mass stars, the subgiants, and the high mass MS stars.
+Could potentially model the subgiants with a model that genuinely describes their behavior.
+The high mass MS stars might need to be modelled as a broad Gaussian since they don't spin down appreciably, so will just have the rotation periods they were born with.
 
 \end{document}
 
