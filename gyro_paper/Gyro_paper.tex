@@ -7,12 +7,13 @@
 
 \begin{document}
 
-\title{Calibrating Gyrochronology using Kepler Asteroseismic targets}
+\title{Calibrating Gyrochronology with Kepler Asteroseismic targets}
 
-\author{Ruth Angus$^1$, Suzanne Aigrain$^1$, Amy McQuillan$^2$, William, J. Chaplin$^3$}
+\author{Ruth Angus$^1$, Suzanne Aigrain$^1$, Amy McQuillan$^2$, Daniel Foreman-Mackey$^3$,  William, J. Chaplin$^4$, Tsevi Maseh$^2$}
 \affil{$^1$Department of Physics, University of Oxford, OX1 3RH, UK}
 \affil{$^2$School of Physics and Astronomy, Raymond and Beverly Sackler, Faculty of Exact Sciences, Tel Aviv University, 69978, Tel Aviv, Israel}
-\affil{$^3$School of Physics and Astronomy, University of Birmingham, Edgbaston, Birmingham, B15 2TT, UK}
+\affil{$^3$Centre for Cosmology and Particle Physics, New York University, New York, NY, USA}
+\affil{$^4$School of Physics and Astronomy, University of Birmingham, Edgbaston, Birmingham, B15 2TT, UK}
 
 \section{Abstract}
 \label{abs}
@@ -28,15 +29,16 @@ We measured the photometric rotation periods of 144 stars with asteroseismic age
 \section{Introduction}
 \label{intro}
 
-Stellar ages are difficult to measure on the main sequence (MS) as their observational properties are not strong functions of age.
+Stellar ages are difficult to measure on the main sequence (MS) as their observational properties do not vary rapidly with age.
 Chromospheric activity is often used as an age indicator, as well as lithium depletion, but the evolution of these properties on the main-sequence is poorly understood, plus, high resolution spectra are required to measure either of these properties.
-Isochrone placement for field stars is a notoriously model-dependent and imprecise dating method, often producing age estimates with uncertainties of order 100 \% or more.
+Isochrone placement for field stars is a notoriously model-dependent and imprecise dating method, often producing age estimates with uncertainties of order 100\% or more.
 The gain in precision achieved for fitting isochrones to ensembles of cluster members is substantial; cluster ages can have uncertainties as low as 10\% \citep{Soderblom_2010}.
 However, because the majority of clusters are young, there is a significant lack of precisely measured ages for old stars.
 For this reason the current gyrochronology relations are poorly calibrated at late ages.
 Photometrically determined rotation periods for stars in the older Kepler clusters will provide excellent anchors for gyrochronology, however extracting rotation periods for these stars is difficult due, in part, to Kepler's large pixels.
 The gyrochronology relations of \citet{Mamajek_2008} were calibrated using activity indicators for old field stars as well as vsini measurements of young cluster stars.
 The evolution of stellar activity is currently poorly understood, especially for older stars and whilst the \citet{Mamajek_2008} relation is a revision of the \citet{Barnes_2007} relation, it remains poorly calibrated at late ages.
+No existing gyrochronology models correctly describe the spin-down behaviour of stars for all masses and at all ages.
 
 \subsection{Angular momentum loss in Main Sequence stars}
 Stars lose angular momentum over their MS lifetimes via a magnetised wind that is constrained to rotate with the stellar surface out to the alfven radius (CITATION).
@@ -49,12 +51,11 @@ The gyrochronology relation of \citet{Barnes_2007} was determined empirically fr
 It can be written:
 
 \begin{equation}
-\mbox{log}~ t_{gyro} = \frac{1}{n}\left[\mbox{log}~ P - \mbox{log}~ a - b~\mbox{log}(B-V-c)\right] ,
+P = A^n \times a(B-V-c)^b
 \label{eq:Barnes2007_2}
 \end{equation}
 
-where t, B, V and P are time (in Myr), B and V band colours and rotation period
-(in days), respectively. The values of n, a, b and c are tabulated in ...
+where P, A,  B and V are rotation period (in days), age (in Myr),  and B and V band colours respectively. The values of n, a, b and c are tabulated in ...
 This relation was further calibrated by Mamajek and Hillenbrand (2008) with chromospheric activity measurements of field stars.
 Their relation takes the same form as Barnes (2007) with revised parameters shown in table ....
 
@@ -147,8 +148,6 @@ Of the 505 targets in the original sample, rotation periods of 144 were reliably
 An example light curve and ACF for KIC 322300 is shown in figure \ref{fig:lc} and quarter-by-quarter period measurements in figure \ref{fig:ind_qs}.
 All but one of the quarters for this star produced an ACF with a significant initial peak and repeating subsequent peaks and of those, all period measurements lie within 15\% of the median value.
 
-
-
 Long cadence PDC-MAP data were used throughout this analysis (\citet{Smith_2012}, \citet{Stumpe_2012}).
 The PDC-MAP data are the product of an initial systematics removal process applied by the Kepler team,
  in which large-scale linear trends are removed in order to improve planet transit search and
@@ -161,77 +160,209 @@ such as the exponential decays that appear after telescope shutdowns, which affe
 
 \section{Gyrochronology Calibration}
 
-505 stars with asteroseismically determined values of mass and age were published in \citet{Chaplin2013}
-and rotation periods were successfully measured for 144 of them.
-We also obtained more precise values of mass and age, (from individual oscillation mode analysis) for 7 of the stars in this sample from (CITE VICTOR).
-The 144 stars with rotation periods were divided into MS and sub-giant stars based on their logg values presented in Chaplin et al (2013).
-Stars with logg $>$ 4.0 were classified as MS stars and those with logg $<$ 4.0 as sub-giants.
-Of the 144, 57 were categorised as sub-giants and 87 as MS stars.
-The MS stars were further divided according to their mass, stars with masses above the Kraft break, $> 1.3 M_{\odot}$, were discarded as, these stars do not spin down appreciably on the MS.
-Figure \ref{fig:results} shows rotation period vs asterosiesmic age for each of the 59 MS stars with masses between 0.8 and 1.3 $M_{\odot}$.
-Older stars do appear to be more rapidly rotating, as predicted.
-The isomass lines of the \citet{Barnes_2007} and \citet{Mamajek_2008} gyrochronology relations appear to roughly describe the slope of the observed period-age relation, but not the y-axis offset, particularly at lower masses.
-The observed dependence of rotation period on mass is not consistent with predictions from the existing gyrochronology relations for low-mass stars.
-The relations over-predict the rotation periods of low-mass stars for a given stellar age.
-The triangular outlier at the bottom right of figure \ref{fig:results} is a rapidly rotating, old, low mass, low metallicity object which we believe to be a synchronised binary.
-It is unfortunate that the single high precision target that survived through the rotation period measurement, sub-giant vetting and mass categorisation processes should be a false positive.
-
-
-
-A trend between mass and age is visible in figure \ref{fig:results}, green points lie to the left and pink points to the right.
-In figure \ref{fig:m_vs_a} this trend is clear.
-One would expect not to find old, massive stars due to MS turn-off.
-The lack of young, low mass stars is not surprising either as asteroseismic oscillation signals can be overwhelmed by activity.
-
-Rotation period vs age for the sub-giants is shown in figure \ref{fig:subgiants}. Models of sub-giant rotation evolution from \citet{van_Saders_2013} are shown for comparison.
-Qualitatively speaking the observations show good agreement with the models.
-The relationship between age and rotation shown in these models is, unlike the empirical gyrochronology relations of MS stars, physically motivated.
-Rotational breaking of sub-giants is a simple consequence of angular momentum conservation during the expansion phase and therefore easy to model.
-
-
-\section{A new gyrochronology relation}
-
-A function of the following form was fit to the data:
+505 stars with asteroseismically determined ages were published in \citet{Chaplin2013}, 144 of which we successfully measured rotation periods for.
+We also obtained more precise values of age, (from individual oscillation mode analysis) for 7 of the stars in this sample from (CITE VICTOR).
+Each star has an effective temperature, T from multi-band photometry, a photometric rotation period, P and an asteroseismically derived age, A and surface gravity, log g (G).
+Each of these properties have associated uncertainties, assumed to be independent and Gaussian for T and P and log-normal for A and G. % need a plot showing this!
 
 \begin{equation}
-\log(P) = n\log(t) + \log(a) + b\log(B-V-c)
-\label{eq:fitting}
-\end{equation}
-
-where n, a, b and c are all constants between 0 and 1 and take the values: 0.5189, 0.7725, 0.601 and 0.4 respectively in \citet{Barnes_2007}.
-
-Fitting a model to the data is not straight-forward in this case as uncertainties lie on all three parameters: P, t and B-V, and standard fitting approaches only allow for errors on the independent variable.
-This relation is clearly linear in log space, which is why we choose to fit it in log space, however, most standard fitting methods also assume that uncertainties are Gaussian.
-Uncertainties on the age measurements actually *are* Gaussian in log space, a feature of the asteroseismic age determination (they probably use a logarithmic grid, something like that).
-Uncertainties on the colours, however, will not be linear in log space.
-In fact colours are already logarithmic, so it may not be appropriate to deal with them at all.
-It may be better to use Teffs - these are published in \citet{Chaplin2013} and are not dependent on metallicity, therefore remove another source of noise.
-How does B-V colour depend on Teff and are the uncertainties on Teff Gaussian in log space?
-If the errors on the parameters were Gaussian in log space, a fitting approach such as the one outlined in \citet{Hogg_2010} could be taken.
-If this function was linear and had gaussian uncertainties we could write down a likelihood function, such as the one described in \citet{Hogg_2010} but generalised to three dimensions, and maximise the likelihood to find the parameters a, b, c and n.
-The total least-squares style approach was taken because the uncertainties on t are Gaussian in log space, but uncertainties on B-V are not.
-The total least-squares approach allows you to draw samples from any distribution you want - it doesn't have to be Gaussian.
-The method is outlined as followed:
-For N data points with (P, t, B-V) and variances ($\sigma_P^2$, $\sigma_t^2$, $\sigma_{B-V}^2$), draw M new values of t$\prime$ from $\mathcal{N}(\log(t), \sigma_{\log(t)}^2)$ and (B-V)$\prime$ from $\mathcal{N}(B-V, \sigma_{B-V}^2)$ so that you have N $\times$ M data points.
-Fit a model to the data using MCMC.
-We used emcee \citep{Foreman-Mackey}, an affine-invariant, ensemble walker MCMC algorithm.
-In practise we actually want to find a fit to each new set of N data points M times, rather than generating the whole new data set and fitting a model to it in one go.
-
-The model:
-\begin{equation}
-\log(P) = n\log(A) + \log(a) + b\log(B-V - c)
-\end{equation}
-
-The likelihood function:
-\begin{equation}
-L = p(\{yi\}_{i=1}^N | n, a, b, c, P_b, Y_b, V_b, I)
+p(\hat{T}_n|T_n) = \mathcal{N}(\hat{T}|T_n, \sigma^2_{T,n})
 \end{equation}
 
 \begin{equation}
-L \propto \Pi_{i=1}^N \left[ \frac{1-P_b}{\sqrt{2\pi\sigma^2}} \exp \left(- \frac{[y_i - y_m]^2}{2\sigma_{yi}^2}\right) 
-+ \frac{P_b}{\sqrt{2\pi[V_b + \sigma_{yi}^2]}} \exp \left(- \frac{[y_i - Y_b]^2}{2[V_b + \sigma_{yi}^2]}\right)  \right]
+p(\hat{P}_n|P_n) = \mathcal{N}(\hat{P}|P_n, \sigma^2_{P,n})
 \end{equation}
 
+\begin{equation}
+p(\log(\hat{A}_n)|log(A_n)) = \mathcal{N}(\hat{A}|A_n, \sigma^2_{A,n})
+\end{equation}
+
+\begin{equation}
+p(\log(\hat{G}_n)|log(G_n)) = \mathcal{N}(\hat{G}|T_n, \sigma^2_{G,n})
+\end{equation}
+
+% is this correct?
+
+Where $X_n$ is the true values of the variable at observation n, $\hat{X}_n$ is the noisy observation and $\sigma_{X,n}$ is the associated measurement uncertainty.
+The $X_n$s are the hidden variables, the $\hat{X}_n$s are the visible variables, and the $\theta$ are the parameters, the values of which we want to infer.
+% The following is almost an exact quotation from Murphy: change it eventually!
+The main difference between hidden variables and parameters is that the number of hidden variables grows with the amount of training data, whereas the number of parameters is usually fixed.
+This means we must integrate out the hidden variables to avoide overfitting, but we may be able to get away with point estimation techniques for parameters, which are fewer in number.
+We want to marginalise over the hidden variables so that we just have the probability of the observations, given the model.
+The process of marginalising over these hidden variables takes the form of an intergral which is difficult to solve analytically.
+We therefore approximate it with a sampling technique.
+
+The data are shown in figures \ref{fig:results} to \ref{fig:results2}.
+The stars in our sample cover temperatures ranging from 5400 to 7000 K.
+Gyrochronology is not a valid dating method for stars above a cut-off temperature, the Kraft-break, ($\sim$ 6500 K) as these stars have a different dynamo and do not spin down.
+Subgiants also can't be modelled with a simple gyrochronology relation; stars drastically spin down once they turn off the MS due to angular momentum conservation.
+We can't simply exclude hot stars and subgiants from our sample during the modelling process --- we \emph{have} to model all three populations at once.
+This is for two reasons: firstly, we don't know the exact location of the Kraft-break, so it has to be a free parameter,
+and secondly, all stars have some probability mass lying in all three regimes due to their observational uncertainties.
+
+Previous gyrochronology relations have been in the form of equation \ref{equation:Barnes_2007_2}.
+Our relation will take the form:
+
+\begin{equation}
+	A = \alpha(T - T_k)^{\beta} \times P^{\delta}
+\label{eq:functional_form2}
+\end{equation}
+
+Where now A is the dependent variable, since we want to produce a predictive distribution for the age of a star, given estimates of T and P.
+$\alpha, \beta, T_K$ and $\delta$ are free parameters.
+$T_K$ will also be a hyperparameter, used to constrain the regime that a given star falls into.
+This is the functional form for the model that we will fit to the low-mass MS.
+For the high-mass MS stars and the subgiants we will assume that age is not conditionally dependent upon P and T.
+In these regimes we will apply Gaussian priors over T and P and model ages with log-normal distributions.
+It is also important that we have extra free parameters in our model that account for the intrinsic scatter in the data.
+
+For now, lets just address the low-mass MS stars that can be modelled with the gyrochronology relation.
+The likelihood marginalised over the true values of the variables can be written as:
+
+\begin{equation}
+  p(\{\hat{P}_n,\hat{A}_n,\hat{T}_n,\hat{G}_n\}|\theta) =
+  \prod_{n=1}^{N} \int p(\hat{A}_n,\hat{T}_n,\hat{P}_n,\hat{G}_n,A_n,T_n,P_n,G_n|\theta)
+  {\rm d}A_n {\rm d}T_n {\rm d}P_n {\rm d}G_n
+\label{eq:fullL}
+\end{equation}
+
+Where $\theta = \alpha, \beta, \delta$ and $T_K$ for low-mass MS stars. The joint probability is given by:
+
+\begin{equation}
+  p(\hat{A}_n,\hat{T}_n,\hat{P}_n,\hat{G}_n,A_n,T_n,P_n,G_n|\theta) =
+  p(A_n,T_n,P_n,G_n|\theta) p(\hat{A}_n|A_n)
+  p(\hat{T}_n|T_n) p(\hat{P}_n|P_n) p(\hat{G}_n|G_n),
+\label{eq:jointprob}
+\end{equation}
+
+So the marginalised likelihood for a single star can be written as:
+
+\begin{equation}
+  p(\hat{P}_n,\hat{A}_n,\hat{T}_n,\hat{G}_n|\theta)  =
+  \int p(A_n,T_n,P_n,G_n|\theta)
+  p(\hat{A}_n|A_n) p(\hat{T}_n|T_n) p(\hat{P}_n|P_n) p(\hat{G}_n|G_n),
+  {\rm d}A_n {\rm d}T_n {\rm d}P_n {\rm d}G_n
+\label{eq:L1}
+\end{equation}
+
+The joint probability distribution for the true values of the observables takes a different form in the different regimes.
+Table \ref{table:tab1} summarises the probabilistic properties of the three regimes.
+
+% \begin{deluxetable}{lcc}
+% \label{tab:tab1}
+% \tablewidth{0pc}
+% \tablecaption{Models and free parameters for the three stellar populations.}
+% \tablehead{
+% \colhead{Regime}&
+% \colhead{Model}&
+% \colhead{Parameters}}
+% \startdata
+% Low mass, MS & $P = A^n \times a(B-V-c)^b$ & $\alpha, \beta, \delta, T_K$ \\
+% High mass, MS & $\log{A} \sim \mathcal{N}(\mu_{A,1}, \sigma^2_{A,1})$, $T \sim \mathcal{N}(\mu_{T,1}, \sigma^2_{T,1}) , \log{P} \sim \mathcal{N}(\mu_{P,1}, \sigma^2_{P,1})$ & $\mu_{A,1}, \sigma^2_{A,1}, \mu_{T,1}, \sigma_{T,1}, \mu_{P,1}, \sigma_{P,1}$ \\
+% Subgiants & $\log{A} \sim \mathcal{N}(\mu_{A,2}, \sigma^2_{A,2})$, $T\sim\mathcal{N}(\mu_{T,2}, \sigma^2_{T,2})$, $\log{P} \sim \mathcal{N}(\mu_{P,2}, \sigma^2_{P,2})$ & $\mu_{A,2}, \sigma^2_{A,2}, \mu_{T,2}, \sigma_{T,2}, \mu_{P,2}, \sigma_{P,2}$ \\
+% \enddata
+% \end{deluxetable}
+% Change the model!
+
+\begin{deluxetable}{lcc}
+\label{tab:tab1}
+\tablewidth{0pc}
+\tablecaption{Models and free parameters for the three stellar populations.}
+\tablehead{
+\colhead{Regime}&
+\colhead{Model}&
+\colhead{Parameters}}
+\startdata
+Low mass, MS & $A = \alpha(T-T_K)^\beta \times P^\delta$ & $\alpha, \beta, \delta, T_K$ \\
+High mass, MS & $\log{A} \sim \mathcal{N}(\mu_{A,1}, \sigma^2_{A,1})$ & $\mu_{A,1}, \sigma^2_{A,1}$ \\
+Subgiants & $\log{A} \sim \mathcal{N}(\mu_{A,2}, \sigma^2_{A,2})$ & $\mu_{A,2}, \sigma^2_{A,2}$ \\
+\enddata
+\end{deluxetable}
+
+\begin{deluxetable}{lc}
+\label{tab:tab1}
+\tablewidth{0pc}
+\tablecaption{Joint probability distributions for the three populations.}
+\tablehead{
+\colhead{Regime}&
+\colhead{Joint probability distribution}}
+\startdata
+Low mass, MS & $p_1(A_n,T_n,P_n,G_n|\theta,T_K) = p_1(T_n|T_K) p_1(G_n) p_1(P_n) p_1(A_n|T_n,P_n,\theta)$ \\
+High mass, MS & $p_2(A_n,T_n,P_n,G_n|\phi_2) = p_2(T_n|T_K) p_2(G_n) p_2(P_n|phi_2) p_2(A_n)$  \\
+Subgiants & $p_3(A_n,T_n,P_n,G_n|\phi_3) = p_3(T_n) p_3(G_n) p_3(P_n|\phi_3) p_3(A_n)$ \\
+\enddata
+\end{deluxetable}
+
+% \begin{deluxetable}{lccc}
+% \label{tab:tab1}
+% \tablewidth{0pc}
+% \tablecaption{Priors.}
+% \tablehead{
+% \colhead{Parameter}&
+% \colhead{Prior}&
+% \colheaad{Hyperparameter}}
+% \startdata
+% Regime 1: & &\\
+% $\alpha$ & Gaussian &\\
+% $\beta$ & Gaussian &\\
+% $\delta$ & Gaussian &\\
+% $p(T_n)$ & Gaussian+step & $T_K$ \\
+% $p(P_n)$ & Jeffries & $\phi$\\
+% $p(G_n)$ & Gaussian+step & \\
+% Regime 2: & &\\
+% $p(A_n)$ & Jeffries & $\mu_{A,1}, \sigma_{A,1}$\\
+% $p(T_n)$ & Gaussian+step & $T_K$\\
+% $p(P_n)$ & Jeffries & $\phi$ \\
+% $p(G_n)$ & Gaussian+step & \\
+% Regime 3: & &\\
+% $p(A_n)$ & Jeffries & $\mu_{A,2}, \sigma_{A,2}$ \\
+% $p(T_n)$ & Gaussian+step & $T_{MS}$\\
+% $p(P_n)$ & Jeffries & $\phi$ \\
+% $p(G_n)$ & Gaussian+step & \\
+% \enddata
+% \end{deluxetable}
+
+% & $\mathcal{N}(\mu_{T,1}, \sigma^2_{T,1}), \mathcal{N}(\mu_{P,1}, \sigma^2_{P,1}), \mathcal{N}(\mu_{G,1}, \sigma^2_{G,1})$ \\
+% & $\mathcal{N}(\mu_{T,2}, \sigma^2_{T,2}), \mathcal{N}(\mu_{P,2}, \sigma^2_{P,2}), \mathcal{N}(\mu_{G,2}, \sigma^2_{G,2})$  \\
+% & $ \mathcal{N}(\mu_{T,3}, \sigma^2_{T,3}), \mathcal{N}(\mu_{P,3}, \sigma^2_{P,3}), \mathcal{N}(\mu_{G,3}, \sigma^2_{G,3})$ \\
+
+\subsection{Accounting for the `non-narrow' relationship}
+
+Because we assume that the generative process for the data is an intrinsically noisy one, we need to add two extra parameters describing the mean and variance of a Gaussian perturbation to the plane.
+In this the model takes the form:
+
+We have assumed that we have been given data that parameterise posterior probability distributions with uninformative priors.
+What are the implications if this is not the case?
+
+\begin{equation}
+	A_n = \alpha(T_n - T_K)^\beta \times P_n^\delta + E_n
+\end{equation}
+
+Where the $E_n$ are noise contributions drawn from a Gaussian with some mean, $\mu_{S,n}$ and variance, [$\sigma^2_{S,n} + S_n^2$], where $\sigma_{S,n}$ is the uncertainty of star n and $S_n$ is some unknown parameter, that characterises the intrinsic deviation of the hidden variables from the plane.
+
+
+% Rotation period vs age for the sub-giants is shown in figure \ref{fig:subgiants}. Models of sub-giant rotation evolution from \citet{van_Saders_2013} are shown for comparison.
+% Qualitatively speaking the observations show good agreement with the models.
+% The relationship between age and rotation shown in these models is, unlike the empirical gyrochronology relations of MS stars, physically motivated.
+% Rotational breaking of sub-giants is a simple consequence of angular momentum conservation during the expansion phase and therefore easy to model.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_t_orig.png}
+\caption{Rotation period vs $T_{eff}$ for 58 MS stars with rotation period measurements, coloured according to age.
+Isochrones were calculated using the relation in  \citet{Mamajek_2008}.}
+\label{fig:results}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/np_vs_a3.png}
+\caption{Rotation period vs age for 58 MS stars with $M<1.4M_\odot$, coloured according to mass. % should be according to period!
+Isomass lines were calculated using the relation in \citet{Mamajek_2008}}
+\label{fig:results2}
+\end{center}
+\end{figure}
 
 \section{Discussion}
 
@@ -247,98 +378,90 @@ The larger number of high mass stars is an asteroseismic bias.
 We have seen that the existing gyrochronology relations over-predict the rotation periods of low-mass stars.
 This can be understood as a consequence of core-envelope decoupling.
 
-Contamination.
-Follow up.
-
-Would like to get more precise ages.
-
-Would like to get more slowly rotating, lower mass stars - K2 and TESS.
+% Contamination.
+% Follow up.
+% Would like to get more precise ages.
+% Would like to get more slowly rotating, lower mass stars - K2 and TESS.
 
 \section{Conclusion}
-
-
-\section{Still to do and Future}
-
-separate into age bins and produce plots. Before and after fitting.
-
-fitting - new gyrochronology relation
-
-Make the sub-giant plot better
-
-swap back to Teff
-
-make isochrones nicer.
-
-Ask Amy to send latest version of her code (and automated version?)
-
-look up what constitutes an evolved star.
-
-Think about whether you want to put any limitations on the ACF itself, or whether the
-
-Is it more easy to measure the rotation periods for certain stars as a consequence of diff rot?
-
-Would you expect high or low mass stars to have more differential rotation?
 
 \bibliographystyle{plainnat}
 \bibliography{Gyro_paper}
 
 
-% \begin{figure}[ht]
-% \begin{center}
-% \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/angusr/ACF/ACF2/PDCQ3_output/plots_acf/322300_full.png}
-% \caption{PDC-MAP and 'processed' light curves for KIC 3223000 with the ACF.}
-% \label{fig:lc}
-% \end{center}
-% \end{figure}
-
-% \begin{figure}[ht]
-% \begin{center}
-% \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/angusr/ACF/ind_qs_figs/322300.pdf}
-% \caption{Period measurements for quarters 3 - 16 of star `KIC 7771282'. The blue solid line indicates the median value and the shaded blue region marks its 15\% margin. The blue dashed line with surrounding shaded area indicates one half of the median period measurement with 15\% margin.  More than two thirds of the period measurements were present and consistent to within 15\% of the median for this star, so it passed the selection process.}
-% \label{fig:ind_qs}
-% \end{center}
-% \end{figure}
-
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/p_vs_a6.png}
-\caption{Rotation period vs asteroseismic age for 59 MS stars. The colour scale shows mass. Isomass lines of the \citet{Barnes_2007} and \citet{Mamajek_2008}  gyrochronology relations are shown for different masses as solid and dashed lines respectively. The triangular point is from the Silva Aguirre (CITE) sample.}
-\label{fig:results}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/angusr/ACF/ACF2/PDCQ3_output/plots_acf/3223000_full.png}
+\caption{PDC-MAP and 'processed' light curves for KIC 3223000 with the ACF.}
+\label{fig:lc}
 \end{center}
 \end{figure}
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/m_vs_a.png}
-\caption{Asteroseismic mass vs asteroseismic age of the MS stars.}
-\label{fig:m_vs_a}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/angusr/ACF/ind_qs_figs/3223000.pdf}
+\caption{Period measurements for quarters 3 - 16 of star `KIC 7771282'. The blue solid line indicates the median value and the shaded blue region marks its 15\% margin. The blue dashed line with surrounding shaded area indicates one half of the median period measurement with 15\% margin.  More than two thirds of the period measurements were present and consistent to within 15\% of the median for this star, so it passed the selection process.}
+\label{fig:ind_qs}
 \end{center}
 \end{figure}
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/a_vs_p6.png}
-\caption{Rotation period vs asteroseismic age for 57 sub-giants. Models are from \citet{van_Saders_2013}.}
-\label{fig:subgiants}
-\end{center}
-\end{figure}
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/p_vs_m2.png}
-\caption{Rotation period vs asteroseismic mass.}
-\label{fig:p_vs_m}
-\end{center}
-\end{figure}
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/p_vs_m.png}
-\caption{Rotation period vs asteroseismic mass.}
-\label{fig:p_vs_m}
-\end{center}
-\end{figure}
+% The 144 stars with rotation periods were divided into MS and sub-giant stars based on their logg values presented in \citet{Chaplin2013}.
+% Stars with logg $>$ 4.0 were classified as MS stars and those with logg $<$ 4.0 as sub-giants.
+% Of the 144, 57 were categorised as sub-giants and 87 as MS stars.
+% The MS stars were further divided according to their mass, stars with masses above the Kraft break, $> 1.3 M_{\odot}$, were discarded as, these stars do not spin down appreciably on the MS.
+% Figure \ref{fig:results} shows rotation period vs asterosiesmic age for each of the 59 MS stars with masses between 0.8 and 1.3 $M_{\odot}$.
+% Older stars do appear to be more rapidly rotating, as predicted.
+% The isomass lines of the \citet{Barnes_2007} and \citet{Mamajek_2008} gyrochronology relations appear to roughly describe the slope of the observed period-age relation, but not the y-axis offset, particularly at lower masses.
+% The observed dependence of rotation period on mass is not consistent with predictions from the existing gyrochronology relations for low-mass stars.
+% The relations over-predict the rotation periods of low-mass stars for a given stellar age.
+% The triangular outlier at the bottom right of figure \ref{fig:results} is a rapidly rotating, old, low mass, low metallicity object which we believe to be a synchronised binary.
+% It is unfortunate that the single high precision target that survived through the rotation period measurement, sub-giant vetting and mass categorisation processes should be a false positive.
 
+% A trend between mass and age is visible in figure \ref{fig:results}, green points lie to the left and pink points to the right.
+% In figure \ref{fig:m_vs_a} this trend is clear.
+% One would expect not to find old, massive stars due to MS turn-off.
+% The lack of young, low mass stars is not surprising either as asteroseismic oscillation signals can be overwhelmed by activity.
+
+% Fitting a model to the data is not straight-forward in this case as uncertainties lie on all three parameters: P, t and B-V, and standard fitting approaches only allow for errors on the independent variable.
+% This relation is clearly linear in log space, which is why we choose to fit it in log space, however, most standard fitting methods also assume that uncertainties are Gaussian.
+% Uncertainties on the age measurements actually *are* Gaussian in log space, a feature of the asteroseismic age determination (they probably use a logarithmic grid, something like that).
+% Uncertainties on the colours, however, will not be linear in log space.
+% In fact colours are already logarithmic, so it may not be appropriate to deal with them at all.
+% It may be better to use Teffs - these are published in \citet{Chaplin2013} and are not dependent on metallicity, therefore remove another source of noise.
+% How does B-V colour depend on Teff and are the uncertainties on Teff Gaussian in log space?
+% If the errors on the parameters were Gaussian in log space, a fitting approach such as the one outlined in \citet{Hogg_2010} could be taken.
+% If this function was linear and had gaussian uncertainties we could write down a likelihood function, such as the one described in \citet{Hogg_2010} but generalised to three dimensions, and maximise the likelihood to find the parameters a, b, c and n.
+% The total least-squares style approach was taken because the uncertainties on t are Gaussian in log space, but uncertainties on B-V are not.
+% The total least-squares approach allows you to draw samples from any distribution you want - it doesn't have to be Gaussian.
+% The method is outlined as followed:
+% For N data points with (P, t, B-V) and variances ($\sigma_P^2$, $\sigma_t^2$, $\sigma_{B-V}^2$), draw M new values of t$\prime$ from $\mathcal{N}(\log(t), \sigma_{\log(t)}^2)$ and (B-V)$\prime$ from $\mathcal{N}(B-V, \sigma_{B-V}^2)$ so that you have N $\times$ M data points.
+% Fit a model to the data using MCMC.
+% We used emcee \citep{Foreman-Mackey}, an affine-invariant, ensemble walker MCMC algorithm.
+% In practise we actually want to find a fit to each new set of N data points M times, rather than generating the whole new data set and fitting a model to it in one go.
+
+% Whilst modelling the data we need to properly account for the uncertainties on all three variables and model all three populations simultaneously.
+% We also need
+% In order to do this we followed a hierarchical inference method, outlined in \citet{Hogg2010}.
+% It was also essential that we model all three populations (low mass MS stars, high mass MS stars and sub giants) simultaneously.
+% We do this for two reasons: firstly, the position of the Kraft break will be a free parameter in our model since we don't know precisely where it falls.
+% Secondly, because the uncertainties on the data are large, each star will have a finite probability mass lying in each regime.
+
+% The model:
+% \begin{equation}
+% \log(P) = n\log(A) + \log(a) + b\log(B-V - c)
+% \end{equation}
+
+% The likelihood function:
+% \begin{equation}
+% L = p(\{yi\}_{i=1}^N | n, a, b, c, P_b, Y_b, V_b, I)
+% \end{equation}
+
+% \begin{equation}
+% L \propto \Pi_{i=1}^N \left[ \frac{1-P_b}{\sqrt{2\pi\sigma^2}} \exp \left(- \frac{[y_i - y_m]^2}{2\sigma_{yi}^2}\right)
+% + \frac{P_b}{\sqrt{2\pi[V_b + \sigma_{yi}^2]}} \exp \left(- \frac{[y_i - Y_b]^2}{2[V_b + \sigma_{yi}^2]}\right)  \right]
+% \end{equation}
 
 \end{document}
 
