@@ -1,0 +1,213 @@
+\documentclass[12pt,preprint]{aastex}
+\usepackage{cite,natbib}
+\usepackage{epsfig}
+\usepackage{cases}
+\usepackage[section]{placeins}
+\usepackage{graphicx, subfigure}
+
+\begin{document}
+
+\section{Gyrochronology Calibration}
+
+505 stars with asteroseismically determined ages were published in Chaplin (2013).
+We successfully measured rotation periods for 144 of these 505.
+Each star has an effective temperature, T from multi-band photometry, a photometric rotation period, P and an asteroseismically derived age, A and surface gravity, log g (G).
+Each of these properties have associated uncertainties, assumed to be independent and Gaussian for T and P and log-normal for A and G.
+% need a plot showing this!
+
+\begin{equation}
+p(\hat{T}_n|T_n) = \mathcal{N}(\hat{T}|T_n, \sigma^2_{T,n})
+\end{equation}
+
+\begin{equation}
+p(\hat{P}_n|P_n) = \mathcal{N}(\hat{P}|P_n, \sigma^2_{P,n})
+\end{equation}
+
+\begin{equation}
+p(\log(\hat{A}_n)|log(A_n)) = \mathcal{N}(\hat{A}|A_n, \sigma^2_{A,n})
+\end{equation}
+
+\begin{equation}
+p(\log(\hat{G}_n)|log(G_n)) = \mathcal{N}(\hat{G}|T_n, \sigma^2_{G,n})
+\end{equation}
+
+% is this correct?
+
+Where $X_n$ is the true value of the variable, $X$ at observation n, $\hat{X}_n$ is the noisy observation and $\sigma_{X,n}$ is the associated measurement uncertainty.
+
+
+The data are shown in figures \ref{fig:results} to \ref{fig:results2}.
+The stars in our sample cover temperatures ranging from 5400 to 7000 K.
+Gyrochronology is not a valid dating method for stars above a cut-off temperature, the Kraft-break, ($\sim$ 6500 K) as these stars have a different dynamo and do not spin down.
+Subgiants also can't be modelled with a simple gyrochronology relation; stars drastically spin down once they turn off the MS due to angular momentum conservation.
+We can't simply exclude hot stars and subgiants from our sample during the modelling process --- we \emph{have} to model all three populations at once.
+This is for two reasons: firstly, we don't know the exact location of the Kraft-break, so it has to be a free parameter,
+and secondly, all stars have some probability mass lying in all three regimes due to their observational uncertainties.
+
+Previous gyrochronology relations have been in the form of equation \ref{equation:Barnes_2007_2}.
+Our relation will take the form:
+
+\begin{equation}
+	A = \alpha(T - T_k)^{\beta} \times P^{\delta}
+\label{eq:functional_form2}
+\end{equation}
+
+Where now A is the dependent variable, since we want to produce a predictive distribution for the age of a star, given estimates of T and P.
+$\alpha, \beta, T_K$ and $\delta$ are free parameters.
+$T_K$ will also be a hyperparameter, used to constrain the regime that a given star falls into.
+This is the functional form for the model that we will fit to the low-mass MS.
+For the high-mass MS stars and the subgiants we will assume that age is not conditionally dependent upon P and T.
+In these regimes we will apply Gaussian priors over T and P and model ages with log-normal distributions.
+It is also important that we have extra free parameters in our model that account for the intrinsic scatter in the data.
+
+For now, lets just address the low-mass MS stars that can be modelled with the gyrochronology relation.
+The likelihood marginalised over the true values of the variables can be written as:
+
+\begin{equation}
+  p(\{\hat{P}_n,\hat{A}_n,\hat{T}_n,\hat{G}_n\}|\theta) =
+  \prod_{n=1}^{N} \int p(\hat{A}_n,\hat{T}_n,\hat{P}_n,\hat{G}_n,A_n,T_n,P_n,G_n|\theta)
+  {\rm d}A_n {\rm d}T_n {\rm d}P_n {\rm d}G_n
+\label{eq:fullL}
+\end{equation}
+
+Where $\theta = \alpha, \beta, \delta$ and $T_K$ for low-mass MS stars. The joint probability is given by:
+
+\begin{equation}
+  p(\hat{A}_n,\hat{T}_n,\hat{P}_n,\hat{G}_n,A_n,T_n,P_n,G_n|\theta) =
+  p(A_n,T_n,P_n,G_n|\theta) p(\hat{A}_n|A_n)
+  p(\hat{T}_n|T_n) p(\hat{P}_n|P_n) p(\hat{G}_n|G_n),
+\label{eq:jointprob}
+\end{equation}
+
+So the marginalised likelihood for a single star can be written as:
+
+\begin{equation}
+  p(\hat{P}_n,\hat{A}_n,\hat{T}_n,\hat{G}_n|\theta)  =
+  \int p(A_n,T_n,P_n,G_n|\theta)
+  p(\hat{A}_n|A_n) p(\hat{T}_n|T_n) p(\hat{P}_n|P_n) p(\hat{G}_n|G_n),
+  {\rm d}A_n {\rm d}T_n {\rm d}P_n {\rm d}G_n
+\label{eq:L1}
+\end{equation}
+
+The joint probability distribution for the true values of the observables takes a different form in the different regimes.
+Table \ref{table:tab1} summarises the probabilistic properties of the three regimes.
+
+The $X_n$s are the hidden variables, the $\hat{X}_n$s are the visible variables, and the $\theta$ are the parameters, the values of which we want to infer.
+% The following is almost an exact quotation from Murphy: change it eventually!
+The main difference between hidden variables and parameters is that the number of hidden variables grows with the amount of training data, whereas the number of parameters is usually fixed.
+This means we must integrate out the hidden variables to avoide overfitting, but we may be able to get away with point estimation techniques for parameters, which are fewer in number.
+We want to marginalise over the hidden variables so that we just have the probability of the observations, given the model.
+The process of marginalising over these hidden variables takes the form of an intergral which is difficult to solve analytically.
+We therefore approximate it with a sampling technique.
+
+% \begin{deluxetable}{lcc}
+% \label{tab:tab1}
+% \tablewidth{0pc}
+% \tablecaption{Models and free parameters for the three stellar populations.}
+% \tablehead{
+% \colhead{Regime}&
+% \colhead{Model}&
+% \colhead{Parameters}}
+% \startdata
+% Low mass, MS & $P = A^n \times a(B-V-c)^b$ & $\alpha, \beta, \delta, T_K$ \\
+% High mass, MS & $\log{A} \sim \mathcal{N}(\mu_{A,1}, \sigma^2_{A,1})$, $T \sim \mathcal{N}(\mu_{T,1}, \sigma^2_{T,1}) , \log{P} \sim \mathcal{N}(\mu_{P,1}, \sigma^2_{P,1})$ & $\mu_{A,1}, \sigma^2_{A,1}, \mu_{T,1}, \sigma_{T,1}, \mu_{P,1}, \sigma_{P,1}$ \\
+% Subgiants & $\log{A} \sim \mathcal{N}(\mu_{A,2}, \sigma^2_{A,2})$, $T\sim\mathcal{N}(\mu_{T,2}, \sigma^2_{T,2})$, $\log{P} \sim \mathcal{N}(\mu_{P,2}, \sigma^2_{P,2})$ & $\mu_{A,2}, \sigma^2_{A,2}, \mu_{T,2}, \sigma_{T,2}, \mu_{P,2}, \sigma_{P,2}$ \\
+% \enddata
+% \end{deluxetable}
+% Change the model!
+
+\begin{deluxetable}{lcc}
+\label{tab:tab1}
+\tablewidth{0pc}
+\tablecaption{Models and free parameters for the three stellar populations.}
+\tablehead{
+\colhead{Regime}&
+\colhead{Model}&
+\colhead{Parameters}}
+\startdata
+Low mass, MS & $A = \alpha(T-T_K)^\beta \times P^\delta$ & $\alpha, \beta, \delta, T_K$ \\
+High mass, MS & $\log{A} \sim \mathcal{N}(\mu_{A,1}, \sigma^2_{A,1})$ & $\mu_{A,1}, \sigma^2_{A,1}$ \\
+Subgiants & $\log{A} \sim \mathcal{N}(\mu_{A,2}, \sigma^2_{A,2})$ & $\mu_{A,2}, \sigma^2_{A,2}$ \\
+\enddata
+\end{deluxetable}
+
+\begin{deluxetable}{lc}
+\label{tab:tab1}
+\tablewidth{0pc}
+\tablecaption{Joint probability distributions for the three populations.}
+\tablehead{
+\colhead{Regime}&
+\colhead{Joint probability distribution}}
+\startdata
+Low mass, MS & $p_1(A_n,T_n,P_n,G_n|\theta,T_K) = p_1(T_n|T_K) p_1(G_n) p_1(P_n) p_1(A_n|T_n,P_n,\theta)$ \\
+High mass, MS & $p_2(A_n,T_n,P_n,G_n|\phi_2) = p_2(T_n|T_K) p_2(G_n) p_2(P_n|phi_2) p_2(A_n)$  \\
+Subgiants & $p_3(A_n,T_n,P_n,G_n|\phi_3) = p_3(T_n) p_3(G_n) p_3(P_n|\phi_3) p_3(A_n)$ \\
+\enddata
+\end{deluxetable}
+
+% \begin{deluxetable}{lccc}
+% \label{tab:tab1}
+% \tablewidth{0pc}
+% \tablecaption{Priors.}
+% \tablehead{
+% \colhead{Parameter}&
+% \colhead{Prior}&
+% \colheaad{Hyperparameter}}
+% \startdata
+% Regime 1: & &\\
+% $\alpha$ & Gaussian &\\
+% $\beta$ & Gaussian &\\
+% $\delta$ & Gaussian &\\
+% $p(T_n)$ & Gaussian+step & $T_K$ \\
+% $p(P_n)$ & Jeffries & $\phi$\\
+% $p(G_n)$ & Gaussian+step & \\
+% Regime 2: & &\\
+% $p(A_n)$ & Jeffries & $\mu_{A,1}, \sigma_{A,1}$\\
+% $p(T_n)$ & Gaussian+step & $T_K$\\
+% $p(P_n)$ & Jeffries & $\phi$ \\
+% $p(G_n)$ & Gaussian+step & \\
+% Regime 3: & &\\
+% $p(A_n)$ & Jeffries & $\mu_{A,2}, \sigma_{A,2}$ \\
+% $p(T_n)$ & Gaussian+step & $T_{MS}$\\
+% $p(P_n)$ & Jeffries & $\phi$ \\
+% $p(G_n)$ & Gaussian+step & \\
+% \enddata
+% \end{deluxetable}
+
+% & $\mathcal{N}(\mu_{T,1}, \sigma^2_{T,1}), \mathcal{N}(\mu_{P,1}, \sigma^2_{P,1}), \mathcal{N}(\mu_{G,1}, \sigma^2_{G,1})$ \\
+% & $\mathcal{N}(\mu_{T,2}, \sigma^2_{T,2}), \mathcal{N}(\mu_{P,2}, \sigma^2_{P,2}), \mathcal{N}(\mu_{G,2}, \sigma^2_{G,2})$  \\
+% & $ \mathcal{N}(\mu_{T,3}, \sigma^2_{T,3}), \mathcal{N}(\mu_{P,3}, \sigma^2_{P,3}), \mathcal{N}(\mu_{G,3}, \sigma^2_{G,3})$ \\
+
+\subsection{Accounting for the `non-narrow' relationship}
+
+Because we assume that the generative process for the data is an intrinsically noisy one, we need to add two extra parameters describing the mean and variance of a Gaussian perturbation to the plane.
+In this the model takes the form:
+
+We have assumed that we have been given data that parameterise posterior probability distributions with uninformative priors.
+What are the implications if this is not the case?
+
+\begin{equation}
+	A_n = \alpha(T_n - T_K)^\beta \times P_n^\delta + E_n
+\end{equation}
+
+Where the $E_n$ are noise contributions drawn from a Gaussian with some mean, $\mu_{S,n}$ and variance, [$\sigma^2_{S,n} + S_n^2$], where $\sigma_{S,n}$ is the uncertainty of star n and $S_n$ is some unknown parameter, that characterises the intrinsic deviation of the hidden variables from the plane.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_t_orig.png}
+\caption{Rotation period vs $T_{eff}$ for 58 MS stars with rotation period measurements, coloured according to age.
+Isochrones were calculated using the relation in  \citet{Mamajek_2008}.}
+\label{fig:results}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/np_vs_a3.png}
+\caption{Rotation period vs age for 58 MS stars with $M<1.4M_\odot$, coloured according to mass. % should be according to period!
+Isomass lines were calculated using the relation in \citet{Mamajek_2008}}
+\label{fig:results2}
+\end{center}
+\end{figure}
+
+\end{document}
