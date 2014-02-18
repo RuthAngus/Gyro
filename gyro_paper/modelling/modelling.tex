@@ -1,4 +1,6 @@
 \documentclass[12pt,preprint]{aastex}
+\usepackage{amsmath}
+\usepackage{breqn}
 \usepackage{cite,natbib}
 \usepackage{epsfig}
 \usepackage{cases}
@@ -15,182 +17,231 @@ Each star has an effective temperature, T from multi-band photometry, a photomet
 Each of these properties have associated uncertainties, assumed to be independent and Gaussian for T and P and log-normal for A and G.
 % need a plot showing this!
 
-\begin{equation}
-p(\hat{T}_n|T_n) = \mathcal{N}(\hat{T}|T_n, \sigma^2_{T,n})
-\end{equation}
-
-\begin{equation}
-p(\hat{P}_n|P_n) = \mathcal{N}(\hat{P}|P_n, \sigma^2_{P,n})
-\end{equation}
-
-\begin{equation}
-p(\log(\hat{A}_n)|log(A_n)) = \mathcal{N}(\hat{A}|A_n, \sigma^2_{A,n})
-\end{equation}
-
-\begin{equation}
-p(\log(\hat{G}_n)|log(G_n)) = \mathcal{N}(\hat{G}|T_n, \sigma^2_{G,n})
-\end{equation}
-
-% is this correct?
-
-Where $X_n$ is the true value of the variable, $X$ at observation n, $\hat{X}_n$ is the noisy observation and $\sigma_{X,n}$ is the associated measurement uncertainty.
-
-
 The data are shown in figures \ref{fig:results} to \ref{fig:results2}.
 The stars in our sample cover temperatures ranging from 5400 to 7000 K.
 Gyrochronology is not a valid dating method for stars above a cut-off temperature, the Kraft-break, ($\sim$ 6500 K) as these stars have a different dynamo and do not spin down.
-Subgiants also can't be modelled with a simple gyrochronology relation; stars drastically spin down once they turn off the MS due to angular momentum conservation.
+Subgiants also cannot be modelled with a simple gyrochronology relation; stars drastically spin down once they turn off the main sequence (MS) due to angular momentum conservation.
 We can't simply exclude hot stars and subgiants from our sample during the modelling process --- we \emph{have} to model all three populations at once.
 This is for two reasons: firstly, we don't know the exact location of the Kraft-break, so it has to be a free parameter,
 and secondly, all stars have some probability mass lying in all three regimes due to their observational uncertainties.
+The subgiant regime is bounded by a function of effective temperature, $T$ and log g, $G$.
+This function will be a straight line with established slope and intercept, taken from the literature.
 
-Previous gyrochronology relations have been in the form of equation \ref{equation:Barnes_2007_2}.
+The gyrochronology relations of Barnes (2007) and Mamajek \& Hillenbrand (2008) are of the form:
+
+\begin{equation}
+P = A^n \times \alpha(B-V-c)^\beta.
+\end{equation}
+
 Our relation will take the form:
 
 \begin{equation}
-	A = \alpha(T - T_k)^{\beta} \times P^{\delta}
+	A = 10^\alpha(T - T_k)^{\beta} \times P^{\delta}
 \label{eq:functional_form2}
 \end{equation}
 
 Where now A is the dependent variable, since we want to produce a predictive distribution for the age of a star, given estimates of T and P.
 $\alpha, \beta, T_K$ and $\delta$ are free parameters.
-$T_K$ will also be a hyperparameter, used to constrain the regime that a given star falls into.
-This is the functional form for the model that we will fit to the low-mass MS.
-For the high-mass MS stars and the subgiants we will assume that age is not conditionally dependent upon P and T.
-In these regimes we will apply Gaussian priors over T and P and model ages with log-normal distributions.
-It is also important that we have extra free parameters in our model that account for the intrinsic scatter in the data.
-
-For now, lets just address the low-mass MS stars that can be modelled with the gyrochronology relation.
-The likelihood marginalised over the true values of the variables can be written as:
+Since this equation is linear in log-space, we will be fitting the logarithmic form of this equation to the low-mass, MS stars:
 
 \begin{equation}
-  p(\{\hat{P}_n,\hat{A}_n,\hat{T}_n,\hat{G}_n\}|\theta) =
-  \prod_{n=1}^{N} \int p(\hat{A}_n,\hat{T}_n,\hat{P}_n,\hat{G}_n,A_n,T_n,P_n,G_n|\theta)
+	\log{A} = \alpha + \beta \log{(T - T_k)} +  \delta \log{P}
+\label{eq:log}
+\end{equation}
+
+For the high-mass MS stars and the subgiants we will assume that age does not depend upon P and T.
+In these regimes we will apply Gaussian priors over T and Jeffries priors over P (with different, fixed, hyperparameters in different regimes) and model ages with log-normal distributions.
+% The mean and variances of the age distributions in the high-mass and subgiant regimes are nuisance parameters that will be marginalised over.
+
+For now, lets just address the low-mass MS stars that obey the gyrochronology relation.
+The likelihood, marginalised over hidden variables, can be written as:
+
+\begin{equation}
+  p(\{\hat{P}_n,\hat{A}_n,\hat{T}_n,\hat{G}_n\}|\theta, T_K) =
+  \prod_{n=1}^{N} \int p(\hat{A}_n,\hat{T}_n,\hat{P}_n,\hat{G}_n,A_n,T_n,P_n,G_n|\theta, T_K)
   {\rm d}A_n {\rm d}T_n {\rm d}P_n {\rm d}G_n
 \label{eq:fullL}
 \end{equation}
 
-Where $\theta = \alpha, \beta, \delta$ and $T_K$ for low-mass MS stars. The joint probability is given by:
+Where $\theta = \alpha, \beta, \delta$. The joint probability can be factorised as:
 
 \begin{equation}
-  p(\hat{A}_n,\hat{T}_n,\hat{P}_n,\hat{G}_n,A_n,T_n,P_n,G_n|\theta) =
-  p(A_n,T_n,P_n,G_n|\theta) p(\hat{A}_n|A_n)
+  p(\hat{A}_n,\hat{T}_n,\hat{P}_n,\hat{G}_n,A_n,T_n,P_n,G_n|\theta, T_K) =
+  p(A_n,T_n,P_n,G_n|\theta, T_K) p(\hat{A}_n|A_n)
   p(\hat{T}_n|T_n) p(\hat{P}_n|P_n) p(\hat{G}_n|G_n),
 \label{eq:jointprob}
 \end{equation}
 
-So the marginalised likelihood for a single star can be written as:
+and the marginalised likelihood for a single star can be written as the sum of the individual star likelihoods over the three different regimes, k:
 
-\begin{equation}
-  p(\hat{P}_n,\hat{A}_n,\hat{T}_n,\hat{G}_n|\theta)  =
-  \int p(A_n,T_n,P_n,G_n|\theta)
-  p(\hat{A}_n|A_n) p(\hat{T}_n|T_n) p(\hat{P}_n|P_n) p(\hat{G}_n|G_n),
-  {\rm d}A_n {\rm d}T_n {\rm d}P_n {\rm d}G_n
+\begin{multline}
+p(\hat{P}_n,\hat{A}_n,\hat{T}_n,\hat{G}_n|\theta,T_K)  = \\
+\sum_{k=1}^3\int p(A_n,T_n,P_n,G_n|\theta,T_K)
+p(\hat{A}_n|A_n) p(\hat{T}_n|T_n) p(\hat{P}_n|P_n) p(\hat{G}_n|G_n)
+{\rm d}A_n {\rm d}T_n {\rm d}P_n {\rm d}G_n,
+\end{multline}
 \label{eq:L1}
-\end{equation}
 
-The joint probability distribution for the true values of the observables takes a different form in the different regimes.
-Table \ref{table:tab1} summarises the probabilistic properties of the three regimes.
-
-The $X_n$s are the hidden variables, the $\hat{X}_n$s are the visible variables, and the $\theta$ are the parameters, the values of which we want to infer.
-% The following is almost an exact quotation from Murphy: change it eventually!
-The main difference between hidden variables and parameters is that the number of hidden variables grows with the amount of training data, whereas the number of parameters is usually fixed.
-This means we must integrate out the hidden variables to avoide overfitting, but we may be able to get away with point estimation techniques for parameters, which are fewer in number.
-We want to marginalise over the hidden variables so that we just have the probability of the observations, given the model.
-The process of marginalising over these hidden variables takes the form of an intergral which is difficult to solve analytically.
-We therefore approximate it with a sampling technique.
-
-% \begin{deluxetable}{lcc}
-% \label{tab:tab1}
-% \tablewidth{0pc}
-% \tablecaption{Models and free parameters for the three stellar populations.}
-% \tablehead{
-% \colhead{Regime}&
-% \colhead{Model}&
-% \colhead{Parameters}}
-% \startdata
-% Low mass, MS & $P = A^n \times a(B-V-c)^b$ & $\alpha, \beta, \delta, T_K$ \\
-% High mass, MS & $\log{A} \sim \mathcal{N}(\mu_{A,1}, \sigma^2_{A,1})$, $T \sim \mathcal{N}(\mu_{T,1}, \sigma^2_{T,1}) , \log{P} \sim \mathcal{N}(\mu_{P,1}, \sigma^2_{P,1})$ & $\mu_{A,1}, \sigma^2_{A,1}, \mu_{T,1}, \sigma_{T,1}, \mu_{P,1}, \sigma_{P,1}$ \\
-% Subgiants & $\log{A} \sim \mathcal{N}(\mu_{A,2}, \sigma^2_{A,2})$, $T\sim\mathcal{N}(\mu_{T,2}, \sigma^2_{T,2})$, $\log{P} \sim \mathcal{N}(\mu_{P,2}, \sigma^2_{P,2})$ & $\mu_{A,2}, \sigma^2_{A,2}, \mu_{T,2}, \sigma_{T,2}, \mu_{P,2}, \sigma_{P,2}$ \\
-% \enddata
-% \end{deluxetable}
-% Change the model!
-
-\begin{deluxetable}{lcc}
-\label{tab:tab1}
-\tablewidth{0pc}
-\tablecaption{Models and free parameters for the three stellar populations.}
-\tablehead{
-\colhead{Regime}&
-\colhead{Model}&
-\colhead{Parameters}}
-\startdata
-Low mass, MS & $A = \alpha(T-T_K)^\beta \times P^\delta$ & $\alpha, \beta, \delta, T_K$ \\
-High mass, MS & $\log{A} \sim \mathcal{N}(\mu_{A,1}, \sigma^2_{A,1})$ & $\mu_{A,1}, \sigma^2_{A,1}$ \\
-Subgiants & $\log{A} \sim \mathcal{N}(\mu_{A,2}, \sigma^2_{A,2})$ & $\mu_{A,2}, \sigma^2_{A,2}$ \\
-\enddata
-\end{deluxetable}
+where $p(A_n,T_n,P_n,G_n|\theta,T_K)$ is different in the three regimes, as listed in table \ref{tab:jprob}.
 
 \begin{deluxetable}{lc}
-\label{tab:tab1}
+\label{tab:jprob}
 \tablewidth{0pc}
-\tablecaption{Joint probability distributions for the three populations.}
+\tablecaption{Probability of hidden variables for the three populations.}
 \tablehead{
 \colhead{Regime}&
 \colhead{Joint probability distribution}}
 \startdata
-Low mass, MS & $p_1(A_n,T_n,P_n,G_n|\theta,T_K) = p_1(T_n|T_K) p_1(G_n) p_1(P_n) p_1(A_n|T_n,P_n,\theta)$ \\
-High mass, MS & $p_2(A_n,T_n,P_n,G_n|\phi_2) = p_2(T_n|T_K) p_2(G_n) p_2(P_n|phi_2) p_2(A_n)$  \\
-Subgiants & $p_3(A_n,T_n,P_n,G_n|\phi_3) = p_3(T_n) p_3(G_n) p_3(P_n|\phi_3) p_3(A_n)$ \\
+Low mass, MS & $p_1(A_n,T_n,P_n,G_n|\theta,T_K) = p_1(T_n|T_K) p_1(G_n) p_1(P_n) p_1(A_n|T_n,P_n,\theta, T_K)$ \\
+High mass, MS & $p_2(A_n,T_n,P_n,G_n|\theta_{A,2}) = p_2(T_n) p_2(G_n) p_2(P_n) p_2(A_n|\theta_{A,2})$  \\
+Subgiants & $p_3(A_n,T_n,P_n,G_n|\theta_{A,3}) = p_3(T_n) p_3(G_n) p_3(P_n) p_3(A_n|\theta_{A,3})$ \\
+\enddata
+\end{deluxetable}
+% Not at all sure about these - they're probably all wrong!
+
+\subsection{A sampling approach}
+
+In the following, we outline our sampling method, designed to properly account for the uncertainties on all three variables.
+This method is motivated by the work of Hogg et al (2010).
+As mentioned previously, uncertainties lie on all three variables and they are assumed to be independent and Gaussian for T and P and log-normal for A and G:
+
+\begin{equation}
+p(\hat{T}_n|T_n) = \mathcal{N}(\hat{T}|T_n, \sigma^2_{T,n}),
+\label{eq:p1}
+\end{equation}
+
+\begin{equation}
+p(\hat{P}_n|P_n) = \mathcal{N}(\hat{P}|P_n, \sigma^2_{P,n}),
+\label{eq:p2}
+\end{equation}
+
+\begin{equation}
+p(\log(\hat{A}_n)|log(A_n)) = \mathcal{N}(\hat{A}|A_n, \sigma^2_{A,n}),
+\label{eq:p3}
+\end{equation}
+
+\begin{equation}
+p(\log(\hat{G}_n)|log(G_n)) = \mathcal{N}(\hat{G}|G_n, \sigma^2_{G,n}).
+\label{eq:p4}
+\end{equation}
+% is this correct?
+
+Where
+
+\begin{equation}
+	p(\hat{X}_n|X_n) = \frac{p(X_n)~p(X_n|\hat{X}_n)}{p(\hat{X}_n)}
+\label{eq:post_def}
+\end{equation}
+
+\begin{equation}
+	\left(p(\hat{X}_n) = \int{p(\hat{X}_n|X_n)~p(X_n)~dX_n}\right).
+\end{equation}
+
+The $X_n$s are the hidden variables, the $\hat{X}_n$s are the visible variables, and the $\sigma_{X,n}$ are the associatied measurement uncertainties.
+% % The following is almost an exact quotation from Murphy: change it eventually!
+% The main difference between hidden variables and parameters is that the number of hidden variables grows with the amount of training data, whereas the number of parameters is usually fixed.
+% This means we must integrate out the hidden variables to avoide overfitting, but we may be able to get away with point estimation techniques for parameters, which are fewer in number.
+We want to marginalise over the hidden variable likelihoods so that we just have the probability of the observations, given the model.
+The process of marginalising over these hidden variables takes the form of a multi-dimensional integral which is difficult to solve analytically.
+We therefore approximate it with a sampling technique.
+
+We are going to assume that the following is valid for low-mass, MS stars:
+
+\begin{equation}
+p(A_n|T_n,P_n,\theta,T_K) = \delta \left\{ A_n - \left[ 10^\alpha \left(T-T_K \right)^\beta P_n^\delta \right] \right\}.
+\end{equation}
+
+i.e., the hidden variables, $A_n$ lie exactly on a plane described by the gyrochronology relation (equation \ref{eq:functional_form2}).
+In reality this may not be a valid assumption, but for now, it means we can write:
+
+\begin{equation}
+  \int{dA_n p(A_n | T_n, P_n, m) p(\hat{A}_n | A_n)}
+  = p(\hat{A}_n | A_n = 10^\alpha (T-T_K)^\beta P_n^\delta) .
+\end{equation}
+
+which leads to
+
+\begin{equation}
+  p(\hat{A}_n, \hat{T}_n, \hat{P}_n | m) \propto
+    \int dT_n p(T_n) p(\hat{T}_n | T_n) \int dP_n p(P_n) p(\hat{P}_n | P_n)
+    p(\hat{A}_n | A_n = 10^\alpha (T-T_K)^\beta P_n^\delta) .
+\end{equation}
+
+If we draw $j$ samples of $T_n$ and $P_n$ from the distributions \ref{eq:p1} and \ref{eq:p2}, we can evaluate $p(\hat{A_n}|A_n)$ up to a normalisation constant, remembering, in general, that integrals over probability densities can be approximated as sums:
+
+\begin{equation}
+  \int{\rho(x) f(x) dx ~= \frac{1}{N} \sum_i=1^N f(x_i)} .
+  \label{eq:example}
+\end{equation}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in, clip=false, trim=0 0 0.5in 0]{/Users/angusr/Python/noisy-plane/pgm2.pdf}
+\caption{Probabilistic graphical model depicting the conditional dependencies of all model components. $\theta = \alpha, \beta, \gamma, T_K$ and $\sigma^2$.}
+\label{fig:results}
+\end{center}
+\end{figure}
+
+\begin{deluxetable}{lccc}
+\label{tab:tab1}
+\tablewidth{0pc}
+\tablecaption{Parameters, priors and hyperparameters.}
+\tablehead{
+\colhead{Parameter}&
+\colhead{Prior}&
+\colhead{Hyperparameter}}
+\startdata
+Global: & & \\
+$T_K$ & Gaussian & $\mu_{T_K}, \sigma^2_{T_K}$ \\
+Regime 1: & & \\
+$p(\alpha)$ & Gaussian & $\mu_\alpha, \sigma^2_\alpha$ \\
+$p(\beta)$ & Gaussian & $\mu_\beta, \sigma^2_\beta$ \\
+$p(\delta)$ & Gaussian & $\mu_\delta, \sigma^2_\delta$ \\
+$p(\sigma^2)$ & Gaussian & $\mu_{\sigma^2}, \sigma^2_{\sigma^2}$ \\
+$p(T_n)$ & Gaussian & $\mu_{T_n,1}, \sigma^2_{T_n,1}$ \\
+$p(P_n)$ & Jeffries & $\mu_{P_n,1}, \sigma^2_{P_n,1}$ \\
+$p(G_n)$ & Gaussian & $\mu_{G_n,1}, \sigma^2_{G_n,1}$ \\
+Regime 2: & & \\
+$p(T_n)$ & Gaussian & $\mu_{T_n,2}, \sigma^2_{T_n,2}$ \\
+$p(P_n)$ & Jeffries & $\mu_{P_n,2}, \sigma^2_{P_n,2}$ \\
+$p(G_n)$ & Gaussian & $\mu_{G_n,2}, \sigma^2_{G_n,2}$ \\
+Regime 3: & & \\
+$p(T_n)$ & Gaussian & $\mu_{T_n,3}, \sigma^2_{T_n,3}$ \\
+$p(P_n)$ & Jeffries & $\mu_{P_n,3}, \sigma^2_{P_n,3}$ \\
+$p(G_n)$ & Gaussian & $\mu_{G_n,3}, \sigma^2_{G_n,3}$ \\
 \enddata
 \end{deluxetable}
 
-% \begin{deluxetable}{lccc}
-% \label{tab:tab1}
-% \tablewidth{0pc}
-% \tablecaption{Priors.}
-% \tablehead{
-% \colhead{Parameter}&
-% \colhead{Prior}&
-% \colheaad{Hyperparameter}}
-% \startdata
-% Regime 1: & &\\
-% $\alpha$ & Gaussian &\\
-% $\beta$ & Gaussian &\\
-% $\delta$ & Gaussian &\\
-% $p(T_n)$ & Gaussian+step & $T_K$ \\
-% $p(P_n)$ & Jeffries & $\phi$\\
-% $p(G_n)$ & Gaussian+step & \\
-% Regime 2: & &\\
-% $p(A_n)$ & Jeffries & $\mu_{A,1}, \sigma_{A,1}$\\
-% $p(T_n)$ & Gaussian+step & $T_K$\\
-% $p(P_n)$ & Jeffries & $\phi$ \\
-% $p(G_n)$ & Gaussian+step & \\
-% Regime 3: & &\\
-% $p(A_n)$ & Jeffries & $\mu_{A,2}, \sigma_{A,2}$ \\
-% $p(T_n)$ & Gaussian+step & $T_{MS}$\\
-% $p(P_n)$ & Jeffries & $\phi$ \\
-% $p(G_n)$ & Gaussian+step & \\
-% \enddata
-% \end{deluxetable}
-
-% & $\mathcal{N}(\mu_{T,1}, \sigma^2_{T,1}), \mathcal{N}(\mu_{P,1}, \sigma^2_{P,1}), \mathcal{N}(\mu_{G,1}, \sigma^2_{G,1})$ \\
-% & $\mathcal{N}(\mu_{T,2}, \sigma^2_{T,2}), \mathcal{N}(\mu_{P,2}, \sigma^2_{P,2}), \mathcal{N}(\mu_{G,2}, \sigma^2_{G,2})$  \\
-% & $ \mathcal{N}(\mu_{T,3}, \sigma^2_{T,3}), \mathcal{N}(\mu_{P,3}, \sigma^2_{P,3}), \mathcal{N}(\mu_{G,3}, \sigma^2_{G,3})$ \\
+Note:--- I am still unclear on exactly how to fold in the different models.
 
 \subsection{Accounting for the `non-narrow' relationship}
 
-Because we assume that the generative process for the data is an intrinsically noisy one, we need to add two extra parameters describing the mean and variance of a Gaussian perturbation to the plane.
-In this the model takes the form:
+In reality, it makes sense to assume that the generative process for the data is an intrinsically noisy one, we need to add an extra parameter describing the variance of a Gaussian perturbation to the plane.
+% In this the model takes the form:
+
+% \begin{equation}
+% 	A_n = \alpha(T_n - T_K)^\beta \times P_n^\delta + E_n
+% \end{equation}
+
+% Where the $E_n$ are noise contributions drawn from a Gaussian with some mean, $\mu_{S,n}$ and variance, [$\sigma^2_{S,n} + S_n^2$], where $\sigma_{S,n}$ is the uncertainty of star n and $S_n$ is some unknown parameter, that characterises the intrinsic deviation of the hidden variables from the plane.
+
+In this case:
+
+\begin{equation}
+	p(A_n|T_n, P_n, \theta, T_K) = \mathcal{N}(10^\alpha (T-T_K)^\beta P^\delta, \sigma^2)
+\label{eq:addvar}
+\end{equation}
+
+Where $\sigma^2$ is another parameter that will eventually marginalise over.
+
+It is important that we account for the intrinsic scatter in the data. Weighting the data points by their uncertainties alone will result in a artificially high weighting of the points with small uncertainties.
 
 We have assumed that we have been given data that parameterise posterior probability distributions with uninformative priors.
 What are the implications if this is not the case?
 
-\begin{equation}
-	A_n = \alpha(T_n - T_K)^\beta \times P_n^\delta + E_n
-\end{equation}
+Do we also want to account for 'missing data'?
 
-Where the $E_n$ are noise contributions drawn from a Gaussian with some mean, $\mu_{S,n}$ and variance, [$\sigma^2_{S,n} + S_n^2$], where $\sigma_{S,n}$ is the uncertainty of star n and $S_n$ is some unknown parameter, that characterises the intrinsic deviation of the hidden variables from the plane.
+Do we also want to include a parameter describing the underestimation of the rotation period measurement uncertainties?
 
 \begin{figure}[ht]
 \begin{center}
@@ -209,5 +260,25 @@ Isomass lines were calculated using the relation in \citet{Mamajek_2008}}
 \label{fig:results2}
 \end{center}
 \end{figure}
+
+% \subsection{Model vs priors}
+
+% When it comes to actually implementing this modelling method, do we want to include $T_K$ in the model, or have it as a prior?
+% We could have a sharp cut-off between model boundaries at $T_K$, i.e., any star with $T<T_K$ will lie in regime 1 and any star with $T>T_K$ will lie in region 2.
+% Effective temperature and log g measurements reveal the evolutionary stage of a star; subgiants, for example, have low T and low G.
+% The value of T and G for a star at the point of turning off the MS is established from both theory and observation, and we can use this established relation to determine which stars fall in the subgiant regime.
+% We will approximate the relation between T and G at MS turn-off age as a straight line:
+
+% \begin{equation}
+% G = aT + b
+% \label{eq:tefflogg}
+% \end{equation}
+
+% Where a and b will be established from the literature.
+% If a star lies above this line, it is a subgiant.
+% i.e., if $G_n/T_n > \frac{G}{aT+b}$ the star is a subgiant.
+
+% So - a star (or at least, a sample from $p(\hat{A}_n|A_n)$) will lie in a certain regime, depending on its T and G only.
+% We could, however, treat the stars more probabilistically.
 
 \end{document}
