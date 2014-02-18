@@ -7,7 +7,7 @@ import scipy.interpolate as sci
 
 plotpar = {'axes.labelsize': 20,
            'text.fontsize': 20,
-           'legend.fontsize': 10,
+           'legend.fontsize': 15,
            'xtick.labelsize': 18,
            'ytick.labelsize': 18,
            'text.usetex': True}
@@ -56,16 +56,14 @@ class plotting(object):
             n = 0.5189
 
         # calculate isochrones
-        tt = np.array([4873, 5331, 5670, 6140, 6560, 6840, 6980, 7260])#, 7650]) # from http://www.isthe.com/chongo
-        # /tech/astro/HR-temp-mass-table-bymass.html
         tt = np.array([4000, 4250, 4500, 5000, 5500, 6000, 6500])
-        bv = np.array([1.38,1.25,1.05,0.87,0.79,0.69,0.59,0.50])#,0.4])
         bv = np.array([1.393, 1.306, 1.237, 1.063, 0.815, 0.656, 0.498])
         # http://www.astro.yale.edu/demarque/green.tbl
-        pp = a * (bv - c)**b
-        t_ref = 10.0**(np.log10(age[ag]).mean())
-        g = (t_ref*1e3)**n
-        spl = sci.UnivariateSpline(tt, pp*g)
+
+        if type(ag) != np.ndarray: t_ref = ag
+#         else: t_ref = 10.0**(np.log10(age[ag]).mean())
+        else: t_ref = 10.0**(np.median(np.log10(age[ag])))
+        spl = sci.UnivariateSpline(tt, a*(bv - c)**b*(t_ref*1e3)**n)
         xs = np.linspace(min(tt), max(tt), 1000)
         ys = spl(xs)
         return xs, ys, t_ref
@@ -88,7 +86,7 @@ class plotting(object):
         # Remove zeros
         zero = teff > 0
         # age masks
-        a_lim = [0, 1, 2, 3, 4, 5, max(age)]
+        a_lim = [0, 1, 2, 3, 4, 5, 8, max(age)]
 
         # plot
         for i in range(len(a_lim)-1):
@@ -98,19 +96,23 @@ class plotting(object):
             pl.clf()
             pl.errorbar(teff[a], period[a], xerr=t_err[a], \
                     yerr=p_err[a], color='k', fmt='o', mec='k', \
-                    capsize=0, markersize=5, ecolor='0.8',\
+                    capsize=0, markersize=5, ecolor='0.8', zorder = 4, \
                     label='$%s < \mathrm{Age} <%s \mathrm{Gyr}$'%(a_lim[i], a_lim[i+1]))
 
             # Add Isochrones
-            xs, ys, t_ref = plotting.iso_calc(self, a, 'b', age)
-            pl.plot(xs, ys, color = ocols[i], linestyle = '--', linewidth = 2, \
-                    label = '$\mathrm{Age} = %.1f$\,$\mathrm{Gyr}$ $\mathrm{(Barnes~2007)}$' % t_ref)
             xs, ys, t_ref = plotting.iso_calc(self, a, 'mh', age)
-            pl.plot(xs, ys, color = ocols[i], linestyle = '-.', linewidth = 2, \
-                    label = '$\mathrm{Age} = %.1f$\,$\mathrm{Gyr}$ $\mathrm{(Mamajaek~\&~Hillenbrand~2008)}$' % t_ref)
+            pl.plot(xs, ys, color = ocols[i], linestyle = '-', linewidth = 2, \
+                    label = '$\mathrm{Age} = %.1f$\,$\mathrm{Gyr}$ \
+                    $\mathrm{(M\&H~2008)}$' % t_ref, zorder = 1)
+            a = a_lim[i]
+            xs, ys, t_ref = plotting.iso_calc(self, a, 'mh', age)
+            pl.plot(xs, ys, color = ocols[i], linestyle = '--', linewidth = 2, zorder = 2)
+            a = a_lim[i+1]
+            xs, ys, t_ref = plotting.iso_calc(self, a, 'mh', age)
+            pl.plot(xs, ys, color = ocols[i], linestyle = '--', linewidth = 2, zorder = 3)
 
-            pl.xlabel("$\mathrm{T_{eff}}$")
-            pl.ylabel("$\mathrm{P_{rot}}$")
+            pl.xlabel("$\mathrm{T_{eff (K)}}$")
+            pl.ylabel("$\mathrm{P_{rot} (days)}$")
     #             pl.xlim(pl.gca().get_xlim()[::-1])
             pl.xlim(7000, 5000)
             pl.ylim(0, 70)
@@ -119,10 +121,12 @@ class plotting(object):
 
         pl.clf()
         # Make subplots
+        import matplotlib.ticker as tic
+        fig = pl.figure()
         for i in range(len(a_lim)-1):
             a = (a_lim[i] < age)*(age < a_lim[i+1])*zero
-
-            pl.subplot(len(a_lim)-1, 1, i+1)
+#             ax = pl.subplot(i+1)
+            ax = pl.subplot(len(a_lim)-1, 1, i+1)
             # Plot data
             pl.errorbar(teff[a], period[a], xerr=t_err[a], \
                     yerr=p_err[a], color='k', fmt='o', mec='k', \
@@ -130,32 +134,29 @@ class plotting(object):
                     label='$%s < \mathrm{Age} <%s \mathrm{Gyr}$'%(a_lim[i], a_lim[i+1]))
 
             # Add Isochrones
-            xs, ys, t_ref = plotting.iso_calc(self, a, 'b', age)
-            pl.plot(xs, ys, color = ocols[i], linestyle = '--', linewidth = 2, \
-                    label = '$\mathrm{Age} = %.1f$\,$\mathrm{Gyr}$ $\mathrm{(Barnes~2007)}$' % t_ref)
             xs, ys, t_ref = plotting.iso_calc(self, a, 'mh', age)
-            pl.plot(xs, ys, color = ocols[i], linestyle = '-.', linewidth = 2, \
-                    label = '$\mathrm{Age} = %.1f$\,$\mathrm{Gyr}$ $\mathrm{(Mamajaek~\&~Hillenbrand~2008)}$' % t_ref)
+            pl.plot(xs, ys, color = ocols[i], linestyle = '--', linewidth = 2, \
+                    label = '$\mathrm{Age} = %.1f$\,$\mathrm{Gyr}$ $\mathrm{(M\&H~2008)}$' % t_ref)
 
 #             pl.legend(loc='upper left')
             pl.xlim(7000, 5000)
             pl.ylim(0, 70)
-            pl.subplots_adjust(hspace=None)
+            pl.subplots_adjust(hspace = .001)
 
         pl.xlabel("$\mathrm{T_{eff} (K)}$")
         pl.ylabel("$\mathrm{P_{rot} (days)}$")
         pl.savefig("p_vs_t_sub")
 
         acols = ['#8856a7','#9ebcda']
-        # Make figure with all ages (these will still have subgiants in!)
+        # Make figure with all ages, without subgiants
         pl.clf()
-        pl.errorbar(self.teff, self.period, xerr=self.t_err, \
-                yerr=self.p_err, color=ocols[2], fmt='o', mec=ocols[2], \
+        a = (self.age > 0)*(self.logg>4.)
+        pl.errorbar(self.teff[a], self.period[a], xerr=self.t_err[a], \
+                yerr=self.p_err[a], color=ocols[2], fmt='o', mec=ocols[2], \
                 capsize=0, markersize=5, ecolor='0.8')
-        a = self.age > 0
         xs, ys, t_ref = plotting.iso_calc(self, a, 'mh', self.age)
-        pl.plot(xs, ys, color = '0.5', linestyle = '-.', linewidth = 2, \
-                label = '$\mathrm{Age} = %.1f$\,$\mathrm{Gyr}$ $\mathrm{(Barnes~2007)}$' % t_ref)
+        pl.plot(xs, ys, color = '0.5', linestyle = '--', linewidth = 2, \
+                label = '$\mathrm{Age} = %.1f$\,$\mathrm{Gyr}$ $\mathrm{(M\&H~2008)}$' % t_ref)
         pl.xlim(7000, 5000)
         pl.ylim(0, 70)
         pl.xlabel("$\mathrm{T_{eff} (K)}$")
@@ -166,17 +167,17 @@ class plotting(object):
 
         # Make figure with all ages and a different colour across the kraft break
         pl.clf()
-        b = self.teff > 6500
-        pl.errorbar(self.teff, self.period, xerr=self.t_err, \
-                yerr=self.p_err, color=ocols[2], fmt='o', mec=ocols[2], \
+        b = self.teff[a] > 6500
+        pl.errorbar(self.teff[a], self.period[a], xerr=self.t_err[a], \
+                yerr=self.p_err[a], color=ocols[2], fmt='o', mec=ocols[2], \
                 capsize=0, markersize=5, ecolor='0.8')
-        pl.errorbar(self.teff[b], self.period[b], xerr=self.t_err[b], \
-                yerr=self.p_err[b], color=ocols[1], fmt='o', mec=ocols[1], \
+        pl.errorbar(self.teff[a][b], self.period[a][b], xerr=self.t_err[a][b], \
+                yerr=self.p_err[a][b], color=ocols[1], fmt='o', mec=ocols[1], \
                 capsize=0, markersize=5, ecolor='0.8')
-        a = self.age > 0
+#         a = self.age > 0
         xs, ys, t_ref = plotting.iso_calc(self, a, 'mh', self.age)
-        pl.plot(xs, ys, color = '0.5', linestyle = '-.', linewidth = 2, \
-                label = '$\mathrm{Age} = %.1f$\,$\mathrm{Gyr}$ $\mathrm{(Barnes~2007)}$' % t_ref)
+        pl.plot(xs, ys, color = '0.5', linestyle = '--', linewidth = 2, \
+                label = '$\mathrm{Age} = %.1f$\,$\mathrm{Gyr}$ $\mathrm{(M\&H~2008)}$' % t_ref)
         pl.xlim(7000, 5000)
         pl.ylim(0, 70)
         pl.xlabel("$\mathrm{T_{eff} (K)}$")
@@ -200,19 +201,25 @@ class plotting(object):
                 yerr=p_err[c], color=ocols[1], fmt='o', mec=ocols[1], \
                 capsize=0, markersize=5, ecolor='0.8', label = '$<3\mathrm{Gyr}$')
 
-        xs, ys, t_ref = plotting.iso_calc(self, b, 'mh', self.age)
-        pl.plot(xs, ys, color=ocols[2], linestyle = '-.', linewidth = 2, \
+        xs, ys, t_ref = plotting.iso_calc(self, 5, 'mh', self.age)
+        pl.plot(xs, ys, color=ocols[2], linestyle = '--', linewidth = 2, \
                 label = '$%.1f$\,$\mathrm{Gyr}$ $\mathrm{(M\&H~2008)}$' % t_ref)
-        xs, ys, t_ref = plotting.iso_calc(self, c, 'mh', self.age)
-        pl.plot(xs, ys, color=ocols[1], linestyle = '-.', linewidth = 2, \
+#         xs, ys, t_ref = plotting.iso_calc(self, b, 'b', self.age)
+#         pl.plot(xs, ys, color=ocols[2], linestyle = '-', linewidth = 2, \
+#                 label = '$%.1f$\,$\mathrm{Gyr}$ $\mathrm{(Barnes~2007)}$' % t_ref)
+        xs, ys, t_ref = plotting.iso_calc(self, 2, 'mh', self.age)
+        pl.plot(xs, ys, color=ocols[1], linestyle = '--', linewidth = 2, \
                 label = '$%.1f$\,$\mathrm{Gyr}$ $\mathrm{(M\&H~2008)}$' % t_ref)
+#         xs, ys, t_ref = plotting.iso_calc(self, c, 'b', self.age)
+#         pl.plot(xs, ys, color=ocols[1], linestyle = '-', linewidth = 2, \
+#                 label = '$%.1f$\,$\mathrm{Gyr}$ $\mathrm{(Barnes~2007)}$' % t_ref)
 
         pl.xlim(7000, 5000)
         pl.ylim(0, 70)
         pl.xlabel("$\mathrm{T_{eff} (K)}$")
         pl.ylabel("$\mathrm{P_{rot} (days)}$")
         pl.legend(loc='upper left')
-        pl.savefig("p_vs_t_orig2")
+        pl.savefig("p_vs_t_orig")
 
 
 plots = plotting(data)
