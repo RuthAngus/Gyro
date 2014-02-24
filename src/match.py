@@ -23,7 +23,7 @@ def assemble():
     KID = pdata[0]
     p = pdata[1]
     p_err = pdata[2]
-    print KID
+    print len(KID)
 
 
     # Load Astero data from table 1 - KIDs, teffs and feh
