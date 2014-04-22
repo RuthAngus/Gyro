@@ -5,6 +5,8 @@
 
 import numpy as np
 
+# match takes in the list of KIDs that you want to map the values of the matrix X to.
+# the first column of X should also be a list of KIDs
 def match(KID, X):
     n = len(KID)
     m, l = X.shape
@@ -19,12 +21,18 @@ def match(KID, X):
 def assemble():
 
     # load period data
-    pdata = np.genfromtxt('/Users/angusr/Python/Gyro/data/all_data.txt').T
+#     pdata = np.genfromtxt('/Users/angusr/Python/Gyro/data/all_data.txt').T
+    pdata = np.genfromtxt('/Users/angusr/angusr/ACF2/periods.txt').T
     KID = pdata[0]
     p = pdata[1]
     p_err = pdata[2]
-    print len(KID)
 
+#     # load extra amy data
+#     adata = np.genfromtxt("/Users/angusr/Python/Gyro/data/extra_amy.txt").T
+#     KID = np.concatenate((KID, adata[0]))
+#     p = np.concatenate((p, adata[1]))
+#     p_err = np.concatenate((p_err, adata[2]))
+#     print len(KID)
 
     # Load Astero data from table 1 - KIDs, teffs and feh
     # Columns: KID, nu, nu_err, dnu, dnu_err, SDSS_teff, st_err,
@@ -36,19 +44,19 @@ def assemble():
     # load astero data from table 5 - KID, mass, logg, age
     data2 = np.genfromtxt('/Users/angusr/Python/Gyro/data/ApJS91604R2tables.txt', \
             skiprows=699, skip_footer=675, invalid_raise=False, \
-            usecols=(0,1,2,3,11,12,13,14,15)).T
+            usecols=(0,1,2,3,10,11,12,13,14,15)).T
     table5 = match(KID, data2)
 
     # Assemble data in the following order:
-    # KID, period, p_err, teff, teff_err, feh, feh_err, mass, mass_errp,
-    # mass_errm, logg, logg_errp, logg_errm, age, age_errp, age_errm
+    # [0]KID, [1]period, [2]p_err, [3]teff, [4]teff_err, [5]feh, [6]feh_err, [7]mass, [8]mass_errp,
+    # [9]mass_errm, [10]logg, [11]logg_errp, [12]logg_errm, [13]age, [14]age_errp, [15]age_errm
 #     data = np.ndarray((len(KID), 16))
-    data = np.zeros((len(KID), 16))
+    data = np.zeros((len(KID), 17))
     data[:,0] = KID
     data[:,1] = p
     data[:,2] = p_err
     data[:,3:7] = table1[1:,:].T
-    data[:,8:16] = table5[1:,:].T
+    data[:,7:16] = table5[1:,:].T
 
     return data
 

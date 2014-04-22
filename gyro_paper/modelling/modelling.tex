@@ -14,7 +14,7 @@
 505 stars with asteroseismically determined ages were published in Chaplin (2013).
 We successfully measured rotation periods for 144 of these 505.
 Each star has an effective temperature, T from multi-band photometry, a photometric rotation period, P and an asteroseismically derived age, A and surface gravity, log g (G).
-Each of these properties have associated uncertainties, assumed to be independent and Gaussian for T and P and log-normal for A and G.
+Each of these properties has an associated uncertainty, assumed to be independent and Gaussian for T and P and log-normal for A and G.
 % need a plot showing this!
 
 The data are shown in figures \ref{fig:results} to \ref{fig:results2}.
@@ -36,7 +36,12 @@ P = A^n \times \alpha(B-V-c)^\beta.
 Our relation will take the form:
 
 \begin{equation}
-	A = 10^\alpha(T - T_k)^{\beta} \times P^{\delta}
+	A = P^{\delta} \times \alpha(T - T_k)^{\beta}
+\label{eq:functional_form2}
+\end{equation}
+
+\begin{equation}
+	\log(A) = \delta \log(P) + \beta \log(T_k - T) + \alpha
 \label{eq:functional_form2}
 \end{equation}
 
@@ -56,19 +61,39 @@ In these regimes we will apply Gaussian priors over T and Jeffries priors over P
 For now, lets just address the low-mass MS stars that obey the gyrochronology relation.
 The likelihood, marginalised over hidden variables, can be written as:
 
+% \begin{equation}
+%   p(\{\hat{P}_n,\hat{A}_n,\hat{T}_n,\hat{G}_n\}|\theta, T_K) =
+%   \prod_{n=1}^{N} \int p(\hat{A}_n,\hat{T}_n,\hat{P}_n,\hat{G}_n,A_n,T_n,P_n,G_n|\theta, T_K)
+%   {\rm d}A_n {\rm d}T_n {\rm d}P_n {\rm d}G_n
+% \label{eq:fullL}
+% \end{equation}
+
 \begin{equation}
-  p(\{\hat{P}_n,\hat{A}_n,\hat{T}_n,\hat{G}_n\}|\theta, T_K) =
-  \prod_{n=1}^{N} \int p(\hat{A}_n,\hat{T}_n,\hat{P}_n,\hat{G}_n,A_n,T_n,P_n,G_n|\theta, T_K)
-  {\rm d}A_n {\rm d}T_n {\rm d}P_n {\rm d}G_n
+  p(\{\hat{P}_n,\hat{A}_n,\hat{T}_n\}|m) =
+  \prod_{n=1}^{N} \int p(\hat{A}_n,\hat{T}_n,\hat{P}_n,A_n,T_n,P_n|m)
+  {\rm d}A_n {\rm d}T_n {\rm d}P_n
 \label{eq:fullL}
 \end{equation}
 
 Where $\theta = \alpha, \beta, \delta$. The joint probability can be factorised as:
 
+% \begin{equation}
+%   p(\hat{A}_n,\hat{T}_n,\hat{P}_n,\hat{G}_n,A_n,T_n,P_n,G_n|\theta, T_K) =
+%   p(A_n,T_n,P_n,G_n|\theta, T_K) p(\hat{A}_n|A_n)
+%   p(\hat{T}_n|T_n) p(\hat{P}_n|P_n) p(\hat{G}_n|G_n),
+% \label{eq:jointprob}
+% \end{equation}
+
 \begin{equation}
-  p(\hat{A}_n,\hat{T}_n,\hat{P}_n,\hat{G}_n,A_n,T_n,P_n,G_n|\theta, T_K) =
-  p(A_n,T_n,P_n,G_n|\theta, T_K) p(\hat{A}_n|A_n)
-  p(\hat{T}_n|T_n) p(\hat{P}_n|P_n) p(\hat{G}_n|G_n),
+  p(\hat{A}_n,\hat{T}_n,\hat{P}_n,A_n,T_n,P_n|\theta) =
+  p(A_n,T_n,P_n|\theta, T_K) p(\hat{A}_n|A_n)
+  p(\hat{T}_n|T_n) p(\hat{P}_n|P_n),
+\label{eq:jointprob}
+\end{equation}
+
+\begin{equation}
+	\propto \int p(A_n|T_n,P_n,\theta) p(\hat{A}_n|A_n)
+	p(\hat{T}_n|T_n)p(T_n) p(\hat{P}_n|P_n)p(P_n)dA_n dP_n dT_n
 \label{eq:jointprob}
 \end{equation}
 
@@ -112,6 +137,11 @@ p(\hat{T}_n|T_n) = \mathcal{N}(\hat{T}|T_n, \sigma^2_{T,n}),
 
 \begin{equation}
 p(\hat{P}_n|P_n) = \mathcal{N}(\hat{P}|P_n, \sigma^2_{P,n}),
+\label{eq:p2}
+\end{equation}
+
+\begin{equation}
+p(A_n|\hat{A}_n) = \mathcal{N}(\hat{P}|P_n, \sigma^2_{P,n}),
 \label{eq:p2}
 \end{equation}
 
@@ -170,7 +200,7 @@ which leads to
 If we draw $j$ samples of $T_n$ and $P_n$ from the distributions \ref{eq:p1} and \ref{eq:p2}, we can evaluate $p(\hat{A_n}|A_n)$ up to a normalisation constant, remembering, in general, that integrals over probability densities can be approximated as sums:
 
 \begin{equation}
-  \int{\rho(x) f(x) dx ~= \frac{1}{N} \sum_i=1^N f(x_i)} .
+  \int{\rho(x) f(x) dx \approx \frac{1}{N} \sum_i f(x_i)} .
   \label{eq:example}
 \end{equation}
 

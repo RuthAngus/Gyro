@@ -24,20 +24,23 @@ def teff2bv(teff, logg, feh):
             t[3]*(np.log10(teff))**3 + f[0]*feh + f[1]*feh**2 \
             + d1*feh*np.log10(teff) + g1*logg + e1*logg*np.log10(teff)
 
-# load data
-data = np.genfromtxt('/Users/angusr/Python/Gyro/data/data.txt').T
-teff = data[3]
-logg = data[10]
-feh = data[5]
+if __name__ == "__main__":
+    # load data
+    data = np.genfromtxt('/Users/angusr/Python/Gyro/data/data.txt').T
+    teff = data[3]
+    logg = data[10]
+    feh = data[5]
 
-bv = teff2bv(teff, logg, feh)
+    bv = teff2bv(teff, logg, feh)
 
-saveas = np.ndarray((len(data[0]), 2)).T
-saveas[0,:] = data[0]
-saveas[1,:] = bv
+    print np.polyfit(teff[teff>0], bv[np.isfinite(bv)], 1)
 
-np.savetxt("/Users/angusr/Python/Gyro/data/colours.txt", saveas)
+    saveas = np.ndarray((len(data[0]), 2)).T
+    saveas[0,:] = data[0]
+    saveas[1,:] = bv
 
-pl.clf()
-pl.plot(teff, bv, 'k.')
-pl.savefig("/Users/angusr/Python/Gyro/plots/teff_bv")
+    np.savetxt("/Users/angusr/Python/Gyro/data/colours.txt", saveas)
+
+    pl.clf()
+    pl.plot(teff, bv, 'k.')
+    pl.savefig("/Users/angusr/Python/Gyro/plots/teff_bv")
