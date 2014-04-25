@@ -275,6 +275,36 @@ So, if a star has log g > 4, it will be an MS star, otherwise it will be a subgi
 The subgiant population will be modelled, once again, as a log-normal distribution with mean, Z and variance, U.
 Of course, this isn't quite right because there \emph{is} a relation between period, mass and age for the subgiants, in fact, it is an even tighter relationship than that of the MS stars.
 We could choose to model the subgiants with an analytic expression for period, (age), given temperature and age (period), such as the one in \citet{van_Saders_2013}, however, we would like to remain as model \emph{independent} as possible throughout this process.
+Our definition of 'MS' stars is currently anything with log g > 4 (this is also the approach taken by \citet{Garcia_2014}).
+We could use a better motivated function of log g and temperature to categorise MS stars and subgiants.
+Although the point at which a star turns off the MS is relatively well known and understood, (conventionally its hottest point on the HR diagram), the point at which stars stop following the gyrochronology spin-down relation is less well understood.
+In fact, up to this point it has only been theorised \citep{van_Saders_2013}.
+Once again, the parameters of the function that separates MS stars and subgiants should be free parameters.
+We are going to come up against the same herdles as above: the likelihood functions above and below the MS turnoff must be properly normalised, or else the cut-off will 'want' to include all the MS stars too.
+For the moment, therefore, I will be fixing those parameters.
+It seems as though, adding the subgiants in (might not be the subgiants) is producing this strange trend - period decreasing with temperture decreasing.
+Is this because, as temperature decreases, age increases and therefore period decreases?
+Ie, does the MS turn-off trend bite us in the bum right now?
+How can we get around this?
+
+I'm wondering whether the fact that the b parameter (the power of the temperature dependence) is going to small values because of bias in our sample.
+There is obviously a trend between age and temperature in our sample due to MS turn off age. This trend might dominate over the gyrochronology age-teff relation. Presumably no one has really had to take it into account before because nobody has used such old stars for calibration.
+I think we might need to adapt the gyrochronology relation to take this into account, what do you think?
+On the other hand, including MS turn-off in our model might mean that the gyro relation will depend on logg and metallicity.
+
+For now I have tried removing stars with logg < 4.1 and teff > $6400$ in the hope that this will remove the problem.
+It may well be worth running code on the Hyades to see what happens!
+
+Future:
+Still need to figure out why the rotation period errorbars make everything crash!
+Is it because they are, like, an order of magnitude to small?
+remember - I also need to look at the list of binaries!
+
+% Include_subs.py has the subgiants as well
+% A_free_Tk_fixed.py has Y and V as free parameters, but Tk is fixed.
+% A_free.py has Y, V and Tk as free parameters.
+% fixed_Tk.py has Suzanne's likelihood function with fixed Tk
+% realdata.py has Suzanne's likelihood function with free Tk
 
 \begin{figure}[ht]
 \begin{center}
