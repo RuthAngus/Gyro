@@ -9,7 +9,7 @@
 
 \begin{document}
 
-\title{Calibrating Gyrochronology with Kepler Asteroseismic targets}
+\title{Calibrating Gyrochronology using Kepler Asteroseismic targets}
 
 \author{Ruth Angus$^1$, Suzanne Aigrain$^1$, Amy McQuillan$^2$, Daniel Foreman-Mackey$^3$,  William, J. Chaplin$^4$, Tsevi Maseh$^2$}
 \affil{$^1$Department of Physics, University of Oxford, OX1 3RH, UK}
@@ -192,21 +192,23 @@ such as the exponential decays that appear after telescope shutdowns, which affe
 
 
 \section{Gyrochronology Calibration}
+\label{gyro_cal}
 
 505 stars with asteroseismically determined ages were published in Chaplin (2013).
-We successfully measured rotation periods for 144 of these 505.
+We successfully measured rotation periods for 144 of these 505 using the method outlined in \ref{section:rotation_period_measurement}.
+We added an additional 12 rotation periods from \citet{McQuillan_2014}, extending our sample size to 156.
+% note - need to remove duplicates!
 Each star has an effective temperature, T from multi-band photometry, a photometric rotation period, P and an asteroseismically derived age, A and surface gravity, log g (G).
 Each of these properties has an associated uncertainty, assumed to be independent and Gaussian for T and P and log-normal for A and G.
 % need a plot showing this!
 
 The stars in our sample cover temperatures ranging from 5400 to 7000 K.
-Gyrochronology is not a applicable to hot stars or subgiants.
-Stars with effective temperatures above the Kraft-break, $T_{eff} \sim$ 6250 K, \citep{Kraft1967} do not have a thick convective envelope and therefore cannot support a strong magnetic dynamo, so do not spin down during their MS lifetimes.
-Subgiants spin down rapidly due to angular momentum conservation as they expand, leaving the gyrochronology mass-period-age plane.
-We cannot simply exclude hot stars and subgiants from our sample during the modelling process --- we \emph{have} to model all three populations at once.
-There are two reasons for this: firstly, we don't know the exact location of the Kraft-break, so it has to be a free parameter,
-and secondly, all stars have some probability mass lying in all three regimes due to their observational uncertainties.
-The subgiant regime is bounded by a function of effective temperature, $T$ and log g, $G$.
+Gyrochronology is not applicable to hot stars or subgiants ---
+stars with effective temperatures above the Kraft-break, $T_{eff} \sim$ 6250 K, \citep{Kraft1967} do not have a thick convective envelope and therefore cannot support a strong magnetic dynamo, so do not spin down during their MS lifetimes.
+Subgiants spin down rapidly due to angular momentum conservation as they expand, diverging from the gyrochronology mass-period-age plane.
+Subgiants are currently defined as stars with log $g <$ 4.
+We choose not to simply exclude hot stars and subgiants from our sample during the modelling process --- we model all three populations simultaneously to allow for the fact that stars have some probability mass lying in all three regimes due to their large observational uncertainties.
+% The subgiant regime is bounded by a function of effective temperature, $T$ and log g, $G$.
 
 The gyrochronology relations of \citet{Barnes_2007} and \citet{Mamajek_2008} take the form:
 
@@ -214,11 +216,16 @@ The gyrochronology relations of \citet{Barnes_2007} and \citet{Mamajek_2008} tak
 P = A^n \times a(B-V-c)^b,
 \end{equation}
 
-where n, a, b and c are constants, taking slightly different values in the two versions.
+where n, a, b and c are constants.
 Our relation will be of the form:
 
+% \begin{equation}
+% 	A = P^{\delta} \times a(T - T_k)^{\beta}
+% \label{eq:functional_form2}
+% \end{equation}
+
 \begin{equation}
-	A = P^{\delta} \times a(T - T_k)^{\beta}
+	P = A^n \times a(T - T_k)^{\beta}
 \label{eq:functional_form2}
 \end{equation}
 
@@ -342,7 +349,50 @@ So, just as with the Kraft break, the gyrochronological MS turn-off is a fuzzy l
 When modelling sparse data with large uncertainties, the choice of prior is important as it will have a relatively large impact on the results.
 A prior should be a true reflection of one's belief.
 In this case, we know that the parameter, n is around 0.5.
-Parameters a and b on the other hand are slightly less well defined.
+So should I use a flat prior centred around 0.54, or a Gaussian prior, or a combination of the two?
+We want fairly unrestrictive priors on the remaining parameters.
+
+\subsection{To do}
+
+INCLUDE SUBS
+The period errors really do seem to be too small, I have to make them bigger otherwise my MCMC doesn't converge.
+Probably best to get more realistic uncertainties by taking something like the rms from quarter to quarter.
+For now artificially inflating them is fine.
+
+PRIORS
+log(a) - should encompass both the barnes and mh values.
+b. What is log(T) vs log(bv)?
+log(teff) =  -0.327287044706 log(bv) +  3.68764284553
+This might be the reason why I don't take 3 away from the ages to convert to Myrs...
+It looks to me like the priors are being followed exactly!
+This means the priors are very important and it means that we really should be adding in more data.
+REALLY NEED A PLOT SHOWING THE MS COOL STARS!!!!
+aarrgggh - this is because there ARE no stars in my sample at the moment!!!
+%init2 and init_teff2 in include subs
+
+I have already added Amy's stars into my sample.
+What if you just cut out the ultra fast rotators and reinstate the cut?
+remember that you will need to model another distribution of very rapid rotators
+
+`partition function', says Steve
+
+Figure \ref{fig:priors} shows the priors.
+Figure \ref{fig:real} shows the posterior distribtions for the real data and figure \ref{fig:small} shows posteriors for a different data set where rotation periods of the cool MS stars have been replaced with rotation periods calculated from their T$_{eff}$s and ages.
+Given the fact that there is little differences between the posteriors of parameters n and b in the two cases, and both distributions look very similar to the prior distributions we take this to mean that there is not enough `power' in the data to constrain the values of n and b.
+For this reason we need to add data from clusters and the Sun into our sample.
+The cluster data should help constrain b - the index of the period - T$_{eff}$ relation and the Sun should help constrain n - the index of the period - age relation.
+
+ADDING DATA
+Need more data - get data from Barnes, M and H, James.
+Cameron coma berenices
+Meibom.
+Raphael might share table.
+Actually, can you just convert color to teff without logg and feh?
+This would be SUPER useful!
+
+GRID TK
+Doing MCMC over teffs.
+- Be VERY careful not to overwrite your triangle plots!
 
 % Include_subs.py has the subgiants as well
 % A_free_Tk_fixed.py has Y and V as free parameters, but Tk is fixed.
@@ -350,6 +400,12 @@ Parameters a and b on the other hand are slightly less well defined.
 % fixed_Tk.py has Suzanne's likelihood function with fixed Tk
 % realdata.py has Suzanne's likelihood function with free Tk
 % chisq.py is the dumbass minimum chisq code which does not take uncertainties into account properly
+% old_figs/small_sample.py has the MS cool stars replaced with calculated periods
+% prior_sample.py just samples from the priors
+
+\subsection{Additional data}
+
+Rotation periods for M34 from \citet{Meibom_2011}
 
 \begin{figure}[ht]
 \begin{center}
@@ -428,6 +484,30 @@ This can be understood as a consequence of core-envelope decoupling.
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/angusr/ACF/ind_qs_figs/3223000.pdf}
 \caption{Period measurements for quarters 3 - 16 of star `KIC 7771282'. The blue solid line indicates the median value and the shaded blue region marks its 15\% margin. The blue dashed line with surrounding shaded area indicates one half of the median period measurement with 15\% margin.  More than two thirds of the period measurements were present and consistent to within 15\% of the median for this star, so it passed the selection process.}
 \label{fig:ind_qs}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/noisy-plane/old_figs/prior_triangle.png}
+\caption{priors}
+\label{fig:priors}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/noisy-plane/triangle.png}
+\caption{real data}
+\label{fig:real}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/noisy-plane/old_figs/small_triangle.png}
+\caption{replaced cool MS stars}
+\label{fig:small}
 \end{center}
 \end{figure}
 

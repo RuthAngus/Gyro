@@ -4,6 +4,14 @@
 import numpy as np
 import matplotlib.pyplot as pl
 
+plotpar = {'axes.labelsize': 20,
+           'text.fontsize': 20,
+           'legend.fontsize': 15,
+           'xtick.labelsize': 18,
+           'ytick.labelsize': 18,
+           'text.usetex': True}
+pl.rcParams.update(plotpar)
+
 def bv2teff(bv, logg, feh):
     # best fit parameters
     c = [3.929883, -0.360726, 0.168806, -0.048300]
@@ -33,7 +41,7 @@ if __name__ == "__main__":
 
     bv = teff2bv(teff, logg, feh)
 
-    print np.polyfit(teff[teff>0], bv[np.isfinite(bv)], 1)
+#     print np.polyfit(teff[teff>0], bv[np.isfinite(bv)], 1)
 
     saveas = np.ndarray((len(data[0]), 2)).T
     saveas[0,:] = data[0]
@@ -44,3 +52,15 @@ if __name__ == "__main__":
     pl.clf()
     pl.plot(teff, bv, 'k.')
     pl.savefig("/Users/angusr/Python/Gyro/plots/teff_bv")
+
+    pl.clf()
+    logt = np.log10(teff[teff>0])
+    logc = np.log10(bv[teff>0])
+    pl.plot(logc, logt, 'k.')
+    plv = np.polyfit(logc, logt, 1)
+    print 'logt = ', plv[0], 'logc + ', plv[1]
+    plt = np.polyval(plv, logc)
+    pl.xlabel('$\log(B-V)$')
+    pl.ylabel('$\log(T_{eff})$')
+#     pl.plot(logc, plt, 'r-')
+    pl.savefig('logt_vs_logc')
