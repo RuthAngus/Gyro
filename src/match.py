@@ -4,6 +4,7 @@
 # variables in the same order as the original KID list.
 
 import numpy as np
+from find_extra_amy import extra
 
 # match takes in the list of KIDs that you want to map the values of the matrix X to.
 # the first column of X should also be a list of KIDs
@@ -18,22 +19,26 @@ def match(KID, X):
             Xm[:,i] = X[:,l].reshape(Xm[:,i].shape)
     return Xm
 
-def assemble():
+def assemble(KID, p, p_err):
 
-    # load period data
+#     # load period data
 #     pdata = np.genfromtxt('/Users/angusr/Python/Gyro/data/all_data.txt').T
-    pdata = np.genfromtxt('/Users/angusr/angusr/ACF2/periods.txt').T
-    KID = pdata[0]
-    p = pdata[1]
-    p_err = pdata[2]
-    print len(KID)
+# #     pdata = np.genfromtxt('/Users/angusr/angusr/ACF2/periods.txt').T
+#     KID = pdata[0]
+#     p = pdata[1]
+#     p_err = pdata[2]
 
-    # load extra amy data
-    adata = np.genfromtxt("/Users/angusr/Python/Gyro/data/extra_amy.txt").T
-    KID = np.concatenate((KID, adata[0]))
-    p = np.concatenate((p, adata[1]))
-    p_err = np.concatenate((p_err, adata[2]))
-    print len(KID)
+#     # load extra amy data
+#     adata = np.genfromtxt("/Users/angusr/Python/Gyro/data/extra_amy.txt").T
+#     KID = np.concatenate((KID, adata[0]))
+#     p = np.concatenate((p, adata[1]))
+#     p_err = np.concatenate((p_err, adata[2]))
+
+    # find and load extra amy data
+    KID2, p2, p_err2 = extra(KID)
+    KID = np.concatenate((KID, KID2))
+    p = np.concatenate((p, p2))
+    p_err = np.concatenate((p_err, p2))
 
 #     data1 = np.genfromtxt('/Users/angusr/Python/Gyro/data/ApJS91604R2tables.txt', \
 #             skiprows=30, skip_footer=1343, invalid_raise=False, usecols=(0)).T
@@ -46,7 +51,8 @@ def assemble():
     # Load Astero data from table 1 - KIDs, teffs and feh
     # Columns: KID, nu, nu_err, dnu, dnu_err, SDSS_teff, st_err,
     # IRFM_teff, It_err, feh, feh_err
-    data1 = np.genfromtxt('/Users/angusr/Python/Gyro/data/ApJS91604R2tables.txt', \
+#     data1 = np.genfromtxt('/Users/angusr/Python/Gyro/data/ApJS91604R2tables.txt', \
+    data1 = np.genfromtxt('/Users/angusr/Python/Gyro/data/filled_in.txt', \
             skiprows=30, skip_footer=1343, invalid_raise=False, usecols=(0,5,6,9,10)).T
     table1 = match(KID, data1)
     dnu_data1 = np.genfromtxt('/Users/angusr/Python/Gyro/data/ApJS91604R2tables.txt', \
@@ -72,8 +78,18 @@ def assemble():
     data[:,17] = dnu_table1[1]
     data[:,18] = dnu_table1[2]
 
+#     # find missing data
+#     t = table1[1]
+#     print KID[t==0]
+#     print 'stop'
+#     missing = KID[t==0]
+#     all_KIDs = np.genfromtxt('/Users/angusr/Python/Gyro/data/ApJS91604R2tables.txt', \
+#             skiprows=30, skip_footer=1343, usecols=(0,5,6)).T
+#     for i, kid in enumerate(missing):
+#         print kid, all_KIDs[0][all_KIDs[0]==kid], all_KIDs[1][all_KIDs[0]==kid]
+
+    np.savetxt("/Users/angusr/Python/Gyro/data/new_data.txt", data)
     return data
 
-data = assemble()
-np.savetxt("/Users/angusr/Python/Gyro/data/data.txt", data)
-# np.savetxt("/Users/angusr/Python/Gyro/data/alldata.txt", data)
+if __name__ == "__main__":
+    data = assemble()

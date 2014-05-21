@@ -1,4 +1,4 @@
-\documentclass[12pt,preprint]{aastex}
+\documentclass[10pt,preprint]{aastex}
 \usepackage{amsmath}
 \usepackage{breqn}
 \usepackage{cite,natbib}
@@ -147,7 +147,6 @@ In cases where only one peak was present in the ACF, the
 central peak value was kept as the period and the error measured from
 the width of the peak.  Example ACFs are shown in figure \ref{fig:subfigures} at the end of this document.
 
-
 We measured the rotation periods of the stars in our
 asteroseismic target sample from Kepler quarters 3-16.
 While some
@@ -195,7 +194,7 @@ such as the exponential decays that appear after telescope shutdowns, which affe
 \label{gyro_cal}
 
 505 stars with asteroseismically determined ages were published in Chaplin (2013).
-We successfully measured rotation periods for 144 of these 505 using the method outlined in \ref{section:rotation_period_measurement}.
+We successfully measured rotation periods for 144 of these 505 using the method outlined in \ref{label:rotation_period_measurement}.
 We added an additional 12 rotation periods from \citet{McQuillan_2014}, extending our sample size to 156.
 % note - need to remove duplicates!
 Each star has an effective temperature, T from multi-band photometry, a photometric rotation period, P and an asteroseismically derived age, A and surface gravity, log g (G).
@@ -216,7 +215,7 @@ The gyrochronology relations of \citet{Barnes_2007} and \citet{Mamajek_2008} tak
 P = A^n \times a(B-V-c)^b,
 \end{equation}
 
-where n, a, b and c are constants.
+where n, a, b and c are constants, taking values tabulated in table \ref{tab:constants}.
 Our relation will be of the form:
 
 % \begin{equation}
@@ -225,21 +224,29 @@ Our relation will be of the form:
 % \end{equation}
 
 \begin{equation}
-	P = A^n \times a(T - T_k)^{\beta}
+	P = A^n \times a(T - T_k)^b
 \label{eq:functional_form2}
 \end{equation}
 
-Where now A is the dependent variable, since we want to produce a predictive distribution for the age of a star, given estimates of T and P.
-Since this equation is linear in log-space, we fit the logarithmic form of this equation to the low-mass, MS stars:
+% Where now A is the dependent variable, since we want to produce a predictive distribution for the age of a star, given estimates of T and P.
+% Since this equation is linear in log-space, we fit the logarithmic form of this equation to the low-mass, MS stars:
 
-\begin{equation}
-	\log{A} = \delta \log{P} + \alpha + \beta \log{(T - T_k)},
-\label{eq:log}
-\end{equation}
+% \begin{equation}
+% 	\log{A} = \delta \log{P} + \alpha + \beta \log{(T - T_k)},
+% \label{eq:log}
+% \end{equation}
 
-where $\alpha, \beta, T_K$ and $\delta$ are free parameters.
-For the high-mass MS stars we assume that age is independent of period and $T_{eff}$, and model the population as a log-normal distribution with mean and variance as free parameters tobe marginalised over.
-Subgiant ages \emph{are} a function of period and $T_{eff}$.
+% \begin{equation}
+% 	\log{P} = n \log{A} + a + b \log{(T - T_k)},
+% \label{eq:log}
+% \end{equation}
+
+% where $\alpha, \beta, T_K$ and $\delta$ are free parameters.
+% where a, b, T$_K$ and n are free parameters.
+where a, b and n are free parameters.
+For the high-mass MS stars we assume that age is independent of period and $T_{eff}$, and model the population with a log-normal distribution
+with mean and variance as `uninteresting' parameters to be marginalised over.
+Subgiant ages \emph{are} a function of period and $T_{eff}$, however, since we are not interested in the rotational properties of these stars for the purposes of gyrochronology calibration, we also model them with a log-normal distribution.
 
 For now, lets just address the low-mass MS stars that obey the gyrochronology relation.
 We have a set of noisy observations, $\hat{A}, \hat{P}, \hat{T}$ and $\hat{G}$ for each star.
@@ -294,8 +301,28 @@ Subgiants & $p(A_n,P_n,T_n,G_n|Z, U) = p(T_n) p(G_n) p(P_n) p(A_n|Z, U)$ \\
 \enddata
 \end{deluxetable}
 
-Where Y, V, Z and U are the means and variances of the hot star and subgiant populations respectively.
-Right now I am fixing $T_K$ and only including two regimes: the cool MS stars and the hot MS stars.
+There is an additional, contaminating, population of stars in our sample: rapid rotators.
+A cluster of $\sim$ 20 stars have rotation periods of less than $\sim$ 5 days and do not lie on the standard gyrochronology mass-period-age plane.
+These stars could be synchronised binaries.
+Since our rotation period measurement method is biased towards fast rotators, we most probably measure rotation periods for all stars with periods $\lesssim$ 5 days.
+% This could be quantised! - calculate your completeness as a function of period!!!
+Therefore, we could consider this to be the almost complete population of rapid rotators in the entire asteroseismic sample.
+Would be expect to find $\sim$ 20 synchronised binaries in a sample of 505 stars --- one in twenty-five?
+These stars are not simple 'outliers' --- there seems to be a trend between rotation period and temperature: cooler stars spin faster.
+This is the opposite of the prediction from gyrochronology where hotter stars spin faster, having the less efficient magnetic dynamo.
+
+We model four stellar populations simultaneously: cool MS stars, hot MS stars, subgiants and fast rotators.
+The hot MS stars are defined as those with T$_{eff} > 6250$ and their rotation periods/ages are modelled as a log-normal distribution with mean, Y and variance, V inferred from the data.
+Subgiants are defined as those stars with log $g < 4$ and their rotation periods/ages are modelled as a log-normal distribution with mean, Z and variance, U inferred from the data.
+We use a mixture model for the remaining two populations of cool MS stars: those that follow the gyrochronology relations and those with unusually low rotation periods.
+The fast rotators are treated as 'outliers' and modelled as another log normal distribution with mean, X and variance, W, again inferred from the data.
+In our mixture model, an additional parameter, P, is the probability that each data point is an outlier.
+
+Ideally both $T_K$ and the MS turnoff would be free parameters in our model.
+However, since the hot MS and subgiant populations are being modelled as a much less constraining log-normal distribution, these boundary parameters would not be well behaved.
+T$_k$ would drift to lower and lower, and the MS cutoff to higher and higher values, until all stars were modelled with a log normal distribution.
+only including two regimes: the cool MS stars and the hot MS stars.
+
 This approach produces the recalibrated Gyrochronology relation shown in figure \ref{fig:results2} and the posterior distributions in figure \ref{fig:fixie_pd}.
 Having $T_K$ as a free parameter introduces a problem: all stars will preferentially be modelled by the less constraining broad Gaussian distribution.
 Stars lying above the Kraft break must incur a likelihood penalty or else $T_K$ will be pushed to lower and lower temperatures.
@@ -319,16 +346,21 @@ For the moment, therefore, I will be fixing those parameters.
 Now that I seem to have a comparison version which does not treat the uncertainties correctly, that might be interesting to include?
 
 Future:
-still need to get period errorbars sorted.
+still need to get period errorbars sorted and deal with asymmetric errorbars.
 remember - I also need to look at the list of binaries!
-Consider C type stars too (less than 100 Myrs old) and ultra-slow rotators.
-Consider giving the relation a 'breadth'. Then you need to think about Gibbs sampling or similar.
 Consider adding in all existing data.
 Consider gridding over different values of Tk and MS turnoff.
 Ideally we want a predictive distribution for the age of a star, but does that mean we will get screwed by the age - mass dependence?
 Do we also want a colour dependent relation?
+Nomad catalogue - search on vizier.
+At the end check that you don't have any outliers in the opposite sense, i.e. stars with very slow rotation periods.
 
-When relaxing priors n wants to get bigger - this might just be because there isn't enough data (and priors should perhaps be stronger?).
+deal with duplicates.
+Sort out errorbars.
+Get colour version working.
+Get temp version working.
+
+by the way - If you were forced to, couldn't you just write the paper now?
 
 \subsection{Modelling MS turn-off}
 Modelling the MS turn-off requires some thought.
@@ -416,27 +448,14 @@ Isomass lines were calculated using the relation in \citet{Mamajek_2008}}
 \end{center}
 \end{figure}
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/noisy-plane/old_figs/fixie_pd.png}
-\caption{Posterior distributions}
-\label{fig:fixie_pd}
-\end{center}
-\end{figure}
+% \begin{figure}[ht]
+% \begin{center}
+% \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/noisy-plane/old_figs/fixie_pd.png}
+% \caption{Posterior distributions}
+% \label{fig:fixie_pd}
+% \end{center}
+% \end{figure}
 
-\subsection{Accounting for the `non-narrow' relationship}
-
-Because we assume that the generative process for the data is an intrinsically noisy one, we need to add two extra parameters describing the mean and variance of a Gaussian perturbation to the plane.
-In this the model takes the form:
-
-We have assumed that we have been given data that parameterise posterior probability distributions with uninformative priors.
-What are the implications if this is not the case?
-
-\begin{equation}
-	A_n = \alpha(T_n - T_K)^\beta \times P_n^\delta + E_n
-\end{equation}
-
-Where the $E_n$ are noise contributions drawn from a Gaussian with some mean, $\mu_{S,n}$ and variance, [$\sigma^2_{S,n} + S_n^2$], where $\sigma_{S,n}$ is the uncertainty of star n and $S_n$ is some unknown parameter, that characterises the intrinsic deviation of the hidden variables from the plane.
 
 Rotation period vs age for the sub-giants is shown in figure \ref{fig:subgiants}. Models of sub-giant rotation evolution from \citet{van_Saders_2013} are shown for comparison.
 Qualitatively speaking the observations show good agreement with the models.
@@ -468,6 +487,24 @@ This can be understood as a consequence of core-envelope decoupling.
 
 \section{Conclusion}
 
+\section{Appendix}
+
+\subsection{Accounting for the `non-narrow' relationship}
+
+Because we assume that the generative process for the data is an intrinsically noisy one, we need to add two extra parameters describing the mean and variance of a Gaussian perturbation to the plane.
+In this the model takes the form:
+
+We have assumed that we have been given data that parameterise posterior probability distributions with uninformative priors.
+What are the implications if this is not the case?
+
+\begin{equation}
+	A_n = \alpha(T_n - T_K)^\beta \times P_n^\delta + E_n
+\end{equation}
+
+Where the $E_n$ are noise contributions drawn from a Gaussian with some mean, $\mu_{S,n}$ and variance, [$\sigma^2_{S,n} + S_n^2$], where $\sigma_{S,n}$ is the uncertainty of star n and $S_n$ is some unknown parameter, that characterises the intrinsic deviation of the hidden variables from the plane.
+
+\subsection{Probability theory}
+
 \bibliographystyle{plainnat}
 \bibliography{Gyro_paper}
 
@@ -487,29 +524,29 @@ This can be understood as a consequence of core-envelope decoupling.
 \end{center}
 \end{figure}
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/noisy-plane/old_figs/prior_triangle.png}
-\caption{priors}
-\label{fig:priors}
-\end{center}
-\end{figure}
+% \begin{figure}[ht]
+% \begin{center}
+% \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/noisy-plane/old_figs/prior_triangle.png}
+% \caption{priors}
+% \label{fig:priors}
+% \end{center}
+% \end{figure}
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/noisy-plane/triangle.png}
-\caption{real data}
-\label{fig:real}
-\end{center}
-\end{figure}
+% \begin{figure}[ht]
+% \begin{center}
+% \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/noisy-plane/triangle.png}
+% \caption{real data}
+% \label{fig:real}
+% \end{center}
+% \end{figure}
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/noisy-plane/old_figs/small_triangle.png}
-\caption{replaced cool MS stars}
-\label{fig:small}
-\end{center}
-\end{figure}
+% \begin{figure}[ht]
+% \begin{center}
+% \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/noisy-plane/old_figs/small_triangle.png}
+% \caption{replaced cool MS stars}
+% \label{fig:small}
+% \end{center}
+% \end{figure}
 
 \end{document}
 
