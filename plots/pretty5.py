@@ -41,6 +41,11 @@ class plotting(object):
         return par[0] + par[1] * log_age + par[2] * np.log10(par[3] - temp)
 
     def log_period_colour_model(self, par, log_age, bv):
+        print log_age
+        print 'logage'
+        print par[0] + par[1] * log_age + par[2] * np.log10(bv - par[3])
+        print 'period'
+        raw_input('enter')
         return par[0] + par[1] * log_age + par[2] * np.log10(bv - par[3])
 
     def iso_calc(self, ag, pars, age, the_model):
@@ -73,7 +78,7 @@ class plotting(object):
         k = self.logg>4.0
         return self.period[k], self.p_err[k], self.age[k], self.teff[k], self.t_err[k]
 
-    def p_vs_t(self, pars):
+    def p_vs_t(self, pars, model):
 
         # remove k break and subgiants
         period, p_err, age, teff, t_err = plotting.kraft_sub(self)
@@ -95,15 +100,17 @@ class plotting(object):
                     label='$%s < \mathrm{Age} <%s \mathrm{Gyr}$'%(a_lim[i], a_lim[i+1]))
 
             # Add Isochrones
-            xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, self.log_period_model)
+            xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, model)
+            print xs, ys
+            raw_input('enter')
             pl.plot(xs, ys, color = ocols[i], linestyle='-', linewidth = 2, \
                     label = '$\mathrm{Age} = %.1f$\,$\mathrm{Gyr}$ \
                     $\mathrm{(M\&H~2008)}$' % t_ref, zorder = 1)
             a = a_lim[i]
-            xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, self.log_period_model)
+            xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, model)
             pl.plot(xs, ys, color = ocols[i], linestyle = '--', linewidth = 2, zorder = 2)
             a = a_lim[i+1]
-            xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, self.log_period_model)
+            xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, model)
             pl.plot(xs, ys, color = ocols[i], linestyle = '--', linewidth = 2, zorder = 3)
 
             pl.xlabel("$\mathrm{T_{eff (K)}}$")
@@ -120,5 +127,6 @@ if __name__ == "__main__":
 #     pars  = [0.407, 0.325, 0.495, 0.566]
 #     pars = [np.log10(0.7725), 0.5189, .2, 6300.]
 #     pars = [1.51613663, .185575537, -.245929036, 9.04129937e+03]
-    pars  = [0.407, 0.325, 0.495, 0.566]
-    plots.p_vs_t(pars)
+    pars  = [np.log10(.7725), .5189, .601, .4]
+    plots.p_vs_t(pars, plots.log_period_colour_model)
+#     plots.p_vs_t(pars, plots.log_period_model)
