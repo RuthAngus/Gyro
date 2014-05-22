@@ -89,7 +89,9 @@ def assemble(KID, p, p_err):
 #         print kid, all_KIDs[0][all_KIDs[0]==kid], all_KIDs[1][all_KIDs[0]==kid]
 
     np.savetxt("/Users/angusr/Python/Gyro/data/new_data.txt", data)
+#     np.savetxt("/Users/angusr/Python/Gyro/data/recovered.txt", data)
     return data
 
 if __name__ == "__main__":
-    data = assemble()
+    KID, p, p_err = 1, 1, 1
+    data = assemble(KID, p, p_err)

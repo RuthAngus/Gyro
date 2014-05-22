@@ -43,7 +43,7 @@ class plotting(object):
     def log_period_colour_model(self, par, log_age, bv):
         return par[0] + par[1] * log_age + par[2] * np.log10(bv - par[3])
 
-    def iso_calc(self, ag, pars, age):
+    def iso_calc(self, ag, pars, age, the_model):
 
         # calculate isochrones
         tt = np.array([4000, 4250, 4500, 5000, 5500, 6000, 6500])
@@ -55,7 +55,7 @@ class plotting(object):
         else: t_ref = 10.0**(np.median(np.log10(age[ag])))
 #         model = a*(bv - c)**b*(t_ref*1e3)**n
         teff = np.linspace(4000, pars[-1]-10, 100)
-        model = 10**self.log_period_model(pars, np.log10(t_ref*1000), teff)
+        model = 10**the_model(pars, np.log10(t_ref*1000), teff)
 #         spl = sci.UnivariateSpline(tt, model)
 #         xs = np.linspace(min(tt), max(tt), 1000)
 #         ys = spl(xs)
@@ -95,15 +95,15 @@ class plotting(object):
                     label='$%s < \mathrm{Age} <%s \mathrm{Gyr}$'%(a_lim[i], a_lim[i+1]))
 
             # Add Isochrones
-            xs, ys, t_ref = plotting.iso_calc(self, a, pars, age)
+            xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, self.log_period_model)
             pl.plot(xs, ys, color = ocols[i], linestyle='-', linewidth = 2, \
                     label = '$\mathrm{Age} = %.1f$\,$\mathrm{Gyr}$ \
                     $\mathrm{(M\&H~2008)}$' % t_ref, zorder = 1)
             a = a_lim[i]
-            xs, ys, t_ref = plotting.iso_calc(self, a, pars, age)
+            xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, self.log_period_model)
             pl.plot(xs, ys, color = ocols[i], linestyle = '--', linewidth = 2, zorder = 2)
             a = a_lim[i+1]
-            xs, ys, t_ref = plotting.iso_calc(self, a, pars, age)
+            xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, self.log_period_model)
             pl.plot(xs, ys, color = ocols[i], linestyle = '--', linewidth = 2, zorder = 3)
 
             pl.xlabel("$\mathrm{T_{eff (K)}}$")
