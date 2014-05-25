@@ -88,10 +88,15 @@ def assemble(KID, p, p_err):
 #     for i, kid in enumerate(missing):
 #         print kid, all_KIDs[0][all_KIDs[0]==kid], all_KIDs[1][all_KIDs[0]==kid]
 
-    np.savetxt("/Users/angusr/Python/Gyro/data/new_data.txt", data)
-#     np.savetxt("/Users/angusr/Python/Gyro/data/recovered.txt", data)
+#     np.savetxt("/Users/angusr/Python/Gyro/data/new_data.txt", data)
+    np.savetxt("/Users/angusr/Python/Gyro/data/old_data.txt", data) # should be matched_data in the proper format
+#     np.savetxt("/Users/angusr/Python/Gyro/data/recovered.txt", data) # this was supposed to be
     return data
 
 if __name__ == "__main__":
-    KID, p, p_err = 1, 1, 1
+
+    data = np.genfromtxt('/Users/angusr/Python/Gyro/data/matched_data.txt').T
+    KID = data[0]
+    p = data[1]
+    p_err = data[2]
     data = assemble(KID, p, p_err)

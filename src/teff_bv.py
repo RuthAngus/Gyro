@@ -55,7 +55,7 @@ def teff2bv(teff, logg, feh, error=False):
     dfdg1 = logg
     dfde1 = logg*np.log10(teff)
 
-    pds = np.array([dfdT, dfdF, dfdG, dfdt0, dfdt1, dfdt2, dfdt3, dfdf0, dfdf1, dfdd1, dfdg1m dfde1])
+    pds = np.array([dfdT, dfdF, dfdG, dfdt0, dfdt1, dfdt2, dfdt3, dfdf0, dfdf1, dfdd1, dfdg1m, dfde1])
     vs = np.zeros((len(teff), len(pds)))
     vs[0:], vs[1:], vs[2:] = teff, feh, logg
     o = np.ones_like(teff)

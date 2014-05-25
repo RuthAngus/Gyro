@@ -120,6 +120,54 @@ It is therefore essential that we have a well calibrated dating method like gyro
 % INDEPENDENT OF AGE
 % SHOW 3D FIGURE
 
+\subsection{Hierarchical inference}
+
+We have a set of noisy observations $\hat{A}_n, \hat{P}_n, \hat{T}_n$ and $\hat{G}_n$, describing some true, underlying (latent) values of age, period and temperature, $A_n, P_n, T_n$ and $G_n$.
+In order to properly take into account the uncertainties in our data, we should marginalise over the latent variables, $A_n$, $P_n$, $T_n$ and $G_n$, we want to compute the marginalised likelihood:
+
+% \begin{equation}
+% 	p(\{\hat{A}_n,\hat{P}_n,\hat{T}_n,\hat{G}\}|\theta) =
+% 	\prod_{n=1}^{n} \int p(\hat{A}_n,\hat{P}_n,\hat{T}_n,\hat{G}_n,A_n,P_n,T_n,G_n|\theta)
+% 	{\rm d}A_n {\rm d}P_n {\rm d}T_n,{\rm d}G_n
+% \label{eq:fulll}
+% \end{equation}
+
+\begin{equation}
+	p(\{\hat{Y}_n\}|\theta) = \prod_{n=1}^{n} \int p(\{\hat{Y}_n\}, \{Y_n\}|\theta) {\rm d}Y_n
+\label{eq:fulll}
+\end{equation}
+
+where Y = $(A, P, T, G)$.
+
+We therefore need to introduce a prior: $\alpha$.
+These probability distributions are sometimes called `interim priors' and they can be thought of as a prior distribution over the likelihood $p({\hat{A}_n}|{A_n})$.
+They can also be thought of as posterior distributions: $p({\hat{Y}_n}|{\hat{X}_k}$.
+Where the ${\hat{X}_k}$ are some set of asteroseismic (say) observations and the ${\hat{T}_n}$ in this case are the model parameters --- for example, the $\hat{X}$ might be Kepler light curves and the $\hat{Y}$ ages.
+This is what makes this process hierarchical: the posteriors of previous inferences become priors in ours.
+
+Ideally, the catalogue of asteroseismic data in \citet{Chaplin2013} would provide posterior samplings, which we could use directly as our samples from the prior distribution, $\alpha$.
+Since we do not have these samples, we must generate our own --- this is not too bad an approximation as long as the asteroseismic team used a uniform prior.
+The set of prior distributions, one for each observation, is characterised by the catalogue uncertainties.
+That is, our prior samples are draws from a Gaussian distribution with mean $\hat{Y}_n$ and variance $\sigma^2_{Y,n}$ for each star.
+
+\begin{equation}
+	p(\{Y_n\}|\{\hat{Y}_n\}, \alpha) = \frac{p(\{\hat{Y}_n\}|\{Y_n\}) p(\{\hat{Y}_n\}|\alpha)}{p(\{Y_n\}|\alpha)}
+\end{equation}
+
+In order to approximate the marginalised likelihood above, we multiply the integrand by
+
+\begin{equation}
+	\frac{p(\{Y_n\}|\{\hat{Y}_n\}, \alpha)}{p(\{Y_n\}|\{\hat{Y}_n\}, \alpha)}
+\end{equation}
+
+to obtain
+
+\begin{equation}
+	\frac{p(\{\hat{Y_n}\}|\theta)}{p(\{\hat{Y_n}\}|\alpha)} = \int \frac{p(\{Y_n\}|\theta)}{p(\{Y_n\}|\alpha)} p(\{Y_n\}|\{\hat{Y}_n\}, \alpha) d\{Y_n\}
+\end{equation}
+
+This importance sampling approach has the effect of supplying more weight to regions of higher probability.
+
 \section{Rotation Period Measurement}
 \label{rotation_period_measurement}
 
@@ -253,10 +301,10 @@ These observational values have effectively been 'drawn' from a probability dist
 The likelihood of the data given the model, marginalised over hidden variables, can be written as:
 
 \begin{equation}
-	p(\{\hat{A}_n,\hat{P}_n,\hat{T}_n,\hat{G}\}|\theta) =
-	\prod_{n=1}^{N} \int p(\hat{A}_n,\hat{P}_n,\hat{T}_n,\hat{G}_n,A_n,P_n,T_n,G_n|\theta)
-	{\rm d}A_n {\rm d}P_n {\rm d}T_n,{\rm d}G_n
-\label{eq:fullL}
+	p(\{\hat{a}_n,\hat{p}_n,\hat{t}_n,\hat{g}\}|\theta) =
+	\prod_{n=1}^{n} \int p(\hat{a}_n,\hat{p}_n,\hat{t}_n,\hat{g}_n,a_n,p_n,t_n,g_n|\theta)
+	{\rm d}a_n {\rm d}p_n {\rm d}t_n,{\rm d}g_n
+\label{eq:fulll}
 \end{equation}
 
 Where $\theta =$ a, b, \& n.
@@ -449,10 +497,9 @@ Subgiants & $p(A_n,P_n,T_n,G_n|Z, U) = p(T_n) p(G_n) p(P_n) p(A_n|Z, U)$ \\
 \enddata
 \end{deluxetable}
 
-\subsection{Importance Sampling}
 
-We use hierarchical inference to deal with the uncertainties on our data.
-
+% linearised uncertainty propagation - for logarithmic errors.
+% asymmetric errorbars - take mean or max
 
 \bibliographystyle{plainnat}
 \bibliography{Gyro_paper}
