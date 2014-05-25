@@ -21,32 +21,11 @@ def match(KID, X):
 
 def assemble(KID, p, p_err):
 
-#     # load period data
-#     pdata = np.genfromtxt('/Users/angusr/Python/Gyro/data/all_data.txt').T
-# #     pdata = np.genfromtxt('/Users/angusr/angusr/ACF2/periods.txt').T
-#     KID = pdata[0]
-#     p = pdata[1]
-#     p_err = pdata[2]
-
-#     # load extra amy data
-#     adata = np.genfromtxt("/Users/angusr/Python/Gyro/data/extra_amy.txt").T
-#     KID = np.concatenate((KID, adata[0]))
-#     p = np.concatenate((p, adata[1]))
-#     p_err = np.concatenate((p_err, adata[2]))
-
     # find and load extra amy data
     KID2, p2, p_err2 = extra(KID)
     KID = np.concatenate((KID, KID2))
     p = np.concatenate((p, p2))
     p_err = np.concatenate((p_err, p2))
-
-#     data1 = np.genfromtxt('/Users/angusr/Python/Gyro/data/ApJS91604R2tables.txt', \
-#             skiprows=30, skip_footer=1343, invalid_raise=False, usecols=(0)).T
-#     KID = data1
-#     p = np.zeros_like(KID)
-#     p_err = np.zeros_like(KID)
-#     print len(KID)
-#     raw_input('enter')
 
     # Load Astero data from table 1 - KIDs, teffs and feh
     # Columns: KID, nu, nu_err, dnu, dnu_err, SDSS_teff, st_err,
@@ -78,16 +57,6 @@ def assemble(KID, p, p_err):
     data[:,17] = dnu_table1[1]
     data[:,18] = dnu_table1[2]
 
-#     # find missing data
-#     t = table1[1]
-#     print KID[t==0]
-#     print 'stop'
-#     missing = KID[t==0]
-#     all_KIDs = np.genfromtxt('/Users/angusr/Python/Gyro/data/ApJS91604R2tables.txt', \
-#             skiprows=30, skip_footer=1343, usecols=(0,5,6)).T
-#     for i, kid in enumerate(missing):
-#         print kid, all_KIDs[0][all_KIDs[0]==kid], all_KIDs[1][all_KIDs[0]==kid]
-
 #     np.savetxt("/Users/angusr/Python/Gyro/data/new_data.txt", data)
     np.savetxt("/Users/angusr/Python/Gyro/data/old_data.txt", data) # should be matched_data in the proper format
 #     np.savetxt("/Users/angusr/Python/Gyro/data/recovered.txt", data) # this was supposed to be
@@ -95,6 +64,9 @@ def assemble(KID, p, p_err):
 
 if __name__ == "__main__":
 
+#     # load period data
+#     pdata = np.genfromtxt('/Users/angusr/Python/Gyro/data/all_data.txt').T
+# #     pdata = np.genfromtxt('/Users/angusr/angusr/ACF2/periods.txt').T
     data = np.genfromtxt('/Users/angusr/Python/Gyro/data/matched_data.txt').T
     KID = data[0]
     p = data[1]
