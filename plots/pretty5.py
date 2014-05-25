@@ -39,67 +39,43 @@ class plotting(object):
         self.t_err = data[13]
         self.j_k = data[14]
 
-    def log_period_model(self, par, log_age, temp, logg):
-        return par[0] + par[1] * log_age + par[2] * np.log10(par[3] - temp)
+    def log_period_model(self, par, log_age, bvt, logg, col):
+        print log_age
+        if col==False:
+            return par[0] + par[1] * log_age + par[2] * np.log10(par[3] - bvt) # temp
+        return par[0] + par[1] * log_age + par[2] * np.log10(bvt - par[3]) # colour
 
-    def log_period_colour_model(self, par, log_age, bv, logg):
-#         bv = teff_bv.teff2bv(temp, logg, np.ones_like(temp)*-.2, error=False)
-        return par[0] + par[1] * log_age + par[2] * np.log10(bv - par[3])
+    def iso_calc(self, ag, pars, age, model, col):
 
-    def iso_calc(self, ag, pars, age, the_model):
-
-        # calculate isochrones
-#         tt = np.array([4000, 4250, 4500, 5000, 5500, 6000, 6500])
-#         bv = np.array([1.393, 1.306, 1.237, 1.063, 0.815, 0.656, 0.498])
-        # http://www.astro.yale.edu/demarque/green.tbl
-
-        if type(ag) != np.ndarray: a_ref = ag
-#         else: a_ref = 10.0**(np.log10(age[ag]).mean())
-        else: a_ref = 10.0**(np.median(np.log10(age[ag])))
-#         model = a*(bv - c)**b*(a_ref*1e3)**n
-#         teff = np.linspace(4000, pars[-1]-10, 100)
-        teff = np.linspace(4000, 6250, 100)
-        logg = np.ones_like(teff)*4.5
-        period = 10**the_model(pars, np.log10(a_ref*1000), teff, logg)
-#         spl = sci.UnivariateSpline(tt, model)
-#         xs = np.linspace(min(tt), max(tt), 1000)
-#         ys = spl(xs)
-        return teff, period, a_ref
-
-    def iso_calc_colour(self, ag, pars, age, model):
-
-        # calculate isochrones. a_ref = age of bin
         if type(ag) != np.ndarray: a_ref = ag
         else: a_ref = 10.0**(np.median(np.log10(age[ag])))
 
-#         teff = np.linspace(4000, 6250, 100)
-        bv = np.linspace(1.3, .4, 100)
-        logg = np.ones_like(self.teff)*4.5
-        period = 10**model(pars, np.log10(a_ref*1000), bv, logg)
-        return bv, period, a_ref
+#         bv_or_t = np.linspace(1.3, .4, len(self.age))
+        bv_or_t = np.linspace(1.3, .4, 100)
+#         if col==False: bv_or_t = np.linspace(4000, 6250, len(self.age))
+        if col==False: bv_or_t = np.linspace(4000, 6250, 100)
+
+        logg = np.ones_like(bv_or_t)*4.5
+        period = 10**model(pars, np.log10(a_ref*1000), bv_or_t, logg, col)
+        return bv_or_t, period, a_ref
 
     # remove kraft break and subgiant stars
-    def kraft_sub(self):
-        k = (self.mass < 1.4)*(self.logg>4.0)
-        return self.period[k], self.p_err[k], self.age[k], self.teff[k], self.t_err[k], \
-                self.a_errp[k], self.a_errm[k], self.logg[k], self.l_errp[k], \
-                self.l_errm[k]
-
-    # remove subgiants only
-    def sub(self):
+    def kraft_sub(self, kraft):
         k = self.logg>4.0
+        if kraft==True: k = (self.mass < 1.4)*(self.logg>4.0)
         return self.period[k], self.p_err[k], self.age[k], self.teff[k], self.t_err[k], \
                 self.a_errp[k], self.a_errm[k], self.logg[k], self.l_errp[k], \
                 self.l_errm[k]
 
     def p_vs_t(self, pars, model, col):
 
-        # remove k break and subgiants
+        # remove subgiants and kraft break with kraft toggle
         period, p_err, age, teff, t_err, a_errp, a_errm, logg, logg_errp,\
-                logg_errm = self.kraft_sub()
+                logg_errm = self.kraft_sub(kraft=False)
 
         # Remove zeros
         zero = teff > 0
+
         # age masks
         a_lim = [0, 1, 2, 3, 4, 5, 8, max(age)]
 
@@ -115,17 +91,17 @@ class plotting(object):
                     label='$%s < \mathrm{Age} <%s \mathrm{Gyr}$'%(a_lim[i], a_lim[i+1]))
 
             # Add Isochrones
-            xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, model)
-            print xs, ys
-#             raw_input('enter')
+            xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, model, col)
+#             print age
+#             print ys
             pl.plot(xs, ys, color = ocols[i], linestyle='-', linewidth = 2, \
                     label = '$\mathrm{Age} = %.1f$\,$\mathrm{Gyr}$ \
                     $\mathrm{(M\&H~2008)}$' % t_ref, zorder = 1)
             a = a_lim[i]
-            xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, model)
+            xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, model, col)
             pl.plot(xs, ys, color = ocols[i], linestyle = '--', linewidth = 2, zorder = 2)
             a = a_lim[i+1]
-            xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, model)
+            xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, model, col)
             pl.plot(xs, ys, color = ocols[i], linestyle = '--', linewidth = 2, zorder = 3)
 
             pl.xlabel("$\mathrm{T_{eff (K)}}$")
@@ -142,6 +118,7 @@ if __name__ == "__main__":
 #     pars  = [0.407, 0.325, 0.495, 0.566]
 #     pars = [np.log10(0.7725), 0.5189, .2, 6300.]
 #     pars = [1.51613663, .185575537, -.245929036, 9.04129937e+03]
-    pars  = [np.log10(.7725), .5189, .601, .4]
-    plots.p_vs_t(pars, plots.log_period_colour_model, col=True)
-#     plots.p_vs_t(pars, plots.log_period_model)
+#     pars  = [np.log10(.7725), .5189, .601, .4]
+    pars  = [np.log10(.7725), .5189, -.2, 6250]
+    pars = [0.14510016, 0.59600838, 0.32905815, 6250]
+    plots.p_vs_t(pars, plots.log_period_model, col=False)
