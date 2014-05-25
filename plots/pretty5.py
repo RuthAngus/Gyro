@@ -18,42 +18,37 @@ from matplotlib import rc
 rc("font", size=20, family="serif", serif="Computer Sans")
 rc("text", usetex=True)
 
+# class plotting(object):
 class plotting(object):
 
-    def __init__(self):
-        data = np.genfromtxt('/Users/angusr/Python/Gyro/data/matched_data.txt').T
-#         data = np.genfromtxt('/Users/angusr/Python/Gyro/data/recovered.txt').T
-        self.KID = data[0]
-        self.period = data[1]
-        self.p_err = data[2]
-        self.age = data[3]
-        self.a_errp = data[4]
-        self.a_errm = data[5]
-        self.mass = data[6]
-        self.m_errp = data[7]
-        self.m_errm = data[8]
-        self.logg = data[9]
-        self.l_errp = data[10]
-        self.l_errm = data[11]
-        self.teff = data[12]
-        self.t_err = data[13]
-        self.j_k = data[14]
+    def __init__(self, stars):
+        self.KID = stars[0]
+        self.period = stars[1]
+        self.p_err = stars[2]
+        self.teff = stars[3]
+        self.t_err = stars[4]
+        self.feh = stars[5]
+        self.feh_err = stars[6]
+        self.logg = stars[10]
+        self.l_errp = stars[11]
+        self.l_errm = stars[12]
+        self.age = stars[13]
+        self.a_errp = stars[14]
+        self.a_errm = stars[15]
 
-    def log_period_model(self, par, log_age, bvt, logg, col):
-        print log_age
+    def log_period_model(self, par, log_age, teff, logg, col):
         if col==False:
-            return par[0] + par[1] * log_age + par[2] * np.log10(par[3] - bvt) # temp
-        return par[0] + par[1] * log_age + par[2] * np.log10(bvt - par[3]) # colour
+            return par[0] + par[1] * log_age + par[2] * np.log10(6250 - teff) # temp
+#         bv = teff_bv.teff2bv(teff, logg, np.ones_like(teff)*-.2, error=False)
+        return par[0] + par[1] * log_age + par[2] * np.log10(teff - .4) # colour
 
     def iso_calc(self, ag, pars, age, model, col):
 
         if type(ag) != np.ndarray: a_ref = ag
         else: a_ref = 10.0**(np.median(np.log10(age[ag])))
 
-#         bv_or_t = np.linspace(1.3, .4, len(self.age))
         bv_or_t = np.linspace(1.3, .4, 100)
-#         if col==False: bv_or_t = np.linspace(4000, 6250, len(self.age))
-        if col==False: bv_or_t = np.linspace(4000, 6250, 100)
+        if col==False: bv_or_t = np.linspace(4000, 6249, 100)
 
         logg = np.ones_like(bv_or_t)*4.5
         period = 10**model(pars, np.log10(a_ref*1000), bv_or_t, logg, col)
@@ -62,12 +57,19 @@ class plotting(object):
     # remove kraft break and subgiant stars
     def kraft_sub(self, kraft):
         k = self.logg>4.0
-        if kraft==True: k = (self.mass < 1.4)*(self.logg>4.0)
+#         if kraft==True: k = (self.mass < 1.4)*(self.logg>4.0)
+        if kraft==True: k = (self.teff < 6250)*(self.logg>4.0)
         return self.period[k], self.p_err[k], self.age[k], self.teff[k], self.t_err[k], \
                 self.a_errp[k], self.a_errm[k], self.logg[k], self.l_errp[k], \
                 self.l_errm[k]
 
     def p_vs_t(self, pars, model, col):
+
+        # convert teff data to colours
+        if col==True:
+            self.teff = teff_bv.teff2bv(self.teff, np.ones_like(self.teff)*4.5, \
+                    np.ones_like(self.teff)*-.2)
+            self.t_err = np.ones_like(self.teff)*0.01
 
         # remove subgiants and kraft break with kraft toggle
         period, p_err, age, teff, t_err, a_errp, a_errm, logg, logg_errp,\
@@ -92,8 +94,6 @@ class plotting(object):
 
             # Add Isochrones
             xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, model, col)
-#             print age
-#             print ys
             pl.plot(xs, ys, color = ocols[i], linestyle='-', linewidth = 2, \
                     label = '$\mathrm{Age} = %.1f$\,$\mathrm{Gyr}$ \
                     $\mathrm{(M\&H~2008)}$' % t_ref, zorder = 1)
@@ -104,21 +104,30 @@ class plotting(object):
             xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, model, col)
             pl.plot(xs, ys, color = ocols[i], linestyle = '--', linewidth = 2, zorder = 3)
 
-            pl.xlabel("$\mathrm{T_{eff (K)}}$")
+            pl.xlabel("$\mathrm{B-V}$")
+            if col==False: pl.xlabel("$\mathrm{T_{eff (K)}}$")
             pl.ylabel("$\mathrm{P_{rot} (days)}$")
     #             pl.xlim(pl.gca().get_xlim()[::-1])
-            pl.xlim(7000, 5000)
+
+            pl.xlim(.2, .8)
+            if col==False: pl.xlim(7000, 5000)
             pl.ylim(0, 70)
             pl.legend(loc='upper left')
             pl.savefig("p_vs_t%s"%i)
 
 if __name__ == "__main__":
+
+    data = np.genfromtxt('/Users/angusr/Python/Gyro/data/recovered.txt').T
+
     # Load data
-    plots = plotting()
+    plots = plotting(data)
 #     pars  = [0.407, 0.325, 0.495, 0.566]
 #     pars = [np.log10(0.7725), 0.5189, .2, 6300.]
 #     pars = [1.51613663, .185575537, -.245929036, 9.04129937e+03]
 #     pars  = [np.log10(.7725), .5189, .601, .4]
-    pars  = [np.log10(.7725), .5189, -.2, 6250]
-    pars = [0.14510016, 0.59600838, 0.32905815, 6250]
-    plots.p_vs_t(pars, plots.log_period_model, col=False)
+    pars  = [np.log10(.7725), .5189, -.2]
+    pars = [0.14510016, 0.59600838, 0.32905815] # results of working
+    pars = [np.log10(.7725), 0.5189, 0.601] # Barnes
+#     pars = [-.6, 0.5189, 0.2]
+
+    plots.p_vs_t(pars, plots.log_period_model, col=True)
