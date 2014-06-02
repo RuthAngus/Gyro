@@ -143,6 +143,7 @@ class plotting(object):
         pl.ylabel("$\mathrm{P_{rot} (days)}$")
         pl.savefig("p_vs_t_sub")
 
+
         acols = ['#8856a7','#9ebcda']
         # Make figure with all ages, without subgiants
         pl.clf()

@@ -2,11 +2,10 @@
 
 import numpy as np
 import matplotlib.pyplot as pl
-import scipy.interpolate as sci
+# import scipy.interpolate as sci
 import teff_bv
 
-plotpar = {'axes.labelsize': 20,
-           'text.fontsize': 20,
+plotpar = {'axes.labelsize': 20, 'text.fontsize': 20,
            'legend.fontsize': 15,
            'xtick.labelsize': 18,
            'ytick.labelsize': 18,
@@ -57,7 +56,7 @@ class plotting(object):
         if col==False:
             return par[0] + par[1] * log_age + par[2] * np.log10(6250 - teff) # temp
 #         bv = teff_bv.teff2bv(teff, logg, np.ones_like(teff)*-.2, error=False)
-        return par[0] + par[1] * log_age + par[2] * np.log10(teff - .4) # colour
+        return np.log10(par[0]) + par[1] * log_age + par[2] * np.log10(teff - par[3]) # colour
 
     def iso_calc(self, ag, pars, age, model, col):
 
@@ -80,7 +79,7 @@ class plotting(object):
                 self.a_errp[k], self.a_errm[k], self.logg[k], self.l_errp[k], \
                 self.l_errm[k]
 
-    def p_vs_t(self, pars, model, col):
+    def p_vs_t(self, pars, pars2, model, col):
 
         # convert teff data to colours
         if col==True:
@@ -110,15 +109,20 @@ class plotting(object):
 
             # Add Isochrones
             xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, model, col)
-            pl.plot(xs, ys, color = ocols[i], linestyle='-', linewidth = 2, \
+            pl.plot(xs, ys, color = ocols[i], linestyle='--', linewidth = 2, \
                     label = '$\mathrm{Age} = %.1f$\,$\mathrm{Gyr}$ \
-                    $\mathrm{(M\&H~2008)}$' % t_ref, zorder = 1)
-            a = a_lim[i]
-            xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, model, col)
-            pl.plot(xs, ys, color = ocols[i], linestyle = '--', linewidth = 2, zorder = 2)
-            a = a_lim[i+1]
-            xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, model, col)
-            pl.plot(xs, ys, color = ocols[i], linestyle = '--', linewidth = 2, zorder = 3)
+                    $\mathrm{(Barnes~2007)}$' % t_ref, zorder = 1)
+            if pars != pars2:
+                xs, ys, t_ref = plotting.iso_calc(self, a, pars2, age, model, col)
+                pl.plot(xs, ys, color = ocols[i], linestyle='-', linewidth = 2, \
+                        label = '$\mathrm{Age} = %.1f$\,$\mathrm{Gyr}$ \
+                        $\mathrm{This~work}$' % t_ref, zorder = 1)
+#             a = a_lim[i]
+#             xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, model, col)
+#             pl.plot(xs, ys, color = ocols[i], linestyle = '--', linewidth = 2, zorder = 2)
+#             a = a_lim[i+1]
+#             xs, ys, t_ref = plotting.iso_calc(self, a, pars, age, model, col)
+#             pl.plot(xs, ys, color = ocols[i], linestyle = '--', linewidth = 2, zorder = 3)
 
             pl.xlabel("$\mathrm{B-V}$")
             if col==False: pl.xlabel("$\mathrm{T_{eff (K)}}$")
@@ -133,14 +137,20 @@ class plotting(object):
 
 if __name__ == "__main__":
 
-    data = np.genfromtxt('/Users/angusr/Python/Gyro/data/recovered.txt').T
+#     data = np.genfromtxt('/Users/angusr/Python/Gyro/data/recovered.txt').T
 #     data = np.genfromtxt('/Users/angusr/Python/Gyro/data/matched_data.txt').T
+#     data = np.genfromtxt('/Users/angusr/Python/Gyro/data/new_data.txt').T
+    data = np.genfromtxt('/Users/angusr/Python/Gyro/data/old_data.txt').T
 
     # Load data
     plots = plotting(data)
 #     pars = [-.6, 0.5189, 0.2] # fitting by eye
 #     pars = [0.14510016, 0.59600838, 0.32905815] # results of working
-    pars = [np.log10(.7725), 0.5189, 0.601] # Barnes
-
-    plots.p_vs_t(pars, plots.log_period_model, col=True)
+    pars = [0.7725, 0.5189, 0.601, .4] # Barnes
+#     pars2 = [np.log10(.8), 0.6, 0.7] # Barnes
+#     pars2 = [0.2343379, 0.65866075, 0.50728003]
+#     pars2 = [0.17030109, 0.68712136, 0.48599914]
+#     pars2 = [np.log10(0.7725), 0.5, 0.601]
+    pars2 = [0.6459, 0.52115295, 0.52449312, .45]
+    plots.p_vs_t(pars, pars2, plots.log_period_model, col=True)
 #     plots.p_vs_t(pars, plots.log_period_model, col=False)

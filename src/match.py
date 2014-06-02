@@ -21,11 +21,11 @@ def match(KID, X):
 
 def assemble(KID, p, p_err):
 
-    # find and load extra amy data
-    KID2, p2, p_err2 = extra(KID)
-    KID = np.concatenate((KID, KID2))
-    p = np.concatenate((p, p2))
-    p_err = np.concatenate((p_err, p2))
+#     # find and load extra amy data
+#     KID2, p2, p_err2 = extra(KID)
+#     KID = np.concatenate((KID, KID2))
+#     p = np.concatenate((p, p2))
+#     p_err = np.concatenate((p_err, p2))
 
     # Load Astero data from table 1 - KIDs, teffs and feh
     # Columns: KID, nu, nu_err, dnu, dnu_err, SDSS_teff, st_err,
@@ -57,9 +57,6 @@ def assemble(KID, p, p_err):
     data[:,17] = dnu_table1[1]
     data[:,18] = dnu_table1[2]
 
-#     np.savetxt("/Users/angusr/Python/Gyro/data/new_data.txt", data)
-    np.savetxt("/Users/angusr/Python/Gyro/data/old_data.txt", data) # should be matched_data in the proper format
-#     np.savetxt("/Users/angusr/Python/Gyro/data/recovered.txt", data) # this was supposed to be
     return data
 
 if __name__ == "__main__":
@@ -68,7 +65,14 @@ if __name__ == "__main__":
 #     pdata = np.genfromtxt('/Users/angusr/Python/Gyro/data/all_data.txt').T
 # #     pdata = np.genfromtxt('/Users/angusr/angusr/ACF2/periods.txt').T
     data = np.genfromtxt('/Users/angusr/Python/Gyro/data/matched_data.txt').T
+#     data = np.genfromtxt('/Users/angusr/Python/Gyro/data/extra_amy.txt').T
     KID = data[0]
     p = data[1]
     p_err = data[2]
     data = assemble(KID, p, p_err)
+
+#     np.savetxt("/Users/angusr/Python/Gyro/data/new_data.txt", data)
+#     np.savetxt("/Users/angusr/Python/Gyro/data/old_data.txt", data) # should be matched_data in the proper format
+#     np.savetxt("/Users/angusr/Python/Gyro/data/recovered.txt", data) # this was supposed to be
+#     np.savetxt("/Users/angusr/Python/Gyro/data/extra_amy_matched.txt", data)
+    np.savetxt("/Users/angusr/Python/Gyro/data/new_matched.txt", data)
