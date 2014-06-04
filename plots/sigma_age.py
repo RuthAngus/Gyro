@@ -14,6 +14,13 @@ ocols = ['#FF9933','#66CCCC' , '#FF33CC', '#3399FF', '#CC0066', '#99CC99', '#993
 def log_period_model(par, log_a, bv):
     return np.log10(par[0]) + par[1] * log_a + par[2] * np.log10(bv - par[3]) # colour
 
+def age_model(par, p, bv):
+    return (1./par[0]) * p**(1./par[1]) * (bv-par[3])**(-par[2]/par[0])
+
+def distance(pars, a_obs, bv, a_err):
+    model = age_model(pars, a_obs, bv)
+    return ((a_obs-model))**2/a_err
+
 def iso_calc(pars, age):
     x = np.linspace(1.3, .4, 1000)
     y = 10**log_period_model(pars, np.log10(age*1000), x)
@@ -85,16 +92,23 @@ for i, age in enumerate(ages):
     l21 = (a1-(a_errm1*sig) < age) * (age < a1+(a_errp1*sig)) * (bv1 < .4) # hot astero
     l22 = (a2-(a_errm2*sig) < age) * (age < a2+(a_errp2*sig)) * (bv2 < .4) # hot clusters
 
+    dist = distance(pars3, a1, bv1, a_errp1)
+    dist[np.isnan(dist)] = 0
+
     # Plot data
     pl.clf()
+    cm = pl.cm.get_cmap('Greys')
     pl.errorbar(bv1[l11], p1[l11], xerr=bv_err1[l11], yerr=p_err1[l11], color='k', \
             fmt='o', mec='k', capsize=0, markersize=5, ecolor='0.8', zorder=4)
+    pl.scatter(bv1[l11], p1[l11], c=distance(pars3, a1[l11], bv1[l11], a_errp1[l11]), \
+            cmap=cm, marker='o', s=40, zorder=5, edgecolors='None')
     pl.errorbar(bv1[l21], p1[l21], xerr=bv_err1[l21], yerr=p_err1[l21], color='.75', \
             fmt='o', mec='.75', capsize=0, markersize=5, ecolor='0.8', zorder=4)
     pl.errorbar(bv2[l12], p2[l12], xerr=bv_err2[l12], yerr=p_err2[l12], color='k', \
             fmt='+', mec='k', capsize=0, markersize=5, ecolor='0.8', zorder=4)
     pl.errorbar(bv2[l22], p2[l22], xerr=bv_err2[l22], yerr=p_err2[l22], color='.75', \
             fmt='+', mec='.75', capsize=0, markersize=5, ecolor='0.8', zorder=4)
+    pl.colorbar()
 
     # Add Isochrones
     xs, ys = iso_calc(pars, ages[i])
