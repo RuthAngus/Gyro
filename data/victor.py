@@ -45,6 +45,6 @@ for i in range(len(KID)):
     else:
         data[2][i] = period_err3[i]
 
-np.savetxt("/Users/angusr/Python/Gyro/data/victor_p_errs.txt", data.T)
+np.savetxt("/Users/angusr/Python/Gyro/data/victor_p_errs.txt", data)
 
 print data
