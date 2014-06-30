@@ -1,0 +1,3 @@
+Data from M&H 2008. (made up uncertainties) age from http://arxiv.org/abs/astro-ph/0204331
+B-V B-V_err P P_err Age Age_err
+0.65 0.001 26.09 0.1 4.570 0.11

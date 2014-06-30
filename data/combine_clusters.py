@@ -35,11 +35,53 @@ mbv, mbv_err = gr2bv(data[1], data[2])
 bv = np.concatenate((bv, mbv))
 bv_err = np.concatenate((bv_err, mbv_err))
 a = np.concatenate((a, np.ones_like(data[3])*1.1))
-a_err = np.concatenate((a_err, np.ones_like(data[3])*.1))
-# a_err = np.concatenate((a_err, np.ones_like(data[3])*.2))
-pl.clf()
-pl.plot(mbv, data[3], 'ko')
-pl.savefig('NGC6811')
+# a_err = np.concatenate((a_err, np.ones_like(data[3])*.1))
+a_err = np.concatenate((a_err, np.ones_like(data[3])*.2))
+
+# add alpha cen ab
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/alphacen.txt", skip_header=2).T
+bv = np.concatenate((bv, data[0]))
+bv_err = np.concatenate((bv_err, data[1]))
+p = np.concatenate((p, data[2]))
+p_err = np.concatenate((p_err, data[3]))
+a = np.concatenate((a, data[4]))
+a_err = np.concatenate((a_err, data[5]))
+
+bv = list(bv)
+bv_err = list(bv_err)
+p = list(p)
+p_err = list(p_err)
+a = list(a)
+a_err = list(a_err)
+
+# add 18sco
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/18sco.txt", skip_header=2).T
+bv.append(data[0])
+bv_err.append(data[1])
+p.append(data[2])
+p_err.append(data[3])
+a.append(data[4])
+a_err.append(data[5])
+
+# add 16cygB
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/16CygB.txt", skip_header=2).T
+bv.append(data[8])
+bv_err.append(data[9])
+p.append(data[2])
+p_err.append(data[3])
+a.append(data[4])
+a_err.append(data[5])
+
+bv = np.array(bv)
+bv_err = np.array(bv_err)
+p = np.array(p)
+p_err = np.array(p_err)
+a = np.array(a)
+a_err = np.array(a_err)
+
+# pl.clf()
+# pl.plot(mbv, data[3], 'ko')
+# pl.savefig('NGC6811')
 
 logg = np.ones_like(bv)*4.5
 logg_err = np.ones_like(bv)*.01
