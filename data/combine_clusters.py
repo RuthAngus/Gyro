@@ -1,7 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as pl
 from colour_conversion import gr2bv
+from teff_bv import teff2bv_err
 
+# make up colour errors
 c_err = .01
 
 # add hyades
@@ -78,6 +80,24 @@ p = np.array(p)
 p_err = np.array(p_err)
 a = np.array(a)
 a_err = np.array(a_err)
+
+# add Travis' stars
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/Travis_data.txt", skip_header=1).T
+a = np.concatenate((a, data[5]))
+a_err = np.concatenate((a_err, data[6]))
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/travis_actual_periods.txt").T
+p = np.concatenate((p, data[1]))
+p_err = np.concatenate((p_err, data[2]))
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/travis_teffs.txt", skip_header=1).T
+teff = data[1]
+teff_err = data[2]
+logg = data[3]
+logg_err = data[4]
+feh = data[5]
+feh_err = data[6]
+travis_bv, travisbv_err = teff2bv_err(teff, logg, feh, teff_err, logg_err, feh_err)
+bv = np.concatenate((bv, travis_bv))
+bv_err = np.concatenate((bv_err, travisbv_err))
 
 # pl.clf()
 # pl.plot(mbv, data[3], 'ko')

@@ -24,6 +24,65 @@ def teff2bv_orig(teff, logg, feh):
             t[3]*(np.log10(teff))**3 + f[0]*feh + f[1]*feh**2 \
             + d1*feh*np.log10(teff) + g1*logg + e1*logg*np.log10(teff)
 
+def teff2bv_err(teff, logg, feh, teff_err, logg_err, feh_err):
+    # best fit parameters
+    t = [-813.3175, 684.4585, -189.923, 17.40875]
+    f = [1.2136, 0.0209]
+    d1 = -0.294
+    g1 = -1.166
+    e1 = 0.3125
+
+    # and uncertainties
+    t_err = [42.5, 34.3, 9.23, 0.827]
+    f_err = [0.038, 0.0006]
+    d1_err = 0.010
+    g1_err = 0.028
+    e1_err = 0.0076
+
+    # Monte carlo error propagation
+    nsamp = 1000
+    nobs = len(teff)
+
+    bv = np.empty(nobs)
+    for i in range(nobs):
+        bv[i] = t[0] + t[1]*np.log10(teff[i]) + t[2]*(np.log10(teff[i]))**2 + \
+                t[3]*(np.log10(teff[i]))**3 + f[0]*feh[i] + f[1]*feh[i]**2 \
+                + d1*feh[i]*np.log10(teff[i]) + g1*logg[i] + e1*logg[i]*np.log10(teff[i])
+
+# monte carlo for function parameters
+#     t[0] = t[0]+t_err[0]*np.random.randn(nsamp)
+#     t[1] = t[1]+t_err[1]*np.random.randn(nsamp)
+#     t[2] = t[2]+t_err[2]*np.random.randn(nsamp)
+#     t[3] = t[3]+t_err[3]*np.random.randn(nsamp)
+#     f[0] = f[0]+f_err[0]*np.random.randn(nsamp)
+#     f[1] = f[1]+f_err[1]*np.random.randn(nsamp)
+#     d1 = d1+d1_err*np.random.randn(nsamp)
+#     g1 = g1+g1_err*np.random.randn(nsamp)
+#     e1 = e1+e1_err*np.random.randn(nsamp)
+
+    teff_samp = np.vstack([x0+xe*np.random.randn(nsamp) for x0, xe in zip(teff, teff_err)])
+    logg_samp = np.vstack([x0+xe*np.random.randn(nsamp) for x0, xe in zip(logg, logg_err)])
+    feh_samp = np.vstack([x0+xe*np.random.randn(nsamp) for x0, xe in zip(feh, feh_err)])
+
+    bvs = np.empty((nobs, nsamp))
+    sigma = np.empty((nobs))
+
+    for i in range(nobs):
+        bvs[i] = t[0] + t[1]*np.log10(teff_samp[i]) + t[2]*(np.log10(teff_samp[i]))**2 + \
+                t[3]*(np.log10(teff_samp[i]))**3 + f[0]*feh_samp[i] + f[1]*feh_samp[i]**2 \
+                + d1*feh_samp[i]*np.log10(teff_samp[i]) + g1*logg_samp[i] + e1*logg_samp[i]*np.log10(teff_samp[i])
+        sigma[i] = np.std(bvs[i], axis=0)
+
+# plot to check results
+#     pl.clf()
+#     pl.hist(bvs[0], 50)
+#     pl.axvline(bv[0], color='r')
+#     pl.axvline(bv[0]+sigma[0], color='r')
+#     pl.axvline(bv[0]-sigma[0], color='r')
+#     pl.savefig('mc_hist')
+
+    return bv, sigma
+
 def bv2teff(bv, logg, feh):
     # best fit parameters
     c = [3.929883, -0.360726, 0.168806, -0.048300]
@@ -174,3 +233,8 @@ if __name__ == "__main__":
     bv = teff2bv_orig(6250., 4., -.2)
 
     print 'bv', bv
+
+    bv = teff2bv_orig(teff, t_err, logg)
+    print bv
+    # testing teff2bv_err
+    bv = teff2bv_err(teff, logg, feh, t_err, logg_err, feh_err)
