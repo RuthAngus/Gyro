@@ -22,7 +22,7 @@
 
 \title{Calibrating Gyrochronology using Kepler Asteroseismic targets}
 
-\author{Ruth Angus$^1$, Suzanne Aigrain$^1$, Amy McQuillan$^2$, Daniel Foreman-Mackey$^3$,  William, J. Chaplin$^4$, Tsevi Maseh$^2$}
+\author{Ruth Angus$^1$, Suzanne Aigrain$^1$, Amy McQuillan$^2$, Daniel Foreman-Mackey$^3$,  William, J. Chaplin$^4$, Tsevi Mazeh$^2$}
 \affil{$^1$Department of Physics, University of Oxford, OX1 3RH, UK}
 \affil{$^2$School of Physics and Astronomy, Raymond and Beverly Sackler, Faculty of Exact Sciences, Tel Aviv University, 69978, Tel Aviv, Israel}
 \affil{$^3$Centre for Cosmology and Particle Physics, New York University, New York, NY, USA}
@@ -88,7 +88,7 @@ Note that \citet{Mamajek2008} treat c, the parameter setting the position of the
 \tablehead{
 \colhead{Parameter}&
 	\colhead{\citet{Barnes2007}}&
-	\colhead{\citet{Mamajek2008}}
+\colhead{\citet{Mamajek2008}}}
 \startdata
 a & $0.7725 \pm 0.011$ & $0.407 \pm 0.021$ \\
 b & $0.601 \pm 0.024$ & $0.325 \pm 0.024$ \\
@@ -100,11 +100,11 @@ n & $0.5189 \pm 0.0070$ & $0.566 \pm 0.008$ \\
 Gyrochronology relations of this kind can only be applied to F, G and K MS stars.
 M dwarfs are fully convective and have a different magnetic dynamo \citep{McQuillan_2013}, therefore follow a different spin-down law.
 % Which is What?
-However, M dwarfs are unsuitable targets for asteroseismology as they do not display high signal-to-noise Solar-like oscillations and do not feature in our sample anyway.
+However, M dwarfs are unsuitable targets for asteroseismology as they do not display high signal-to-noise Solar-like oscillations and so do not feature in our sample anyway.
 Stars with effective temperatures $\lesssim$ 6250 K have shallow convective zones - they are almost fully radiative - and, again, they have a different dynamo-driven magnetic field \citep{Kraft1967}.
 These massive stars remain rapidly rotating throughout their brief MS lifetimes and are therefore not suitable gyrochronology targets.
 
-This paper is laid out as follows: the data and our photometric rotation period measurement method is described in \textsection~\ref{sec:asteroseismic_targets}, the calibration and model fitting process is outlined in \textsection~\ref{sec:gyro_cal} and the results are discussed in \textsection~\ref{sec:results} and \textsection~\ref{sec:discussion}.
+This paper is laid out as follows: the data and our photometric rotation period measurement method are described in \textsection~\ref{sec:asteroseismic_targets}, the calibration and model fitting process is outlined in \textsection~\ref{sec:gyro_cal} and the results are discussed in \textsection~\ref{sec:results} and \textsection~\ref{sec:discussion}.
 
 \section{Ages and rotation periods of asteroseismic targets}
 \label{sec:asteroseismic_targets}
@@ -112,13 +112,12 @@ This paper is laid out as follows: the data and our photometric rotation period 
 \subsection{Asteroseismic ages}
 Ages measured with asteroseismology can be very precise, with uncertainties as low as 10\% in some cases.
 Unlike activity and rotation period diagnostics, the precision of asteroseismic ages are not, themselves age dependent.
-Pressure wave oscillations produce periodic luminosity variations on timescales of $\sim$ 5 minutes for solar-like stars.
-These oscillations can be detected in short-cadence Kepler data, and a fourier transform of the time-series shows a series of peaks, corresponding to each oscillation mode.
-The mean large frequency separation between oscillation modes, $\Delta\nu$, is a fundamental asteroseismic observable and is related to the square-root of stellar density.
-The series of peaks is modulated by a gaussian envelope, the maximum of which is another fundamental asteroseismic observable, $\nu_{max}$
-The frequency of each oscillation mode depends on the integrated sound speed along the path through the star and measuring the frequency separation between oscillation modes yields an estimate of the stellar density.
-When combined with spectroscopic observations and compared with theoretical stellar evolution models, measurements of the oscillation mode frequencies can yield stellar ages.
-The asteroseismic properties of 505 stars published in Chaplin et al (2013) were calculated from measurements of the mean large frequency separation, $\Delta\nu$ and the maximum of the gaussian envelope, $\nu_{max}$
+Pressure wave oscillations produce periodic luminosity variations on timescales of $\sim$ 5 minutes for Solar-like stars.
+These oscillations can be detected in short-cadence Kepler data, and a fourier transform of the time-series shows a series of peaks, corresponding to discrete oscillation mode.
+The mean large frequency separation between oscillation modes, $\Delta\nu$, is a fundamental asteroseismic observable and is related to stellar density.
+% $\Delta\nu \propto \sqrt\rho_{star}$
+The series of peaks in the Fourier transform is modulated by a gaussian envelope, the maximum of which is another fundamental asteroseismic observable, $\nu_{max}$.
+When combined with spectroscopic observations and compared with theoretical stellar evolution models, measurements of the two fundamental asteroseismic observables yeild stellar ages.
 These two fundamental asteroseismic parameters can be used, via the scaling relations below, to derive stellar ages, masses and radii.
 
 \begin{equation}
@@ -131,28 +130,28 @@ These two fundamental asteroseismic parameters can be used, via the scaling rela
 \label{eq:delta_nu}
 \end{equation}
 
-Ages provided in \citet{Chaplin2013}, calculated from the mean large frequency separation and this scaling relation have uncertainties of  $\approx$ 35\%.
-If the frequency of each oscillation mode is measured individually, one can build a density profile of the star and provide a tighter constraint on the evolutionary stage of the star.
-Ages derived from individual oscillation mode measurements can have uncertainties as small as 10\% (CITATION), however this is a still a manual process and therefore takes time.
-Although asteroseismology is a potentially precise dating method, it can only be applied to bright stars observed by missions like Kepler that show solar-like oscillations \citep{Chaplin_2011}.
-It is therefore essential that we have a well calibrated dating method like gyrochronology which can be applied to any F, G or K star with a measurable rotation period.
-
-The asteroseismic targets have two sets of calculated temperatures.
-One set is derived using an Infra-Red Flux Method (IRFM) calibration (\citet{Casagrande2010}, \citet{SilvaAguirre2012}) and the other derived from a recalibration of the SDSS griz filter KIC photometry \citep{Pinsonneault2012} using YREC models \citep{Demarque2008}.
-We use the second set since these are temperatures are slightly more precise.
-
-Of the 505 asteroseismic targets, 65 were modelled with the Asteroseismic Modeling Portal, and therefore have more precise ages.
-42 of these are published in \citep{Metcalfe2014} and 23 were obtained from Silva Aguirre (private communication).
-Of the 42 stars in \citep{Metcalfe2014}, we only include the `simple stars' (cool dwarfs) in our sample --- ignoring the `F stars' and `mixed mode' (subgiant) stars.
-The AMP calculates more precise asteroseismic ages (typically improved by a factor of $\sim$ 2), by measuring the frequency of individual oscillation modes, using the `peak bagging' technique \citep{Appourchaux2012}.
-Precise effective temperatures and metallicities are required, and were obtained from \citet{Bruntt2012}.
+The ages of 505 stars were calculated from measurements of the mean large frequency separation, $\Delta\nu$ and the maximum of the gaussian envelope, $\nu_{max}$ and published in \citet{Chaplin2013}
+They are published with two sets of effective temperatures: one is derived using an Infra-Red Flux Method (IRFM) calibration (\citet{Casagrande2010}, \citet{SilvaAguirre2012}) and the other from a recalibration of the SDSS griz filter KIC photometry by \citet{Pinsonneault2012} using Yale Rotating Stellar Evolution Code (YREC) models \citep{Demarque2008}.
+We use the second set of temperatures since they temperatures are slightly more precise.
+% test: is our analysis sensitive to this choice?
+The asteroseismic ages in \citet{Chaplin2013} have typical uncertainties of $\approx$ 35\%; however, for some of these stars it will be possible to derive more precise ages.
+If the frequency of each oscillation mode is measured individually, one can build up a density profile of the star and provide a tighter constraint on its age.
+Ages derived from individual oscillation mode measurements can have uncertainties as small as 10\%, however the process of measuring frequencies for individual oscillation modes is a manual, more time consuming process and can only be applied in the highest signal-to-noise cases.
+\citet{Chaplin2013} predict that around 150 of the 505 stars will be suitable for this individual oscillation mode treatment.
+% Although asteroseismology is a potentially precise dating method, it can only be applied to bright stars observed by missions like Kepler that show solar-like oscillations \citep{Chaplin_2011}.
+% It is therefore essential that we have a well calibrated dating method like gyrochronology which can be applied to any F, G or K star with a measurable rotation period.
+So far this has been done for 65 of the 505 with the Asteroseismic Modeling Portal (AMP), 42 of which are published in \citep{Metcalfe2014} and 23 obtained from Silva Aguirre (private communication).
+Of the 42 stars in \citep{Metcalfe2014}, we only integrate the `simple stars' (cool dwarfs) into our sample --- we ignore the `F stars' and `mixed mode' (subgiant) stars as these are not expected to follow the simple gyrochronology relation.
+The AMP used the `peak bagging' technique \citep{Appourchaux2012} to measure individual oscillation mode frequencies
+% (typically improved by a factor of $\sim$ 2), by measuring the frequency of individual oscillation modes, using the `peak bagging' technique \citep{Appourchaux2012}.
+Precise effective temperatures and metallicities were obtained from \citet{Bruntt2012}.
+The uncertainties of stellar ages measured with AMP are typically improved over the scaling relation techique by a factor of 2.
 
 % Infra-Red Flux Method (IRFM) calibration (Casagrande et al. 2010; see also Silva Aguirre et al. 2012). This made use of multi-band JHK photometry from the Two Micron All Sky Survey (2MASS; Skrutskie et al. 2006), photometry in the SDSS griz bands available in the KIC, and reddening estimates from Drimmel et al. (2003). A second set of temperatures were those derived by Pinsonneault et al. (2012), who performed a recalibration of the KIC photometry in the SDSS griz filters, using YREC models. The complementary photometry that was available to us did not allow strong constraints to be placed on the metallicity of all the targets. When using the photometric Te¿ in the grid searches we therefore adopted an [Fe/H] corresponding to an average value for the field of  0.2±0.3 dex (e.g. see Silva Aguirre et al. 2011).
 
-% INDEPENDENT OF AGE
 % SHOW 3D FIGURE
 
-\subsection{Rotation Period Measurement}
+\subsection{Rotation Period Measurements}
 \label{rotation_period_measurement}
 
 The Kepler light curves of these 505 asteroseismic targets display quasi-periodic variations on timescales corresponding to rotational periods of the stars due to transiting star spots.
@@ -224,7 +223,7 @@ such as the exponential decays that appear after telescope shutdowns, which affe
 
 \subsection{Supplementary data}
 
-13 stars in our sample have  precise asteroseismic ages
+13 stars in our sample have  precise asteroseismic ages.
 7 of these are from \citet{Metcalfe2012} with spectroscopic effective temperatures, metallicities and log g from \citet{Bruntt2012} and 6 are from Silva-Aguirre (private communication).
 The individual mode frequencies were measured for these stars, enabling a more detailed modelling of their interior structure and therefore yeilding a more precise age measurement.
 An unfortunate disharmony exists between asteroseismology and gyrochronology.
@@ -290,7 +289,7 @@ The gyrochronology relations of \citet{Barnes2007} and \citet{Mamajek2008} take 
 P = A^n \times a(B-V-c)^b,
 \end{equation}
 
-where n, a, b and c are constants, taking values tabulated in table \ref{tab:constants}.
+where n, a, b and c are constants, taking values tabulated in \ref{tab:constants}.
 Our relation will be of the form:
 
 % \begin{equation}
@@ -437,7 +436,7 @@ We then used emcee \citep{Foreman-Mackey2013} to explore the posterior probabili
 Posterior distributions for all model parameters are shown in figure \ref{fig:triangle_full}.
 Figure ... shows the posterior distributions for the parameters of interest only, having marginalised over the nuisance parameters describing the log-normal distributions of subgiants, hot stars and rapid rotators.
 The full set of posterior samples can be downloaded at (URL...).
-Our resulting Maximum \emph{a posteriori} values of the three gyrochronology parameters, with their 16th and 84th percentile values are tabulated in table \ref{tab:results}.
+Our resulting Maximum \emph{a posteriori} values of the three gyrochronology parameters, with their 16th and 84th percentile values are tabulated in \ref{tab:results}.
 
 % comment this out for now - slows down compile time cos it's so biiiig
 % \begin{figure}[ht]
