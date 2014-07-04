@@ -7,6 +7,17 @@
 \usepackage[section]{placeins}
 \usepackage{graphicx, subfigure}
 
+\newcommand{\logg}{log \emph{g}~}
+\newcommand{\teff}{$T_{eff}~$}
+\newcommand{\prot}{$P_{rot}~$}
+\newcommand{\ah}{$\hat{A}_n$}
+\newcommand{\ph}{$\hat{P}_n$}
+\newcommand{\ch}{$\hat{C}_n$}
+\newcommand{\gh}{$\hat{G}_n$}
+\newcommand{\yh}{$\hat{Y}_n$}
+\newcommand{\teffh}{$\hat{T}_n$}
+\newcommand{\dd}{\ensuremath{\,\mathrm{d}}}
+
 \begin{document}
 
 \title{Calibrating Gyrochronology using Kepler Asteroseismic targets}
@@ -246,17 +257,20 @@ This conversion is imprecise since the metallicites of the asteroseismic targets
 \section{Calibrating the Gyrochronology relation}
 \label{gyro_cal}
 
-The 176 asteroseismic stars in our sample have B-V colours, converted from $T_{eff}$s, photometric rotation periods, P and asteroseismically derived ages, A and surface gravities, log g (G).
-Each of these properties has an associated uncertainty, assumed to be independent and Gaussian for T and P and log-normal for A and G.
-The 265 cluster and field stars added to our sample do not have log gs, however since we only use log g to constrain the populations of subgiants and dwarfs (and we assume that the cluster and field stars are dwarfs, this shouldn't hurt our analysis.
+\subsection{The model}
 
-Gyrochronology is not applicable to hot stars or subgiants --- stars with effective temperatures above the Kraft-break, $T_{eff} \sim$ 6250 K, \citep{Kraft1967} do not have a thick convective envelope and therefore cannot support a strong magnetic dynamo, so do not spin down during their MS lifetimes.
-Subgiants spin down rapidly as they expand, due to angular momentum conservation and thus diverge from the gyrochronology mass-period-age plane.
-The `gyrochronological MS turnoff' is difficult to define.
-Classically, MS turnoff is defined as the hottest point on a star's path on the HR diagram, however the point at which stars cease to be well described by gyrochronology is not well understood.
+The 176 asteroseismic stars in our sample have B-V colours, converted from effective temperatures, photometric rotation periods, P and asteroseismically derived ages, A and surface gravities, \logg (G).
+Each of these properties has an associated uncertainty, assumed to be independent and Gaussian for B-V and P and log-normal for A and G.
+The 265 cluster and field stars added to our sample do not have \logg values, however since we only use \logg to separate the populations of subgiants and dwarfs (and we assume that the cluster and field stars are dwarfs) this shouldn't hurt our analysis.
+
+Gyrochronology is not applicable to hot stars or subgiants.
+Stars with effective temperatures above the Kraft-break, $T_{eff} \sim$ 6250 K, \citep{Kraft1967} do not have a thick convective envelope and therefore cannot support a strong magnetic dynamo, so do not spin down during their MS lifetimes.
+Subgiants spin down rapidly as they expand, due to angular momentum conservation and thus diverge from the gyrochronology mass-period-age plane; however, the `gyrochronological MS turnoff' is difficult to define.
+% Although the point at which a star turns off the MS is relatively well known and understood, (conventionally its hottest point on the HR diagram), the point at which stars stop following the gyrochronology spin-down relation is less well understood.
+Classically, MS turnoff is defined as the hottest point on a star's path on the HR diagram, but the point at which stars cease to be well described by gyrochronology is not well understood.
 Theory predicts that evolving stars begin the process of spinning down relatively slowly after leaving the `classically defined' MS \citep{vanSaders2013}.
-For this reason we choose a very simple definition of MS turnoff --- we use a log g cut of 4.0 to differentiate dwarfs from giants.
-We choose not to simply exclude hot stars and subgiants from our sample during the modelling process --- we model all three populations simultaneously.
+For this reason we choose a very simple definition of MS turnoff --- we use a \logg cut of 4.0 to differentiate dwarfs from giants.
+We do not simply exclude hot stars and subgiants from our sample during the modelling process --- we model all three populations simultaneously.
 This allows for the fact that stars have some probability mass lying in all three regimes due to their large observational uncertainties.
 
 The gyrochronology relations of \citet{Barnes_2007} and \citet{Mamajek_2008} take the form:
@@ -269,144 +283,176 @@ where n, a, b and c are constants, taking values tabulated in table \ref{tab:con
 Our relation will be of the form:
 
 % \begin{equation}
-% 	A = P^{\delta} \times a(T - T_k)^{\beta}
+% 	A = \left[\frac{P}{a(B-V - c)^{b}}\right]^{\frac{1}{n}}
 % \label{eq:functional_form2}
 % \end{equation}
 
 \begin{equation}
-	P = A^n \times a(T - T_k)^b
-\label{eq:functional_form2}
+A = \left[P \times \frac{1}{a}(B-V - c)^{-b}\right]^{\frac{1}{n}}
+\label{eq:plane}
 \end{equation}
 
-% Where now A is the dependent variable, since we want to produce a predictive distribution for the age of a star, given estimates of T and P.
-% Since this equation is linear in log-space, we fit the logarithmic form of this equation to the low-mass, MS stars:
+Where, since we want to produce a predictive distribution for the age of a star given estimates of B-V and P, A is now the dependent variable.
 
-% \begin{equation}
-% 	\log{A} = \delta \log{P} + \alpha + \beta \log{(T - T_k)},
-% \label{eq:log}
-% \end{equation}
+Additionally to the hot stars and subgiants, there is further population of contaminating stars in our sample: rapid rotators.
+Around 20 stars with rotation periods of less than $\sim$ 5 days do not lie on the standard gyrochronology mass-period-age plane.
+These stars could plausibly be synchronised binaries or stars with unseen, close-in, massive planets.
 
-% \begin{equation}
-% 	\log{P} = n \log{A} + a + b \log{(T - T_k)},
-% \label{eq:log}
-% \end{equation}
+We model four stellar populations simultaneously: cool MS stars, hot MS stars, subgiants and rapid rotators.
+The hot MS stars are defined as those with B-V $<$ 0.45, corresponding to \teff = 6250 K for Solar metallicity and \logg.
+Since there is no dependence of age on rotation period for massive MS stars, their ages are modelled as a log-normal distribution with mean and variance as free parameters.
+Subgiant ages \emph{do} depend on period and $T_{eff}$; however, since we are not interested in the rotational properties of these stars for the purposes of gyrochronology calibration, we also model them with a log-normal distribution with mean and variance as free parameters.
+We could model the subgiants with an analytic expression for period, (age), given temperature and age (period), such as the one in \citet{vanSaders2013}, however, we would like to remain as model \emph{independent} as possible throughout this process.
 
-% where $\alpha, \beta, T_K$ and $\delta$ are free parameters.
-% where a, b, T$_K$ and n are free parameters.
-where a, b and n are free parameters.
+We use a mixture model for the remaining two populations of cool MS stars: those that follow the gyrochronology relations and those with unusually fast rotation periods.
+The fast rotators are treated as 'outliers' and modelled with another log normal distribution with mean and variance, again inferred from the data.
+In our mixture model, an additional parameter, P, is the probability that each data point is an outlier.
 
-For now, lets just address the low-mass MS stars that obey the gyrochronology relation.
-We have a set of noisy observations, $\hat{A}, \hat{P}, \hat{T}$ and $\hat{G}$ for each star.
-These observational values have effectively been 'drawn' from a probability distribution centered on the 'true', hidden values, $A, P, T$ and $G$ with variance characterised by the uncertainties, $\sigma_A, \sigma_P, \sigma_T$ and $\sigma_G$.
-The likelihood of the data given the model, marginalised over hidden variables, can be written as:
+Ideally both the hot star (B-V $<$ 0.45) and subgiant (\logg $<$ 4) boundaries would be free parameters in our model.
+However, since these two populations are modelled with a much less constraining log-normal distribution, these boundary parameters would not be well behaved.
+Both boundaries would be pushed to higher and higher values, until all stars were modelled with a log normal distribution.
+In order to avoid this problem, we fixed these two boundaries.
+A future analysis could deal with this issue by gridding over values of the two parameters.
+Alternatively, one could avoid the assumption that the gyrochronology relation is infinitely narrow and assign it some intrinsic width, which would also be a free parameter.
+
+\subsection{Accounting for observational uncertainties using hierarchical inference}
+
+% We have a set of noisy observations $\hat{A}_n, \hat{P}_n, \hat{T}_n$ and $\hat{G}_n$, describing some true, underlying (latent) values of age, period and temperature, $A_n, P_n, T_n$ and $G_n$.
+% In order to properly take into account the uncertainties in our data, we should marginalise over the latent variables, $A_n$, $P_n$, $T_n$ and $G_n$, we want to compute the marginalised likelihood:
+
+We postulate that there is a relationship between the (true) age, $A_n$, of a star and its (true) rotational period, $P_n$, and colour, $C_n$ (calculated from its true temperature), described by equation \ref{sec:plane}.
+$A_n$ also depends on \logg($G_n$) since this property determines whether a star falls in the gyrochronological-dwarf or log-normal-subgiant regime.
+
+We would like to sample the posterior probability of the parameter vector $\theta = \{a, b, n\}$ conditioned on a set of noisy observations \ah, \ph, \ch, and \gh.
+We therefore need to compute the marginalised likelihood,
 
 \begin{equation}
-	p(\{\hat{a}_n,\hat{p}_n,\hat{t}_n,\hat{g}\}|\theta) =
-	\prod_{n=1}^{n} \int p(\hat{a}_n,\hat{p}_n,\hat{t}_n,\hat{g}_n,a_n,p_n,t_n,g_n|\theta)
-	{\rm d}a_n {\rm d}p_n {\rm d}t_n,{\rm d}g_n
+	p(\{\hat{A}_n,\hat{P}_n,\hat{C}_n,\hat{G}\}|\theta) =
+	\prod_{n=1}^{n} \int p(\hat{A}_n,\hat{P}_n,\hat{C}_n,\hat{G}_n,A_n,P_n,C_n,G_n|\theta)
+	{\rm d}A_n {\rm d}P_n {\rm d}C_n,{\rm d}G_n
 \label{eq:fulll}
 \end{equation}
 
-Where $\theta =$ a, b, \& n.
-
-Additionally to the hot stars and subgiants, there is further population of `contaminating' stars in our sample: rapid rotators.
-Around 20 stars with rotation periods of less than $\sim$ 5 days do not lie on the standard gyrochronology mass-period-age plane.
-These stars could be synchronised binaries.
-Since our rotation period measurement method is biased towards fast rotators, this is likely to be the almost complete population of rapid rotators in the entire asteroseismic sample.
-Or, they could just be incorrectly measured periods.
-% This could be quantised! - calculate your completeness as a function of period!!!
-% Would be expect to find $\sim$ 20 synchronised binaries in a sample of 505 stars --- one in twenty-five?
-% These stars are not simple 'outliers' --- there seems to be a trend between rotation period and temperature: cooler stars spin faster.
-% This is the opposite of the prediction from gyrochronology where hotter stars spin faster, having the less efficient magnetic dynamo.
-
-% For the high-mass MS stars we assume that age is independent of period and $T_{eff}$, and model the population with a log-normal distribution
-% with mean and variance as `uninteresting' parameters to be marginalised over.
-
-We model four stellar populations simultaneously: cool MS stars, hot MS stars, subgiants and fast rotators.
-The hot MS stars are defined as those with T$_{eff} > 6250$ \citep{Garcia_2014} (ANOTHER CITATION) and their rotation periods/ages are modelled as a log-normal distribution with mean, Y and variance, V inferred from the data.
-Subgiant ages \emph{are} a function of period and $T_{eff}$, however, since we are not interested in the rotational properties of these stars for the purposes of gyrochronology calibration, we also model them with a log-normal distribution.
-We \emph{could} choose to model the subgiants with an analytic expression for period, (age), given temperature and age (period), such as the one in \citet{vanSaders2013}, however, we would like to remain as model \emph{independent} as possible throughout this process.
-Subgiants are defined as those stars with log $g < 4$ \citep{Garcia_2014} (ANOTHER CITATION) and their rotation periods/ages are modelled as a log-normal distribution with mean, Z and variance, U inferred from the data.
-We use a mixture model for the remaining two populations of cool MS stars: those that follow the gyrochronology relations and those with unusually fast rotation periods.
-The fast rotators are treated as 'outliers' and modelled with another log normal distribution with mean, X and variance, W, again inferred from the data.
-In our mixture model, an additional parameter, P, is the probability that each data point is an outlier.
-
-Ideally both the hot star and subgiant boundaries would be free parameters in our model.
-However, since these two populations are modelled with a much less constraining log-normal distribution, these boundary parameters would not be well behaved.
-T$_k$ would drift to lower and lower, and the MS cutoff to higher and higher values, until all stars were modelled with a log normal distribution.
-
-% This approach produces the recalibrated Gyrochronology relation shown in figure \ref{fig:results2} and the posterior distributions in figure \ref{fig:fixie_pd}.
-% Having $T_K$ as a free parameter introduces a problem: all stars will preferentially be modelled by the less constraining broad Gaussian distribution.
-% Stars lying above the Kraft break must incur a likelihood penalty or else $T_K$ will be pushed to lower and lower temperatures.
-% Alternatively, stars lying below the Kraft break could be given a likelihood `boost'.
-We could get around this problem by fitting a gyrochronology relation to the data over a grid of $T_K$ values, or by introducing another parameter that describes the variance of the gyrochronology relation.
-I.e. we no longer describe the relation between temperature, age and period as being an infinitely narrow relationship --- instead we give it a little `width'.
-
-Although the point at which a star turns off the MS is relatively well known and understood, (conventionally its hottest point on the HR diagram), the point at which stars stop following the gyrochronology spin-down relation is less well understood.
-In fact, up to this point it has only been theorised \citep{vanSaders2013}.
-Once again, the parameters of the function separating MS stars and subgiants would ideally be free.
-
-% Now that I seem to have a comparison version which does not treat the uncertainties correctly, that might be interesting to include?
-
-% Future:
-% still need to get period errorbars sorted and deal with asymmetric errorbars.
-% remember - I also need to look at the list of binaries!
-% Consider adding in all existing data.
-% Consider gridding over different values of Tk and MS turnoff.
-% Ideally we want a predictive distribution for the age of a star, but does that mean we will get screwed by the age - mass dependence?
-% Nomad catalogue - search on vizier.
-% At the end check that you don't have any outliers in the opposite sense, i.e. stars with very slow rotation periods.
-
-\subsection{Hierarchical inference}
-
-We have a set of noisy observations $\hat{A}_n, \hat{P}_n, \hat{T}_n$ and $\hat{G}_n$, describing some true, underlying (latent) values of age, period and temperature, $A_n, P_n, T_n$ and $G_n$.
-In order to properly take into account the uncertainties in our data, we should marginalise over the latent variables, $A_n$, $P_n$, $T_n$ and $G_n$, we want to compute the marginalised likelihood:
-
 % \begin{equation}
-% 	p(\{\hat{A}_n,\hat{P}_n,\hat{T}_n,\hat{G}\}|\theta) =
-% 	\prod_{n=1}^{n} \int p(\hat{A}_n,\hat{P}_n,\hat{T}_n,\hat{G}_n,A_n,P_n,T_n,G_n|\theta)
-% 	{\rm d}A_n {\rm d}P_n {\rm d}T_n,{\rm d}G_n
+% 	p(\{\hat{Y}_n\}|\theta) = \prod_{n=1}^{n} \int p(\{\hat{Y}_n\}, \{Y_n\}|\theta) {\rm d}Y_n
 % \label{eq:fulll}
 % \end{equation}
 
-\begin{equation}
-	p(\{\hat{Y}_n\}|\theta) = \prod_{n=1}^{n} \int p(\{\hat{Y}_n\}, \{Y_n\}|\theta) {\rm d}Y_n
-\label{eq:fulll}
-\end{equation}
+% where we have used Y to represent the set of observables, \yh = \{\ah, \ph, \ch, \gh\}.
+The joint probability can be factorised as
 
-where Y = $(A, P, T, G)$.
+\begin{eqnarray}
+	p(\hat{A}_n,\hat{P}_n,\hat{C}_n,\hat{G}_n,A_n,P_n,C_n,G_n\,|\,\theta) &=&
+p(P_n)\,p(C_n)\,p(A_n\,|\,P_n,C_n,G_n,\theta)\,
+    p(\hat{A}_n\,|\,A_n)\,p(\hat{P}_n\,|\,P_n)\,p(\hat{C}_n\,|\,C_n)
+\nonumber
+\end{eqnarray}
+where (by equation~\ref{eq:plane})
+\begin{eqnarray}
+p(A_n\,|\,P_n,C_n,G_n,m) &=&
+	\delta \left [A_n - \left(\left[P \times \frac{1}{a}(B-V - c)^{-b}\right]^{\frac{1}{n}}\right) \right] \quad.
+\end{eqnarray}
 
-We therefore need to introduce a prior: $\alpha$.
-These probability distributions are sometimes called `interim priors' and they can be thought of as a prior distribution over the likelihood $p({\hat{A}_n}|{A_n})$.
-They can also be thought of as posterior distributions: $p({\hat{Y}_n}|{\hat{X}_k}$.
-Where the ${\hat{X}_k}$ are some set of asteroseismic (say) observations and the ${\hat{T}_n}$ in this case are the model parameters --- for example, the $\hat{X}$ might be Kepler light curves and the $\hat{Y}$ ages.
-This is what makes this process hierarchical: the posteriors of previous inferences become priors in ours.
+We can compute equation \ref{eq:fulll}, up to an unimportant constant, using a sampling approximation.
+The values of \ah, \teffh and \gh with uncertainties, $\sigma_A$, $\sigma_T$ and $\sigma_G$, reported in the asteroseismic catalogues provide constraints on the posterior probability of those variables, under a choice of prior.
+Ideally, the catalogue of asteroseismic data in \citet{Chaplin2013} would provide posterior samples which we could use directly but in the absence of these we generated our own from posterior distributions characterised by means, \ah, \ph, \ch, \gh and variances, $\sigma_A^2$, $\sigma_P^2$, $\sigma_C^2$ and $\sigma_G^2$.
 
-Ideally, the catalogue of asteroseismic data in \citet{Chaplin2013} would provide posterior samplings, which we could use directly as our samples from the prior distribution, $\alpha$.
-Since we do not have these samples, we must generate our own --- this is not too bad an approximation as long as the asteroseismic team used a uniform prior.
-The set of prior distributions, one for each observation, is characterised by the catalogue uncertainties.
-That is, our prior samples are draws from a Gaussian distribution with mean $\hat{Y}_n$ and variance $\sigma^2_{Y,n}$ for each star.
+We generated $J_n$ posterior samples:
 
-\begin{equation}
-	p(\{Y_n\}|\{\hat{Y}_n\}, \alpha) = \frac{p(\{\hat{Y}_n\}|\{Y_n\}) p(\{\hat{Y}_n\}|\alpha)}{p(\{Y_n\}|\alpha)}
-\end{equation}
+\begin{eqnarray}
+C_n^{(j)} &\sim& p(C_n\,|\,\hat{C}_n) \nonumber \\
+G_n^{(j)} &\sim& p(G_n\,|\,\hat{G}_n) \nonumber \\
+P_n^{(j)} &\sim& p(P_n\,|\,\hat{P}_n)
+\end{eqnarray}
 
-In order to approximate the marginalised likelihood above, we multiply the integrand by
+and used these to evaluate $p(\hat{A_n}|A_n)$ up to a normalisation constant.
 
-\begin{equation}
-	\frac{p(\{Y_n\}|\{\hat{Y}_n\}, \alpha)}{p(\{Y_n\}|\{\hat{Y}_n\}, \alpha)}
-\end{equation}
+We then evaluate the marginalized likelihood for a single star as follows
 
-to obtain
+\begin{eqnarray}
+	p(\hat{A}_n,\hat{P}_n,\hat{C}_n,\hat{G_n}\,|\,\theta) &=&
+\int
+	p(P_n)\,p(C_n)\,p(G_n)\,p(A_n\,|\,P_n,C_n,G_n,\theta)\,
+	p(\hat{A}_n\,|\,A_n)\,p(\hat{P}_n\,|\,P_n)\,p(\hat{C}_n\,|\,C_n),p(\hat{G}_n\,|\,G_n)
+    \dd A_n \dd P_n \dd C_n \dd G_n \nonumber\\
+&\propto& \int
+    p(A_n\,|\,P_n,C_n,G_n,\theta)\,p(\hat{A}_n\,|\,A_n)\,
+    p(P_n\,|\,\hat{P}_n)\,p(C_n\,|\,\hat{C}_n),p(G_n\,|\,\hat{G}_n)
+    \dd A_n \dd P_n \dd C_n \dd G_n \nonumber\\
+&\approx& \frac{1}{J_n} \sum_{j=1}^{J_n}p(\hat{A}_n\,|\,A_n^{(j)})
+\end{eqnarray}
+where $A_n^{(j)}$ is computed from the posterior samples using
+equation~\ref{eq:plane}.
 
-\begin{equation}
-	\frac{p(\{\hat{Y_n}\}|\theta)}{p(\{\hat{Y_n}\}|\alpha)} = \int \frac{p(\{Y_n\}|\theta)}{p(\{Y_n\}|\alpha)} p(\{Y_n\}|\{\hat{Y}_n\}, \alpha) d\{Y_n\}
-\end{equation}
+Finally, the full marginalized log-likelihood is
+\begin{eqnarray}
+	\log p(\{\hat{A}_n,\hat{P}_n,\hat{C}_n,\hat{G}_n\}\,|\,\theta) &\approx&
+    \log\mathcal{Z} + \sum_{n=1}^N
+        \log \left[ \sum_{j=1}^{J_n}p(\hat{A}_n\,|\,A_n^{(j)}) \right ]
+\end{eqnarray}
+where $\mathcal{Z}$ is an irrelevant normalization constant.
 
-This importance sampling approach has the effect of supplying more weight to regions of higher probability.
+We then used emcee \citep{Foreman-Mackey2013} to explore the posterior probability distributions of the model parameters, $\theta$.
+
+% We therefore need to introduce a prior: $\alpha$.
+% These probability distributions are sometimes called `interim priors' and they can be thought of as a prior distribution over the likelihood $p({\hat{A}_n}|{A_n})$.
+% They can also be thought of as posterior distributions: $p({\hat{Y}_n}|{\hat{X}_k}$.
+% Where the ${\hat{X}_k}$ are some set of asteroseismic (say) observations and the ${\hat{T}_n}$ in this case are the model parameters --- for example, the $\hat{X}$ might be Kepler light curves and the $\hat{Y}$ ages.
+% This is what makes this process hierarchical: the posteriors of previous inferences become priors in ours.
+%
+% Since we do not have these samples, we must generate our own --- this is not too bad an approximation as long as the asteroseismic team used a uniform prior.
+% The set of prior distributions, one for each observation, is characterised by the catalogue uncertainties.
+% That is, our prior samples are draws from a Gaussian distribution with mean $\hat{Y}_n$ and variance $\sigma^2_{Y,n}$ for each star.
+
+% \begin{equation}
+% 	p(\{Y_n\}|\{\hat{Y}_n\}, \alpha) = \frac{p(\{\hat{Y}_n\}|\{Y_n\}) p(\{\hat{Y}_n\}|\alpha)}{p(\{Y_n\}|\alpha)}
+% \end{equation}
+%
+% In order to approximate the marginalised likelihood above, we multiply the integrand by
+%
+% \begin{equation}
+% 	\frac{p(\{Y_n\}|\{\hat{Y}_n\}, \alpha)}{p(\{Y_n\}|\{\hat{Y}_n\}, \alpha)}
+% \end{equation}
+%
+% to obtain
+%
+% \begin{equation}
+% 	\frac{p(\{\hat{Y_n}\}|\theta)}{p(\{\hat{Y_n}\}|\alpha)} = \int \frac{p(\{Y_n\}|\theta)}{p(\{Y_n\}|\alpha)} p(\{Y_n\}|\{\hat{Y}_n\}, \alpha) d\{Y_n\}
+% \end{equation}
 
 \section{Results}
 \label{sec:results}
+
+Posterior distributions for all model parameters are shown in figure \ref{fig:triangle_full}
+Figure ... shows the posterior distributions for the parameters of interest only, having marginalised over the nuisance parameters describing the log-normal distributions of subgiants, hot stars and rapid rotators.
+The full set of posterior samples can be downloaded at (URL...)
+Our resulting Maximum \emph{a posteriori} values of the three gyrochronology parameters, with their 16th and 84th percentile values are tabulated in table \ref{tab:results}.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/noisy-plane/triangle45_2.png}
+\caption{Marginalised posterior probability distributions of all parameters in our model. This figure was made using triangle.py \citep{Foreman-Mackey_triangle}}
+\label{fig:triangle_full}
+\end{center}
+\end{figure}
+
+\begin{deluxetable}{lcc}
+\label{tab:results}
+\tablewidth{0pc}
+\tablecaption{Values of a, b \& n}
+\tablehead{
+\colhead{Parameter}&
+\colhead{Value}}
+\startdata
+a & $0.619$ \\
+b & $0.471$ \\
+n & $0.482$ \\
+\enddata
+\end{deluxetable}
+
+We find that the previous gyrochronology relations of both \citet{Barnes_2007} and \citet{Mamajek_2008} overpredict rotation periods.
+Figure ... shows rotation period vs mass for stars with age within 1 $\sigma$ of the Sun's age.
+Figure ... shows rotation period vs age for stars with \teff within 1 $\sigma$ of the Sun's \teff.
 
 \section{Discussion}
 \label{sec:discussion}
@@ -423,57 +469,52 @@ The larger number of high mass stars is an asteroseismic bias.
 We have seen that the existing gyrochronology relations over-predict the rotation periods of low-mass stars.
 This can be understood as a consequence of core-envelope decoupling.
 
-\section{Conclusion}
+% \section{Appendix}
+%
+% \subsection{Probability theory}
+%
+% For the low-mass MS stars the joint probability can be factorised as:
+%
+% \begin{equation}
+%   p(\hat{A}_n,\hat{P}_n,\hat{T}_n,A_n,P_n,T_n,G_n|\theta) =
+%   p(A_n,P_n,T_n,G_n|\theta) p(\hat{A}_n|A_n)
+%   p(\hat{P}_n|P_n) p(\hat{T}_n|T_n) p(\hat{G}_n|G_n),
+% \label{eq:jointprob}
+% \end{equation}
+%
+% \begin{equation}
+% 	\propto p(A_n|P_n,T_n,G_n,\theta) p(\hat{A}_n|A_n)
+% 	p(\hat{P}_n|P_n)p(P_n) p(\hat{T}_n|T_n)p(T_n) p(\hat{G}_n|G_n)p(G_n) dA_n dP_n dT_n dG_n
+% \label{eq:jointprob}
+% \end{equation}
+%
+% and the marginalised likelihood for a single star can be written as the sum of the individual star likelihoods over the three different regimes, k:
+%
+% \begin{multline}
+% p(\hat{P}_n,\hat{A}_n,\hat{T}_n,\hat{G}_n|\theta,T_K)  = \\
+% \sum_{k=1}^3\int p(A_n,T_n,P_n,G_n|\theta,T_K)
+% p(\hat{A}_n|A_n) p(\hat{T}_n|T_n) p(\hat{P}_n|P_n) p(\hat{G}_n|G_n)
+% {\rm d}A_n {\rm d}T_n {\rm d}P_n {\rm d}G_n,
+% \end{multline}
+% \label{eq:L1}
+%
+% where $p(A_n,T_n,P_n,G_n|\theta,T_K)$ is different in the three regimes, as listed in table \ref{tab:jprob}.
 
-\section{Appendix}
+% \begin{deluxetable}{lc}
+% \label{tab:jprob}
+% \tablewidth{0pc}
+% \tablecaption{Probability of hidden variables for the three populations.}
+% \tablehead{
+% \colhead{Regime}&
+% \colhead{Joint probability distribution}}
+% \startdata
+% Low mass, MS & $p(A_n,P_n,T_n,G_n|\theta) = p_1(T_n|T_K) p_1(G_n) p_1(P_n) p(A_n|T_n,P_n,\theta)$ \\
+% High mass, MS & $p(A_n,P_n,T_n,G_n|Y, V) = p(P_n) p(T_n) p(G_n) p(A_n|Y, V)$  \\
+% Subgiants & $p(A_n,P_n,T_n,G_n|Z, U) = p(T_n) p(G_n) p(P_n) p(A_n|Z, U)$ \\
+% \enddata
+% \end{deluxetable}
 
-\subsection{Probability theory}
-
-For the low-mass MS stars the joint probability can be factorised as:
-
-\begin{equation}
-  p(\hat{A}_n,\hat{P}_n,\hat{T}_n,A_n,P_n,T_n,G_n|\theta) =
-  p(A_n,P_n,T_n,G_n|\theta) p(\hat{A}_n|A_n)
-  p(\hat{P}_n|P_n) p(\hat{T}_n|T_n) p(\hat{G}_n|G_n),
-\label{eq:jointprob}
-\end{equation}
-
-\begin{equation}
-	\propto p(A_n|P_n,T_n,G_n,\theta) p(\hat{A}_n|A_n)
-	p(\hat{P}_n|P_n)p(P_n) p(\hat{T}_n|T_n)p(T_n) p(\hat{G}_n|G_n)p(G_n) dA_n dP_n dT_n dG_n
-\label{eq:jointprob}
-\end{equation}
-
-and the marginalised likelihood for a single star can be written as the sum of the individual star likelihoods over the three different regimes, k:
-
-\begin{multline}
-p(\hat{P}_n,\hat{A}_n,\hat{T}_n,\hat{G}_n|\theta,T_K)  = \\
-\sum_{k=1}^3\int p(A_n,T_n,P_n,G_n|\theta,T_K)
-p(\hat{A}_n|A_n) p(\hat{T}_n|T_n) p(\hat{P}_n|P_n) p(\hat{G}_n|G_n)
-{\rm d}A_n {\rm d}T_n {\rm d}P_n {\rm d}G_n,
-\end{multline}
-\label{eq:L1}
-
-where $p(A_n,T_n,P_n,G_n|\theta,T_K)$ is different in the three regimes, as listed in table \ref{tab:jprob}.
-
-\begin{deluxetable}{lc}
-\label{tab:jprob}
-\tablewidth{0pc}
-\tablecaption{Probability of hidden variables for the three populations.}
-\tablehead{
-\colhead{Regime}&
-\colhead{Joint probability distribution}}
-\startdata
-Low mass, MS & $p(A_n,P_n,T_n,G_n|\theta) = p_1(T_n|T_K) p_1(G_n) p_1(P_n) p(A_n|T_n,P_n,\theta)$ \\
-High mass, MS & $p(A_n,P_n,T_n,G_n|Y, V) = p(P_n) p(T_n) p(G_n) p(A_n|Y, V)$  \\
-Subgiants & $p(A_n,P_n,T_n,G_n|Z, U) = p(T_n) p(G_n) p(P_n) p(A_n|Z, U)$ \\
-\enddata
-\end{deluxetable}
-
-% linearised uncertainty propagation - for logarithmic errors.
-% asymmetric errorbars - take mean or max
-
-We would like to thank Eric Mamajek for his helpful input.
+% We would like to thank Eric Mamajek for his helpful input.
 
 \bibliographystyle{plainnat}
 \bibliography{Gyro_paper}
