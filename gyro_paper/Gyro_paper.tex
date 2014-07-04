@@ -135,7 +135,13 @@ It is therefore essential that we have a well calibrated dating method like gyro
 
 The asteroseismic targets have two sets of calculated temperatures.
 One set is derived using an Infra-Red Flux Method (IRFM) calibration (\citet{Casagrande2010}, \citet{SilvaAguirre2012}) and the other derived from a recalibration of the SDSS griz filter KIC photometry \citep{Pinsonneault2012} using YREC models \citep{Demarque2008}.
-We use the second set since these are slightly more precise.
+We use the second set since these are temperatures are slightly more precise.
+
+Of the 505 asteroseismic targets, 65 were modelled with the Asteroseismic Modeling Portal, and therefore have more precise ages.
+42 of these are published in \citep{Metcalfe2014} and 23 were obtained from Silva Aguirre (private communication).
+Of the 42 stars in \citep{Metcalfe2014}, we only include the `simple stars' (cool dwarfs) in our sample --- ignoring the `F stars' and `mixed mode' (subgiant) stars.
+The AMP calculates more precise asteroseismic ages (typically improved by a factor of $\sim$ 2), by measuring the frequency of individual oscillation modes, using the `peak bagging' technique \citep{Appourchaux2012}.
+Precise effective temperatures and metallicities are required, and were obtained from \citet{Bruntt2012}.
 
 % Infra-Red Flux Method (IRFM) calibration (Casagrande et al. 2010; see also Silva Aguirre et al. 2012). This made use of multi-band JHK photometry from the Two Micron All Sky Survey (2MASS; Skrutskie et al. 2006), photometry in the SDSS griz bands available in the KIC, and reddening estimates from Drimmel et al. (2003). A second set of temperatures were those derived by Pinsonneault et al. (2012), who performed a recalibration of the KIC photometry in the SDSS griz filters, using YREC models. The complementary photometry that was available to us did not allow strong constraints to be placed on the metallicity of all the targets. When using the photometric Te¿ in the grid searches we therefore adopted an [Fe/H] corresponding to an average value for the field of  0.2±0.3 dex (e.g. see Silva Aguirre et al. 2011).
 
@@ -198,6 +204,7 @@ We also required that the successful period
 measurements lie within 15\% of the median period value, or a harmonic of that
 median.
 Of the 505 targets in the original sample, rotation periods of 145 were reliably measured using the above process.
+Of those 145, 13 of them were modelled using AMP and therefore have more precise asteroseismic ages.
 An additional 31 targets with rotation periods measured by \citet{McQuillan_2014} were added to our sample.
 An example light curve and ACF for KIC 322300 is shown in figure \ref{fig:lc} and quarter-by-quarter period measurements in figure \ref{fig:ind_qs}.
 All but one of the quarters for this star produced an ACF with a significant initial peak and repeating subsequent peaks and of those, all period measurements lie within 15\% of the median value.
@@ -423,14 +430,15 @@ We then used emcee \citep{Foreman-Mackey2013} to explore the posterior probabili
 \section{Results}
 \label{sec:results}
 
-Posterior distributions for all model parameters are shown in figure \ref{fig:triangle_full}
+Posterior distributions for all model parameters are shown in figure \ref{fig:triangle_full}.
 Figure ... shows the posterior distributions for the parameters of interest only, having marginalised over the nuisance parameters describing the log-normal distributions of subgiants, hot stars and rapid rotators.
-The full set of posterior samples can be downloaded at (URL...)
+The full set of posterior samples can be downloaded at (URL...).
 Our resulting Maximum \emph{a posteriori} values of the three gyrochronology parameters, with their 16th and 84th percentile values are tabulated in table \ref{tab:results}.
 
+% comment this out for now - slows down compile time cos it's so biiiig
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/noisy-plane/triangle45_2.png}
+\includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/noisy-plane/triangle45_2.png}
 \caption{Marginalised posterior probability distributions of all parameters in our model. This figure was made using triangle.py \citep{Foreman-Mackey_triangle}}
 \label{fig:triangle_full}
 \end{center}
@@ -451,23 +459,45 @@ n & $0.482$ \\
 \end{deluxetable}
 
 We find that the previous gyrochronology relations of both \citet{Barnes_2007} and \citet{Mamajek_2008} overpredict rotation periods.
-Figure ... shows rotation period vs mass for stars with age within 1 $\sigma$ of the Sun's age.
-Figure ... shows rotation period vs age for stars with \teff within 1 $\sigma$ of the Sun's \teff.
+Figure \ref{fig:p_vs_bv_solar} shows rotation period vs mass for stars with age within 1 $\sigma$ of the Sun's age.
+Figure \ref{fig:p_vs_a_solar} shows rotation period vs age for stars with B-V colour within 1 $\sigma$ of the Sun's.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv_solar.png}
+\caption{Rotation period vs B-V colour for stars with age within 1$\sigma$ of the Sun's age, 4.568 Gyr. The grey stars are hotter than 6250 K and therefore did not contribute to the fitting process.}
+\label{fig:p_vs_bv_solar}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_a_solar.png}
+\caption{Rotation period vs age for stars with colour within 1$\sigma$ of the Sun's, 0.65.}
+\label{fig:p_vs_a_solar}
+\end{center}
+\end{figure}
 
 \section{Discussion}
 \label{sec:discussion}
 
-Figure \ref{fig:p_vs_m} shows rotation period as a function of asteroseismic mass for the MS stars.
-In practise stellar ages are estimated by fitting gyrochronological isochrones (gyrochrones) to their rotation periods and masses (or colours).
-Again, it is clear that the \citet{Barnes_2007} and \citet{Mamajek_2008} isochrones are over-predicting rotation periods.
-Rotation period is not strongly dependent on age for the more massive stars which is why the two different age populations, shown in pink and blue in figure \ref{fig:p_vs_m} entirely overlap.
-The age of star with mass between 1.1 and 1.3 $M_{\odot}$ and rotation period between 0 and 15 days estimated from gyrochrone fitting would suffer from degeneracy: the isochrones are close together in this region of parameter space.
-More reliable ages are obtainable for low-mass, slowly rotating stars, where there is greater separation between gyrochrones, however these stars are under-represented by our sample.
-The larger number of rapid vs slow rotators is a consequence of rotation period measurement bias: with more revolutions per quarter it is much easier to measure short rotation periods.
-The larger number of high mass stars is an asteroseismic bias.
+There are several possible reasons for the differences between previous and newly calibrated relations.
+The first, and most obvious, is simply that the Sun is not a typical rotator for its age - it is slowly rotating.
+Since previous calibrations draw their age dependence almost exlusively from the Sun, ages calculated using these gyro relations would therefore be too young.
+Another explanation could be that the asteroseismic ages are systematically too old; this would make the Sun appear to be slowly rotating for its age.
 
-We have seen that the existing gyrochronology relations over-predict the rotation periods of low-mass stars.
-This can be understood as a consequence of core-envelope decoupling.
+Core-envelope decoupling.
+
+The implications of a non-narrow relationship.
+A relation that provides a prediction of the age of a star, given observations of \teff or colour and rotation period is the goal of gyrochronology.
+The `narrowness' of the gyrochronology relation has hitherto been an unknown; do the three properties, age, mass and rotation period truely lie on an infinitely narrow plane?
+Does age truely depend solely on rotation period and mass, or are there other variables that influence stellar spin down --- perhaps variables that only become important after many Myrs?
+Metallicity, for example, could play a role --- a future study might explore the influence of metallicity on angular momentum loss rate.
+Unfortunately, we cannot answer these questions here: the asteroseismic ages are noisy and we have not attempted to disentangle observational noise from intrinsic scatter.
+A future study might include an extra parameter that describes the `width' of the gyrochronological plane.
+
+A rift exists between theory and observation in the field of gyrochronology.
+Attempts to unite theory and observation are being conducted (see, e.g. (CITATION)).
 
 % \section{Appendix}
 %
