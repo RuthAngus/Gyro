@@ -237,6 +237,16 @@ The age of 3.66 $\pm$ 0.2 for 18 Sco was taken from \citet{Li2012}, with rotatio
 Despite having effective temperatures for the asteroseismic targets, we converted $T_{eff}$ to B-V colours, using the relation in \citet{Sekiguchi2000}.
 This conversion is imprecise since the metallicites of the asteroseismic targets are the field average and not calculated per star, however we decided that converting $T_{eff}$ to colour would be more precise than converting cluster star colours to $T_{eff}$, since we have more information about the asteroseismic sample.
 
+The entire set of 441 stars is shown in figure \ref{fig:3d}. Asteroseismic targets are shown in black, with supplementary cluster and field stars in red.
+
+% \begin{figure}[ht]
+% \begin{center}
+% \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/3d_angled.png}
+% \caption{Colour, age and rotation periods of all 441 asteroseismic (black), cluster and field stars (red).}
+% \label{fig:3d}
+% \end{center}
+% \end{figure}
+
 \section{Calibrating the Gyrochronology relation}
 \label{sec:gyro_cal}
 
@@ -459,6 +469,8 @@ The first, and most obvious, is simply that the Sun is not a typical rotator for
 Previous calibrations draw their age dependence almost exlusively from the Sun, assuming that the Sun is representative of other stars with the same rotation period and mass.
 If this were not the case, ages calculated using these gyro relations would be too young.
 Another plausible explanation is that the asteroseismic ages are systematically too old; this would make the Sun appear to be slowly rotating for its age.
+Alternatively, the ACF method could be measuring rotation periods that are too small.
+% could test this
 
 % NON-NARROW RELATIONSHIP
 
@@ -483,12 +495,14 @@ There are very few young K stars in the \citet{Chaplin_2013} sample --- presumab
 Unfortunately, those stars that are ideal asteroseismic targets are often less-than-ideal for a rotation survey.
 
 % List of figures:
-% 3d plot
+% 3d plot of astero targets
+% 3d plot of all data
 % marginalised plot
 % logg (or delta nu) vs teff with ASTEC model ischrones?
 % plot of p vs bv for all stars with new or old isochrones?
 % plot of p vs T for all stars
 % plot of p vs a for all stars
+% plot of a vs bv for all stars
 % completeness plot?
 % additional examples of ACF
 
