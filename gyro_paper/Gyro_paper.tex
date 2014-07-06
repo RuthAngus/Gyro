@@ -428,6 +428,15 @@ Our likelihood function for the cool dwarf regime can be written as follows:
 
 where $P_b$ is the probability that a star is drawn from the background log-normal distribution, with mean, U and variance, Z.
 
+The likelihood function for the hot and subgiant regimes can be written
+
+\begin{eqnarray}
+	\mathcal{L} \propto \prod_{i=1}^N \left[ \frac{1}{\sqrt{2\pi[V+\sigma_{Ai}^2]}}
+	\exp\left({-\frac{\left(\sum_{j=1}^J [A_{ij}- Y]\right)^2} {2[V+\sigma_{Ai}^2}]} \right)  \right] \nonumber \\
+\end{eqnarray}
+
+respectively, where Y and Z are the respective means and V and W the respective variances.
+
 We used emcee \citep{Foreman-Mackey2013} to explore the posterior probability distributions of the model parameters, $\theta$.
 
 % We therefore need to introduce a prior: $\alpha$.
