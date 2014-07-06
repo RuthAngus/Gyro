@@ -6,6 +6,7 @@
 \usepackage{cases}
 \usepackage[section]{placeins}
 \usepackage{graphicx, subfigure}
+\usepackage{color}
 
 \newcommand{\logg}{log \emph{g}~}
 \newcommand{\teff}{$T_{eff}~$}
@@ -194,6 +195,14 @@ Of the 505 targets in the original sample 145 rotation periods were reliably mea
 We added an additional 31 targets with rotation periods measured by \citet{McQuillan_2014}, increasing our sample to 176.
 Of those 176, 13 of them have more precise asteroseismic ages from AMP modelling.
 
+% \begin{figure}[ht]
+% \begin{center}
+% \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/logg_vs_t_paper.png}
+% \caption{\logg vs \teff for the 176 asteroseismic stars. Stars with \teff $>$ 6250 K are red and those with \logg $<$ 4.0 are blue. {\color{red}To do: add ASTEC isochrones and extra data}}
+% \label{fig:p_vs_a}
+% \end{center}
+% \end{figure}
+
 \subsection{Supplementary data}
 
 % 13 stars in our sample have  precise asteroseismic ages.
@@ -209,7 +218,7 @@ We therefore added some young clusters to our sample: NGC6811, the Hyades and Pr
 % \begin{figure}[ht]
 % \begin{center}
 % \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_a_paper.png}
-% \caption{Photometric rotation period vs asteroseismic age for 176 Kepler targets.}
+% \caption{Photometric rotation period vs asteroseismic age for 176 Kepler targets. {\color{red}to do: add more precise data in a different colour}}
 % \label{fig:p_vs_a}
 % \end{center}
 % \end{figure}
@@ -218,6 +227,14 @@ We therefore added some young clusters to our sample: NGC6811, the Hyades and Pr
 % \begin{center}
 % \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_t_paper.png}
 % \caption{Photometric rotation period vs effective temperature for 176 Kepler targets.}
+% \label{fig:p_vs_a}
+% \end{center}
+% \end{figure}
+
+% \begin{figure}[ht]
+% \begin{center}
+% \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/users/angusr/python/gyro/plots/p_vs_bv_paper.png}
+% \caption{Photometric rotation period vs B-V colour for 176 Kepler targets.}
 % \label{fig:p_vs_a}
 % \end{center}
 % \end{figure}
@@ -243,6 +260,22 @@ The entire set of 441 stars is shown in figure \ref{fig:3d}. Asteroseismic targe
 % \begin{center}
 % \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/3d_angled.png}
 % \caption{Colour, age and rotation periods of all 441 asteroseismic (black), cluster and field stars (red).}
+% \label{fig:3d}
+% \end{center}
+% \end{figure}
+
+% \begin{figure}[ht]
+% \begin{center}
+% \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv_paper2.png}
+% \caption{Photometric rotation period vs B-V colour for 176 Kepler targets (black) plus cluster and field stars (red).}
+% \label{fig:3d}
+% \end{center}
+% \end{figure}
+
+% \begin{figure}[ht]
+% \begin{center}
+% \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_a_paper2.png}
+% \caption{Photometric rotation period vs age for 176 Kepler targets (black) plus cluster and field stars (red).}
 % \label{fig:3d}
 % \end{center}
 % \end{figure}
@@ -342,7 +375,7 @@ p(P_n)\,p(C_n)\,p(A_n\,|\,P_n,C_n,G_n,\theta)\,
 \end{eqnarray}
 where (by equation~\ref{eq:plane})
 \begin{eqnarray}
-p(A_n\,|\,P_n,C_n,G_n,m) &=&
+p(A_n\,|\,P_n,C_n,G_n,\theta) &=&
 	\delta \left [A_n - \left(\left[P \times \frac{1}{a}(B-V - c)^{-b}\right]^{\frac{1}{n}}\right) \right] \quad.
 \end{eqnarray}
 
@@ -385,7 +418,17 @@ Finally, the full marginalized log-likelihood is
 \end{eqnarray}
 where $\mathcal{Z}$ is an irrelevant normalization constant.
 
-We then used emcee \citep{Foreman-Mackey2013} to explore the posterior probability distributions of the model parameters, $\theta$.
+Our likelihood function for the cool dwarf regime can be written as follows:
+
+\begin{eqnarray}
+	\mathcal{L} \propto \prod_{i=1}^N \left[ \frac{1-P_b}{\sqrt{2\pi\sigma_{Ai}^2}}
+	\exp\left({-\frac{\left(\sum_{j=1}^J [A_{ij}- (P_{ij} \times \frac{1}{a}([B-V]_{ij}-c)^{-b})^{\frac{1}{n}}]\right)^2} {2\sigma_{Ai}^2}} \right)  \right] \nonumber \\
+	+ \frac{P_b}{\sqrt{2\pi[Z+\sigma_{Ai}^2]}} \exp \left( -\frac{[A_i - U]^2}{2[Z+\sigma_{Ai}^2]}  \right)
+\end{eqnarray}
+
+where $P_b$ is the probability that a star is drawn from the background log-normal distribution, with mean, U and variance, Z.
+
+We used emcee \citep{Foreman-Mackey2013} to explore the posterior probability distributions of the model parameters, $\theta$.
 
 % We therefore need to introduce a prior: $\alpha$.
 % These probability distributions are sometimes called `interim priors' and they can be thought of as a prior distribution over the likelihood $p({\hat{A}_n}|{A_n})$.
@@ -433,14 +476,16 @@ Our resulting Maximum \emph{a posteriori} values of the three gyrochronology par
 \begin{deluxetable}{lcc}
 \label{tab:results}
 \tablewidth{0pc}
-\tablecaption{Values of a, b \& n}
+\tablecaption{Values of a, b \& n with 16th and 84th percentile values.}
 \tablehead{
 \colhead{Parameter}&
 \colhead{Value}}
 \startdata
-a & $0.619$ \\
-b & $0.471$ \\
-n & $0.482$ \\
+a & $0.619~^{+0.14}_{-0.067}$\\
+ & &\\
+b & $0.471~^{+0.016}_{-0.032}$\\
+ & &\\
+n & $0.482~^{+0.013}_{0.030}$\\
 \enddata
 \end{deluxetable}
 
@@ -485,81 +530,77 @@ The success of this approach would strongly depend on having truely representati
 % THEORY
 
 A rift exists between theory and observation in the field of gyrochronology.
-Attempts to unite theory and observation are currently being conducted by ....
+Attempts to unite the two are ongoing \citep{Barnes2011}, \citep{vanSaders2013}.
+The gyrochronology relation of \citet{Barnes2010} attemps to reconcile empirical gyrochronology with physical models.
+However it requires knowledge of stars' initial rotation periods --- in practise, this information is rarely (if ever) available.
+
 % Core-envelope decoupling
 
-% OBSERVATIONAL BIASES
-
+{\color{red} to do: read up on sample biases.}
 Asteroseismic surveys are biased towards relatively quiet, bright stars, slightly more massive than the Sun.
 There are very few young K stars in the \citet{Chaplin_2013} sample --- presumably because these stars are active.
 Unfortunately, those stars that are ideal asteroseismic targets are often less-than-ideal for a rotation survey.
 
 % List of figures:
-% 3d plot of astero targets
-% 3d plot of all data
 % marginalised plot
-% logg (or delta nu) vs teff with ASTEC model ischrones?
-% plot of p vs bv for all stars with new or old isochrones?
-% plot of p vs T for all stars
-% plot of p vs a for all stars
-% plot of a vs bv for all stars
 % completeness plot?
-% additional examples of ACF
 
 \section{Conclusions}
 \label{sec:conclusions}
 
 We have calibrated the relation between rotational period, B-V colour and age for MS stars with \teff $<$ 6250 K using the Kepler asteroseismic targets as well as field stars and clusters with precise age measurements.
 We find that the Sun is no longer well described by the gyrochronology --- it appears to be slowly rotating for its age and mass, compared with the asteroseismic stars.
-It is, however, possible that systematic overestimation of the asteroseismic stars is responsible for this discrepancy.
+It is, possible that systematic overestimation of the asteroseismic star's ages, or underestimation of their rotation periods is responsible for this discrepancy.
 
+Precise modelling of asteroseismic stars using individual oscillation mode analysis is still in progress: more precise ages will continue to be published over the coming months and years.
 
-% \section{Appendix}
-%
-% \subsection{Probability theory}
-%
-% For the low-mass MS stars the joint probability can be factorised as:
-%
-% \begin{equation}
-%   p(\hat{A}_n,\hat{P}_n,\hat{T}_n,A_n,P_n,T_n,G_n|\theta) =
-%   p(A_n,P_n,T_n,G_n|\theta) p(\hat{A}_n|A_n)
-%   p(\hat{P}_n|P_n) p(\hat{T}_n|T_n) p(\hat{G}_n|G_n),
-% \label{eq:jointprob}
-% \end{equation}
-%
-% \begin{equation}
-% 	\propto p(A_n|P_n,T_n,G_n,\theta) p(\hat{A}_n|A_n)
-% 	p(\hat{P}_n|P_n)p(P_n) p(\hat{T}_n|T_n)p(T_n) p(\hat{G}_n|G_n)p(G_n) dA_n dP_n dT_n dG_n
-% \label{eq:jointprob}
-% \end{equation}
-%
-% and the marginalised likelihood for a single star can be written as the sum of the individual star likelihoods over the three different regimes, k:
-%
-% \begin{multline}
-% p(\hat{P}_n,\hat{A}_n,\hat{T}_n,\hat{G}_n|\theta,T_K)  = \\
-% \sum_{k=1}^3\int p(A_n,T_n,P_n,G_n|\theta,T_K)
-% p(\hat{A}_n|A_n) p(\hat{T}_n|T_n) p(\hat{P}_n|P_n) p(\hat{G}_n|G_n)
-% {\rm d}A_n {\rm d}T_n {\rm d}P_n {\rm d}G_n,
-% \end{multline}
-% \label{eq:L1}
-%
-% where $p(A_n,T_n,P_n,G_n|\theta,T_K)$ is different in the three regimes, as listed in table \ref{tab:jprob}.
+The code used in this project can be found at https://github.com/dfm/noisy-plane.
+We would like to thank Eric Mamajek, Marc Pinsonneault, Sydney Barnes, Steve Kawaler, Jerome Bouvier and Daniel Mortlock and David Hogg for their useful insight and discussion.
 
-% \begin{deluxetable}{lc}
-% \label{tab:jprob}
-% \tablewidth{0pc}
-% \tablecaption{Probability of hidden variables for the three populations.}
-% \tablehead{
-% \colhead{Regime}&
-% \colhead{Joint probability distribution}}
-% \startdata
-% Low mass, MS & $p(A_n,P_n,T_n,G_n|\theta) = p_1(T_n|T_K) p_1(G_n) p_1(P_n) p(A_n|T_n,P_n,\theta)$ \\
-% High mass, MS & $p(A_n,P_n,T_n,G_n|Y, V) = p(P_n) p(T_n) p(G_n) p(A_n|Y, V)$  \\
-% Subgiants & $p(A_n,P_n,T_n,G_n|Z, U) = p(T_n) p(G_n) p(P_n) p(A_n|Z, U)$ \\
-% \enddata
-% \end{deluxetable}
+\section{Appendix}
 
-% We would like to thank Eric Mamajek for his helpful input.
+\subsection{Probability theory}
+
+For the low-mass MS stars the joint probability can be factorised as:
+
+\begin{equation}
+  p(\hat{A}_n,\hat{P}_n,\hat{C}_n,A_n,P_n,C_n,G_n|\theta) =
+  p(A_n,P_n,C_n,G_n|\theta) p(\hat{A}_n|A_n)
+  p(\hat{P}_n|P_n) p(\hat{C}_n|C_n) p(\hat{G}_n|G_n),
+\label{eq:jointprob}
+\end{equation}
+
+\begin{equation}
+	\propto p(A_n|P_n,C_n,G_n,\theta) p(\hat{A}_n|A_n)
+	p(\hat{P}_n|P_n)p(P_n) p(\hat{C}_n|C_n)p(C_n) p(\hat{G}_n|G_n)p(G_n) dA_n dP_n dC_n dG_n
+\label{eq:jointprob}
+\end{equation}
+
+and the marginalised likelihood for a single star can be written as the sum of the individual star likelihoods over the three different regimes, k:
+
+\begin{multline}
+p(\hat{P}_n,\hat{A}_n,\hat{C}_n,\hat{G}_n|\theta,C_K)  = \\
+\sum_{k=1}^3\int p(A_n,C_n,P_n,G_n|\theta,C_K)
+p(\hat{A}_n|A_n) p(\hat{C}_n|C_n) p(\hat{P}_n|P_n) p(\hat{G}_n|G_n)
+{\rm d}A_n {\rm d}C_n {\rm d}P_n {\rm d}G_n,
+\end{multline}
+\label{eq:L1}
+
+where $p(A_n,C_n,P_n,G_n|\theta,C_K)$ is different in the three regimes, as listed in table \ref{tab:jprob}.
+
+\begin{deluxetable}{lc}
+\label{tab:jprob}
+\tablewidth{0pc}
+\tablecaption{Probability of hidden variables for the three populations.}
+\tablehead{
+\colhead{Regime}&
+\colhead{Joint probability distribution}}
+\startdata
+Low mass, MS & $p(A_n,P_n,C_n,G_n|\theta) = p(C_n|C_K) p(G_n) p(P_n) p(A_n|C_n,P_n,\theta)$ \\
+High mass, MS & $p(A_n,P_n,C_n,G_n|Y, V) = p(P_n) p(C_n) p(G_n) p(A_n|Y, V)$  \\
+Subgiants & $p(A_n,P_n,C_n,G_n|Z, U) = p(C_n) p(G_n) p(P_n) p(A_n|Z, U)$ \\
+\enddata
+\end{deluxetable}
 
 \bibliographystyle{plainnat}
 \bibliography{Gyro_paper}
@@ -567,7 +608,23 @@ It is, however, possible that systematic overestimation of the asteroseismic sta
 % \begin{figure}[ht]
 % \begin{center}
 % \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/angusr/ACF/ACF2/PDCQ3_output/plots_acf/3223000_full.png}
-% \caption{PDC-MAP and 'processed' light curves for KIC 3223000 with the ACF.}
+% \caption{\emph{Top:} Quarter 3 PDC-MAP light curve of KIC 3223000. \emph{Middle:} The light curve with linear trends removed and gaps interpolated across. \emph{bottom:} The ACF. This star shows high amplitude variability. We measured a rotation period of 4.86 $\pm$ 0.05 days}
+% \label{fig:lc}
+% \end{center}
+% \end{figure}
+
+% \begin{figure}[ht]
+% \begin{center}
+% \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/angusr/ACF/ACF2/PDCQ3_output/plots_acf/3429205_full.png}
+% \caption{\emph{Top:} Quarter 3 PDC-MAP light curve of KIC 3429205. \emph{Middle:} The light curve with linear trends removed and gaps interpolated across. \emph{bottom:} The ACF. This star does not display high amplitude variability --- no rotation period was measured for this target.}
+% \label{fig:lc}
+% \end{center}
+% \end{figure}
+
+% \begin{figure}[ht]
+% \begin{center}
+% \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/angusr/ACF/ACF2/PDCQ3_output/plots_acf/3223000_full.png}
+% \caption{PDC-MAP and 'processed' light curves for KIC 3223000 with its ACF.}
 % \label{fig:lc}
 % \end{center}
 % \end{figure}
@@ -581,4 +638,3 @@ It is, however, possible that systematic overestimation of the asteroseismic sta
 % \end{figure}
 
 \end{document}
-
