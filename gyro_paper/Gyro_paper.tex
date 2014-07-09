@@ -505,7 +505,7 @@ Marginal posterior distributions for all model parameters are shown in figure \r
 % The full set of posterior samples can be downloaded at (URL...).
 Our resulting Maximum \emph{a posteriori} values of the three gyrochronology parameters, with their 16th and 84th percentile values are tabulated in \ref{tab:results}.
 Figures \ref{fig:650} - \ref{fig:13gyr} show the new gyrochronology relation in period-colour space at a sequence of ages.
-The wings of the new relation show the 16th and 84th percentile uncertainties.
+The shaded regions show the 16th and 84th percentile uncertainties of the new relation.
 The stars plotted have ages that fall within 1 $\sigma$ of the reference age.
 
 % % comment this out for now - slows down compile time cos it's so biiiig
@@ -539,11 +539,11 @@ Figure \ref{fig:p_vs_a_solar} shows rotation period vs age for stars with B-V co
 
 \begin{figure}[ht]
 \begin{center}
-	\subfigure[0.65 Gyr]{
+	\subfigure[0.65 Gyr (age of the Hyades)]{
             \label{fig:650}
 	    \includegraphics[width=2in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv0.png}
         }
-	\subfigure[1 Gyr]{
+	\subfigure[1 Gyr (age of NGC 6811)]{
             \label{fig:1gyr}
 	    \includegraphics[width=2in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv1.png}
         }
@@ -555,7 +555,7 @@ Figure \ref{fig:p_vs_a_solar} shows rotation period vs age for stars with B-V co
             \label{fig:3gyr}
 	    \includegraphics[width=2in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv3.png}
         }
-	\subfigure[4.568 Gyr]{
+	\subfigure[4.568 Gyr (Solar age)]{
             \label{fig:sungyr}
 	    \includegraphics[width=2in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv4.png}
         }
@@ -572,7 +572,7 @@ Figure \ref{fig:p_vs_a_solar} shows rotation period vs age for stars with B-V co
 	    \includegraphics[width=2in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv7.png}
         }
     \end{center}
-    \caption{ \prot vs B-V colour for stars within 1$\sigma$ of the reference age with the new gyrochronology relation and \citet{Barnes2007}, and \citet{Mamajek2008} for comparison. Asteroseismic targets are circles and cluster and field stars are triangles. The shaded region represents the 16th and 84th percentile uncertainties. {\color{red}These plots still need some tweaking!}
+    \caption{ \prot vs B-V colour for stars within 1$\sigma$ of the reference age with the new gyrochronology relation and \citet{Barnes2007}, and \citet{Mamajek2008} for comparison. Asteroseismic targets are circles and cluster and field stars are red triangles. The shaded region represents the 16th and 84th percentile uncertainties.
      }
    \label{fig:subfigures2}
 \end{figure}
@@ -588,7 +588,7 @@ Figure \ref{fig:p_vs_a_solar} shows rotation period vs age for stars with B-V co
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_a_solar.png}
-\caption{Rotation period vs age for cool dwarfs with colour within 2$\sigma$ of the Sun's; 0.65. The Sun is shown as a large grey circle.}
+\caption{Rotation period vs age for cool dwarfs with colour within 2$\sigma$ of the Sun's: 0.65, with gyrochronology relations of \citet{Barnes2007}, \citet{Mamajek2008} and this work. The shaded region represents the 16th and 84th percentile uncertainties. The Sun is shown as a large grey circle.}
 \label{fig:p_vs_a_solar}
 \end{center}
 \end{figure}
@@ -598,7 +598,7 @@ The first, and most obvious, is simply that the Sun is not a typical rotator for
 Previous calibrations draw their age dependence almost exlusively from the Sun, assuming that the Sun is representative of other stars with the same rotation period and mass.
 If this were not the case, ages calculated using these gyro relations would be too young.
 Another plausible explanation is that the asteroseismic ages are systematically too old; this would make the Sun appear to be slowly rotating for its age.
-Alternatively, the ACF method could be measuring rotation periods that are too small.
+Alternatively, the ACF method could be underestimating rotation periods.
 % could test this
 
 % NON-NARROW RELATIONSHIP

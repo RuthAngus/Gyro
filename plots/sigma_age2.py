@@ -1,7 +1,7 @@
 import numpy as np
 
 import matplotlib.pyplot as pl
-from teff_bv import teff2bv_orig
+from teff_bv import teff2bv_orig, teff2bv_err
 import pretty5
 
 plotpar = {'axes.labelsize': 20, 'text.fontsize': 20,
@@ -41,14 +41,14 @@ def iso_calc(pars, age):
     y = 10**log_period_model(pars, np.log10(age*1000), x)
     return x, y
 
-data = np.genfromtxt("/Users/angusr/Python/Gyro/data/no_dup.txt").T
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/all_astero.txt", skip_header=1).T
 
 # make up bv_errs
 c_err = .01
 
 # remove subs
-subgiant = 3.9
-g = data[10] > subgiant
+subgiant = 4.
+g = data[8] > subgiant
 
 # p1 = data[1][g]
 # p_err1 = data[2][g]
@@ -63,20 +63,36 @@ g = data[10] > subgiant
 # bv1 = teff2bv(t1, logg1, np.ones_like(t1)*-.02, t_err1, logg_err1, \
 #         np.ones_like(t1)*.001, error=False)
 
-p1 = data[1][g]
-p_err1 = data[2][g]
-t1 = data[3][g]
-t_err1 = data[4][g]
-a1 = data[13][g]
-a_errp1 = data[14][g]
-a_errm1 = data[15][g]
+# p1 = data[1][g]
+# p_err1 = data[2][g]
+# t1 = data[3][g]
+# t_err1 = data[4][g]
+# a1 = data[13][g]
+# a_errp1 = data[14][g]
+# a_errm1 = data[15][g]
+# a_err1 = .5 * (a_errp1 + a_errm1)
+# logg1 = data[10][g]
+# logg_err1 = data[11][g]
+# feh1 = data[5][g]
+# feh_err1 = data[6][g]
+# bv1 = teff2bv_orig(t1, logg1, feh1)
+# bv_err1 = np.ones_like(bv1)*c_err
+
+p1 = data[6][g]
+p_err1 = data[7][g]
+t1 = data[1][g]
+t_err1 = data[2][g]
+a1 = data[3][g]
+a_errp1 = data[4][g]
+a_errm1 = data[5][g]
 a_err1 = .5 * (a_errp1 + a_errm1)
-logg1 = data[10][g]
-logg_err1 = data[11][g]
-feh1 = data[5][g]
-feh_err1 = data[6][g]
-bv1 = teff2bv_orig(t1, logg1, feh1)
-bv_err1 = np.ones_like(bv1)*c_err
+logg1 = data[8][g]
+logg_errp1 = data[9][g]
+logg_errm1 = data[10][g]
+logg_err1 = .5*(logg_errp1+logg_errm1)
+feh1 = data[11][g]
+feh_err1 = data[12][g]
+bv1, bv_err1 = teff2bv_err(t1, logg1, feh1, t_err1, logg_err1, feh_err1)
 
 # add clusters
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/clusters.txt").T
@@ -155,7 +171,7 @@ for i, age in enumerate(ages):
 #     pl.scatter(bv2, p2, c=dist2, cmap=cm, marker='^', s=40, zorder=1, \
 #             edgecolors='None', alpha=.6)
     pl.errorbar(bv2[l12], p2[l12], xerr=bv_err2[l12], yerr=p_err2[l12], color='r', \
-            fmt='^', mec='k', capsize=0, markersize=3, ecolor='0.7', zorder=0)#, alpha=.1)
+            fmt='^', mec='r', capsize=0, markersize=3, ecolor='0.7', zorder=0)#, alpha=.1)
 #             fmt='^', mec='k', capsize=0, markersize=6, ecolor='0.4', zorder=0)#, alpha=.1)
 
     # Add Isochrones
