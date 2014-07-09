@@ -504,8 +504,8 @@ Marginal posterior distributions for all model parameters are shown in figure \r
 % Figure ... shows the posterior distributions for the parameters of interest only, having marginalised over the nuisance parameters describing the log-normal distributions of subgiants, hot stars and rapid rotators.
 % The full set of posterior samples can be downloaded at (URL...).
 Our resulting Maximum \emph{a posteriori} values of the three gyrochronology parameters, with their 16th and 84th percentile values are tabulated in \ref{tab:results}.
-Figures \ref{fig:650} - \ref{fig:13gyr} show the new gyrochronology relation in period-colour space at a sequence of ages.
-The shaded regions show the 16th and 84th percentile uncertainties of the new relation.
+Figures \ref{fig:650} - \ref{fig:13gyr} show the new gyrochronology relation in period-colour space over a sequence of ages.
+The shaded region shows the 16th and 84th percentile uncertainties of the new relation.
 The stars plotted have ages that fall within 1 $\sigma$ of the reference age.
 
 % % comment this out for now - slows down compile time cos it's so biiiig
@@ -533,9 +533,12 @@ n & $0.482~^{+0.013}_{0.030}$\\
 \enddata
 \end{deluxetable}
 
-We find that the previous gyrochronology relations of both \citet{Barnes2007} and \citet{Mamajek2008} overpredict rotation periods.
-Figure \ref{fig:p_vs_bv_solar} shows rotation period vs colour for stars with age within 2 $\sigma$ of the Sun's: 4.568 Gyr.
-Figure \ref{fig:p_vs_a_solar} shows rotation period vs age for stars with B-V colour within 1 $\sigma$ of the Sun's: 0.65.
+% Figures \ref{fig:p_vs_bv_solar} and \ref{fig:p_vs_a_solar} show rotation period vs colour and age for stars that lie within 2 $\sigma$ of the Sun's colour and age: 0.65 and 4.568 Gyr.
+Figure \ref{fig:p_vs_bv_solar} shows rotation period vs colour for stars with age within 1 $\sigma$ of the Sun's: 4.568 Gyr.
+Figure \ref{fig:p_vs_a_solar} shows rotation period vs age for stars with B-V colour within 10\% of the Sun's: 0.65.
+Our new gyrochronology relation falls below both those of \citet{Barnes2007} and \citet{Mamajek2008} which seem to overpredict the rotation periods of the asteroseismic stars.
+It is clear that we do not have many Solar analogues in our sample: most stars of a similar age are hotter.
+{\color{red} Note - I don't want to interpret too much before we have the final results!}
 
 \begin{figure}[ht]
 \begin{center}
@@ -572,7 +575,7 @@ Figure \ref{fig:p_vs_a_solar} shows rotation period vs age for stars with B-V co
 	    \includegraphics[width=2in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv7.png}
         }
     \end{center}
-    \caption{ \prot vs B-V colour for stars within 1$\sigma$ of the reference age with the new gyrochronology relation and \citet{Barnes2007}, and \citet{Mamajek2008} for comparison. Asteroseismic targets are circles and cluster and field stars are red triangles. The shaded region represents the 16th and 84th percentile uncertainties.
+    \caption{ \prot vs B-V colour for dwarfs within 1$\sigma$ of the reference age with the new gyrochronology relation and \citet{Barnes2007}, and \citet{Mamajek2008} for comparison. Asteroseismic targets are circles and cluster and field stars are red triangles. The shaded region represents the 16th and 84th percentile uncertainties.
      }
    \label{fig:subfigures2}
 \end{figure}
@@ -580,7 +583,7 @@ Figure \ref{fig:p_vs_a_solar} shows rotation period vs age for stars with B-V co
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv_solar.png}
-\caption{Rotation period vs B-V colour for cool dwarfs with age within 2$\sigma$ of the Sun's age, 4.568 Gyr. The grey stars are hotter than 6250 K. The Sun is shown as a large grey circle.}
+\caption{Rotation period vs B-V colour for dwarfs with age within 1$\sigma$ of the Sun's age, 4.568 Gyr. The grey stars are hotter than 6250 K. The Sun is shown as a large grey circle.}
 \label{fig:p_vs_bv_solar}
 \end{center}
 \end{figure}
@@ -588,17 +591,18 @@ Figure \ref{fig:p_vs_a_solar} shows rotation period vs age for stars with B-V co
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_a_solar.png}
-\caption{Rotation period vs age for cool dwarfs with colour within 2$\sigma$ of the Sun's: 0.65, with gyrochronology relations of \citet{Barnes2007}, \citet{Mamajek2008} and this work. The shaded region represents the 16th and 84th percentile uncertainties. The Sun is shown as a large grey circle.}
+\caption{Rotation period vs age for cool dwarfs with colour within 10\% of the Sun's: 0.65, with gyrochronology relations of \citet{Barnes2007}, \citet{Mamajek2008} and this work. The shaded region represents the 16th and 84th percentile uncertainties. The Sun is shown as a large grey circle.}
 \label{fig:p_vs_a_solar}
 \end{center}
 \end{figure}
 
-There are several possible reasons for the differences between previous and newly calibrated relations.
+There are a few potential explanations for the differences between previous and newly calibrated relations.
 The first, and most obvious, is simply that the Sun is not a typical rotator for its age - it is slowly rotating.
-Previous calibrations draw their age dependence almost exlusively from the Sun, assuming that the Sun is representative of other stars with the same rotation period and mass.
-If this were not the case, ages calculated using these gyro relations would be too young.
+Previous calibrations draw their age dependence almost exlusively from the Sun, assuming that it is representative of other stars with the same rotation period and mass.
+In light of these new data, it may be time to reassess the `Sun is a representative star' viewpoint.
 Another plausible explanation is that the asteroseismic ages are systematically too old; this would make the Sun appear to be slowly rotating for its age.
 Alternatively, the ACF method could be underestimating rotation periods.
+{\color{red} Do we have any reason to believe either of these to be true?}
 % could test this
 
 % NON-NARROW RELATIONSHIP
@@ -608,7 +612,7 @@ The `narrowness' of the gyrochronology relation has hitherto been an unknown; do
 Does age depend solely on rotation period and mass, or do other variables influence stellar spin down---perhaps only becoming important after many Myrs?
 Metallicity, for example, could play a role---a future study might explore the influence of this property on angular momentum loss rate.
 Unfortunately, we cannot answer these questions here: the asteroseismic ages are noisy and observational and intrinsic scatter are ambiguously interwoven.
-A future study might include an extra parameter that describes the `width' of the gyrochronological plane, and attempt to detect an element of scatter above the noise level.
+A future study might include an extra parameter that describes the `width' of the gyrochronological plane and attempt to detect an element of scatter above the noise level.
 The success of this approach would strongly depend on having truely representative observational uncertainties.
 
 % THEORY
@@ -633,11 +637,10 @@ Unfortunately, those stars that are ideal asteroseismic targets are often less-t
 \label{sec:conclusions}
 
 We have calibrated the relation between rotational period, B-V colour and age for MS stars with \teff $<$ 6250 K using 153 Kepler asteroseismic targets, as well as 5 field stars and 260 cluster stars with precise age measurements.
-We find that the Sun is no longer well described by gyrochronology---it appears to be slowly rotating for its age and mass, compared with the asteroseismic stars.
+We find that the Sun is no longer well described by gyrochronology---it appears to be slowly rotating for its age and mass compared with the asteroseismic stars.
 However it is possible that systematic overestimation of the asteroseismic star's ages, or underestimation of their rotation periods is responsible for this discrepancy (note that the field stars are consistent with the Sun).
 This will become clear when more stars in the asteroseismic sample have precise age measurements from individual oscillation mode analysis.
-
-Precise modelling of asteroseismic stars using individual oscillation mode analysis is still in progress: precise ages will continue to be published over the coming months and years.
+These precise ages will continue to be published over the coming months and years.
 Once those stars for which it is possible to measure precise ages (the $\sim$ 150 in the \citet{Chaplin2013} sample with high signal-to-noise), this gyrochronology relation will be updated.
 
 The future looks bright for gyrochronology; K2 will provide rotation periods for hundreds of stars lying in old clusters, with precisely known ages.
@@ -645,8 +648,8 @@ These data will be invaluable for gyrochronology and will provide a far more com
 The TESS spacecraft will also deliver high precision photometry, suitable for both asteroseismic studies and rotation period measurement.
 We are entering an era where cluster studies and asteroseismology will deliver precise ages for stars with measureable rotation periods: the picture of gyrochronology will continue to advance over the coming years.
 
-The code used in this project can be found at https://github.com/dfm/noisy-plane.
-We would like to thank Eric Mamajek, Marc Pinsonneault, Sydney Barnes, Steve Kawaler, Jerome Bouvier, Daniel Mortlock and David Hogg for their useful insight and discussion.
+The code used in this project can be found at https://github.com/RuthAngus/Gyro.
+We would like to thank Eric Mamajek, Marc Pinsonneault, Sydney Barnes, Steve Kawaler, Jerome Bouvier, Daniel Mortlock and David Hogg for useful insight and discussion.
 
 % \section{Appendix}
 %
