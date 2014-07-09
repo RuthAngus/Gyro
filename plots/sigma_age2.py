@@ -103,7 +103,7 @@ a_errm = np.concatenate((a_errm1, data[5]))
 logg = np.concatenate((logg1, data[6]))
 logg_err = np.concatenate((logg_err1, data[7]))
 
-ages = [.65, 1, 2, 3, 4.57, 7, 10, 13]
+ages = [.65, 1, 2, 3, 4.57, 6, 8, 10]
 
 pars = [.7725, .5189, .601, .4] # Barnes
 pars_err = [.0070, .011, .024, 0.]
@@ -154,7 +154,7 @@ for i, age in enumerate(ages):
 #             edgecolors='None', alpha=.6)
 #     pl.scatter(bv2, p2, c=dist2, cmap=cm, marker='^', s=40, zorder=1, \
 #             edgecolors='None', alpha=.6)
-    pl.errorbar(bv2[l12], p2[l12], xerr=bv_err2[l12], yerr=p_err2[l12], color='k', \
+    pl.errorbar(bv2[l12], p2[l12], xerr=bv_err2[l12], yerr=p_err2[l12], color='r', \
             fmt='^', mec='k', capsize=0, markersize=3, ecolor='0.7', zorder=0)#, alpha=.1)
 #             fmt='^', mec='k', capsize=0, markersize=6, ecolor='0.4', zorder=0)#, alpha=.1)
 
