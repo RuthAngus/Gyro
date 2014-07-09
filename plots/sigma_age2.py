@@ -12,7 +12,7 @@ plotpar = {'axes.labelsize': 20, 'text.fontsize': 20,
 pl.rcParams.update(plotpar)
 ocols = ['#FF9933','#66CCCC' , '#FF33CC', '#3399FF', '#CC0066', '#9933FF', '#CC0000', '#9933FF', '#99cc99', '#CC0000']
 
-lw = 3
+lw = 1
 
 def log_period_model(par, log_a, bv):
     return np.log10(par[0]) + par[1] * log_a + par[2] * np.log10(bv - par[3]) # colour
@@ -41,9 +41,7 @@ def iso_calc(pars, age):
     y = 10**log_period_model(pars, np.log10(age*1000), x)
     return x, y
 
-# data = np.genfromtxt("/Users/angusr/Python/Gyro/data/matched_data.txt").T
-# data = np.genfromtxt("/Users/angusr/Python/Gyro/data/new_matched.txt").T
-data = np.genfromtxt("/Users/angusr/Python/Gyro/data/p_errs.txt").T
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/no_dup.txt").T
 
 # make up bv_errs
 c_err = .01
@@ -105,8 +103,7 @@ a_errm = np.concatenate((a_errm1, data[5]))
 logg = np.concatenate((logg1, data[6]))
 logg_err = np.concatenate((logg_err1, data[7]))
 
-ages = [.65, 1., 3., 4.57, 6., 9., 13.]
-ages = [.65, 1, 3, 4.57, 7, 10, 13]
+ages = [.65, 1, 2, 3, 4.57, 7, 10, 13]
 
 pars = [.7725, .5189, .601, .4] # Barnes
 pars_err = [.0070, .011, .024, 0.]
@@ -146,54 +143,40 @@ for i, age in enumerate(ages):
 
     dist = distance2(a1, age, a_errp1)
     dist2 = distance2(a2, age, a_errp2)
-#     dist2 = distance2(a2[:-1], age, a_errp2[:-1])
-#     dist3 = distance2(a2[-1], age, a_errp2[-1])
 
     # Plot data
     pl.clf()
     cm = pl.cm.get_cmap('Greys')
-    pl.errorbar(bv1, p1, xerr=bv_err1, yerr=p_err1, color='k', \
-            fmt='o', mec='k', capsize=0, markersize=6, ecolor='k', zorder=3)#, alpha=.05)
+    pl.errorbar(bv1[l11], p1[l11], xerr=bv_err1[l11], yerr=p_err1[l11], color='k', \
+            fmt='o', mec='k', capsize=0, markersize=2, ecolor='.7', zorder=3)#, alpha=.05)
+#             fmt='o', mec='k', capsize=0, markersize=6, ecolor='k', zorder=3)#, alpha=.05)
 #     pl.scatter(bv1, p1, c=dist, cmap=cm, marker='o', s=30, zorder=2, \
 #             edgecolors='None', alpha=.6)
 #     pl.scatter(bv2, p2, c=dist2, cmap=cm, marker='^', s=40, zorder=1, \
 #             edgecolors='None', alpha=.6)
-# #     pl.scatter(bv2[:-1], p2[:-1], c=dist2[:-1], cmap=cm, marker='^', s=40, zorder=2, \
-# #             edgecolors='None', alpha=.8)
-# #     pl.scatter(bv2[-1], p2[-1], c=dist2[-1]*10, cmap=cm, marker='*', s=60, zorder=2, \
-# #             edgecolors='None')
-# #     pl.errorbar(bv2[:-1], p2[:-1], xerr=bv_err2[:-1], yerr=p_err2[:-1], color='k', \
-# #             fmt='^', mec='k', capsize=0, markersize=6, ecolor='0.4', zorder=0, alpha=.1)
-    pl.errorbar(bv2, p2, xerr=bv_err2, yerr=p_err2, color='k', \
-            fmt='^', mec='k', capsize=0, markersize=6, ecolor='0.4', zorder=0)#, alpha=.1)
-# #     pl.scatter(bv2, p2, c='k', marker='^', s=40, zorder=1, \
-# #             edgecolors='None', alpha=.05)
-# #     pl.scatter(bv2[:-1], p2[:-1], c='k', marker='^', s=40, zorder=3, \
-# #             edgecolors='None', alpha=.1)
-# #     pl.scatter(bv2[-1], p2[-1], c='k', marker='*', s=70, zorder=3, \
-# #             edgecolors='None', alpha=.1)
+    pl.errorbar(bv2[l12], p2[l12], xerr=bv_err2[l12], yerr=p_err2[l12], color='k', \
+            fmt='^', mec='k', capsize=0, markersize=3, ecolor='0.7', zorder=0)#, alpha=.1)
+#             fmt='^', mec='k', capsize=0, markersize=6, ecolor='0.4', zorder=0)#, alpha=.1)
 
     # Add Isochrones
     xs, ys = iso_calc(pars, ages[i])
-    pl.plot(xs, ys, color=ocols[i], linestyle='-.', linewidth=lw, \
+#     pl.plot(xs, ys, color=ocols[i], linestyle='-.', linewidth=lw, \
+    pl.plot(xs, ys, color='k', linestyle='-.', linewidth=lw, \
             label='$%s~\mathrm{Gyr}$~$\mathrm{(Barnes~2007)}$' %ages[i], zorder=0)
     xs, ys = iso_calc(pars2, ages[i])
-    pl.plot(xs, ys, color=ocols[i], linestyle='--', linewidth=lw, \
+#     pl.plot(xs, ys, color=ocols[i], linestyle='--', linewidth=lw, \
+    pl.plot(xs, ys, color='k', linestyle='--', linewidth=lw, \
             label='$%s~\mathrm{Gyr}$~$\mathrm{(M\&H~2008)}$' %ages[i], zorder=0)
     xs, ys = iso_calc(pars3, ages[i])
-    pl.plot(xs, ys, color = ocols[i], linestyle='-', linewidth=2, \
+#     pl.plot(xs, ys, color = ocols[i], linestyle='-', linewidth=2, \
+    pl.plot(xs, ys, color='k', linestyle='-', linewidth=lw, \
             label = '$%s~\mathrm{Gyr}$~ \
             $\mathrm{Angus~\emph{et~al.}~(in~prep)}$' %ages[i], zorder=0)
     xs, ys1 = iso_calc(pars3-pars3_err, ages[i])
     xs, ys2 = iso_calc(pars3+pars3_err, ages[i])
-    pl.fill_between(xs, ys1, ys2, facecolor=ocols[i], alpha=0.3, edgecolor='None', \
+#     pl.fill_between(xs, ys1, ys2, facecolor=ocols[i], alpha=0.3, edgecolor='None', \
+    pl.fill_between(xs, ys1, ys2, facecolor='0.5', alpha=0.3, edgecolor='None', \
             zorder=0)
-
-#     print np.sort(a1)
-#     xa = 10.5
-#     print a1[a1 == xa], a_err1[a1 == xa]
-#     print p1[a1 == xa]
-#     print bv1[a1 == xa]
 
     pl.xlabel("$\mathrm{B-V}$")
     pl.ylabel("$\mathrm{P_{rot} (days)}$")

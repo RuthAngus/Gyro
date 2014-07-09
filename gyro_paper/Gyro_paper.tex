@@ -7,6 +7,10 @@
 \usepackage[section]{placeins}
 \usepackage{graphicx, subfigure}
 \usepackage{color}
+\usepackage{amsmath}
+\usepackage{float}
+\floatplacement{figure}{H}
+% \usepackage[nomarkers,figuresonly]{endfloat}
 
 \newcommand{\logg}{log \emph{g}~}
 \newcommand{\teff}{$T_{eff}~$}
@@ -266,7 +270,7 @@ An age of 4.568 $\pm$ 0.001 Gyr for the Sun was taken from \citet{Bouvier2010}, 
 The age of 3.66 $\pm$ 0.2 for 18 Sco was taken from \citet{Li2012}, with rotation period from \citet{Petit2008} and B and V colours from \citet{Mermilliod1986}.
 
 Despite having effective temperatures for the asteroseismic targets, we converted $T_{eff}$ to B-V colours, using the relation in \citet{Sekiguchi2000}---see figure \ref{fig:subfigures}.
-This conversion is imprecise since the metallicites of the asteroseismic targets are the field average and not calculated per star, however we concluded that converting $T_{eff}$ to colour would be more precise than converting cluster star colours to $T_{eff}$, since we have more information about the asteroseismic sample.
+This conversion is imprecise since the metallicites of the asteroseismic targets are the field average and not calculated per star, however we concluded that converting $T_{eff}$ to colour would be more efficient than converting cluster star colours to $T_{eff}$, since we have more information about the asteroseismic sample.
 
 The entire set of 418 stars is shown in figure \ref{fig:3d}. Asteroseismic targets are shown in black, with supplementary cluster and field stars in red.
 
@@ -277,7 +281,7 @@ The entire set of 418 stars is shown in figure \ref{fig:3d}. Asteroseismic targe
 \label{fig:3d}
 \end{center}
 \end{figure}
-
+%
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv_paper2.png}
@@ -285,7 +289,7 @@ The entire set of 418 stars is shown in figure \ref{fig:3d}. Asteroseismic targe
 \label{fig:3d}
 \end{center}
 \end{figure}
-
+%
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_a_paper2.png}
@@ -337,7 +341,7 @@ Where, since we want to produce a predictive distribution for the age of a star 
 
 In addition to hot stars and subgiants, there is further population of contaminating stars in our sample: rapid rotators.
 Around 20 stars with rotation periods of less than $\sim$ 5 days do not lie on the standard gyrochronology mass-period-age plane.
-These stars could plausibly be synchronised binaries or stars with unseen, close-in, massive planets. {\color{red} CITATION - e.g. Poppenhager, B\`{e}ky.}
+These stars could plausibly be synchronised binaries or stars with unseen, close-in, massive planets (\citet{Poppenhaeger2014}, \citet{Beky2014})
 
 We model four stellar populations simultaneously: cool MS stars, hot MS stars, subgiants and rapid rotators.
 The hot MS stars are defined as those with B-V $<$ 0.45, corresponding to \teff $\approx$ 6250 K for Solar metallicity and \logg.
@@ -347,23 +351,60 @@ We could model the subgiants with an analytic expression for age, given colour a
 
 We use a mixture model for the remaining two populations of cool MS stars: those that follow the gyrochronology relation and those with unusually fast rotation periods.
 The fast rotators are treated as 'outliers' and modelled with another log normal distribution with mean and variance, X and W, again inferred from the data.
-In our mixture model, an additional parameter, P, is the probability that each data point is an outlier.
+In our mixture model an additional parameter, P, is the probability of each data point being an outlier.
 
 Ideally both the hot star (B-V $<$ 0.45) and subgiant (\logg $<$ 4) boundaries would be free parameters in our model.
 However, since these two populations are modelled with a relatively unconstraining log-normal distribution, these boundary parameters would not be well behaved.
-Both boundaries would be pushed to higher and higher values, until all stars were modelled with a log normal distribution.
+Both would be pushed to higher and higher values until all stars were modelled with a log normal distribution.
 In order to avoid this problem, we fixed these two boundaries.
 A future analysis could deal with this issue by gridding over values of the two parameters.
 {\color{red}Try using different values and seeing how sensitive you are!}
 Alternatively, one could avoid the assumption that the gyrochronology relation is infinitely narrow and assign it some intrinsic width, which would also be a free parameter.
 
-\subsection{Accounting for observational uncertainties using hierarchical inference}
+Our likelihood function for the cool dwarf regime can be written in full as follows:
 
-% We have a set of noisy observations $\hat{A}_n, \hat{P}_n, \hat{T}_n$ and $\hat{G}_n$, describing some true, underlying (latent) values of age, period and temperature, $A_n, P_n, T_n$ and $G_n$.
-% In order to properly take into account the uncertainties in our data, we should marginalise over the latent variables, $A_n$, $P_n$, $T_n$ and $G_n$, we want to compute the marginalised likelihood:
+\begin{eqnarray}
+	\mathcal{L}_{gyro} \propto \prod_{i=1}^N \left[ \frac{1-P_b}{\sqrt{2\pi\sigma_{i}^2}}
+	\exp\left({-\frac{\left(\sum_{j=1}^J [A_{i}- (P_{ij} \times \frac{1}{a}([B-V]_{ij}-c)^{-b})^{\frac{1}{n}}]\right)^2} {2\sigma_{i}^2}} \right)  \right] \nonumber \\
+	+ \frac{P_b}{\sqrt{2\pi[U+\sigma_{i}^2]}} \exp \left( -\frac{[A_i - X]^2}{2[U+\sigma_{i}^2]}  \right)
+\end{eqnarray}
+\label{eq:likelihood}
+{\color{red}---should be dividing everything in the (inner) square bracket by J!}
 
-We postulate that there is a relationship between the (true) age, $A_n$, of a star and its (true) rotational period, $P_n$, and colour, $C_n$ (calculated from its true temperature), described by equation \ref{eq:plane}.
-$A_n$ also depends on \logg($G_n$) since this property determines whether a star falls in the gyrochronological-dwarf or log-normal-subgiant regime.
+where $P_b$ is the probability that a star is drawn from the background log-normal distribution, with mean, X and variance, U.
+
+The likelihood function for the hot and subgiant regimes can be written
+
+\begin{eqnarray}
+	\mathcal{L}_{hot} \propto \prod_{i=1}^N \left[ \frac{1}{\sqrt{2\pi[V+\sigma_{i}^2]}}
+	\exp\left({-\frac{\left(A_{i}- Y\right)^2} {2[V+\sigma_{i}^2]}} \right)  \right] \\
+	\nonumber \\
+	\mathcal{L}_{subgiant} \propto \prod_{i=1}^N \left[ \frac{1}{\sqrt{2\pi[W+\sigma_{i}^2]}}
+	\exp\left({-\frac{\left(A_{i}- Z\right)^2} {2[W+\sigma_{i}^2]}} \right)  \right] \nonumber \\
+\end{eqnarray}
+
+{\color{red} in this formulation I'm not actually making use of the samples in the hot and subgiant regimes...
+is that ok?}
+
+respectively, where Y and Z are the respective means and V and W the respective variances.
+The likelihood can be written as the sum of likelihoods over the three different regimes:%, k:
+
+\begin{equation}
+	\mathcal{L} = \mathcal{L}_{gyro} + \mathcal{L}_{hot} + \mathcal{L}_{sub}
+\end{equation}
+
+% \begin{multline}
+% p(\hat{P}_n,\hat{A}_n,\hat{C}_n,\hat{G}_n|\theta)  = \\
+% \sum_{k=1}^3\int p(A_n,C_n,P_n,G_n|\theta)
+% p(\hat{A}_n|A_n) p(\hat{C}_n|C_n) p(\hat{P}_n|P_n) p(\hat{G}_n|G_n)
+% {\rm d}A_n {\rm d}C_n {\rm d}P_n {\rm d}G_n,
+% \end{multline}
+% \label{eq:L1}
+
+\subsection{Accounting for observational uncertainties}
+
+We postulate that there is a relationship between the (true) age, $A_n$, of a star and its (true) rotational period, $P_n$, and colour, $C_n$, described by equation \ref{eq:plane}.
+$A_n$ also depends on \logg($G_n$) since this property determines whether a star falls in the dwarf or subgiant regime.
 
 We would like to sample the posterior probability of the parameter vector $\theta = \{a, b, n\}$ conditioned on a set of noisy observations \ah, \ph, \ch, and \gh.
 We therefore need to compute the marginalised likelihood,
@@ -375,21 +416,17 @@ We therefore need to compute the marginalised likelihood,
 \label{eq:fulll}
 \end{equation}
 
-% \begin{equation}
-% 	p(\{\hat{Y}_n\}|\theta) = \prod_{n=1}^{n} \int p(\{\hat{Y}_n\}, \{Y_n\}|\theta) {\rm d}Y_n
-% \label{eq:fulll}
-% \end{equation}
-
-% where we have used Y to represent the set of observables, \yh = \{\ah, \ph, \ch, \gh\}.
 The joint probability can be factorised as
 
-\begin{eqnarray}
-	p(\hat{A}_n,\hat{P}_n,\hat{C}_n,\hat{G}_n,A_n,P_n,C_n,G_n\,|\,\theta) &=&
-p(P_n)\,p(C_n)\,p(A_n\,|\,P_n,C_n,G_n,\theta)\,
-    p(\hat{A}_n\,|\,A_n)\,p(\hat{P}_n\,|\,P_n)\,p(\hat{C}_n\,|\,C_n)
+\begin{align}
+	p(\hat{A}_n,\hat{P}_n,\hat{C}_n,\hat{G}_n,A_n,P_n,C_n,G_n\,|\,\theta) = & \nonumber \\
+	p(P_n)\,p(C_n)\,p(G_n)\,p(A_n\,| & \,P_n,C_n,G_n,\theta)\
+        p(\hat{A}_n\,|\,A_n)\,p(\hat{P}_n\,|\,P_n)\,p(\hat{C}_n\,|\,C_n)\,p(\hat{G}_n\,|\,G_n)
 \nonumber
-\end{eqnarray}
-where (by equation~\ref{eq:plane})
+\end{align}
+
+where, in the cool dwarf regime (by equation~\ref{eq:plane})
+
 \begin{eqnarray}
 p(A_n\,|\,P_n,C_n,G_n,\theta) &=&
 	\delta \left [A_n - \left(\left[P \times \frac{1}{a}(B-V - c)^{-b}\right]^{\frac{1}{n}}\right) \right] \quad.
@@ -397,7 +434,8 @@ p(A_n\,|\,P_n,C_n,G_n,\theta) &=&
 
 We can compute equation \ref{eq:fulll}, up to an unimportant constant, using a sampling approximation.
 The values of \ah, \teffh and \gh with uncertainties, $\sigma_A$, $\sigma_T$ and $\sigma_G$, reported in the asteroseismic catalogues provide constraints on the posterior probability of those variables, under a choice of prior.
-Ideally, the catalogue of asteroseismic data in \citet{Chaplin2013} would provide posterior samples which we could use directly but in the absence of these we generated our own from posterior distributions characterised by means, \ah, \ph, \ch, \gh and variances, $\sigma_A^2$, $\sigma_P^2$, $\sigma_C^2$ and $\sigma_G^2$.
+Ideally, the catalogue of asteroseismic data in \citet{Chaplin2013} would provide posterior samples which we could use directly but in the absence of these we generated our own from Gaussian distributions with means, \ah, \ph, \ch, \gh and variances, $\sigma_A^2$, $\sigma_P^2$, $\sigma_C^2$ and $\sigma_G^2$.
+% What about period?
 
 We generated $J_n$ posterior samples:
 
@@ -407,24 +445,22 @@ G_n^{(j)} &\sim& p(G_n\,|\,\hat{G}_n) \nonumber \\
 P_n^{(j)} &\sim& p(P_n\,|\,\hat{P}_n)
 \end{eqnarray}
 
-and used these to evaluate $p(\hat{A_n}|A_n)$ up to a normalisation constant.
+and used these to evaluate $p(\hat{A_n}|A_n)$ up to a normalisation constant. We then evaluate the marginalized likelihood for a single star as follows
 
-We then evaluate the marginalized likelihood for a single star as follows
-
-\begin{eqnarray}
-	p(\hat{A}_n,\hat{P}_n,\hat{C}_n,\hat{G_n}\,|\,\theta) &=&
+\begin{align}
+	p(\hat{A}_n,\hat{P}_n,\hat{C}_n,\hat{G_n}\,|\,\theta) = & \nonumber\\
 \int
-	p(P_n)\,p(C_n)\,p(G_n)\,p(A_n\,|\,P_n,C_n,G_n,\theta)\,
+p(P_n)\,p(C_n)\, & p(G_n)\,p(A_n\,|\,P_n,C_n,G_n,\theta)\,
 	p(\hat{A}_n\,|\,A_n)\,p(\hat{P}_n\,|\,P_n)\,p(\hat{C}_n\,|\,C_n),p(\hat{G}_n\,|\,G_n)
     \dd A_n \dd P_n \dd C_n \dd G_n \nonumber\\
-&\propto& \int
+&\propto \int
     p(A_n\,|\,P_n,C_n,G_n,\theta)\,p(\hat{A}_n\,|\,A_n)\,
     p(P_n\,|\,\hat{P}_n)\,p(C_n\,|\,\hat{C}_n),p(G_n\,|\,\hat{G}_n)
     \dd A_n \dd P_n \dd C_n \dd G_n \nonumber\\
-&\approx& \frac{1}{J_n} \sum_{j=1}^{J_n}p(\hat{A}_n\,|\,A_n^{(j)})
-\end{eqnarray}
-where $A_n^{(j)}$ is computed from the posterior samples using
-equation~\ref{eq:plane}.
+&\approx \frac{1}{J_n} \sum_{j=1}^{J_n}p(\hat{A}_n\,|\,A_n^{(j)})
+\end{align}
+
+where $A_n^{(j)}$ is computed from the posterior samples using equation~\ref{eq:plane}.
 
 Finally, the full marginalized log-likelihood is
 \begin{eqnarray}
@@ -432,39 +468,8 @@ Finally, the full marginalized log-likelihood is
     \log\mathcal{Z} + \sum_{n=1}^N
         \log \left[ \sum_{j=1}^{J_n}p(\hat{A}_n\,|\,A_n^{(j)}) \right ]
 \end{eqnarray}
-where $\mathcal{Z}$ is an irrelevant normalization constant.
-
-Our likelihood function for the cool dwarf regime can be written in full as follows:
-
-\begin{eqnarray}
-	\mathcal{L} \propto \prod_{i=1}^N \left[ \frac{1-P_b}{\sqrt{2\pi\sigma_{Ai}^2}}
-	\exp\left({-\frac{\left(\sum_{j=1}^J [A_{ij}- (P_{ij} \times \frac{1}{a}([B-V]_{ij}-c)^{-b})^{\frac{1}{n}}]\right)^2} {2\sigma_{Ai}^2}} \right)  \right] \nonumber \\
-	+ \frac{P_b}{\sqrt{2\pi[U+\sigma_{Ai}^2]}} \exp \left( -\frac{[A_i - X]^2}{2[U+\sigma_{Ai}^2]}  \right)
-\end{eqnarray}
-
-where $P_b$ is the probability that a star is drawn from the background log-normal distribution, with mean, X and variance, U.
-
-The likelihood function for the hot and subgiant regimes can be written
-
-\begin{eqnarray}
-	\mathcal{L}_{hot} \propto \prod_{i=1}^N \left[ \frac{1}{\sqrt{2\pi[V+\sigma_{Ai}^2]}}
-	\exp\left({-\frac{\left(\sum_{j=1}^J [A_{ij}- Y]\right)^2} {2[V+\sigma_{Ai}^2]}} \right)  \right] \\
-	\nonumber \\
-	\mathcal{L}_{subgiant} \propto \prod_{i=1}^N \left[ \frac{1}{\sqrt{2\pi[W+\sigma_{Ai}^2]}}
-	\exp\left({-\frac{\left(\sum_{j=1}^J [A_{ij}- Z]\right)^2} {2[W+\sigma_{Ai}^2]}} \right)  \right] \nonumber \\
-\end{eqnarray}
-
-respectively, where Y and Z are the respective means and V and W the respective variances. The marginalised likelihood for a single star can be written as the sum of the individual star likelihoods over the three different regimes, k:
-
-\begin{multline}
-p(\hat{P}_n,\hat{A}_n,\hat{C}_n,\hat{G}_n|\theta)  = \\
-\sum_{k=1}^3\int p(A_n,C_n,P_n,G_n|\theta)
-p(\hat{A}_n|A_n) p(\hat{C}_n|C_n) p(\hat{P}_n|P_n) p(\hat{G}_n|G_n)
-{\rm d}A_n {\rm d}C_n {\rm d}P_n {\rm d}G_n,
-\end{multline}
-\label{eq:L1}
-
-We used emcee \citep{Foreman-Mackey2013} to explore the posterior probability distributions of the model parameters, $\theta$.
+where $\mathcal{Z}$ is an irrelevant normalization constant and $p(\hat{A}_n|A_n)$ is defined in \ref{eq:likelihood}.
+We used {\tt emcee} \citep{Foreman-Mackey2013}, an affine invariant, ensemble sampler, Markov Chain Monte Carlo (MCMC) algorithm, to explore the posterior probability distributions of the model parameters, $\theta$.
 
 % We therefore need to introduce a prior: $\alpha$.
 % These probability distributions are sometimes called `interim priors' and they can be thought of as a prior distribution over the likelihood $p({\hat{A}_n}|{A_n})$.
@@ -495,16 +500,19 @@ We used emcee \citep{Foreman-Mackey2013} to explore the posterior probability di
 \section{Results and Discussion}
 \label{sec:results}
 
-Posterior distributions for all model parameters are shown in figure \ref{fig:triangle_full}.
+Marginal posterior distributions for all model parameters are shown in figure \ref{fig:triangle_full}.
 % Figure ... shows the posterior distributions for the parameters of interest only, having marginalised over the nuisance parameters describing the log-normal distributions of subgiants, hot stars and rapid rotators.
 % The full set of posterior samples can be downloaded at (URL...).
 Our resulting Maximum \emph{a posteriori} values of the three gyrochronology parameters, with their 16th and 84th percentile values are tabulated in \ref{tab:results}.
+Figures \ref{fig:650} - \ref{fig:13gyr} show the new gyrochronology relation in period-colour space at a sequence of ages.
+The wings of the new relation show the 16th and 84th percentile uncertainties.
+The stars plotted have ages that fall within 1 $\sigma$ of the reference age.
 
 % % comment this out for now - slows down compile time cos it's so biiiig
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/noisy-plane/triangle45_2.png}
-\caption{Marginalised posterior probability distributions of all parameters in our model. This figure was made using triangle.py \citep{Foreman-Mackey_triangle}. {\color{red}Note - this is just a placeholder and not the final plot!}}
+\caption{Marginalised posterior probability distributions of all parameters in our model. The blue lines are centred on the maximum \emph{a posteriori} parameter values. This figure was made using triangle.py \citep{Foreman-Mackey_triangle}. {\color{red}Note - this is just a placeholder and not the final plot!}}
 \label{fig:triangle_full}
 \end{center}
 \end{figure}
@@ -526,22 +534,61 @@ n & $0.482~^{+0.013}_{0.030}$\\
 \end{deluxetable}
 
 We find that the previous gyrochronology relations of both \citet{Barnes2007} and \citet{Mamajek2008} overpredict rotation periods.
-Figure \ref{fig:p_vs_bv_solar} shows rotation period vs mass for stars with age within 1 $\sigma$ of the Sun's age.
-Figure \ref{fig:p_vs_a_solar} shows rotation period vs age for stars with B-V colour within 1 $\sigma$ of the Sun's.
-{\color{red} to do: Something's not quite right here - these data need checking!}
+Figure \ref{fig:p_vs_bv_solar} shows rotation period vs colour for stars with age within 2 $\sigma$ of the Sun's: 4.568 Gyr.
+Figure \ref{fig:p_vs_a_solar} shows rotation period vs age for stars with B-V colour within 1 $\sigma$ of the Sun's: 0.65.
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv_solar.png}
-\caption{Rotation period vs B-V colour for cool dwarfs with age within 1$\sigma$ of the Sun's age, 4.568 Gyr. The grey stars are hotter than 6250 K and therefore did not contribute to the fitting process. The Sun is shown as a large grey circle.}
-\label{fig:p_vs_bv_solar}
-\end{center}
+	\subfigure[0.65 Gyr]{
+            \label{fig:650}
+	    \includegraphics[width=2in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv0.png}
+        }
+	\subfigure[1 Gyr]{
+            \label{fig:1gyr}
+	    \includegraphics[width=2in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv1.png}
+        }
+	\subfigure[2 Gyr]{
+            \label{fig:2gyr}
+	    \includegraphics[width=2in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv2.png}
+        }
+	\subfigure[3 Gyr]{
+            \label{fig:3gyr}
+	    \includegraphics[width=2in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv3.png}
+        }
+	\subfigure[4.568 Gyr]{
+            \label{fig:sungyr}
+	    \includegraphics[width=2in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv4.png}
+        }
+	\subfigure[7 Gyr]{
+            \label{fig:7gyr}
+	    \includegraphics[width=2in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv5.png}
+        }
+	\subfigure[10 Gyr]{
+            \label{fig:10gyr}
+	    \includegraphics[width=2in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv6.png}
+        }
+% 	\subfigure[13 Gyr]{
+%             \label{fig:13gyr}
+% 	    \includegraphics[width=2in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv7.png}
+%         }
+    \end{center}
+    \caption{ \prot vs B-V colour for stars within 1$\sigma$ of the reference age with the new gyrochronology relation and \citet{Barnes2007}, and \citet{Mamajek2008} for comparison. Asteroseismic targets are circles and cluster and field stars are triangles.
+     }
+   \label{fig:subfigures2}
 \end{figure}
 
 \begin{figure}[ht]
 \begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv_solar.png}
+\caption{Rotation period vs B-V colour for cool dwarfs with age within 2$\sigma$ of the Sun's age, 4.568 Gyr. The grey stars are hotter than 6250 K. The Sun is shown as a large grey circle.}
+\label{fig:p_vs_bv_solar}
+\end{center}
+\end{figure}
+%
+\begin{figure}[ht]
+\begin{center}
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_a_solar.png}
-\caption{Rotation period vs age for cool dwarfs with colour within 1$\sigma$ of the Sun's; 0.65. The Sun is shown as a large grey circle.}
+\caption{Rotation period vs age for cool dwarfs with colour within 2$\sigma$ of the Sun's; 0.65. The Sun is shown as a large grey circle.}
 \label{fig:p_vs_a_solar}
 \end{center}
 \end{figure}
@@ -585,9 +632,10 @@ Unfortunately, those stars that are ideal asteroseismic targets are often less-t
 \section{Conclusions}
 \label{sec:conclusions}
 
-We have calibrated the relation between rotational period, B-V colour and age for MS stars with \teff $<$ 6250 K using the Kepler asteroseismic targets as well as field stars and clusters with precise age measurements.
-We find that the Sun is no longer well described by the gyrochronology---it appears to be slowly rotating for its age and mass, compared with the asteroseismic stars.
-It is, possible that systematic overestimation of the asteroseismic star's ages, or underestimation of their rotation periods is responsible for this discrepancy.
+We have calibrated the relation between rotational period, B-V colour and age for MS stars with \teff $<$ 6250 K using 153 Kepler asteroseismic targets, as well as 5 field stars and 260 cluster stars with precise age measurements.
+We find that the Sun is no longer well described by gyrochronology---it appears to be slowly rotating for its age and mass, compared with the asteroseismic stars.
+However it is possible that systematic overestimation of the asteroseismic star's ages, or underestimation of their rotation periods is responsible for this discrepancy (note that the field stars are consistent with the Sun).
+This will become clear when more stars in the asteroseismic sample have precise age measurements from individual oscillation mode analysis.
 
 Precise modelling of asteroseismic stars using individual oscillation mode analysis is still in progress: precise ages will continue to be published over the coming months and years.
 Once those stars for which it is possible to measure precise ages (the $\sim$ 150 in the \citet{Chaplin2013} sample with high signal-to-noise), this gyrochronology relation will be updated.
@@ -598,7 +646,7 @@ The TESS spacecraft will also deliver high precision photometry, suitable for bo
 We are entering an era where cluster studies and asteroseismology will deliver precise ages for stars with measureable rotation periods: the picture of gyrochronology will continue to advance over the coming years.
 
 The code used in this project can be found at https://github.com/dfm/noisy-plane.
-We would like to thank Eric Mamajek, Marc Pinsonneault, Sydney Barnes, Steve Kawaler, Jerome Bouvier and Daniel Mortlock and David Hogg for their useful insight and discussion.
+We would like to thank Eric Mamajek, Marc Pinsonneault, Sydney Barnes, Steve Kawaler, Jerome Bouvier, Daniel Mortlock and David Hogg for their useful insight and discussion.
 
 % \section{Appendix}
 %
@@ -655,7 +703,7 @@ We would like to thank Eric Mamajek, Marc Pinsonneault, Sydney Barnes, Steve Kaw
 \label{fig:lc}
 \end{center}
 \end{figure}
-
+%
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/angusr/ACF/ACF2/PDCQ3_output/plots_acf/3429205_full.png}
@@ -663,7 +711,7 @@ We would like to thank Eric Mamajek, Marc Pinsonneault, Sydney Barnes, Steve Kaw
 \label{fig:lc}
 \end{center}
 \end{figure}
-
+%
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/angusr/ACF/ind_qs_figs/3223000.pdf}
