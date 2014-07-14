@@ -49,19 +49,19 @@ Measuring ages for intermediate and low-mass stars on the main
 sequence is challenging, but important for a wide range of studies,
 from Galactic dynamics to stellar and planetary evolution.
 Among the available methods, gyrochronology is a powerful one, because it requires knowledge of only the star’s mass (or colour) and its rotation period.
-However, it is not well calibrated at late ages, and suffers from large uncertainties.
+However, it is not well calibrated at late ages and suffers from large uncertainties.
 Asteroseismology provides relatively precise age measurements for some of the brightest stars observed by Kepler.
 We measured the photometric rotation periods of 153 stars with asteroseismic ages in order to calibrate the gyrochronology relation and improve upon current methods of measuring the ages of MS field stars.
 We use advanced statistical methods to model the relationship between rotation period, age, and mass (or colour or effective temperature) while accounting for measurement uncertainties in all three quantities.
 Our sample includes both main sequence stars and subgiants, and straddles the Kraft break (only main sequence stars cooler than the Kraft break, $\sim$ 6250 K, are expected to follow gyrochronology relations); and this must be taken into account when modelling the data.
-Our method has been applied to the extended sample of published rotation periods for stars with reliable mass and age estimates, and enables us to estimate ages for any star with a measured period and mass (or temperature), along with associated uncertainties that reflect both measurement errors and the intrinsic scatter in the gyrochronology relations.
+Our method has been applied to the extended sample of published rotation periods for stars with reliable age measurements and enables us to estimate ages for any star with a measured period and colour, along with associated uncertainties that reflect both measurement errors and the intrinsic scatter in the gyrochronology relations.
 
 \end{abstract}
 
 \section{Introduction}
 \label{intro}
 
-Stellar ages are notoriously difficult to measure for main sequence (MS) stars; uncertainties are typically above the 20\% level \citep{Soderblom2010}.
+Stellar ages are notoriously difficult to measure for main sequence (MS) stars---uncertainties are typically above the 20\% level \citep{Soderblom2010}.
 % Chromospheric activity is often used as an age indicator, as well as lithium depletion, but the evolution of these properties on the main-sequence is poorly understood, plus, high resolution spectra are required to measure either of these properties.
 Fitting isochrones to spectroscopic properties is one of the most commonly used dating methods for field stars, however this process is model-dependent, imprecise and requires high resolution spectroscopy.
 Ages of field stars measured via isochrone placement often have uncertainties of order 100\% or more.
@@ -69,13 +69,14 @@ Gyrochronology has become a popular dating method due to its simplicity---knowle
 Thanks to the high-precision photometry delivered by the Kepler spacecraft, photometric rotation periods are now relatively easy to measure.
 
 Cluster ages measured by fitting isochrones to an ensemble of coeval stars can have uncertainties as low as 10\%.
-Open clusters are therefore invaluable tools for calibrating model dependent, empirical dating methods such as gyrochronology.
+Open clusters are therefore invaluable tools for calibrating empirical dating methods such as gyrochronology.
 Unfortunately the majority of nearby clusters are young---there is a significant dearth of precisely measured ages for old stars and it is for this reason that the current gyrochronology relations are poorly calibrated at late ages.
-The older Kepler clusters will provide excellent anchors for gyrochronology.
 The Kepler cluster study \citep{Meibom2011} aims to measure rotation periods for stars in all four open clusters in the Kepler field of view: NGC 6866 (0.5 Gyr), NGC 6811 (1.1 Gyr), NGC 6819 (2.5 Gyr) and NGC 6791 (9 Gyr).
 So far, rotation periods for 71 stars in NGC 6811 have been measured and member identification for the other three clusters is underway.
+Once completed, the older Kepler clusters will provide excellent anchors for gyrochronology.
+
 The gyrochronology relation of \citet{Barnes2007} relates stellar rotation period to age and B-V colour.
-It was calibrated with 9 young open clusters, aged 650 Myrs or less, and the Sun; the clusters provided the period-mass dependence and the Sun provided the period-age dependence.
+It was calibrated using young open clusters aged 650 Myrs or less and the Sun; the clusters provided the period-mass dependence and the Sun provided the period-age dependence.
 This gyrochronology relation was updated by \citet{Mamajek2008} who used activity indicators in young cluster stars and a small number of field stars.
 % Chromospheric activity, usually measured from the strength of emission in the centers of the broad Ca II H \& K emission lines $R'_{HK}$, is driven by the magnetic dynamo and therefore correlated with rotation (\citet{Kraft1967}, \citet{Noyes1984}, \citet{Montesinos2001}).
 The evolution of stellar activity is still poorly understood, especially for older stars and whilst the \citet{Mamajek2008} relation improves upon the period-colour dependence of the \citet{Barnes2007} relation, it still relies almost exclusively on the Sun for its age dependence.
@@ -86,10 +87,10 @@ Stellar winds are constrained to corotate with the stellar surface out to the Al
 % Stars lose angular momentum over their MS lifetimes via a magnetised wind that is constrained to rotate with the stellar surface out to the Alfv\`{e}n radius \citep{Weber_1967}.
 The strength of the magnetic field at the stellar surface, and therefore the rate of angular momentum loss, is inversely proportional to rotation period \citep{Kawaler1988}.
 So although stellar populations are born with a range of rotation periods, the rapid rotators rapidly lose angular momentum and rotation periods converge onto a unique sequence.
-The timescale for convergence is around the age of the Hyades: 650 Myrs \citep{Irwin2009}, {\color{red}Radick et al (as in collier cameron)} after this time rotation periods are \emph{independent} of their initial values.
-The rate of angular momentum loss also depends on stellar mass---more massive stars lose angular momentum more slowly and in theory stellar age can be inferred from mass (or some proxy thereof) and rotation period measurements alone.
+The timescale for convergence is around the age of the Hyades: 650 Myrs (\citet{Irwin2009}, \citet{Radick1987}) after this time rotation periods are \emph{independent} of their initial values.
+The rate of angular momentum loss also depends on stellar mass---more massive stars lose angular momentum more slowly and, in theory, stellar age can be inferred from mass (or some proxy thereof) and rotation period measurements alone.
 % Due to this dependence all F, G and K stars converge onto a unique mass-period-age relation at around the age of the Hyades: 650 Myrs \citep{Irwin_2009}.
-The gyrochronology relation of \citet{Barnes2007} can be written:
+The empirical gyrochronology relation of \citet{Barnes2007} can be written:
 
 \begin{equation}
 P = A^n \times a(B-V-c)^b
@@ -97,8 +98,7 @@ P = A^n \times a(B-V-c)^b
 \end{equation}
 
 where P, A,  B and V are rotation period (in days), age (in Myr),  and B and V band colours respectively. The values of n, a, b and c are tabulated in \ref{tab:constants}.
-This relation was further calibrated by \citep{Mamajek2008}, using chromospheric activity measurements of field stars. %citation needed
-Their relation takes the same form as Barnes (2007) with revised parameters shown in table \ref{tab:constants}.
+This relation was further calibrated by \citet{Mamajek2008} and their revised parameters are also shown in table \ref{tab:constants}.
 Note that \citet{Mamajek2008} treat c, the parameter setting the position of the colour discontinuity, as a free parameter, whereas \citet{Barnes2007} fix it at 0.4.
 % As a result, the \citet{Barnes2007} relation can be applied to hotter stars.
 
@@ -166,26 +166,22 @@ We use the second set of temperatures since they are slightly more precise.
 
 The asteroseismic ages in \citet{Chaplin2013} have typical uncertainties of $\sim$ 35\%; however, it will be possible to derive more precise ages for some of these stars.
 By measuring the frequency of each oscillation mode individually, not just the mean large serparation, one can build up a density profile of the star and provide a tighter constraint on its age.
-Ages derived from individual oscillation mode measurements can have uncertainties as small as 10\% (\citet{Brown1994}, \citet{SilvaAguirre2013}, however measuring frequencies for individual oscillation modes is a manual process and can only be applied in the highest signal-to-noise cases.
+Ages derived from individual oscillation mode measurements can have uncertainties as small as 10\% (\citet{Brown1994}, \citet{SilvaAguirre2013}), however measuring frequencies for individual oscillation modes is a manual process and can only be applied in the highest signal-to-noise cases.
 \citet{Chaplin2013} predict that around 150 of the 505 stars will be suitable for this individual oscillation mode treatment.
 % Although asteroseismology is a potentially precise dating method, it can only be applied to bright stars observed by missions like Kepler that show solar-like oscillations \citep{Chaplin_2011}.
 % It is therefore essential that we have a well calibrated dating method like gyrochronology which can be applied to any F, G or K star with a measurable rotation period.
-So far this has been done for 65 of the 505 with the Asteroseismic Modeling Portal (AMP), 42 of which are published in \citep{Metcalfe2014} and 23 obtained from Silva Aguirre (private communication).
-Of the 42 stars in \citep{Metcalfe2014}, we only integrate the `simple stars' (cool dwarfs) into our sample---we ignore the `F stars' and `mixed mode' (subgiant) stars as these are not expected to follow the simple gyrochronology relation.
-% {\color{red} Shouldn't I include these to be consistent?}
-The AMP uses the `peak bagging' technique \citep{Appourchaux2012} to measure individual oscillation mode frequencies.
-% (typically improved by a factor of $\sim$ 2), by measuring the frequency of individual oscillation modes, using the `peak bagging' technique \citep{Appourchaux2012}.
+We obtained precise ages for 42 stars from \citet{Metcalfe2014}, modelled with the Asteroseismic Modeling Portal (AMP) and 23 from Silva Aguirre (private communication).
 Precise effective temperatures and metallicities were obtained from \citet{Bruntt2012}.
+% Of the 42 stars in \citep{Metcalfe2014}, we only integrate the `simple stars' (cool dwarfs) into our sample---we ignore the `F stars' and `mixed mode' (subgiant) stars as these are not expected to follow the simple gyrochronology relation.
+% {\color{red} Shouldn't I include these to be consistent?}
+% The AMP uses the `peak bagging' technique \citep{Appourchaux2012} to measure individual oscillation mode frequencies.
+% (typically improved by a factor of $\sim$ 2), by measuring the frequency of individual oscillation modes, using the `peak bagging' technique \citep{Appourchaux2012}.
 % The uncertainties of stellar ages measured with AMP are typically improved over the scaling relation techique by a factor of 2.
 
-% Infra-Red Flux Method (IRFM) calibration (Casagrande et al. 2010; see also Silva Aguirre et al. 2012). This made use of multi-band JHK photometry from the Two Micron All Sky Survey (2MASS; Skrutskie et al. 2006), photometry in the SDSS griz bands available in the KIC, and reddening estimates from Drimmel et al. (2003). A second set of temperatures were those derived by Pinsonneault et al. (2012), who performed a recalibration of the KIC photometry in the SDSS griz filters, using YREC models. The complementary photometry that was available to us did not allow strong constraints to be placed on the metallicity of all the targets. When using the photometric Teø in the grid searches we therefore adopted an [Fe/H] corresponding to an average value for the field of  0.2±0.3 dex (e.g. see Silva Aguirre et al. 2011).
-
-% SHOW 3D FIGURE
-
 \section{Rotation Period Measurements}
-\label{rotation_period_measurement}
+\label{sec:rotation_period_measurement}
 
-The Kepler light curves of these 505 asteroseismic targets display quasi-periodic variations on timescales corresponding to rotational periods of the stars.
+The Kepler light curves of the 505 asteroseismic targets display quasi-periodic variations on timescales corresponding to rotational periods of the stars.
 Flux variations are produced by active regions on the stellar surface, rotating in and out of view.
 In order to measure periodic signals in the light curves we used the auto-correlation function (ACF) method, developed by \citet{McQuillan2013}.
 An autocorrelation function describes the self-similarity of a light curve at a range of lags and the highest peak in the ACF (usually also the first peak) is centered on the dominant periodic signal in the time series.
@@ -196,7 +192,7 @@ Long cadence PDC-MAP data were used throughout this analysis (\citet{Smith_2012}
 The PDC-MAP data are the product of an initial systematics removal process applied by the Kepler team, in which large-scale linear trends are removed in order to improve planet transit search and modelling capability.
 PDC-MAP data are not, however, optimised to preserve stellar variability: periodic signals longer than around 30 days are reduced in power.
 Additionally, light curves still contain large systematic features, such as the exponential decays that appear after telescope shutdowns, which affect period measurement precision.
-The Astrophysically Robust Correction (ARC) is a detrending method developed by \citet{Roberts2013} is better at preserving astrophysical signals, however, it has not yet been applied to all Kepler quarters, so we opt to use PDC-MAP.
+The Astrophysically Robust Correction (ARC), a detrending method developed by \citet{Roberts2013}, is better at preserving astrophysical signals, however, it has not yet been applied to all Kepler quarters, so we opt to use PDC-MAP.
 % {\color{red} So why are we still using it then?! - explain!}
 % Note - I HAVE done some injection tests... could talk about these, although it would probably involve quite a lot more work...
 
