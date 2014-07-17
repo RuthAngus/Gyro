@@ -2,6 +2,7 @@
 \usepackage{amsmath}
 \usepackage{breqn}
 \usepackage{cite,natbib}
+\usepackage{natbib}
 \usepackage{epsfig}
 \usepackage{cases}
 \usepackage[section]{placeins}
@@ -65,15 +66,12 @@ Uncertainties on the ages of this asteroseismic sample are of order 35\%---advan
 \section{Introduction}
 \label{intro}
 
-Stellar ages are notoriously difficult to measure for main sequence (MS) stars---uncertainties are typically above the 20\% level \citep{Soderblom2010}.
-% Chromospheric activity is often used as an age indicator, as well as lithium depletion, but the evolution of these properties on the main-sequence is poorly understood, plus, high resolution spectra are required to measure either of these properties.
-Fitting isochrones to spectroscopic properties is one of the most commonly used dating methods for field stars, however this process is model-dependent, imprecise and requires high resolution spectroscopy.
-Ages of field stars measured via isochrone placement often have uncertainties of order 100\% or more.
-Gyrochronology has become a popular dating method due to its simplicity---knowledge of a star's rotation period and mass, or appropriate proxy, are the only requirements.
 
 \subsection{Angular momentum loss in Main Sequence stars}
 
-In current angular momentum evolution models stellar winds are assumed to corotate with the stellar surface out to the Alfv\`{e}n radius \citep{Weber1967}, at which point the stellar wind decouples and angular momentum is lost from the star.
+Cool Main Sequence (MS) stars are expected to lose angular momentum via a magnitised wind.
+This wind is assumed to corotate with the stellar surface out to the Alfv\'{e}n radius \citep{Weber1967}, at which point point it decouples and angular momentum is lost from the star.
+% In current angular momentum evolution models stellar winds are assumed to corotate with the stellar surface out to the Alfv\`{e}n radius \citep{Weber1967}, at which point the stellar wind decouples and angular momentum is lost from the star.
 % Stars lose angular momentum over their MS lifetimes via a magnetised wind that is constrained to rotate with the stellar surface out to the Alfv\`{e}n radius \citep{Weber_1967}.
 The strength of the magnetic field at the stellar surface, and therefore the rate of angular momentum loss, is inversely proportional to rotation period \citep{Kawaler1988}.
 So although stellar populations are born with a range of rotation periods, the rapid rotators rapidly lose angular momentum and rotation periods converge onto a unique sequence.
@@ -92,7 +90,7 @@ This relation was further calibrated by \citet{Mamajek2008} and their revised pa
 Note that \citet{Mamajek2008} treat c, the parameter setting the position of the colour discontinuity, as a free parameter, whereas \citet{Barnes2007} fix it at 0.4.
 % As a result, the \citet{Barnes2007} relation can be applied to hotter stars.
 
-\begin{deluxetable}{lcc}
+\begin{deluxetable}{lccc}
 \label{tab:constants}
 \tablewidth{0pc}
 \tablecaption{Values of a, b, c \& n in \citet{Barnes2007} and \citet{Mamajek2008} and this work.}
@@ -117,6 +115,12 @@ M dwarf angular momentum evolves over extremely long timescales and they often h
 Stars with effective temperatures $\gtrsim$ 6250 K have shallow convective zones - they are almost fully radiative - and, again, they have a different dynamo-driven magnetic field \citep{Kraft1967}.
 These massive stars retain their initial rotation period throughout their brief MS lifetimes and are therefore not suitable gyrochronology targets.
 
+Stellar ages are notoriously difficult to measure for main sequence (MS) stars---uncertainties are typically above the 20\% level \citep{Soderblom2010}.
+% Chromospheric activity is often used as an age indicator, as well as lithium depletion, but the evolution of these properties on the main-sequence is poorly understood, plus, high resolution spectra are required to measure either of these properties.
+Fitting isochrones to spectroscopic properties is one of the most commonly used dating methods for field stars, however this process is model-dependent, imprecise and requires high resolution spectroscopy.
+Ages of field stars measured via isochrone placement often have uncertainties of order 100\% or more.
+Gyrochronology has become a popular dating method due to its simplicity---knowledge of a star's rotation period and mass, or appropriate proxy, are the only requirements.
+
 % Thanks to the high-precision photometry delivered by the Kepler spacecraft, photometric rotation periods are now relatively easy to measure.
 Cluster ages measured by fitting isochrones to an ensemble of coeval stars can have uncertainties as low as 10\%.
 Open clusters are therefore invaluable tools for calibrating empirical dating methods such as gyrochronology.
@@ -131,10 +135,7 @@ This gyrochronology relation was updated by \citet{Mamajek2008} who used activit
 % Chromospheric activity, usually measured from the strength of emission in the centers of the broad Ca II H \& K emission lines $R'_{HK}$, is driven by the magnetic dynamo and therefore correlated with rotation (\citet{Kraft1967}, \citet{Noyes1984}, \citet{Montesinos2001}).
 The evolution of stellar activity is still poorly understood, especially for older stars and whilst the \citet{Mamajek2008} relation improves upon the period-colour dependence of the \citet{Barnes2007} relation, it still relies almost exclusively on the Sun for its age dependence.
 
-
-This paper is laid out as follows: the asteroseismic data are described in \textsection~\ref{sec:asteroseismic_targets}, our rotation period measurement method is described in \textsection~\ref{sec:rotation_period_measurement}, the calibration and model fitting process is outlined in \textsection~\ref{sec:gyro_cal} and the results are discussed in \textsection~\ref{sec:results}.
-
-\section{Asteroseismic ages}
+\subsection{Asteroseismic ages}
 \label{sec:asteroseismic_targets}
 
 % Ages measured with asteroseismology can be very precise, with uncertainties as low as 10\% in some cases (\citet{Brown1994}, \citet{SilvaAguirre2013}).
@@ -142,12 +143,12 @@ This paper is laid out as follows: the asteroseismic data are described in \text
 % Rotation periods increase with age and longer rotation periods are more difficult to measure, therefore the precision of rotationally derived stellar ages is also age dependent.
 % The signal-to-noise ratio of asteroseismic oscillations remains relatively stable throughout a star's MS lifetime and therefore the precision of asteroseismic ages is age independent. {\color{red}(CITATION)}.
 Acoustic (pressure) mode oscillations produce periodic luminosity variations on timescales of $\sim$ 5 minutes in Solar-like stars.
-These oscillations can be detected in short-cadence Kepler data---a fourier transform of the time series reveals a series of narrow peaks at discrete frequencies, overtones of high radial order, n.
-Non-radial oscillations with angular degree, l are also detectable in Solar-like stars.
-The frequency spacing, (or large frequency separation, $\Delta\nu_{nl} = \nu_{n+1l}-\nu_{nl}$) between consecutive overtones, n, of the same degree, l, is a fundamental asteroseismic observable.
+These oscillations can be detected in short-cadence Kepler data---a fourier transform of the time series reveals a series of narrow peaks at discrete frequencies, overtones of high radial order, $n$.
+Non-radial oscillations with angular degree, $l$ are also detectable in Solar-like stars.
+The frequency spacing, (or large frequency separation, $\Delta\nu_{nl} = \nu_{n+1l}-\nu_{nl}$) between consecutive overtones, $n$, of the same degree, $l$, is a fundamental asteroseismic observable.
 % The mean large frequency separation between oscillation modes, $\Delta\nu$, is a fundamental asteroseismic observable and is related to stellar density.
 % $\Delta\nu \propto \sqrt\rho_{star}$
-The series of peaks in the Fourier transform is modulated by a gaussian envelope, the maximum of which is another fundamental asteroseismic observable, $\nu_{max}$.
+The series of peaks in the Fourier transform is modulated by a gaussian envelope, the maximum of which is another fundamental asteroseismic observable, $\nu_{\mathrm{max}}$.
 % When combined with spectroscopic observations and compared with theoretical stellar evolution models, measurements of the two fundamental asteroseismic observables yeild stellar ages.
 These two fundamental asteroseismic parameters together with effective temperature can be used, via the scaling relations below, to derive stellar masses and radii.
 
@@ -157,17 +158,17 @@ These two fundamental asteroseismic parameters together with effective temperatu
 \end{equation}
 
 \begin{equation}
-\frac{\nu_{max}}{\nu_{max,\odot}} \approx \frac{M/M_{\odot}}{(R/R_{\odot})^2\sqrt{(T_{eff}/T_{eff,\odot})}}
+\frac{\nu_{\mathrm{max}}}{\nu_{\mathrm{max},\odot}} \approx \frac{M/M_{\odot}}{(R/R_{\odot})^2\sqrt{(T_{\mathrm{eff}}/T_{\mathrm{eff},\odot})}}
 \label{eq:delta_nu}
 \end{equation}
 
-In particular, the mean large frequency separation, $\Delta\nu$ is proportional to the mean stellar density.
+In particular, the mean large frequency separation, $\Delta\nu$ is proportional to the mean stellar density---since stellar density changes over the MS lifetime of a star, this parameter enables us to measure ages.
 
-\citet{Chaplin2013} Calculated the ages of 505 Kepler targets using the above scaling relations with estimates of $\Delta\nu$ and $\nu_{max}$.
+\citet{Chaplin2013} calculated the ages of 505 Kepler targets using the above scaling relations with estimates of $\Delta\nu$ and $\nu_{\mathrm{max}}$.
 A grid-based approach was used to measure stellar properties: values of $\Delta\nu$ were calculated for each R and M on the grid and compared with the observed $\Delta\nu$.
 Ages quoted in \citet{Chaplin2013} are the combined result of six different grid-based model pipelines.
-The uncertainties on the ages reflect the model dependencies.
-Two sets of effective temperatures were used: one was derived using an Infra-Red Flux Method (IRFM) calibration (\citet{Casagrande2010}, \citet{SilvaAguirre2012}) and the other from a recalibration of the SDSS griz filter KIC photometry by \citet{Pinsonneault2012} using Yale Rotating Stellar Evolution Code (YREC) models \citep{Demarque2004}.
+The uncertainties on the ages reflect discrepancies between results obtained using different sets.
+Two sets of effective temperatures were used: one was derived using an Infra-Red Flux Method (IRFM) calibration (\citealt{Casagrande2010}, \citealt{SilvaAguirre2012}) and the other from a recalibration of the SDSS griz filter KIC photometry by \citet{Pinsonneault2012} using Yale Rotating Stellar Evolution Code (YREC) models \citep{Demarque2004}.
 We use the second set of temperatures since they are slightly more precise.
 % test: is our analysis sensitive to this choice?
 
