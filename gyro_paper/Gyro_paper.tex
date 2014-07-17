@@ -45,16 +45,20 @@
 \begin{abstract}
 \label{abs}
 
-Measuring ages for intermediate and low-mass stars on the main
-sequence is challenging, but important for a wide range of studies,
-from Galactic dynamics to stellar and planetary evolution.
-Among the available methods, gyrochronology is a powerful one, because it requires knowledge of only the star’s mass (or colour) and its rotation period.
+Measuring ages for intermediate and low-mass stars on the Main Sequence (MS) is challenging but important for a wide range of studies, from Galactic dynamics to stellar and planetary evolution.
+Among the available methods, gyrochronology is a powerful one because it requires knowledge of only the star's mass (or effective temperature, or colour) and its rotation period.
 However, it is not well calibrated at late ages and suffers from large uncertainties.
-Asteroseismology provides relatively precise age measurements for some of the brightest stars observed by Kepler.
-We measured the photometric rotation periods of 153 stars with asteroseismic ages in order to calibrate the gyrochronology relation and improve upon current methods of measuring the ages of MS field stars.
-We use advanced statistical methods to model the relationship between rotation period, age, and mass (or colour or effective temperature) while accounting for measurement uncertainties in all three quantities.
-Our sample includes both main sequence stars and subgiants, and straddles the Kraft break (only main sequence stars cooler than the Kraft break, $\sim$ 6250 K, are expected to follow gyrochronology relations); and this must be taken into account when modelling the data.
-Our method has been applied to the extended sample of published rotation periods for stars with reliable age measurements and enables us to estimate ages for any star with a measured period and colour, along with associated uncertainties that reflect both measurement errors and the intrinsic scatter in the gyrochronology relations.
+Asteroseismology provides age measurements for some of the brightest stars observed by Kepler.
+% We measured the photometric rotation periods of 153 stars with asteroseismic ages in order to calibrate the gyrochronology relations and improve upon current methods of measuring the ages of MS field stars. %pchange
+We use rotation periods measurements of 283 stars with asteroseismic ages and 237 cluster and field stars with precise age measurements to calibrate the gyrochronology relations.
+Advanced statistical methods are used to model the relationship between rotation period, age, and colour while accounting for measurement uncertainties in all three quantities.
+Our sample includes both MS stars and subgiants, and straddles the Kraft break (only MS stars cooler than the Kraft break, $\sim$ 6250 K, are expected to follow gyrochronology relations); and this must be taken into account when modelling the data.
+Our method has been applied to the extended sample of published rotation periods for stars with reliable age measurements.
+It enables us to estimate an age for any cool MS star with a measured period and colour, along with an associated uncertainty that reflects both measurement errors and the intrinsic scatter in the gyrochronology relations.
+Uncertainties on stellar ages calculated with this new gyrochronology relation will typically be of order ...\%.
+We find that this sample of asteroseismic stars does not fall neatly onto the mass-period-age plane---there is a significant level of intrinsic scatter.
+It is currently unclear whether this scatter is a manifestation of noisy data or if stars cease to be well described by gyrochronology in general, past a certain age.
+Uncertainties on the ages of this asteroseismic sample are of order 35\%---advancements in age measurement precision anticipated over the coming months will be key for our understanding of the applicability of gyrochronology.
 
 \end{abstract}
 
@@ -66,24 +70,10 @@ Stellar ages are notoriously difficult to measure for main sequence (MS) stars--
 Fitting isochrones to spectroscopic properties is one of the most commonly used dating methods for field stars, however this process is model-dependent, imprecise and requires high resolution spectroscopy.
 Ages of field stars measured via isochrone placement often have uncertainties of order 100\% or more.
 Gyrochronology has become a popular dating method due to its simplicity---knowledge of a star's rotation period and mass, or appropriate proxy, are the only requirements.
-Thanks to the high-precision photometry delivered by the Kepler spacecraft, photometric rotation periods are now relatively easy to measure.
-
-Cluster ages measured by fitting isochrones to an ensemble of coeval stars can have uncertainties as low as 10\%.
-Open clusters are therefore invaluable tools for calibrating empirical dating methods such as gyrochronology.
-Unfortunately the majority of nearby clusters are young---there is a significant dearth of precisely measured ages for old stars and it is for this reason that the current gyrochronology relations are poorly calibrated at late ages.
-The Kepler cluster study \citep{Meibom2011} aims to measure rotation periods for stars in all four open clusters in the Kepler field of view: NGC 6866 (0.5 Gyr), NGC 6811 (1.1 Gyr), NGC 6819 (2.5 Gyr) and NGC 6791 (9 Gyr).
-So far, rotation periods for 71 stars in NGC 6811 have been measured and member identification for the other three clusters is underway.
-Once completed, the older Kepler clusters will provide excellent anchors for gyrochronology.
-
-The gyrochronology relation of \citet{Barnes2007} relates stellar rotation period to age and B-V colour.
-It was calibrated using young open clusters aged 650 Myrs or less and the Sun; the clusters provided the period-mass dependence and the Sun provided the period-age dependence.
-This gyrochronology relation was updated by \citet{Mamajek2008} who used activity indicators in young cluster stars and a small number of field stars.
-% Chromospheric activity, usually measured from the strength of emission in the centers of the broad Ca II H \& K emission lines $R'_{HK}$, is driven by the magnetic dynamo and therefore correlated with rotation (\citet{Kraft1967}, \citet{Noyes1984}, \citet{Montesinos2001}).
-The evolution of stellar activity is still poorly understood, especially for older stars and whilst the \citet{Mamajek2008} relation improves upon the period-colour dependence of the \citet{Barnes2007} relation, it still relies almost exclusively on the Sun for its age dependence.
 
 \subsection{Angular momentum loss in Main Sequence stars}
 
-Stellar winds are constrained to corotate with the stellar surface out to the Alfv\`{e}n radius \citep{Weber1967}, at which point the stellar wind decouples and angular momentum is lost from the star.
+In current angular momentum evolution models stellar winds are assumed to corotate with the stellar surface out to the Alfv\`{e}n radius \citep{Weber1967}, at which point the stellar wind decouples and angular momentum is lost from the star.
 % Stars lose angular momentum over their MS lifetimes via a magnetised wind that is constrained to rotate with the stellar surface out to the Alfv\`{e}n radius \citep{Weber_1967}.
 The strength of the magnetic field at the stellar surface, and therefore the rate of angular momentum loss, is inversely proportional to rotation period \citep{Kawaler1988}.
 So although stellar populations are born with a range of rotation periods, the rapid rotators rapidly lose angular momentum and rotation periods converge onto a unique sequence.
@@ -97,7 +87,7 @@ P = A^n \times a(B-V-c)^b
 \label{eq:Barnes2007_2}
 \end{equation}
 
-where P, A,  B and V are rotation period (in days), age (in Myr),  and B and V band colours respectively. The values of n, a, b and c are tabulated in \ref{tab:constants}.
+where $P$, $A$, $B$ and $V$ are rotation period (in days), age (in Myr),  and B and V band magnitudes respectively. The values of n, a, b and c are tabulated in \ref{tab:constants}.
 This relation was further calibrated by \citet{Mamajek2008} and their revised parameters are also shown in table \ref{tab:constants}.
 Note that \citet{Mamajek2008} treat c, the parameter setting the position of the colour discontinuity, as a free parameter, whereas \citet{Barnes2007} fix it at 0.4.
 % As a result, the \citet{Barnes2007} relation can be applied to hotter stars.
@@ -105,25 +95,42 @@ Note that \citet{Mamajek2008} treat c, the parameter setting the position of the
 \begin{deluxetable}{lcc}
 \label{tab:constants}
 \tablewidth{0pc}
-\tablecaption{Values of a, b, c \& n in \citet{Barnes2007} and \citet{Mamajek2008}}
+\tablecaption{Values of a, b, c \& n in \citet{Barnes2007} and \citet{Mamajek2008} and this work.}
 \tablehead{
 \colhead{Parameter}&
-	\colhead{\citet{Barnes2007}}&
-\colhead{\citet{Mamajek2008}}}
+\colhead{\citet{Barnes2007}}&
+\colhead{\citet{Mamajek2008}}&
+\colhead{\citet{This work}}}
 \startdata
-a & $0.7725 \pm 0.011$ & $0.407 \pm 0.021$ \\
-b & $0.601 \pm 0.024$ & $0.325 \pm 0.024$ \\
-c & $0.4$ & $0.495 \pm 0.010$ \\
-n & $0.5189 \pm 0.0070$ & $0.566 \pm 0.008$ \\
+a & $0.7725 \pm 0.011$ & $0.407 \pm 0.021$ & $0.619~^{+0.14}_{-0.067}$\\
+b & $0.601 \pm 0.024$ & $0.325 \pm 0.024$ & $0.471~^{+0.016}_{-0.032}$\\
+c & $0.4$ & $0.495 \pm 0.010$ & $0.45$ \\
+n & $0.5189 \pm 0.0070$ & $0.566 \pm 0.008$ & $0.482~^{+0.013}_{0.030}$\\
 \enddata
 \end{deluxetable}
 
 Gyrochronology relations of this kind can only be applied to F, G and K MS stars.
-M dwarfs are fully convective and have a different magnetic dynamo \citep{McQuillan2013}, therefore follow a different spin-down law.
+M dwarf angular momentum evolves over extremely long timescales and they often have not converged onto the mass-period-age plane, even after several Gyrs.
+% not consistent with that of earlier type MS stars \citep{McQuillan2013}---this is presumed to be due to the fact that they are fully convective and have a different magnetic dynamo.
 % Which is What?
 % However, M dwarfs are unsuitable targets for asteroseismology as they do not display high signal-to-noise Solar-like oscillations and so do not feature in our sample anyway.
 Stars with effective temperatures $\gtrsim$ 6250 K have shallow convective zones - they are almost fully radiative - and, again, they have a different dynamo-driven magnetic field \citep{Kraft1967}.
 These massive stars retain their initial rotation period throughout their brief MS lifetimes and are therefore not suitable gyrochronology targets.
+
+% Thanks to the high-precision photometry delivered by the Kepler spacecraft, photometric rotation periods are now relatively easy to measure.
+Cluster ages measured by fitting isochrones to an ensemble of coeval stars can have uncertainties as low as 10\%.
+Open clusters are therefore invaluable tools for calibrating empirical dating methods such as gyrochronology.
+Unfortunately the majority of nearby clusters are young---there is a significant dearth of precisely measured ages for old stars and it is for this reason that the current gyrochronology relations are poorly calibrated at late ages.
+The Kepler cluster study \citep{Meibom2011} aims to measure rotation periods for stars in all four open clusters in the Kepler field of view: NGC 6866 (0.5 Gyr), NGC 6811 (1.1 Gyr), NGC 6819 (2.5 Gyr) and NGC 6791 (9 Gyr).
+So far, rotation periods for 71 stars in NGC 6811 have been measured and member identification for the other three clusters is underway.
+Once completed, the older Kepler clusters will provide excellent anchors for gyrochronology.
+
+The gyrochronology relation of \citet{Barnes2007} relates stellar rotation period to age and B-V colour.
+It was calibrated using young open clusters aged 650 Myrs or less and the Sun; the clusters provided the period-mass dependence and the Sun provided the period-age dependence.
+This gyrochronology relation was updated by \citet{Mamajek2008} who used activity indicators in young cluster stars and a small number of field stars.
+% Chromospheric activity, usually measured from the strength of emission in the centers of the broad Ca II H \& K emission lines $R'_{HK}$, is driven by the magnetic dynamo and therefore correlated with rotation (\citet{Kraft1967}, \citet{Noyes1984}, \citet{Montesinos2001}).
+The evolution of stellar activity is still poorly understood, especially for older stars and whilst the \citet{Mamajek2008} relation improves upon the period-colour dependence of the \citet{Barnes2007} relation, it still relies almost exclusively on the Sun for its age dependence.
+
 
 This paper is laid out as follows: the asteroseismic data are described in \textsection~\ref{sec:asteroseismic_targets}, our rotation period measurement method is described in \textsection~\ref{sec:rotation_period_measurement}, the calibration and model fitting process is outlined in \textsection~\ref{sec:gyro_cal} and the results are discussed in \textsection~\ref{sec:results}.
 
@@ -256,28 +263,72 @@ Rotation periods and colours from \citet{CollierCameron2009}.
 Convert j-k to B-V.
 Age of 500 $\pm$ 100 from \citet{Dobbie2009}.
 
-\begin{deluxetable}{lcccccc}
+% \begin{deluxetable}{lcccccc}
+% \label{tab:results}
+% \tablewidth{0pc}
+% \tablecaption{Rotation periods and B-V colours for field binaries used in \citet{Mamajek2008}.
+% 	References: (1) \citet{Perryman1997}, (2) \citet{Donahue1996}, (3) \citet{Metcalfe2012}, (4) \citet{Ramirez2009}, (5) \citet{Henry2000}, (6) \citet{Moffet1979}, (7) \citet{Bazot2012}, (8) \citet{Yildiz2007}, (9) \citet{Mermilliod1986} (10) \citet{Hallam1991}, (11) \citet{Hoffleit1991}, (12) \citet{Mermilliod1991}}
+% \tablehead{
+% \colhead{ID (A)}&
+% \colhead{ID (B)}&
+% \colhead{Age (Gyr)}&
+% \colhead{\prot (A)}&
+% \colhead{\prot (B)}&
+% \colhead{B-V (A)}&
+% \colhead{B-V (B)}&
+% \colhead{refs}}
+% \startdata
+% HD 131156A & HD 131156B & & 6.31$^{+0.31}_{0.25}$ & 11.94$^{+1.25}_{-1.02}$ \footnote{Based on the maximum and minimum rotation periods measured.}& 0.73 & 1.16 & 1, 2\\
+% % HD 128620 & HD 128621 & 6 $\pm$ 1 & 25.6 & 36.9 & 0.63 & 0.84 & 3, 4, 5, 6, 7, 8, 9, 10\\
+% HD 128620 & HD 128621 & 6 $\pm$ 1 & 28.8 $\pm$ 2.5 & 38.7 $\pm$ 5.0 & 0.69 $\pm$ 0.01 & 0.90 $\pm$ 0.01 & 3, 4, 5, 6, 7, 8, 9, 10\\
+% HD 155886 & HD 155885 & & 20.69 & 21.11 & 0.85 & 0.86& 2, 10\\
+% HD 201091 & HD 201092 & & 35.37 & 37.84 & 1.07 & 1.31 & 1, 2\\
+% HD 219834A & HD 219834B & 42 & 43 & 0.79 & 0.90 & 11, 12\\
+% \enddata
+% \end{deluxetable}
+
+\begin{deluxetable}{lccc}
 \label{tab:results}
 \tablewidth{0pc}
-\tablecaption{Rotation periods and B-V colours for field stars used in \citet{Mamajek2008}.
-References: (1) \citet{Perryman1997}, (2) \citet{Donahue1996}, (3) \citet{Hallam1991}, (4) \citet{Hoffleit1991}, (5) \citet{Mermilliod1991}}
+\tablecaption{Rotation periods and B-V colours for field stars with precise ages.
+References: (1) \citet{Metcalfe2012}, (2) \citet{Henry2000}, (3) \citet{Moffet1979}, (4) \citet{Li2012}, (5) \citet{Petit2008}, (6) \citet{Mermilliod1986}, (7) \citet{Bouvier2010}, (8) \citet{Donahue1996}, (9) \citet{Cox2000}, (10) \citet{Bazot2012}, (11) \citet{Yildiz2007}, (12) \citet{Hallam1991}, (13) \citet{Dumusque2012}.}
 \tablehead{
-\colhead{ID (A)}&
-\colhead{ID (B)}&
-\colhead{\prot (A)}&
-\colhead{\prot (B)}&
-\colhead{B-V (A)}&
-\colhead{B-V (B)}&
-\colhead{refs}}
+\colhead{ID}&
+\colhead{age}&
+\colhead{\prot}&
+\colhead{B-V}}
 \startdata
-HD 131156A & HD 131156B & 6.31 & 11.94 & 0.73 & 1.16 & 1, 2\\
-% HD 128620 & 25.6 & 0.63 \\
-% HD 128621 & 36.9 & 0.84 \\
-HD 155886 & HD 155885 & 20.69 & 21.11 & 0.85 & 0.86& 2, 3\\
-HD 201091 & HD 201092 & 35.37 & 37.84 & 1.07 & 1.31 & 1, 2\\
-HD 219834A & HD 219834B & 42 & 43 & 0.79 & 0.90 & 4, 5\\
+16 Cyg B & 6.4 $\pm$ 0.4$^1$ & 31.5 $\pm$ 6.5$^2$ & 0.66 $\pm$ 0.01$^3$ \\
+18 Sco & 3.66 $\pm$ 0.2$^4$ & 22.7 $\pm$ 0.5$^5$ & 0.64 $\pm$ 0.01$^6$ \\
+The Sun & 4.568 $\pm$ 0.001$^7$ & 26.09 $\pm$ 0.1$^8$ & 0.65 $\pm$ 0.001$^9$ \\
+$\alpha Cen A $ & 6 $\pm$ 1$^{10,11}$ & 28.8 $\pm$ 2.5$^{12}$ & 0.69 $\pm$ 0.01$^6$ \\
+$\alpha Cen B $ & 6 $\pm$ 1$^{10,11}$ & 38.7 $\pm$ 5.0$^{13}$ & 0.90 $\pm$ 0.01$^6$ \\
 \enddata
 \end{deluxetable}
+
+\begin{deluxetable}{lccc}
+\label{tab:results}
+\tablewidth{0pc}
+\tablecaption{Clusters and references.}
+\tablehead{
+\colhead{Cluster}&
+\colhead{Age (Gyr)}&
+\colhead{Age ref}&
+\colhead{Rotation period ref}}
+\startdata
+Praesepe & 0.588 $\pm$ 0.137 & 1 & 2 \\
+Hyades & 0.625 $\pm$ 0.05 & 3 & 4 \\
+NGC 6811 & 1.1 $\pm$ 0.2 & 5 & 6 \\
+M 34 & \\
+Coma Ber & \\
+Pleides & \\
+\enddata
+\tablecaption{References: (3) \citet{Perryman1998}, (4) \citet{Radick1987}, (5) \citet{Janes2011}, (6) \citet{Meibom2011}, (1) \citet{Khalaj2013}, (2) \citet{Kovacs2014}. NGC 6811 g-r colours were converted to dereddened B-V with $E_{(B-V)}$ = 0.1. B and V colours for Praesepe were taken from the APASS database (http://www.aavso.org/apass).}
+\end{deluxetable}
+
+% Still to add: one star from Mathur, stars from Victor, travis.
+% Add table of clusters
+% Add table of our stars, measured additionally to Garcia.
 
 \begin{figure}[ht]
 \begin{center}
@@ -408,7 +459,6 @@ Our likelihood function for the cool dwarf regime can be written in full as foll
 	+ \frac{P_b}{\sqrt{2\pi[U+\sigma_{i}^2]}} \exp \left( -\frac{[A_i - X]^2}{2[U+\sigma_{i}^2]}  \right)
 \end{eqnarray}
 \label{eq:likelihood}
-{\color{red}---should be dividing everything in the (inner) square bracket by J!}
 
 where $P_b$ is the probability that a star is drawn from the background log-normal distribution, with mean, X and variance, U.
 
@@ -555,22 +605,6 @@ The stars plotted have ages that fall within 1 $\sigma$ of the reference age.
 \label{fig:triangle_full}
 \end{center}
 \end{figure}
-
-\begin{deluxetable}{lcc}
-\label{tab:results}
-\tablewidth{0pc}
-\tablecaption{Values of a, b \& n with 16th and 84th percentile values.}
-\tablehead{
-\colhead{Parameter}&
-\colhead{Value}}
-\startdata
-a & $0.619~^{+0.14}_{-0.067}$\\
- & &\\
-b & $0.471~^{+0.016}_{-0.032}$\\
- & &\\
-n & $0.482~^{+0.013}_{0.030}$\\
-\enddata
-\end{deluxetable}
 
 % Figures \ref{fig:p_vs_bv_solar} and \ref{fig:p_vs_a_solar} show rotation period vs colour and age for stars that lie within 2 $\sigma$ of the Sun's colour and age: 0.65 and 4.568 Gyr.
 Figure \ref{fig:p_vs_bv_solar} shows rotation period vs colour for stars with age within 1 $\sigma$ of the Sun's: 4.568 Gyr.

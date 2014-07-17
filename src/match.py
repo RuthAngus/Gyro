@@ -64,8 +64,9 @@ if __name__ == "__main__":
 #     # load period data
 #     pdata = np.genfromtxt('/Users/angusr/Python/Gyro/data/all_data.txt').T
 # #     pdata = np.genfromtxt('/Users/angusr/angusr/ACF2/periods.txt').T
-    data = np.genfromtxt('/Users/angusr/Python/Gyro/data/matched_data.txt').T
+#     data = np.genfromtxt('/Users/angusr/Python/Gyro/data/matched_data.txt').T
 #     data = np.genfromtxt('/Users/angusr/Python/Gyro/data/extra_amy.txt').T
+    data = np.genfromtxt('/Users/angusr/Python/Gyro/data/Garcia_et_al_2014_Table_1.txt').T
     KID = data[0]
     p = data[1]
     p_err = data[2]
@@ -75,4 +76,5 @@ if __name__ == "__main__":
 #     np.savetxt("/Users/angusr/Python/Gyro/data/old_data.txt", data) # should be matched_data in the proper format
 #     np.savetxt("/Users/angusr/Python/Gyro/data/recovered.txt", data) # this was supposed to be
 #     np.savetxt("/Users/angusr/Python/Gyro/data/extra_amy_matched.txt", data)
-    np.savetxt("/Users/angusr/Python/Gyro/data/new_matched.txt", data)
+#     np.savetxt("/Users/angusr/Python/Gyro/data/new_matched.txt", data)
+    np.savetxt("/Users/angusr/Python/Gyro/data/garcia.txt", data)
