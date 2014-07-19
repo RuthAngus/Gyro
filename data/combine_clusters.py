@@ -4,10 +4,14 @@ from colour_conversion import gr2bv
 from teff_bv import teff2bv_err
 
 # make up colour errors
-c_err = .01
+c_err = .04
 
-# make up period errors for M 34
+# make up period errors for M 34 - 5% (conservative), multiplicative
 pe = .05
+
+# make up logg and errors for cluster stars - want these all to be treated as MS
+g = 4.5
+g_err = .001
 
 # add hyades
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/hyades.txt", skip_header=2).T
@@ -43,6 +47,34 @@ bv_err = np.concatenate((bv_err, np.ones_like(mbv)*c_err))
 a = np.concatenate((a, np.ones_like(data[3])*1.1))
 # a_err = np.concatenate((a_err, np.ones_like(data[3])*.1))
 a_err = np.concatenate((a_err, np.ones_like(data[3])*.2))
+# print np.mean(data[4]/data[3])
+
+# add Coma Berenices
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/ComaBer_bv.txt").T
+p = np.concatenate((p, data[0]))
+p_err = np.concatenate((p_err, p*pe))
+bv = np.concatenate((bv, data[1]))
+bv_err = np.concatenate((bv_err, np.ones_like(data[1])*c_err))
+a = np.concatenate((a, np.ones_like(data[0])*.225))
+a_err = np.concatenate((a_err, np.ones_like(data[0])*.025))
+
+# add the Pleiades
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/pleiades.txt").T
+p = np.concatenate((p, data[1]))
+p_err = np.concatenate((p_err, data[2]))
+bv = np.concatenate((bv, data[3]-data[4]))
+bv_err = np.concatenate((bv_err, np.ones_like(data[1])*c_err))
+a = np.concatenate((a, np.ones_like(data[0])*.1))
+a_err = np.concatenate((a_err, np.ones_like(data[0])*.005))
+
+# M 34
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/M34.txt").T
+p = np.concatenate((p, data[0]))
+p_err = np.concatenate((p_err, p*pe))
+bv = np.concatenate((bv, data[1]))
+bv_err = np.concatenate((bv_err, np.ones_like(data[1])*c_err))
+a = np.concatenate((a, np.ones_like(data[0])*.225))
+a_err = np.concatenate((a_err, np.ones_like(data[0])*.025))
 
 # add alpha cen ab
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/alphacen.txt", skip_header=3).T
@@ -53,6 +85,7 @@ p_err = np.concatenate((p_err, data[3]))
 a = np.concatenate((a, data[4]))
 a_err = np.concatenate((a_err, data[5]))
 
+# add field stars (convert to lists first)
 bv = list(bv)
 bv_err = list(bv_err)
 p = list(p)
@@ -85,26 +118,9 @@ p_err = np.array(p_err)
 a = np.array(a)
 a_err = np.array(a_err)
 
-# # add Travis' stars
-# data = np.genfromtxt("/Users/angusr/Python/Gyro/data/Travis_data.txt", skip_header=1).T
-# a = np.concatenate((a, data[5]))
-# a_err = np.concatenate((a_err, data[6]))
-# data = np.genfromtxt("/Users/angusr/Python/Gyro/data/travis_actual_periods.txt").T
-# p = np.concatenate((p, data[1]))
-# p_err = np.concatenate((p_err, data[2]))
-# data = np.genfromtxt("/Users/angusr/Python/Gyro/data/travis_teffs.txt", skip_header=1).T
-# teff = data[1]
-# teff_err = data[2]
-# logg = data[3]
-# logg_err = data[4]
-# feh = data[5]
-# feh_err = data[6]
-# travis_bv, travisbv_err = teff2bv_err(teff, logg, feh, teff_err, logg_err, feh_err)
-# bv = np.concatenate((bv, travis_bv))
-# bv_err = np.concatenate((bv_err, travisbv_err))
-
-logg = np.ones_like(bv)*4.5
-logg_err = np.ones_like(bv)*.01
+# make up loggs
+logg = np.ones_like(bv)*g
+logg_err = np.ones_like(bv)*g_err
 
 data = np.zeros((8, len(bv)+1))
 data[0,:-1] = bv
