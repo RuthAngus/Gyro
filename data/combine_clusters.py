@@ -6,6 +6,9 @@ from teff_bv import teff2bv_err
 # make up colour errors
 c_err = .01
 
+# make up period errors for M 34
+pe = .05
+
 # add hyades
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/hyades.txt", skip_header=2).T
 bv = data[0]
@@ -30,12 +33,13 @@ a_errp = np.concatenate((a_errp, np.ones_like(data[5])*.137))
 a_errm = np.concatenate((a_errm, np.ones_like(data[5])*.137))
 
 # add NGC6811
-data = np.genfromtxt("/Users/angusr/Python/Gyro/data/NGC6811", skip_header=2).T
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/NGC6811.txt", skip_header=44).T
 p = np.concatenate((p, data[3]))
 p_err = np.concatenate((p_err, data[4]))
-mbv, mbv_err = gr2bv(data[1], data[2])
+EBV = .1
+mbv = gr2bv(data[1], data[2], EBV)
 bv = np.concatenate((bv, mbv))
-bv_err = np.concatenate((bv_err, mbv_err))
+bv_err = np.concatenate((bv_err, np.ones_like(mbv)*c_err))
 a = np.concatenate((a, np.ones_like(data[3])*1.1))
 # a_err = np.concatenate((a_err, np.ones_like(data[3])*.1))
 a_err = np.concatenate((a_err, np.ones_like(data[3])*.2))
@@ -98,10 +102,6 @@ a_err = np.array(a_err)
 # travis_bv, travisbv_err = teff2bv_err(teff, logg, feh, teff_err, logg_err, feh_err)
 # bv = np.concatenate((bv, travis_bv))
 # bv_err = np.concatenate((bv_err, travisbv_err))
-
-# pl.clf()
-# pl.plot(mbv, data[3], 'ko')
-# pl.savefig('NGC6811')
 
 logg = np.ones_like(bv)*4.5
 logg_err = np.ones_like(bv)*.01
