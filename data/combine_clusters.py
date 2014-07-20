@@ -23,7 +23,6 @@ a = data[4]
 a_err = data[5]
 a_errp = data[5]
 a_errm = data[5]
-print a[-1], p[-1], bv[-1]
 
 # add praesepe
 data = np.genfromtxt('/Users/angusr/Python/Gyro/data/praesepe.txt').T
@@ -36,7 +35,6 @@ a = np.concatenate((a, np.ones_like(data[5])*.588))
 a_err = np.concatenate((a_err, np.ones_like(data[5])*.137))
 a_errp = np.concatenate((a_errp, np.ones_like(data[5])*.137))
 a_errm = np.concatenate((a_errm, np.ones_like(data[5])*.137))
-print a[-1], p[-1], bv[-1]
 
 # add NGC6811
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/NGC6811.txt", skip_header=44).T
@@ -54,7 +52,7 @@ a_err = np.concatenate((a_err, np.ones_like(data[3])*.2))
 # add Coma Berenices
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/ComaBer_bv.txt").T
 p = np.concatenate((p, data[0]))
-p_err = np.concatenate((p_err, p*pe))
+p_err = np.concatenate((p_err, data[0]*pe))
 bv = np.concatenate((bv, data[1]))
 bv_err = np.concatenate((bv_err, np.ones_like(data[1])*c_err))
 a = np.concatenate((a, np.ones_like(data[0])*.225))
@@ -72,7 +70,7 @@ a_err = np.concatenate((a_err, np.ones_like(data[0])*.005))
 # M 34
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/M34.txt").T
 p = np.concatenate((p, data[0]))
-p_err = np.concatenate((p_err, p*pe))
+p_err = np.concatenate((p_err, data[0]*pe))
 bv = np.concatenate((bv, data[1]))
 bv_err = np.concatenate((bv_err, np.ones_like(data[1])*c_err))
 a = np.concatenate((a, np.ones_like(data[0])*.225))
