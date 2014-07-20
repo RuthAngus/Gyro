@@ -68,7 +68,7 @@ a = np.concatenate((a, np.ones_like(data[0])*.1))
 a_err = np.concatenate((a_err, np.ones_like(data[0])*.005))
 
 # M 34
-data = np.genfromtxt("/Users/angusr/Python/Gyro/data/M34.txt").T
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/M34.txt", skip_header=1).T
 p = np.concatenate((p, data[0]))
 p_err = np.concatenate((p_err, data[0]*pe))
 bv = np.concatenate((bv, data[1]))
