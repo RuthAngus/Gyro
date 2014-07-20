@@ -1,0 +1,3 @@
+B-V from mermilliod (1986), P from petit (2008), A from Li (2012). Age_err is the larger of the errorbars.
+B-V B-V_err P P_err Age Age_err
+0.64 0.01 22.7 0.5 3.66 0.2

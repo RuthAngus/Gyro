@@ -1,0 +1,5 @@
+A: age from bazot and yildiz, rotation period from Hallam, 1991 (pg 630), B-V from mermilliod (1986)
+B: age from ", rotation period from Dumusque (2012) (uncertainty made up), B-V from "
+B-V B-V_err P P_err A A_err
+0.69 0.01 28.8 2.5 6.0 1.0
+0.90 0.01 38.7 5.0 6.0 1.0
