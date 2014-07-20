@@ -23,6 +23,7 @@ a = data[4]
 a_err = data[5]
 a_errp = data[5]
 a_errm = data[5]
+print a[-1], p[-1], bv[-1]
 
 # add praesepe
 data = np.genfromtxt('/Users/angusr/Python/Gyro/data/praesepe.txt').T
@@ -35,6 +36,7 @@ a = np.concatenate((a, np.ones_like(data[5])*.588))
 a_err = np.concatenate((a_err, np.ones_like(data[5])*.137))
 a_errp = np.concatenate((a_errp, np.ones_like(data[5])*.137))
 a_errm = np.concatenate((a_errm, np.ones_like(data[5])*.137))
+print a[-1], p[-1], bv[-1]
 
 # add NGC6811
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/NGC6811.txt", skip_header=44).T
@@ -59,7 +61,7 @@ a = np.concatenate((a, np.ones_like(data[0])*.225))
 a_err = np.concatenate((a_err, np.ones_like(data[0])*.025))
 
 # add the Pleiades
-data = np.genfromtxt("/Users/angusr/Python/Gyro/data/pleiades.txt").T
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/pleiades.txt", skip_header=1).T
 p = np.concatenate((p, data[1]))
 p_err = np.concatenate((p_err, data[2]))
 bv = np.concatenate((bv, data[3]-data[4]))
