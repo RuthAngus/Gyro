@@ -55,26 +55,26 @@ p = np.concatenate((p, data[0]))
 p_err = np.concatenate((p_err, data[0]*pe))
 bv = np.concatenate((bv, data[1]))
 bv_err = np.concatenate((bv_err, np.ones_like(data[1])*c_err))
-a = np.concatenate((a, np.ones_like(data[0])*.225))
-a_err = np.concatenate((a_err, np.ones_like(data[0])*.025))
+a = np.concatenate((a, np.ones_like(data[0])*.5))
+a_err = np.concatenate((a_err, np.ones_like(data[0])*.1))
 
-# add the Pleiades
-data = np.genfromtxt("/Users/angusr/Python/Gyro/data/pleiades.txt", skip_header=1).T
-p = np.concatenate((p, data[1]))
-p_err = np.concatenate((p_err, data[2]))
-bv = np.concatenate((bv, data[3]-data[4]))
-bv_err = np.concatenate((bv_err, np.ones_like(data[1])*c_err))
-a = np.concatenate((a, np.ones_like(data[0])*.1))
-a_err = np.concatenate((a_err, np.ones_like(data[0])*.005))
+# # add the Pleiades
+# data = np.genfromtxt("/Users/angusr/Python/Gyro/data/pleiades.txt", skip_header=1).T
+# p = np.concatenate((p, data[1]))
+# p_err = np.concatenate((p_err, data[2]))
+# bv = np.concatenate((bv, data[3]-data[4]))
+# bv_err = np.concatenate((bv_err, np.ones_like(data[1])*c_err))
+# a = np.concatenate((a, np.ones_like(data[0])*.1))
+# a_err = np.concatenate((a_err, np.ones_like(data[0])*.005))
 
-# M 34
-data = np.genfromtxt("/Users/angusr/Python/Gyro/data/M34.txt", skip_header=1).T
-p = np.concatenate((p, data[0]))
-p_err = np.concatenate((p_err, data[0]*pe))
-bv = np.concatenate((bv, data[1]))
-bv_err = np.concatenate((bv_err, np.ones_like(data[1])*c_err))
-a = np.concatenate((a, np.ones_like(data[0])*.225))
-a_err = np.concatenate((a_err, np.ones_like(data[0])*.025))
+# # M 34
+# data = np.genfromtxt("/Users/angusr/Python/Gyro/data/M34.txt", skip_header=1).T
+# p = np.concatenate((p, data[0]))
+# p_err = np.concatenate((p_err, data[0]*pe))
+# bv = np.concatenate((bv, data[1]))
+# bv_err = np.concatenate((bv_err, np.ones_like(data[1])*c_err))
+# a = np.concatenate((a, np.ones_like(data[0])*.225))
+# a_err = np.concatenate((a_err, np.ones_like(data[0])*.025))
 
 # add alpha cen ab
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/alphacen.txt", skip_header=3).T
