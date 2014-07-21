@@ -31,12 +31,9 @@
 % math
 \newcommand{\dd}{\ensuremath{\,\mathrm{d}}}
 
-
 \begin{document}
-
 \section{Introduction}
 \label{intro}
-
 \subsection{Dating methods for field stars}
 
 Many fields of astronomy rely on stellar ages; the ages of planet hosts are necessary for planetary system evolution studies, for example.
@@ -126,18 +123,11 @@ n & $0.5189 \pm 0.0070$ & $0.566 \pm 0.008$ & $0.482~^{+0.013}_{0.030}$\\
 \subsection{Asteroseismic ages}
 \label{sec:asteroseismic_targets}
 
-% Ages measured with asteroseismology can be very precise, with uncertainties as low as 10\% in some cases (\citet{Brown1994}, \citet{SilvaAguirre2013}).
-% Unlike rotation based age diagnostics, the precision of asteroseismic ages are not themselves age dependent.
-% Rotation periods increase with age and longer rotation periods are more difficult to measure, therefore the precision of rotationally derived stellar ages is also age dependent.
-% The signal-to-noise ratio of asteroseismic oscillations remains relatively stable throughout a star's MS lifetime and therefore the precision of asteroseismic ages is age independent. {\color{red}(CITATION)}.
 Acoustic (pressure) mode oscillations produce periodic luminosity variations on timescales of $\sim$ 5 minutes in Solar-like stars.
 These oscillations can be detected in short-cadence Kepler data---a fourier transform of the time series reveals a series of narrow peaks at discrete frequencies, overtones of high radial order, $n$.
 Non-radial oscillations with angular degree, $l$ are also detectable in Solar-like stars.
 The frequency spacing, (or large frequency separation, $\Delta\nu_{nl} = \nu_{n+1l}-\nu_{nl}$) between consecutive overtones, $n$, of the same degree, $l$, is a fundamental asteroseismic observable.
-% The mean large frequency separation between oscillation modes, $\Delta\nu$, is a fundamental asteroseismic observable and is related to stellar density.
-% $\Delta\nu \propto \sqrt\rho_{star}$
 The series of peaks in the Fourier transform is modulated by a gaussian envelope, the maximum of which is another fundamental asteroseismic observable, $\nu_{\mathrm{max}}$.
-% When combined with spectroscopic observations and compared with theoretical stellar evolution models, measurements of the two fundamental asteroseismic observables yeild stellar ages.
 These two fundamental asteroseismic parameters together with effective temperature can be used, via the scaling relations below, to derive stellar masses and radii.
 
 \begin{equation}
@@ -164,20 +154,15 @@ The asteroseismic ages in \citet{Chaplin2013} have typical uncertainties of $\si
 By measuring the frequency of each oscillation mode individually, not just the mean large serparation, one can build up a density profile of the star and provide a tighter constraint on its age.
 Ages derived from individual oscillation mode measurements can have uncertainties as small as 10\% (\citet{Brown1994}, \citet{SilvaAguirre2013}), however measuring frequencies for individual oscillation modes is a manual process and can only be applied in the highest signal-to-noise cases.
 \citet{Chaplin2013} predict that around 150 of the 505 stars will be suitable for this individual oscillation mode treatment.
-% Although asteroseismology is a potentially precise dating method, it can only be applied to bright stars observed by missions like Kepler that show solar-like oscillations \citep{Chaplin_2011}.
-% It is therefore essential that we have a well calibrated dating method like gyrochronology which can be applied to any F, G or K star with a measurable rotation period.
 We obtained precise ages for 42 stars from \citet{Metcalfe2014}, modelled with the Asteroseismic Modeling Portal (AMP) and 23 from Silva Aguirre (private communication).
 Precise effective temperatures and metallicities were obtained from \citet{Bruntt2012}.
 % Of the 42 stars in \citep{Metcalfe2014}, we only integrate the `simple stars' (cool dwarfs) into our sample---we ignore the `F stars' and `mixed mode' (subgiant) stars as these are not expected to follow the simple gyrochronology relation.
 % {\color{red} Shouldn't I include these to be consistent?}
-% The AMP uses the `peak bagging' technique \citep{Appourchaux2012} to measure individual oscillation mode frequencies.
-% (typically improved by a factor of $\sim$ 2), by measuring the frequency of individual oscillation modes, using the `peak bagging' technique \citep{Appourchaux2012}.
-% The uncertainties of stellar ages measured with AMP are typically improved over the scaling relation techique by a factor of 2.
 
-Notes - apparently asteroseismic ages are easier to derive for older stars!
-Probably don't want to include the youngest clusters since they have so much spread and haven't converged!
-We are calibrating the relation between period, age and colour---this is different to the relation between period, age and mass because
-colour-mass relation is different for different compositions and this adds a level of systematic uncertainty.
+% Notes - apparently asteroseismic ages are easier to derive for older stars!
+% Probably don't want to include the youngest clusters since they have so much spread and haven't converged!
+% We are calibrating the relation between period, age and colour---this is different to the relation between period, age and mass because
+% colour-mass relation is different for different compositions and this adds a level of systematic uncertainty.
 
 \subsection{Paper structure}
 
