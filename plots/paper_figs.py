@@ -32,22 +32,6 @@ feh1 = data[11]
 feh1_err = data[12]
 bv1, bv1_err = teff2bv_err(t1, logg1, feh1, t1_err, logg1_err, feh1_err)
 
-# p1 = data[1]
-# p1_err = data[2]
-# t1 = data[3]
-# t1_err = data[4]
-# feh1 = data[5]
-# feh1_err = data[6]
-# logg1 = data[10]
-# logg1_errp = data[11]
-# logg1_errm = data[12]
-# logg1_err = .5*(logg1_errp+logg1_errm)
-# a1 = data[13]
-# a1_errp = data[14]
-# a1_errm = data[15]
-# a1_err = .5*(a1_errp+a1_errm)
-# bv1, bv1_err = teff2bv_err(t1, logg1, feh1, t1_err, logg1_err, feh1_err)
-
 # load travis and victor data
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/vandt.txt", skip_header=1).T
 vtKID = data[0]
@@ -100,89 +84,29 @@ p2_err = data[3]
 a2 = data[4]
 a2_err = data[5]
 
-# load travis data
-data = np.genfromtxt("/Users/angusr/Python/Gyro/data/travis_shortlist.txt",skip_header=1).T
-tKID = data[0]
-ta = data[5]
-ta_err = data[6]
-data = np.genfromtxt("/Users/angusr/Python/Gyro/data/travis_actual_periods.txt").T
-tp = data[1]
-tp_err = data[2]
-data = np.genfromtxt("/Users/angusr/Python/Gyro/data/travis_teffs.txt",skip_header=1).T
-tt = data[1]
-tt_err = data[2]
-tlogg = data[3]
-tlogg_err = data[4]
-tfeh = data[5]
-tfeh_err = data[6]
-tbv, tbv_err = teff2bv_err(tt, tlogg, tfeh, tt_err, tlogg_err, tfeh_err)
-
-# load Victor data
-data = np.genfromtxt("/Users/angusr/Python/Gyro/data/Victor_params.txt",skip_header=1).T
-vKID = data[0]
-vfeh = data[1]
-vfeh_err = data[2]
-vt = data[3]
-vt_err = data[4]
-vlogg = data[11]
-vlogg_errp = data[12]
-vlogg_errm = data[13]
-vlogg_err = .5*(vlogg_errp+vlogg_errm)
-va = data[14]
-va_errp = data[15]
-va_errm = data[16]
-data = np.genfromtxt("/Users/angusr/Python/Gyro/data/Victor_p_errs.txt").T
-vp = data[1]
-vp_err = data[2]
-vbv, vbv_err = teff2bv_err(vt, vlogg, vfeh, vt_err, vlogg_err, vfeh_err)
-
-# remove travis' stars
-for i, kid in enumerate(tKID):
-    l = KID==kid
-    if KID[l]:
-        a2[l] = 0; a2_err[l] = 0
-        bv2[l] = 0; bv2_err[l] = 0
-        p2[l] = 0; p2_err[l] = 0
-l = a2>0
-a2 = a2[l]; a2_err = a2_err[l]
-bv2 = bv2[l]; bv2_err = bv2_err[l]
-p2 = p2[l]; p2_err = p2_err[l]
-
-# remove victors' stars
-for i, kid in enumerate(vKID):
-    l = KID==kid
-    if KID[l]:
-        a2[l] = 0; a2_err[l] = 0
-        bv2[l] = 0; bv2_err[l] = 0
-        p2[l] = 0; p2_err[l] = 0
-l = a2>0
-a2 = a2[l]; a2_err = a2_err[l]
-bv2 = bv2[l]; bv2_err = bv2_err[l]
-p2 = p2[l]; p2_err = p2_err[l]
-
 # plot p_vs_bv for all stars
 sun = a2 == 4.568
 pl.clf()
+
 # astero stars
 pl.errorbar(bv1, p1, xerr=bv1_err, yerr=p1_err, fmt='k.', capsize=0, ecolor='.7')
+
 # cluster + field
 pl.errorbar(bv2, p2, xerr=bv2_err, yerr=p2_err, fmt='.', color='r', capsize=0, ecolor='.7')
+
 # sun
 pl.errorbar(bv2[sun], p2[sun], xerr=bv2_err[sun], yerr=p2_err[sun], fmt='*', color='k', capsize=0, ecolor='.7',\
         markersize = 8, mec='k')
+
 # Travis and victor
-pl.errorbar(tbv, tp, xerr=tbv_err, yerr=tp_err, fmt='.', color='b', capsize=0, ecolor='.7')
-pl.errorbar(vbv, vp, xerr=vbv_err, yerr=vp_err, fmt='.', color='b', capsize=0, ecolor='.7')
+pl.errorbar(vtbv, vtp, xerr=vtbv_err, yerr=vtp_err, fmt='.', \
+        color='b', capsize=0, ecolor='.7')
 pl.xlabel("$\mathrm{B-V}$")
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")
-pl.ylim(0,70)
+# pl.ylim(0,70)
+pl.loglog()
 pl.savefig("p_vs_bv_paper2")
 
-# plot p_vs_a for all stars
-# a1 = np.log10(a1)
-# a2 = np.log10(a2)
-# p1 = np.log10(p1)
-# p2 = np.log10(p2)
 pl.clf()
 l = a1>0
 a1 = a1[l]
@@ -191,19 +115,16 @@ a1_err = a1_err[l]
 p1_err = p1_err[l]
 pl.errorbar(a1, p1, xerr=a1_err, yerr=p1_err, fmt='k.', capsize=0, ecolor='.7')
 pl.errorbar(a2, p2, xerr=a2_err, yerr=p2_err, fmt='.', color='r', capsize=0, ecolor='.7')
-pl.errorbar(a2[sun], p2[sun], xerr=a2_err[sun], yerr=p2_err[sun], fmt='*', color='k', capsize=0, ecolor='.7',\
-        markersize = 8, mec='k')
-pl.errorbar(ta, tp, xerr=ta_err, yerr=tp_err, fmt='.', color='b', capsize=0, ecolor='.7')
-# pl.plot(a1, p1, 'k.')
+pl.errorbar(a2[sun], p2[sun], xerr=a2_err[sun], yerr=p2_err[sun], \
+        fmt='*', color='k', capsize=0, ecolor='.7', markersize = 8, mec='k')
+pl.errorbar(vta, vtp, xerr=vta_err, yerr=vtp_err, fmt='.', \
+        color='b', capsize=0, ecolor='.7')
 sun = 10**a2==4.568
-# pl.plot(a2, p2, '.', color='.5')
-# pl.plot(a2[sun], p2[sun], '.', color='r')
-# print a2[sun]
 pl.xlabel("$\mathrm{Age~(Gyr)}$")
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")
-pl.ylim(0,70)
+# pl.ylim(0,70)
 pl.xlim(0,15)
-# pl.loglog()
+pl.loglog()
 pl.savefig("p_vs_a_paper2")
 
 # data = np.empty((len(tKID)+len(vKID), 14))

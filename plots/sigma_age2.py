@@ -137,18 +137,31 @@ pars3_err = np.array([.03, .03, .03, .00])
 # params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parametersgyro.txt').T
 # params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters45_2.txt').T
 # params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters45.txt').T # sun free
-params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parametersgarcia.txt').T #
 # params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parametersgyrosun.txt').T
+# params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parametersgarcia.txt').T #
+params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_45.txt').T # current
+params4 = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_50.txt').T # .5
 pars3 = np.zeros(4)
+pars4 = np.zeros(4)
 err = np.zeros((2, 4))
+err4 = np.zeros((2, 4))
 pars3[:3] = params[0][:3]
 pars3[-1] = .45; err[:,3] = .0
 err[0,:3] = params[1][:3]
 err[1,:3] = params[2][:3]
+
+pars4_err = np.zeros(4)
+pars4[:3] = params4[0][:3]
+pars4[-1] = .45; err4[:,3] = .0
+err4[0,:3] = params4[1][:3]
+err4[1,:3] = params4[2][:3]
+
 pars3_err = np.zeros(4)
+pars4_err = np.zeros(4)
 for i in range(4):
 #     pars3_err[i] = .5*sum(err[:,i])
     pars3_err[i] = min(err[:,i])
+    pars4_err[i] = min(err4[:,i])
 
 for i, age in enumerate(ages):
 #     sig = .5
