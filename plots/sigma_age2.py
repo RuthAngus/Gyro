@@ -152,7 +152,7 @@ err[1,:3] = params[2][:3]
 
 pars4_err = np.zeros(4)
 pars4[:3] = params4[0][:3]
-pars4[-1] = .45; err4[:,3] = .0
+pars4[-1] = .5; err4[:,3] = .0
 err4[0,:3] = params4[1][:3]
 err4[1,:3] = params4[2][:3]
 
@@ -199,6 +199,10 @@ for i, age in enumerate(ages):
             label='$%s~\mathrm{Gyr}$~$\mathrm{(M\&H~2008)}$' %ages[i], zorder=0)
     xs, ys = iso_calc(pars3, ages[i])
 #     pl.plot(xs, ys, color = ocols[i], linestyle='-', linewidth=2, \
+    pl.plot(xs, ys, color='k', linestyle='-', linewidth=lw, \
+            label = '$%s~\mathrm{Gyr}$~ \
+            $\mathrm{Angus~\emph{et~al.}~(in~prep)}$' %ages[i], zorder=0)
+    xs, ys = iso_calc(pars4, ages[i])
     pl.plot(xs, ys, color='k', linestyle='-', linewidth=lw, \
             label = '$%s~\mathrm{Gyr}$~ \
             $\mathrm{Angus~\emph{et~al.}~(in~prep)}$' %ages[i], zorder=0)
