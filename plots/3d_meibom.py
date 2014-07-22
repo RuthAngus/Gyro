@@ -21,36 +21,39 @@ a_surf, c_surf = np.meshgrid(a_surf, c_surf)
 p_surf = a_surf**n * a * (c_surf - c)**b
 a_surf /= 1000.
 
-# load hyades data
-p, c, a, p_err, c_err, a_err = hya_load()
-a /= 1000.
-
-# load praesepe data
-data = np.genfromtxt('/Users/angusr/Python/Gyro/data/praesepe.txt').T
-c = np.concatenate((c, (data[5]-data[6])))
-c_err = np.concatenate((c_err, np.ones_like(data[5])*.1))
-p = np.concatenate((p, 1./data[3]))
-p_err = np.concatenate((p_err, (1./data[3])*(data[4]/data[3])))
-a = np.concatenate((a, np.ones_like(data[5])*.588))
-a_err = np.concatenate((a_err, np.ones_like(data[5])*.137))
-
 # load my data
-# data = np.genfromtxt("/Users/angusr/Python/Gyro/data/data.txt").T
-data = np.genfromtxt("/Users/angusr/Python/Gyro/data/new_matched.txt").T
-x = data[10] > 1.
-period = data[1][x]
-teff = data[3][x]
-feh = data[5][x]
-logg = data[10][x]
-age = data[13][x]
-bv = teff2bv_orig(teff, logg, feh)
+# data = np.genfromtxt("/Users/angusr/Python/Gyro/data/garcia_all_astero.txt")
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/garcia_all_astero_no_precise.txt")
+# data = np.genfromtxt("/Users/angusr/Python/Gyro/data/all_astero_plusgarcia.txt")
+t = data[1]
+a = data[3]
+p = data[6]
+logg = data[8]
+feh = data[11]
+bv = teff2bv_orig(t, logg, feh)
+
+# load precise data
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/vandt.txt", skip_header=1).T
+pt = data[1]
+pa = data[3]
+pp = data[6]
+plogg = data[8]
+pfeh = data[11]
+pbv = teff2bv_orig(pt, plogg, pfeh)
+
+# load cluster and field stars data
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/clusters.txt").T
+cbv = data[0]
+cp = data[2]
+ca = data[4]
 
 pl.clf()
 fig = pl.figure()
 ax = fig.gca(projection='3d')
 ax.plot_surface(c_surf, a_surf, p_surf, alpha = 0.0)
-ax.scatter(c, a, p, color='k')
-ax.scatter(bv, age, period, color=ocols[0])
+ax.scatter(bv, a, p, color='k', zorder=1)
+ax.scatter(pbv, pa, pp, color='b', zorder=3)
+ax.scatter(cbv, ca, cp, color='r', zorder=2)
 ax.set_zlabel('$P_{rot}~\mathrm{(days)}$')
 ax.set_xlabel('$\mathrm{B-V}$')
 ax.set_ylabel('$\mathrm{Age~(Gyr)}$')
