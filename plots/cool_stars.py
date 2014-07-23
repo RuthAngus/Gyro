@@ -203,6 +203,8 @@ pl.savefig("cool_stars13")
 
 # hot dwarfs
 l = bv < kbreak
+lv = vtbv > kbreak
+lc = cbv[:-5] > kbreak
 p, t, p_err, t_err, b, b_err = period[l], teff[l], period_err[l], teff_err[l], \
         bv[l], bv_err[l]
 pl.clf()
@@ -211,9 +213,9 @@ pl.errorbar(bv, period, yerr=period_err, xerr=bv_err, color=ocols[1], fmt='.', \
         markersize=ms)
 pl.errorbar(b, p, yerr=p_err, xerr=b_err, color=ocols[0], mec=ocols[0], fmt='.', \
         ecolor='.7', capsize=0, label="$\mathrm{Hot~stars}$", markersize=ms)
-pl.errorbar(vtbv, vtperiod, yerr=vtperiod_err, xerr=vtbv_err, color=ocols[1],\
+pl.errorbar(vtbv[lv], vtperiod[lv], yerr=vtperiod_err[lv], xerr=vtbv_err[lv], color=ocols[1],\
         mec=ocols[1], ecolor='.7', capsize=0, fmt='.', markersize=ms)
-pl.errorbar(cbv[:-5], cp[:-5], yerr=cp_err[:-5], xerr=cbv_err[:-5], color=ocols[1], \
+pl.errorbar(cbv[:-5][lc], cp[:-5][lc], yerr=cp_err[:-5][lc], xerr=cbv_err[:-5][lc], color=ocols[1], \
         mec=ocols[1], ecolor='.7', capsize=0, fmt='.', markersize=ms)
 pl.errorbar(cbv[-5:], cp[-5:], yerr=cp_err[-5:], xerr=cbv_err[-5:], color=ocols[1], \
         mec=ocols[1], ecolor='.7', capsize=0, fmt='.', markersize=ms)
@@ -234,6 +236,8 @@ pl.savefig("cool_stars2")
 
 # subs
 l2 = logg < 4.
+lc = cbv[:-5] > kbreak
+lv = vtbv > kbreak
 p2, t2, p_err2, t_err2, b2, b_err2 = period[l2], bv[l2], period_err[l2], bv_err[l2], \
         bv[l2], bv_err[l2]
 pl.clf()
@@ -244,9 +248,9 @@ pl.errorbar(b, p, yerr=p_err, xerr=b_err, color=ocols[0], mec=ocols[0], fmt='.',
         ecolor='.7', capsize=0, label="$\mathrm{Hot~dwarfs}$", markersize=ms)
 pl.errorbar(b2, p2, yerr=p_err2, xerr=b_err2, color=ocols[3], mec=ocols[3], fmt='.', \
         ecolor='.7', capsize=0, label="$\mathrm{Subgiants}$", markersize=ms)
-pl.errorbar(vtbv, vtperiod, yerr=vtperiod_err, xerr=vtbv_err, color=ocols[1],\
+pl.errorbar(vtbv[lv], vtperiod[lv], yerr=vtperiod_err[lv], xerr=vtbv_err[lv], color=ocols[1],\
         mec=ocols[1], ecolor='.7', capsize=0, fmt='.', markersize=ms)
-pl.errorbar(cbv[:-5], cp[:-5], yerr=cp_err[:-5], xerr=cbv_err[:-5], color=ocols[1], \
+pl.errorbar(cbv[:-5][lc], cp[:-5][lc], yerr=cp_err[:-5][lc], xerr=cbv_err[:-5][lc], color=ocols[1], \
         mec=ocols[1], ecolor='.7', capsize=0, fmt='.', markersize=ms)
 pl.errorbar(cbv[-5:], cp[-5:], yerr=cp_err[-5:], xerr=cbv_err[-5:], color=ocols[1], \
         mec=ocols[1], ecolor='.7', capsize=0, fmt='.', markersize=ms)
@@ -300,6 +304,7 @@ pl.xlim(.2, 1.)
 pl.legend(loc="upper left")
 pl.xlabel("$\mathrm{B-V}$")
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")
+pl.ylim(0, 120)
 pl.xlim(.2, 1.)
 pl.legend(loc="upper left")
 pl.savefig("cool_stars4")

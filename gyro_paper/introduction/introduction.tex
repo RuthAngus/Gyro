@@ -36,17 +36,18 @@
 \label{intro}
 \subsection{Dating methods for field stars}
 
-Many fields of astronomy rely on stellar ages; the ages of planet hosts are necessary for planetary system evolution studies, for example.
-Unfortunately, ages are notoriously difficult to measure for main sequence (MS) stars---observable stellar properties evolve slowly on the MS and even high precision measurements often cannot pin down a star's age to within 20\% \citep{Soderblom2010}.
-The most reliable and precise age measurements available are for clusters, where isochrones can be fitted to an ensemble of coeval stars with a range of masses.
+Many fields of astronomy rely on measurements of the ages of Main Sequence (MS) stars.
+Take the particular example of exoplanets: age is required in order to understand dynamical evolution of planetary systems and the potential for habitability.
+Unfortunately, ages are notoriously difficult to measure for MS stars---observable stellar properties evolve slowly on the MS and even high precision measurements of spectroscopic properties often cannot pin down a star's age to within 20\% \citep{Soderblom2010}.
+The most reliable and precise age measurements available are for stars in clusters, where isochrones can be fitted to a coeval population with a range of masses.
 % These coeval populations provide a statistical ensemble of stars, with a range of masses, to which isochrones can be fitted.
 % Cluster ages can also be measured, or independantly verified, from their dynamical properties.
 Uncertainties on cluster ages are typically of order 10\%.
 Isochronally derived ages for field stars are much less precise than cluster ages and often have uncertainties of order 50\% or more.
-A few alternatives to isochrone fitting exist.
-Asteroseismology can provide age measurements for bright Solar-like oscillators, with typical uncertainties ranging from 10-35\%.
-Since the internal structure of stars evolve over time, asteroseismic measurements of stellar density yeild ages.
-For field stars which do not show high-signal-to-noise oscillations, or for which high precision photometry is not available, empirically calibrated dating methods can be used.
+However, some alternatives methods for dating field stars exist.
+% Asteroseismology can provide age measurements for bright Solar-like oscillators, with typical uncertainties ranging from 10-35\%.
+% Since the internal structure of stars evolve over time, asteroseismic measurements of stellar density yeild ages.
+% For field stars which do not show high-signal-to-noise oscillations, or for which high precision photometry is not available, empirically calibrated dating methods can be used.
 
 % set up likelihood as if you're going to ignore uncertainties.
 % Explain the fact that you can have samples falling in different regimes for the different stars.
@@ -59,30 +60,33 @@ For field stars which do not show high-signal-to-noise oscillations, or for whic
 
 \subsection{Gyrochronology}
 
-Mass loss via magnetised stellar winds is thought to cause magnetic breaking of MS stars \citep{Weber1967}.
-The rate of rotational period decay was quantified by \citet{Skumanich1972}, who observed $P_{rot} \propto \mathrm{Age}^0.5$.
-% \citet{Skumanich1972} quantified the decay of stellar activity and rotational period as proportional square-root of age.
-Later, \citet{Noyes1984_2} added a mass dependence was added to the period-activity-age relation: more massive stars were observed to spin down more slowly.
-This mass-dependent rotation period decay can be understood as stellar wind driven angular momentum loss.
-In angular momentum loss models, a stellar wind is assumed to corotate with the stellar surface out to the Alfv\'{e}n radius \citep{Weber1967}, at which point point it decouples and angular momentum is lost from the star.
+Mass loss via magnetised stellar winds causes magnetic breaking of MS stars \citep{Weber1967}.
+A dynamo-driven magnetic field, generated at the tachocline, the interface between radiative and convective zones, locks the stellar wind to the surface of the star.
+The stellar wind corotates with the stellar surface out to the Alfv\'{e}n radius, at which point point it decouples and angular momentum is lost from the star.
 The strength of the magnetic field at the stellar surface, and therefore the rate of angular momentum loss, is inversely proportional to rotation period \citep{Kawaler1988}.
 So although stellar populations are born with a range of rotation periods, the rapid rotators rapidly lose angular momentum and rotation periods converge onto a unique sequence.
 The timescale for convergence is around the age of the Hyades: 650 Myrs (\citealt{Radick1987}, \citealt{Irwin2009}).
 After this time rotation periods are \emph{independent} of their initial values.
 
-Note that the type of angular momentum evolution explored here can only be applied to F, G and K MS stars.
-M dwarf rotation periods evolve over extremely long timescales and they often have not converged onto the mass-period-age plane, even after several Gyrs.
+Note that the particular form of angular momentum evolution explored here can only be applied to F, G and K MS stars.
+M dwarfs have a different dynamo-driven magnetic field.
+Their rotation periods evolve over extremely long timescales and they often do not converge onto the mass-period-age plane, even after several Gyrs.
 Stars with effective temperatures $\gtrsim$ 6250 K have shallow convective zones - they are almost fully radiative - and, again, they have a different dynamo-driven magnetic field \citep{Kraft1967}.
 These massive stars retain their initial rotation period throughout their brief MS lifetimes and are therefore not suitable gyrochronology targets.
 
-The term `gyrochronology' was coined by \citet{Barnes2003} who calibrated the relation between period, colour and age of the form
+The rate of rotation period decay was first quantified by \citet{Skumanich1972}, who observed $P_{rot} \propto \mathrm{Age}^{\frac{1}{2}}$.
+% \citet{Skumanich1972} quantified the decay of stellar activity and rotational period as proportional square-root of age.
+Later, \citet{Noyes1984_2} added a mass dependence was added to the period-activity-age relation: more massive stars were observed to spin down more slowly.
+
+The term `gyrochronology' was coined by \citet{Barnes2003} who proposed an empirically motivated functional form for the relation between period, colour and age
 
 \begin{equation}
 P = A^n \times a(B-V-0.4)^b
 \label{eq:Barnes2007_2}
 \end{equation}
 
-where $P$, $A$, $B$ and $V$ are rotation period (in days), age (in Myr) and B and V band magnitudes respectively and $a$, $b$, and $n$ are free parameters.
+where $P$, $A$, $B$ and $V$ are rotation period (in days), age (in Myr) and B and V band magnitudes respectively
+$a$, $b$, and $n$ are constants.
 \citet{Barnes2007} used 8 young open clusters, aged between 30 and 650 Myrs to calibrate $f(B-V)$ and the Sun to calibrate $g(t)$.
 A minimum \chit fitting approach was used---taking observational uncertainties on rotational period measurements into account, but not those for age and colour measurements.
 Minimum \chit fitting also assumes uncertainties are Gaussian, which may not always be the case (although could be a reasonable approximation).
@@ -165,6 +169,8 @@ Precise effective temperatures and metallicities were obtained from \citet{Brunt
 % colour-mass relation is different for different compositions and this adds a level of systematic uncertainty.
 
 \subsection{Paper structure}
+
+This paper is laid out as follows: .....
 
 \bibliographystyle{plainnat}
 \bibliography{Gyro_paper}

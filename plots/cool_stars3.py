@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as pl
-from teff_bv import teff2bv_orig, bv2teff
+from teff_bv import teff2bv_err, bv2teff, teff2bv_orig
 
 plotpar = {'axes.labelsize': 20,
            'text.fontsize': 20,
@@ -18,19 +18,24 @@ subgiants = 3.9
 def model(pars, log_age, bv):
     return np.log10(pars[0]) + pars[1]*log_age + pars[2]*np.log10(bv-pars[3])
 
-data = np.genfromtxt('/Users/angusr/Python/Gyro/data/p_errs.txt').T
-period = data[1]
-period_err = data[2]
-teff = data[3]
-teff_err = data[4]
-age = data[13]
-age_err = data[14]
-logg = data[10]
-bv = teff2bv_orig(teff, logg, np.ones_like(teff)*-.2)
-bv_err = np.ones_like(bv)*0.01
-
-a_errp = age_err
-a_errm = age_err
+data = np.genfromtxt('/Users/angusr/Python/Gyro/data/garcia_all_astero.txt')
+teff = data[1]
+teff_err = data[2]
+age = data[3]
+age_errp = data[4]
+age_errm = data[5]
+age_err = .5*(age_errp+age_errm)
+period = data[6]
+period_err = data[7]
+logg = data[8]
+logg_errp = data[9]
+logg_errm = data[10]
+logg_err = .5*(logg_errp+logg_errm)
+feh = data[11]
+feh_err = data[11]
+bv, bv_err = teff2bv_err(teff, logg, feh, teff_err, logg_err, feh_err)
+a_errp = age_errp
+a_errm = age_errm
 p_err = period_err
 
 pl.clf()
@@ -185,6 +190,19 @@ pl.errorbar(age_sun, period_sun, xerr = age_sun_err, yerr = period_sun_err, \
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")
 pl.xlabel("$\mathrm{Age~(Gyr)}$")
 pl.xlim(0.1, 15)
-pl.ylim(0, 70)
+pl.ylim(0, 120)
 pl.legend(loc="upper right")
 pl.savefig('cool_stars8')
+
+# remove
+l3 = (logg > subgiants) * (bv > .45)
+pl.clf()
+pl.errorbar(age[l3], period[l3], xerr = (a_errp[l3], a_errm[l3]), yerr = p_err[l3], \
+            color = '.2', fmt = 'o', mec = '.2', capsize = 0, \
+    markersize = ms, ecolor = '0.8', label="$\mathrm{Cool~dwarfs}$")
+pl.ylabel("$P_{rot}~\mathrm{(days)}$")
+pl.xlabel("$\mathrm{Age~(Gyr)}$")
+pl.xlim(0.1, 15)
+pl.ylim(0, 80)
+pl.legend(loc="upper right")
+pl.savefig('cool_stars9')
