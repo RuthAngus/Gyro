@@ -139,7 +139,8 @@ pars3_err = np.array([.03, .03, .03, .00])
 # params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters45.txt').T # sun free
 # params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parametersgyrosun.txt').T
 # params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parametersgarcia.txt').T #
-params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_45.txt').T # current
+# params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_45.txt').T # current
+params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_45_2.txt').T # current
 params4 = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_50.txt').T # .5
 params5 = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_45acf.txt').T # .5
 params6 = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_40.txt').T # .5
@@ -227,18 +228,18 @@ for i, age in enumerate(ages):
     pl.plot(xs, ys, color='k', linestyle='-', linewidth=lw, \
             label = '$%s~\mathrm{Gyr}$~ \
             $\mathrm{Angus~\emph{et~al.}~(in~prep)}$' %ages[i], zorder=0)
-    xs, ys = iso_calc(pars4, ages[i])
-    pl.plot(xs, ys, color='k', linestyle='-', linewidth=lw, \
-            label = '$%s~\mathrm{Gyr}$~ \
-            $\mathrm{Angus~\emph{et~al.}~(in~prep)}$' %ages[i], zorder=0)
-    xs, ys = iso_calc(pars5, ages[i])
-    pl.plot(xs, ys, color='k', linestyle='-', linewidth=lw, \
-            label = '$%s~\mathrm{Gyr}$~ \
-            $\mathrm{Angus~\emph{et~al.}~(in~prep)}$' %ages[i], zorder=0)
-    xs, ys = iso_calc(pars6, ages[i])
-    pl.plot(xs, ys, color='k', linestyle='-', linewidth=lw, \
-            label = '$%s~\mathrm{Gyr}$~ \
-            $\mathrm{Angus~\emph{et~al.}~(in~prep)}$' %ages[i], zorder=0)
+#     xs, ys = iso_calc(pars4, ages[i])
+#     pl.plot(xs, ys, color='k', linestyle='-', linewidth=lw, \
+#             label = '$%s~\mathrm{Gyr}$~ \
+#             $\mathrm{Angus~\emph{et~al.}~(in~prep)}$' %ages[i], zorder=0)
+#     xs, ys = iso_calc(pars5, ages[i])
+#     pl.plot(xs, ys, color='k', linestyle='-', linewidth=lw, \
+#             label = '$%s~\mathrm{Gyr}$~ \
+#             $\mathrm{Angus~\emph{et~al.}~(in~prep)}$' %ages[i], zorder=0)
+#     xs, ys = iso_calc(pars6, ages[i])
+#     pl.plot(xs, ys, color='k', linestyle='-', linewidth=lw, \
+#             label = '$%s~\mathrm{Gyr}$~ \
+#             $\mathrm{Angus~\emph{et~al.}~(in~prep)}$' %ages[i], zorder=0)
     xs, ys1 = iso_calc(pars3-pars3_err, ages[i])
     xs, ys2 = iso_calc(pars3+pars3_err, ages[i])
 #     pl.fill_between(xs, ys1, ys2, facecolor=ocols[i], alpha=0.3, edgecolor='None', \
