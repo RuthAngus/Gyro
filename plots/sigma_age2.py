@@ -41,7 +41,8 @@ def iso_calc(pars, age):
     y = 10**log_period_model(pars, np.log10(age*1000), x)
     return x, y
 
-data = np.genfromtxt("/Users/angusr/Python/Gyro/data/all_astero.txt", skip_header=1).T
+# data = np.genfromtxt("/Users/angusr/Python/Gyro/data/all_astero.txt", skip_header=1).T
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/all_astero_plusgarcia.txt", skip_header=1).T
 
 # make up bv_errs
 c_err = .01
@@ -140,7 +141,7 @@ pars3_err = np.array([.03, .03, .03, .00])
 # params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parametersgyrosun.txt').T
 # params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parametersgarcia.txt').T #
 # params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_45.txt').T # current
-params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_45_2.txt').T # current
+params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_45_2acf.txt').T # current
 params4 = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_50.txt').T # .5
 params5 = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_45acf.txt').T # .5
 params6 = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_40.txt').T # .5

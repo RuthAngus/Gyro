@@ -18,7 +18,8 @@ subgiants = 3.9
 def model(pars, log_age, bv):
     return np.log10(pars[0]) + pars[1]*log_age + pars[2]*np.log10(bv-pars[3])
 
-data = np.genfromtxt('/Users/angusr/Python/Gyro/data/garcia_all_astero.txt')
+# data = np.genfromtxt('/Users/angusr/Python/Gyro/data/garcia_all_astero.txt')
+data = np.genfromtxt('/Users/angusr/Python/Gyro/data/all_astero_plusgarcia.txt')
 teff = data[1]
 teff_err = data[2]
 age = data[3]
@@ -203,6 +204,7 @@ pl.errorbar(age[l3], period[l3], xerr = (a_errp[l3], a_errm[l3]), yerr = p_err[l
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")
 pl.xlabel("$\mathrm{Age~(Gyr)}$")
 pl.xlim(0.1, 15)
-pl.ylim(0, 80)
+# pl.ylim(0, 80)
+pl.ylim(0, 65)
 pl.legend(loc="upper right")
 pl.savefig('cool_stars9')

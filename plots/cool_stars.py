@@ -37,7 +37,8 @@ def iso(age):
     yp = age**nmh * amh * (xp-cmh)**bmh
     return xp, yp
 
-data = np.genfromtxt('/Users/angusr/Python/Gyro/data/garcia_all_astero.txt')
+# data = np.genfromtxt('/Users/angusr/Python/Gyro/data/garcia_all_astero.txt')
+data = np.genfromtxt('/Users/angusr/Python/Gyro/data/all_astero_plusgarcia.txt')
 KID = data[0]
 teff = data[1]
 age = data[3]
@@ -282,7 +283,7 @@ p2, t2, p_err2, t_err2, b2, b_err2 = period[l2], bv[l2], period_err[l2], bv_err[
         bv[l2], bv_err[l2]
 pl.clf()
 pl.errorbar(b2, p2, yerr=p_err2, xerr=b_err2, color=ocols[1], mec=ocols[1], fmt='.', \
-        ecolor='.7', capsize=0, label="$\mathrm{Cool dwarfs}$", markersize=ms)
+        ecolor='.7', capsize=0, label="$\mathrm{Cool~dwarfs}$", markersize=ms)
 pl.errorbar(vtbv[lv], vtperiod[lv], yerr=vtperiod_err[lv], xerr=vtbv_err[lv], color=ocols[1],\
         mec=ocols[1], ecolor='.7', capsize=0, fmt='.', markersize=ms)
 pl.errorbar(cbv[:-5][lc1], cp[:-5][lc1], yerr=cp_err[:-5][lc1], xerr=cbv_err[:-5][lc1], color=ocols[1], \
@@ -304,7 +305,9 @@ pl.xlim(.2, 1.)
 pl.legend(loc="upper left")
 pl.xlabel("$\mathrm{B-V}$")
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")
-pl.ylim(0, 120)
-pl.xlim(.2, 1.)
+# pl.ylim(0, 120)
+pl.ylim(0, 65)
+# pl.xlim(.2, 1.)
+pl.xlim(.38, 1.)
 pl.legend(loc="upper left")
 pl.savefig("cool_stars4")
