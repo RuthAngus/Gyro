@@ -282,7 +282,7 @@ p2, t2, p_err2, t_err2, b2, b_err2 = period[l2], bv[l2], period_err[l2], bv_err[
         bv[l2], bv_err[l2]
 pl.clf()
 pl.errorbar(b2, p2, yerr=p_err2, xerr=b_err2, color=ocols[1], mec=ocols[1], fmt='.', \
-        ecolor='.7', capsize=0, label="$\mathrm{Subgiants}$", markersize=ms)
+        ecolor='.7', capsize=0, label="$\mathrm{Cool dwarfs}$", markersize=ms)
 pl.errorbar(vtbv[lv], vtperiod[lv], yerr=vtperiod_err[lv], xerr=vtbv_err[lv], color=ocols[1],\
         mec=ocols[1], ecolor='.7', capsize=0, fmt='.', markersize=ms)
 pl.errorbar(cbv[:-5][lc1], cp[:-5][lc1], yerr=cp_err[:-5][lc1], xerr=cbv_err[:-5][lc1], color=ocols[1], \
