@@ -38,6 +38,7 @@ bv, bv_err = teff2bv_err(teff, logg, feh, teff_err, logg_err, feh_err)
 a_errp = age_errp
 a_errm = age_errm
 p_err = period_err
+print period
 
 pl.clf()
 pl.errorbar(age, period, xerr = (a_errp, a_errm), yerr = p_err, \
@@ -197,10 +198,17 @@ pl.savefig('cool_stars8')
 
 # remove
 l3 = (logg > subgiants) * (bv > .45)
+l4 = (logg[-5:] > subgiants) * (bv[-5:] > .45)
+
 pl.clf()
 pl.errorbar(age[l3], period[l3], xerr = (a_errp[l3], a_errm[l3]), yerr = p_err[l3], \
             color = '.2', fmt = 'o', mec = '.2', capsize = 0, \
     markersize = ms, ecolor = '0.8', label="$\mathrm{Cool~dwarfs}$")
+pl.errorbar(age[-5:], period[-5:], xerr = (a_errp[-5:], a_errm[-5:]), yerr = p_err[-5:], \
+            color = 'b', fmt = 'o', mec = 'b', capsize = 0, \
+    markersize = ms, ecolor = 'b', label="$\mathrm{Cool~dwarfs}$")
+pl.errorbar(age_sun, period_sun, xerr = age_sun_err, yerr = period_sun_err, \
+            color = 'r', fmt = 'o', mec = 'r', capsize = 0, markersize = ms, ecolor = 'r')
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")
 pl.xlabel("$\mathrm{Age~(Gyr)}$")
 pl.xlim(0.1, 15)

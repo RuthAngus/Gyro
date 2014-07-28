@@ -59,7 +59,8 @@ def MC_errors(par, errp, errm, ap, ap_err, bv, bv_err, c, nsamp, xmodel, model):
 
     return mean, err
 
-result = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_45.txt').T
+# result = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_45.txt').T
+result = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_45_2acf.txt').T
 pars = result[0]
 errp = result[1]
 errm = result[2]

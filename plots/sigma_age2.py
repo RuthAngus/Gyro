@@ -42,7 +42,7 @@ def iso_calc(pars, age):
     return x, y
 
 # data = np.genfromtxt("/Users/angusr/Python/Gyro/data/all_astero.txt", skip_header=1).T
-data = np.genfromtxt("/Users/angusr/Python/Gyro/data/all_astero_plusgarcia.txt", skip_header=1).T
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/all_astero_plusgarcia.txt")
 
 # make up bv_errs
 c_err = .01
@@ -120,7 +120,7 @@ a_errm = np.concatenate((a_errm1, data[5]))
 logg = np.concatenate((logg1, data[6]))
 logg_err = np.concatenate((logg_err1, data[7]))
 
-ages = [.65, 1, 2, 3, 4.57, 6, 8, 10]
+ages = [.625, 1, 2, 3, 4.568, 6, 8, 10]
 
 pars = [.7725, .5189, .601, .4] # Barnes
 pars_err = [.0070, .011, .024, 0.]
@@ -197,6 +197,7 @@ for i, age in enumerate(ages):
     l12 = (a2-(a_errm2*sig) < age) * (age < a2+(a_errp2*sig)) # cool clusters
     l21 = (a1-(a_errm1*sig) < age) * (age < a1+(a_errp1*sig)) * (bv1 < .4) # hot astero
     l22 = (a2-(a_errm2*sig) < age) * (age < a2+(a_errp2*sig)) * (bv2 < .4) # hot clusters
+    sun = a2==4.568
 
     dist = distance2(a1, age, a_errp1)
     dist2 = distance2(a2, age, a_errp2)
@@ -205,52 +206,43 @@ for i, age in enumerate(ages):
     pl.clf()
     cm = pl.cm.get_cmap('Greys')
     pl.errorbar(bv1[l11], p1[l11], xerr=bv_err1[l11], yerr=p_err1[l11], color='k', \
-            fmt='o', mec='k', capsize=0, markersize=2, ecolor='.7', zorder=3)#, alpha=.05)
-#             fmt='o', mec='k', capsize=0, markersize=6, ecolor='k', zorder=3)#, alpha=.05)
-#     pl.scatter(bv1, p1, c=dist, cmap=cm, marker='o', s=30, zorder=2, \
-#             edgecolors='None', alpha=.6)
-#     pl.scatter(bv2, p2, c=dist2, cmap=cm, marker='^', s=40, zorder=1, \
-#             edgecolors='None', alpha=.6)
+            fmt='o', mec='k', capsize=0, markersize=2, ecolor='.7', zorder=3)
+    if age == 4.568:
+        print 'sun'
+        pl.errorbar(bv2[sun], p2[sun], xerr=bv_err2[sun], yerr=p_err2[sun], color='r', \
+                fmt='o', mec='r', capsize=0, markersize=3, ecolor='.7', zorder=3)
     pl.errorbar(bv2[l12], p2[l12], xerr=bv_err2[l12], yerr=p_err2[l12], color='r', \
-            fmt='^', mec='r', capsize=0, markersize=3, ecolor='0.7', zorder=0)#, alpha=.1)
-#             fmt='^', mec='k', capsize=0, markersize=6, ecolor='0.4', zorder=0)#, alpha=.1)
+            fmt='.', mec='r', capsize=0, markersize=8, ecolor='0.7', zorder=0)
 
     # Add Isochrones
     xs, ys = iso_calc(pars, ages[i])
-#     pl.plot(xs, ys, color=ocols[i], linestyle='-.', linewidth=lw, \
     pl.plot(xs, ys, color='k', linestyle='-.', linewidth=lw, \
             label='$%s~\mathrm{Gyr}$~$\mathrm{(Barnes~2007)}$' %ages[i], zorder=0)
     xs, ys = iso_calc(pars2, ages[i])
-#     pl.plot(xs, ys, color=ocols[i], linestyle='--', linewidth=lw, \
     pl.plot(xs, ys, color='k', linestyle='--', linewidth=lw, \
             label='$%s~\mathrm{Gyr}$~$\mathrm{(M\&H~2008)}$' %ages[i], zorder=0)
     xs, ys = iso_calc(pars3, ages[i])
-#     pl.plot(xs, ys, color = ocols[i], linestyle='-', linewidth=2, \
     pl.plot(xs, ys, color='k', linestyle='-', linewidth=lw, \
             label = '$%s~\mathrm{Gyr}$~ \
             $\mathrm{Angus~\emph{et~al.}~(in~prep)}$' %ages[i], zorder=0)
-#     xs, ys = iso_calc(pars4, ages[i])
-#     pl.plot(xs, ys, color='k', linestyle='-', linewidth=lw, \
-#             label = '$%s~\mathrm{Gyr}$~ \
-#             $\mathrm{Angus~\emph{et~al.}~(in~prep)}$' %ages[i], zorder=0)
-#     xs, ys = iso_calc(pars5, ages[i])
-#     pl.plot(xs, ys, color='k', linestyle='-', linewidth=lw, \
-#             label = '$%s~\mathrm{Gyr}$~ \
-#             $\mathrm{Angus~\emph{et~al.}~(in~prep)}$' %ages[i], zorder=0)
-#     xs, ys = iso_calc(pars6, ages[i])
-#     pl.plot(xs, ys, color='k', linestyle='-', linewidth=lw, \
-#             label = '$%s~\mathrm{Gyr}$~ \
-#             $\mathrm{Angus~\emph{et~al.}~(in~prep)}$' %ages[i], zorder=0)
+#     if age == 6.:
+#         tryage = 8.2
+#         xs, ys = iso_calc(pars3, tryage)
+#         pl.plot(xs, ys, color='k', linestyle='-', linewidth=.5, \
+#                 label = '$%s~\mathrm{Gyr}$~ \
+#                 $\mathrm{Angus~\emph{et~al.}~(in~prep)}$' %tryage, zorder=0)
+#         xs, ys1 = iso_calc(pars3-pars3_err, tryage)
+#         xs, ys2 = iso_calc(pars3+pars3_err, tryage)
+#         pl.fill_between(xs, ys1, ys2, facecolor='0.8', alpha=0.3, edgecolor='None', \
+#                 zorder=0)
     xs, ys1 = iso_calc(pars3-pars3_err, ages[i])
     xs, ys2 = iso_calc(pars3+pars3_err, ages[i])
-#     pl.fill_between(xs, ys1, ys2, facecolor=ocols[i], alpha=0.3, edgecolor='None', \
     pl.fill_between(xs, ys1, ys2, facecolor='0.5', alpha=0.3, edgecolor='None', \
             zorder=0)
 
     pl.xlabel("$\mathrm{B-V}$")
     pl.ylabel("$\mathrm{P_{rot} (days)}$")
     pl.xlim(.2, 1.)
-#     pl.xlim(.2, 1.52)
-    pl.ylim(0, 60)
+    pl.ylim(0, 70)
     pl.legend(loc='upper left')
     pl.savefig("p_vs_bv%s"%i)
