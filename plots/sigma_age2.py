@@ -120,7 +120,7 @@ a_errm = np.concatenate((a_errm1, data[5]))
 logg = np.concatenate((logg1, data[6]))
 logg_err = np.concatenate((logg_err1, data[7]))
 
-ages = [.625, 1, 2, 3, 4.568, 6, 8, 10]
+ages = [.6, 1, 2, 3, 4.568, 6, 8, 10]
 
 pars = [.7725, .5189, .601, .4] # Barnes
 pars_err = [.0070, .011, .024, 0.]
@@ -217,10 +217,10 @@ for i, age in enumerate(ages):
     # Add Isochrones
     xs, ys = iso_calc(pars, ages[i])
     pl.plot(xs, ys, color='k', linestyle='-.', linewidth=lw, \
-            label='$%s~\mathrm{Gyr}$~$\mathrm{(Barnes~2007)}$' %ages[i], zorder=0)
+            label='$%s~\mathrm{Gyr}$~$\mathrm{Barnes~(2007)}$' %ages[i], zorder=0)
     xs, ys = iso_calc(pars2, ages[i])
     pl.plot(xs, ys, color='k', linestyle='--', linewidth=lw, \
-            label='$%s~\mathrm{Gyr}$~$\mathrm{(M\&H~2008)}$' %ages[i], zorder=0)
+            label='$%s~\mathrm{Gyr}$~$\mathrm{M\&H~(2008)}$' %ages[i], zorder=0)
     xs, ys = iso_calc(pars3, ages[i])
     pl.plot(xs, ys, color='k', linestyle='-', linewidth=lw, \
             label = '$%s~\mathrm{Gyr}$~ \
