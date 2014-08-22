@@ -104,7 +104,7 @@ pl.errorbar(vtbv, vtp, xerr=vtbv_err, yerr=vtp_err, fmt='.', \
 pl.xlabel("$\mathrm{B-V}$")
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")
 # pl.ylim(0,70)
-pl.loglog()
+# pl.loglog()
 pl.savefig("p_vs_bv_paper2")
 
 pl.clf()

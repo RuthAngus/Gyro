@@ -23,6 +23,7 @@
 \newcommand{\gh}{$\hat{G}_n$}
 \newcommand{\yh}{$\hat{Y}_n$}
 \newcommand{\teffh}{$\hat{T}_n$}
+\newcommand{\chit}{$\chi^2$}
 
 \newcommand{\feh}{[Fe/H]}
 \newcommand{\dd}{\ensuremath{\,\mathrm{d}}}
@@ -252,58 +253,63 @@ Of those 153, 13 of them have precise asteroseismic ages from AMP modelling.
 \end{center}
 \end{figure}
 
-\subsection{Supplementary data}
+\citet{Garcia2014} use a combination of wavelet transforms and ACFs to measure the surface rotation periods of Kepler asteroseismic stars.
+They use a Morlet mother wavelet which is the convolution of a sinusoid and a Gaussian.
+They require that at least four full rotation periods are present in the data
+They use two sets of data: PDC-MAP and KADACS and two periodicity measurement methods: ACF and wavelet transform.
+They require all four of these possible data and analysis method combinations to be consistent to within 20\%.
+They then visually check the data.
+compute a wavelet transform for each light curve and project it onto the period axis, reinforcing the true period and suppresing harmonic and sub-harmonic signals.
+The details of this method are outlined in \citet{Mathur2014}.
 
-% 13 stars in our sample have  precise asteroseismic ages.
-% 7 of these are from \citet{Metcalfe2012} with spectroscopic effective temperatures, metallicities and log g from \citet{Bruntt2012} and 6 are from Silva-Aguirre (private communication).
-% The individual mode frequencies were measured for these stars, enabling a more detailed modelling of their interior structure and therefore yeilding a more precise age measurement.
-% An unfortunate disharmony exists between asteroseismology and gyrochronology.
-% Stellar rotation periods are easiest to measure for active, rapidly rotating stars, however these do not always make good asteroseismic targets.
+\subsection{Observational data}
 
-The asteroseismic sample covers a large range of ages (see figure \ref{fig:p_vs_a}), however they do not provide good mass coverage at all ages.
-There are very few stars with temperatures below 6000 K (B-V $\sim$ 0.55) and of the low mass stars, most of them are old.
-We therefore added 260 young cluster stars to our sample from NGC6811, the Hyades and Praesepe.
-{\color{red} Still need to add M37, Coma Ber, M11, M34, M35, M50, Pleiades, IC 2391, IC 2602}
+\citet{Chaplin2013} calculated the ages of 505 Kepler targets using the above scaling relations.
+A grid-based approach was used to measure stellar properties: values of $\Delta\nu$ were calculated for each R and M on the grid and compared with the observed $\Delta\nu$.
+Ages quoted in \citet{Chaplin2013} are the combined result of six different grid-based model pipelines.
+The uncertainties on the ages reflect discrepancies between results obtained using different sets.
+Two sets of effective temperatures were used: one was derived using an Infra-Red Flux Method (IRFM) calibration (\citealt{Casagrande2010}, \citealt{SilvaAguirre2012}) and the other from a recalibration of the SDSS griz filter KIC photometry by \citet{Pinsonneault2012} using Yale Rotating Stellar Evolution Code (YREC) models \citep{Demarque2004}.
+We use the second set of temperatures since they are slightly more precise, however our analysis is relatively insensitive to this choice.
+% test: is our analysis sensitive to this choice?
 
-M34:
-Rotation periods from \citet{Meibom2011_M34}. --- These don't have uncertainties!!!!
-We adopt an age of 225 $\pm$ 25 Myr from \citet{Jones1996}. (They actually report an age of 200-250 Myr)
+The asteroseismic ages in \citet{Chaplin2013} have typical uncertainties of $\sim$ 35\%; however, it will be possible to derive more precise ages for some of these stars.
+By measuring the frequency of each oscillation mode individually, not just the mean large serparation, one can build up a density profile of the star and provide a tighter constraint on its age.
+Ages derived from individual oscillation mode measurements can have uncertainties as small as 10\% (\citet{Brown1994}, \citet{SilvaAguirre2013}), however measuring frequencies for individual oscillation modes is a manual process and can only be applied in the highest signal-to-noise cases.
+\citet{Chaplin2013} predict that around 150 of the 505 stars will be suitable for this individual oscillation mode treatment.
+We obtained precise ages for 42 stars from \citet{Metcalfe2014}, modelled with the Asteroseismic Modeling Portal (AMP), with effective temperatures and metallicities from \citet{Bruntt2012}.
+% Of the 42 stars in \citep{Metcalfe2014}, we only integrate the `simple stars' (cool dwarfs) into our sample---we ignore the `F stars' and `mixed mode' (subgiant) stars as these are not expected to follow the simple gyrochronology relation.
+% {\color{red} Shouldn't I include these to be consistent?}
 
-Pleides:
-Rotation periods from \citet{Hartman2010}.
-Age of 100 $\pm$ 50 from \citet{Soderblom2009}.
+% Notes - apparently asteroseismic ages are easier to derive for older stars!
+% We are calibrating the relation between period, age and colour---this is different to the relation between period, age and mass because
+% colour-mass relation is different for different compositions and this adds a level of systematic uncertainty.
+The asteroseismic sample covers a large range of ages (see figure \ref{fig:p_vs_a}), however it does not provide good mass coverage across the entire range.
+There are very few stars with temperatures below 6000 K (B-V $\sim$ 0.55) and of the low mass stars, most of them are old (note---the paucity of massive, old stars is an effect of MS turn-off).
+We therefore added 261 stars to our sample from young clusters Coma Berenices (0.5 Gyr), Praesepe (0.588 Gyr), the Hyades (0.625 Gyr) and NGC6811 (1.1 Gyr) (see table \ref{tab:clusters}).
+We only added clusters with ages greater than 0.5 Gyrs as these younger clusters often have large populations of rapid rotators that have not yet converged onto the gyrochronology plane.
 
-Coma Ber:
-Rotation periods and colours from \citet{CollierCameron2009}.
-Convert j-k to B-V.
-Age of 500 $\pm$ 100 from \citet{Dobbie2009}.
-
-% \begin{deluxetable}{lcccccc}
-% \label{tab:results}
-% \tablewidth{0pc}
-% \tablecaption{Rotation periods and B-V colours for field binaries used in \citet{Mamajek2008}.
-% 	References: (1) \citet{Perryman1997}, (2) \citet{Donahue1996}, (3) \citet{Metcalfe2012}, (4) \citet{Ramirez2009}, (5) \citet{Henry2000}, (6) \citet{Moffet1979}, (7) \citet{Bazot2012}, (8) \citet{Yildiz2007}, (9) \citet{Mermilliod1986} (10) \citet{Hallam1991}, (11) \citet{Hoffleit1991}, (12) \citet{Mermilliod1991}}
-% \tablehead{
-% \colhead{ID (A)}&
-% \colhead{ID (B)}&
-% \colhead{Age (Gyr)}&
-% \colhead{\prot (A)}&
-% \colhead{\prot (B)}&
-% \colhead{B-V (A)}&
-% \colhead{B-V (B)}&
-% \colhead{refs}}
-% \startdata
-% HD 131156A & HD 131156B & & 6.31$^{+0.31}_{0.25}$ & 11.94$^{+1.25}_{-1.02}$ \footnote{Based on the maximum and minimum rotation periods measured.}& 0.73 & 1.16 & 1, 2\\
-% % HD 128620 & HD 128621 & 6 $\pm$ 1 & 25.6 & 36.9 & 0.63 & 0.84 & 3, 4, 5, 6, 7, 8, 9, 10\\
-% HD 128620 & HD 128621 & 6 $\pm$ 1 & 28.8 $\pm$ 2.5 & 38.7 $\pm$ 5.0 & 0.69 $\pm$ 0.01 & 0.90 $\pm$ 0.01 & 3, 4, 5, 6, 7, 8, 9, 10\\
-% HD 155886 & HD 155885 & & 20.69 & 21.11 & 0.85 & 0.86& 2, 10\\
-% HD 201091 & HD 201092 & & 35.37 & 37.84 & 1.07 & 1.31 & 1, 2\\
-% HD 219834A & HD 219834B & 42 & 43 & 0.79 & 0.90 & 11, 12\\
-% \enddata
-% \end{deluxetable}
+\begin{deluxetable}{lcccc}
+\label{tab:clusters}
+\tablewidth{0pc}
+\tablecaption{Clusters and References: (1) \citet{Soderblom2009}, (2) \citet{Hartman2010}, (3) \citet{Jones1996}, (4) \citet{Meibom2011_M34}, (5) \citet{Dobbie2009}, (6) \citet{CollierCameron2009}, (7) \citet{Khalaj2013}, (8) \citet{Kovacs2014}, (9) \citet{Perryman1998}, (10) \citet{Radick1987}, (11) \citet{Janes2011}, (12) \citet{Meibom2011}. NGC 6811 g-r colours were converted to dereddened B-V with $E_{(B-V)}$ = 0.1. The age of M 34 reported in \citet{Jones1996} is 200-250 Myr.}
+\tablehead{
+\colhead{Cluster}&
+\colhead{Age (Gyr)}&
+\colhead{Number of stars}&
+\colhead{Age ref}&
+\colhead{Rotation period ref}}
+\startdata
+% Pleides & 0.1 $\pm$ 0.05 & 1 & 2 \\
+% M 34 & 0.225 $\pm$ 0.025 & 3 & 4 \\
+Coma Ber & 0.5 $\pm$ 0.1 & 28 & 5 & 6 \\
+Praesepe & 0.588 $\pm$ 0.137 & 161 & 7 & 8 \\
+Hyades & 0.625 $\pm$ 0.05 & 22 & 9 & 10\\
+NGC 6811 & 1.1 $\pm$ 0.2 & 50 & 11 & 12 \\
+\enddata
+\end{deluxetable}
 
 \begin{deluxetable}{lccc}
-\label{tab:results}
+\label{tab:field_stars}
 \tablewidth{0pc}
 \tablecaption{Rotation periods and B-V colours for field stars with precise ages.
 References: (1) \citet{Metcalfe2012}, (2) \citet{Henry2000}, (3) \citet{Moffet1979}, (4) \citet{Li2012}, (5) \citet{Petit2008}, (6) \citet{Mermilliod1986}, (7) \citet{Bouvier2010}, (8) \citet{Donahue1996}, (9) \citet{Cox2000}, (10) \citet{Bazot2012}, (11) \citet{Yildiz2007}, (12) \citet{Hallam1991}, (13) \citet{Dumusque2012}.}
@@ -320,32 +326,6 @@ $\alpha$ Cen A & 6 $\pm$ 1$^{10,11}$ & 28.8 $\pm$ 2.5$^{12}$ & 0.69 $\pm$ 0.01$^
 $\alpha$ Cen B & 6 $\pm$ 1$^{10,11}$ & 38.7 $\pm$ 5.0$^{13}$ & 0.90 $\pm$ 0.01$^6$ \\
 \enddata
 \end{deluxetable}
-
-\begin{deluxetable}{lccc}
-\label{tab:results}
-\tablewidth{0pc}
-\tablecaption{Clusters and references.}
-\tablehead{
-\colhead{Cluster}&
-\colhead{Age (Gyr)}&
-\colhead{Age ref}&
-\colhead{Rotation period ref}}
-\startdata
-Pleides & 0.1 $\pm$ 0.05 & 1 & 2 \\
-M 34 & 0.225 $\pm$ 0.025 & 3 & 4 \\
-Coma Ber & 0.5 $\pm$ 0.1 & 5 & 6 \\
-Praesepe & 0.588 $\pm$ 0.137 & 7 & 8 \\
-Hyades & 0.625 $\pm$ 0.05 & 9 & 10 \\
-NGC 6811 & 1.1 $\pm$ 0.2 & 11 & 12 \\
-\enddata
-\tablecaption{References: (1) \citet{Soderblom2009}, (2) \citet{Hartman2010}, (3) \citet{Jones1996}, (4) \citet{Meibom2011_M34}, (5) \citet{Dobbie2009}, (6) \citet{CollierCameron2009}, (7) \citet{Khalaj2013}, (8) \citet{Kovacs2014}, (9) \citet{Perryman1998}, (10) \citet{Radick1987}, (11) \citet{Janes2011}, (12) \citet{Meibom2011}. NGC 6811 g-r colours were converted to dereddened B-V with $E_{(B-V)}$ = 0.1. The age of M 34 reported in \citet{Jones1996} is 200-250 Myr.}
-\end{deluxetable}
-
-% B and V colours for Praesepe were taken from the APASS database (http://www.aavso.org/apass).
-
-% Still to add: one star from Mathur, stars from Victor, travis.
-% Add table of clusters
-% Add table of our stars, measured additionally to Garcia.
 
 \begin{figure}[ht]
 \begin{center}
@@ -366,18 +346,20 @@ NGC 6811 & 1.1 $\pm$ 0.2 & 11 & 12 \\
 Rotation periods and B-V colours for the Hyades were obtained from \citet{Radick1987} and an age of 650 Myrs was adopted from \citet{Perryman1998}.
 NGC 6811 is a cluster in the Kepler field with an age of 1.1 $\pm$ 0.2 Gyr \citep{Janes2011} with photometric rotation periods for cluster members measured by \citet{Meibom2011}.
 These stars have g-r colours which were converted to dereddened B-V with $E_{(B-V)} = 0.1$.
-Rotation periods for the 590 Myr \citep{Khalaj2013} cluster Praesepe were published in \citet{Kovacs2014}, with B and V colours from the APASS database ((http://www.aavso.org/apass).
+Rotation periods for the 590 Myr \citep{Khalaj2013} cluster Praesepe were published in \citet{Kovacs2014}, with dereddened B and V colours from the APASS database ((http://www.aavso.org/apass).
 
-A further 5 field stars with precise age measurements were added to the sample: 16 Cyg B, Alpha Cen A and B, 18 Sco and, of course, the Sun.
+A further 5 field stars with precise age measurements were added to the sample: 16 Cyg B, Alpha Cen A and B, 18 Sco and, of course, the Sun (see table \ref{tab:field_stars}).
 An asteroseismic age for 16 Cyg B was obtained from \citet{Metcalfe2012}, $T_{eff}$ from \citet{Ramirez2009} and rotation period from \citet{Henry2000} with B and V colours from \citet{Moffett1979}.
 An age of 6 $\pm$ 1 Gyr was adopted for Alpha Cen AB, based on the analysis by \citet{Bazot2012} and \citet{Yildiz2007} (note that ages derived for Alpha Cen AB are extremely model dependent).
 B and V colours were obtained from \citet{Mermilliod1986} and rotation periods from \citet{Hallam1991} and \citet{Dumusque2012} for A and B, respectively.
-An age of 4.568 $\pm$ 0.001 Gyr for the Sun was taken from \citet{Bouvier2010}, and a rotation period from \citet{Donahue1996}, with same interpretation as in \citet{Mamajek2008}.
-% We also include the Sun as an old anchor datum, adopting a period of 26.09 days which is the latitudinal mean observed by Donahue et al. (1996) (the solar rotation ranges from ¿25 days near the equator to ¿32 days near the poles).
+An age of 4.568 $\pm$ 0.001 Gyr for the Sun was taken from \citet{Bouvier2010}, and a latitudinal mean rotation period, observed by \citet{Donahue1996}.
+% We also include the Sun as an old anchor datum, adopting a period of 26.09 days which is the latitudinal mean observed by Donahue et al. (1996) (the solar rotation ranges from ø25 days near the equator to ø32 days near the poles).
 The age of 3.66 $\pm$ 0.2 for 18 Sco was taken from \citet{Li2012}, with rotation period from \citet{Petit2008} and B and V colours from \citet{Mermilliod1986}.
 
 Despite having effective temperatures for the asteroseismic targets, we converted $T_{eff}$ to B-V colours, using the relation in \citet{Sekiguchi2000}---see figure \ref{fig:subfigures}.
-This conversion is imprecise since the metallicites of the asteroseismic targets are the field average and not calculated per star, however we concluded that converting $T_{eff}$ to colour would be more efficient than converting cluster star colours to $T_{eff}$, since we have more information about the asteroseismic sample.
+This conversion is imprecise since the metallicites of the asteroseismic targets are the field average and not calculated per star.
+Eventually we intend to provide an effective temperature calibration in addition to this colour calibration.
+% however we concluded that converting $T_{eff}$ to colour would be more efficient than converting cluster star colours to $T_{eff}$, since we have more information about the asteroseismic sample.
 
 The entire set of 418 stars is shown in figure \ref{fig:3d}. Asteroseismic targets are shown in black, with supplementary cluster and field stars in red.
 
@@ -741,51 +723,6 @@ We are entering an era where cluster studies and asteroseismology will deliver p
 The code used in this project can be found at https://github.com/RuthAngus/Gyro.
 We would like to thank Eric Mamajek, Marc Pinsonneault, Sydney Barnes, Steve Kawaler, Jerome Bouvier, Daniel Mortlock and David Hogg for useful insight and discussion.
 
-% \section{Appendix}
-%
-% \subsection{Probability theory}
-%
-% For the low-mass MS stars the joint probability can be factorised as:
-%
-% \begin{equation}
-%   p(\hat{A}_n,\hat{P}_n,\hat{C}_n,A_n,P_n,C_n,G_n|\theta) =
-%   p(A_n,P_n,C_n,G_n|\theta) p(\hat{A}_n|A_n)
-%   p(\hat{P}_n|P_n) p(\hat{C}_n|C_n) p(\hat{G}_n|G_n),
-% \label{eq:jointprob}
-% \end{equation}
-%
-% \begin{equation}
-% 	\propto p(A_n|P_n,C_n,G_n,\theta) p(\hat{A}_n|A_n)
-% 	p(\hat{P}_n|P_n)p(P_n) p(\hat{C}_n|C_n)p(C_n) p(\hat{G}_n|G_n)p(G_n) dA_n dP_n dC_n dG_n
-% \label{eq:jointprob}
-% \end{equation}
-%
-% and the marginalised likelihood for a single star can be written as the sum of the individual star likelihoods over the three different regimes, k:
-%
-% \begin{multline}
-% p(\hat{P}_n,\hat{A}_n,\hat{C}_n,\hat{G}_n|\theta,C_K)  = \\
-% \sum_{k=1}^3\int p(A_n,C_n,P_n,G_n|\theta,C_K)
-% p(\hat{A}_n|A_n) p(\hat{C}_n|C_n) p(\hat{P}_n|P_n) p(\hat{G}_n|G_n)
-% {\rm d}A_n {\rm d}C_n {\rm d}P_n {\rm d}G_n,
-% \end{multline}
-% \label{eq:L1}
-%
-% where $p(A_n,C_n,P_n,G_n|\theta,C_K)$ is different in the three regimes, as listed in table \ref{tab:jprob}.
-%
-% \begin{deluxetable}{lc}
-% \label{tab:jprob}
-% \tablewidth{0pc}
-% \tablecaption{Probability of hidden variables for the three populations.}
-% \tablehead{
-% \colhead{Regime}&
-% \colhead{Joint probability distribution}}
-% \startdata
-% Low mass, MS & $p(A_n,P_n,C_n,G_n|\theta) = p(C_n|C_K) p(G_n) p(P_n) p(A_n|C_n,P_n,\theta)$ \\
-% High mass, MS & $p(A_n,P_n,C_n,G_n|Y, V) = p(P_n) p(C_n) p(G_n) p(A_n|Y, V)$  \\
-% Subgiants & $p(A_n,P_n,C_n,G_n|Z, U) = p(C_n) p(G_n) p(P_n) p(A_n|Z, U)$ \\
-% \enddata
-% \end{deluxetable}
-
 \bibliographystyle{plainnat}
 \bibliography{Gyro_paper}
 
@@ -796,7 +733,7 @@ We would like to thank Eric Mamajek, Marc Pinsonneault, Sydney Barnes, Steve Kaw
 \label{fig:lc}
 \end{center}
 \end{figure}
-%
+
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/angusr/ACF/ACF2/PDCQ3_output/plots_acf/3429205_full.png}

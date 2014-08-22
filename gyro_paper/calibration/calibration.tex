@@ -36,19 +36,17 @@
 \subsection{The model}
 
 The 153 asteroseismic stars in our sample have B-V colours converted from effective temperatures, photometric rotation periods, P and asteroseismically derived ages, A and surface gravities, \logg (G).
-Each of these properties has an associated uncertainty, assumed to be independent and Gaussian for B-V and P and log-normal for A and G.
+Each measurement of these properties is assumed to be independent and has an associated uncertainty, assumed to be Gaussian.
+The assumption of independence breaks down in the case where there is significant systematic bias in the rotation period, colour or age measurement methods, however we do not expect very large biases, so we do not expect this to be a problem.
 The 265 cluster and field stars added to our sample do not have \logg values; however, since we only use \logg to separate the populations of subgiants and dwarfs (and we assume that the cluster and field stars are dwarfs) this shouldn't hurt our analysis.
 
-Hot stars and subgiants follow a different gyrochronology to MS dwarfs.
-Stars with effective temperatures above the Kraft-break, $T_{eff} \sim$ 6250 K, \citep{Kraft1967} do not have a thick convective envelope and cannot support a strong magnetic dynamo, so do not spin down appreciably during their MS lifetimes.
+Hot stars and subgiants follow a different gyrochronology relation to MS dwarfs: stars with effective temperatures above the Kraft-break, $T_{eff} \sim$ 6250 K, \citep{Kraft1967} do not have a thick convective envelope and cannot support a strong magnetic dynamo, so do not spin down appreciably during their MS lifetimes.
 Subgiants spin down rapidly as they expand, due to angular momentum conservation, and thus diverge from the gyrochronological mass-period-age plane.
 The point in their evolution at which they turn off the `gyrochronological MS turnoff' is difficult to define.
 Classically, MS turnoff is defined as the hottest point on a star's path on the HR diagram (before it ascends the giant branch) but theory predicts that evolving stars begin the process of spinning down relatively slowly after leaving the `classically defined' MS \citep{vanSaders2013}.
 For this reason we choose a very simple definition of MS turnoff---we use a \logg cut of 4.0 to differentiate dwarfs from giants.
-
 We do not simply exclude hot stars and subgiants from our sample during the modelling process---we model all three populations simultaneously.
 This allows for the fact that stars have some probability mass lying in all three regimes due to their large observational uncertainties.
-
 In addition to hot stars and subgiants, there is further population of contaminating stars in our sample: rapid rotators.
 Around 20 stars with rotation periods of less than $\sim$ 5 days do not lie on the standard gyrochronology mass-period-age plane.
 These stars could plausibly be synchronised binaries or stars with unseen, close-in, massive planets (\citet{Poppenhaeger2014}, \citet{Beky2014})
@@ -59,7 +57,6 @@ The hot MS stars are defined as those with B-V $<$ 0.45, corresponding to \teff 
 Since there is no dependence of age on rotation period for massive MS stars, their ages are modelled as a log-normal distribution with mean and standard deviation, Y and V, free parameters.
 Subgiant ages \emph{do} depend on period and $T_{eff}$; however, since we are not interested in the rotational properties of these stars for the purposes of gyrochronology calibration, we also model them with a log-normal distribution with mean and standard deviation, Z and U, free parameters.
 % We could model the subgiants with an analytic expression for age, given colour and period, such as the one in \citet{vanSaders2013}, however, we would like to remain as model \emph{independent} as possible throughout this process.
-
 We use a mixture model for the remaining two populations of cool MS stars: those that follow the gyrochronology relation and those with unusually fast rotation periods.
 The fast rotators are treated as 'outliers' and modelled with another log normal distribution with mean and standard deviation, X and U, again inferred from the data.
 In our mixture model an additional parameter, $P_b$, is the probability of each data point being an outlier.
