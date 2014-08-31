@@ -1,8 +1,9 @@
-\documentclass[10pt,preprint]{aastex}
+\documentclass[12pt,preprint]{aastex}
 \usepackage{amsmath}
 \usepackage{breqn}
 \usepackage{cite,natbib}
 \usepackage{natbib}
+\usepackage{verbatim}
 \usepackage{epsfig}
 \usepackage{cases}
 \usepackage[section]{placeins}
@@ -52,12 +53,12 @@ Among the available methods, gyrochronology is a powerful one because it require
 However, it is not well calibrated at late ages and suffers from large uncertainties.
 Asteroseismology provides age measurements for some of the brightest stars observed by Kepler.
 % We measured the photometric rotation periods of 153 stars with asteroseismic ages in order to calibrate the gyrochronology relations and improve upon current methods of measuring the ages of MS field stars. %pchange
-We use rotation periods measurements of 283 stars with asteroseismic ages and 237 cluster and field stars with precise age measurements to calibrate the gyrochronology relations.
-Advanced statistical methods are used to model the relationship between rotation period, age, and colour while accounting for measurement uncertainties in all three quantities.
+We use rotation periods measurements of 283 stars with asteroseismic ages and 265 cluster and field stars with precise age measurements to calibrate the gyrochronology relations.
+Advanced statistical methods are used to model the relationship between rotation period, age and colour while accounting for measurement uncertainties in all three quantities.
 Our sample includes both MS stars and subgiants, and straddles the Kraft break (only MS stars cooler than the Kraft break, $\sim$ 6250 K, are expected to follow gyrochronology relations); and this must be taken into account when modelling the data.
 Our method has been applied to the extended sample of published rotation periods for stars with reliable age measurements.
 It enables us to estimate an age for any cool MS star with a measured period and colour, along with an associated uncertainty that reflects both measurement errors and the intrinsic scatter in the gyrochronology relations.
-Uncertainties on stellar ages calculated with this new gyrochronology relation will typically be of order ...\%.
+Formal uncertainties on stellar ages calculated with this new gyrochronology relation will typically be of order ...\%.
 We find that this sample of asteroseismic stars does not fall neatly onto the mass-period-age plane---there is a significant level of intrinsic scatter.
 It is currently unclear whether this scatter is a manifestation of noisy data or if stars cease to be well described by gyrochronology in general, past a certain age.
 Uncertainties on the ages of this asteroseismic sample are of order 35\%---advancements in age measurement precision anticipated over the coming months will be key for our understanding of the applicability of gyrochronology.
@@ -66,20 +67,20 @@ Uncertainties on the ages of this asteroseismic sample are of order 35\%---advan
 
 \section{Introduction}
 \label{intro}
-
 \subsection{Dating methods for field stars}
 
-Many fields of astronomy rely on stellar ages; the ages of planet hosts are necessary for planetary system evolution studies, for example.
-Unfortunately, ages are notoriously difficult to measure for main sequence (MS) stars---observable stellar properties evolve slowly on the MS and even high precision measurements often cannot pin down a star's age to within 20\% \citep{Soderblom2010}.
-The most reliable and precise age measurements available are for clusters, where isochrones can be fitted to an ensemble of coeval stars with a range of masses.
-% These coeval populations provide a statistical ensemble of stars, with a range of masses, to which isochrones can be fitted.
-% Cluster ages can also be measured, or independantly verified, from their dynamical properties.
-Uncertainties on cluster ages are typically of order 10\%.
-Isochronally derived ages for field stars are much less precise than cluster ages and often have uncertainties of order 50\% or more.
-A few alternatives to isochrone fitting exist.
-Asteroseismology can provide age measurements for bright Solar-like oscillators, with typical uncertainties ranging from 10-35\%.
-Since the internal structure of stars evolve over time, asteroseismic measurements of stellar density yeild ages.
-For field stars which do not show high-signal-to-noise oscillations, or for which high precision photometry is not available, empirically calibrated dating methods can be used.
+Many fields of astronomy rely on precise age measurements of Main Sequence (MS) stars.
+Unfortunately, the ages of MS stars are notoriously difficult to measure---observable stellar properties evolve slowly on the MS and even with high precision measurements of spectroscopic properties, ages often cannot be determined accurately to within 20\% \citep{Soderblom2010}.
+Cluster stars have some of the most reliable and precise age measurements currently available, where isochrones can be fitted to a coeval population with a range of masses, resulting in age measurements with uncertainties often as low as 10\%.
+Isochronally derived field star ages on the other hand, are much less precise than this and often have uncertainties of order 50\% or more.
+Demand for age estimates of planet-hosting stars is high, but faint stars observed by Kepler are often expensive or impractical spectroscopic targets.
+Where high resolution spectra are unavailable, or an independantly derived age measurement is required, gyrochronology can be extrememly useful.
+Gyrochronology is a dating method that utilises the predictable rotation period evolution of intermediate mass, MS stars.
+It requires only knowledge of the rotation period---which is often easily extracted from Kepler light curves, and mass (or appropriate proxy) of a star.
+The current gyrochronology relations are entirely empirically calibrated and still need refining at large stellar ages.
+Kepler data provides the perfect opportunity to calibrate gyrochronology at late ages---it not only provides the means to measure surface rotation of thousands of stars, it also provides new age estimates for hundreds of stars via asteroseismology.
+We use new asteroseismic age measurements to improve the gyrochronology relations at late ages.
+% contributing a small advancement to the large problem of dating stars.
 
 % set up likelihood as if you're going to ignore uncertainties.
 % Explain the fact that you can have samples falling in different regimes for the different stars.
@@ -92,49 +93,44 @@ For field stars which do not show high-signal-to-noise oscillations, or for whic
 
 \subsection{Gyrochronology}
 
-Mass loss via magnetised stellar winds is thought to cause magnetic breaking of MS stars \citep{Weber1967}.
-The rate of rotational period decay was quantified by \citet{Skumanich1972}, who observed $P_{rot} \propto \mathrm{Age}^0.5$.
-% \citet{Skumanich1972} quantified the decay of stellar activity and rotational period as proportional square-root of age.
-Later, \citet{Noyes1984_2} added a mass dependence was added to the period-activity-age relation: more massive stars were observed to spin down more slowly.
-This mass-dependent rotation period decay can be understood as stellar wind driven angular momentum loss.
-In angular momentum loss models, a stellar wind is assumed to corotate with the stellar surface out to the Alfv\'{e}n radius \citep{Weber1967}, at which point point it decouples and angular momentum is lost from the star.
-The strength of the magnetic field at the stellar surface, and therefore the rate of angular momentum loss, is inversely proportional to rotation period \citep{Kawaler1988}.
-So although stellar populations are born with a range of rotation periods, the rapid rotators rapidly lose angular momentum and rotation periods converge onto a unique sequence.
+Mass loss via a magnetised stellar wind causes magnetic breaking of MS stars \citep{Weber1967}.
+A dynamo-driven magnetic field, generated at the tachocline---the interface between radiative and convective zones---locks the stellar wind to the surface of the star.
+The stellar wind corotates with the stellar surface out to the Alfv\'{e}n radius, at which point it decouples and angular momentum is lost from the star.
+The strength of the magnetic field at the surface, and therefore the rate of angular momentum loss, is inversely proportional to rotation period \citep{Kawaler1988}.
+Due to this dependence, although stellar populations are born with a range of rotation periods, the rapid rotators rapidly lose angular momentum and rotation periods converge onto a unique sequence.
 The timescale for convergence is around the age of the Hyades: 650 Myrs (\citealt{Radick1987}, \citealt{Irwin2009}).
 After this time rotation periods are \emph{independent} of their initial values.
-
-Note that the type of angular momentum evolution explored here can only be applied to F, G and K MS stars.
-M dwarf rotation periods evolve over extremely long timescales and they often have not converged onto the mass-period-age plane, even after several Gyrs.
+The form of angular momentum evolution described above and calibrated in this article can only be applied to F, G and K MS stars.
+Fully convective M dwarfs have a different dynamo-driven magnetic field.
+Their rotation periods evolve over extremely long timescales and they often do not converge onto the mass-period-age plane, even after several Gyrs.
 Stars with effective temperatures $\gtrsim$ 6250 K have shallow convective zones - they are almost fully radiative - and, again, they have a different dynamo-driven magnetic field \citep{Kraft1967}.
 These massive stars retain their initial rotation period throughout their brief MS lifetimes and are therefore not suitable gyrochronology targets.
 
-The term `gyrochronology' was coined by \citet{Barnes2003} who calibrated the relation between period, colour and age of the form
-
+The rate of rotation period decay for intermediate mass MS stars was first quantified by \citet{Skumanich1972}, who observed rotation period, lithium abundance and chromospheric activity to be proportional to $\mathrm{Age}^{\frac{1}{2}}$.
+% \citet{Skumanich1972} quantified the decay of stellar activity and rotational period as proportional square-root of age.
+Later, \citet{Noyes1984_2} added a mass dependence was added to the period-activity-age relation: more massive stars were observed to spin down more slowly.
+The term `gyrochronology' was coined by \citet{Barnes2003} who proposed an empirically motivated functional form for the relation between period, colour and age,
 \begin{equation}
-P = A^n \times a(B-V-0.4)^b
+P = A^n \times a(B-V-0.4)^b,
 \label{eq:Barnes2007_2}
 \end{equation}
+where $P$ is rotation period (in days), $A$ is age (in Myr), $B$ and $V$ are B and V band magnitudes respectively and $a$, $b$, and $n$ are constants.
+The discontinuity in the period-colour relation was set to be 0.4.
 
-where $P$, $A$, $B$ and $V$ are rotation period (in days), age (in Myr) and B and V band magnitudes respectively and $a$, $b$, and $n$ are free parameters.
-\citet{Barnes2007} used 8 young open clusters, aged between 30 and 650 Myrs to calibrate $f(B-V)$ and the Sun to calibrate $g(t)$.
-A minimum \chit fitting approach was used---taking observational uncertainties on rotational period measurements into account, but not those for age and colour measurements.
-Minimum \chit fitting also assumes uncertainties are Gaussian, which may not always be the case (although could be a reasonable approximation).
-Best-fit values of $n$, $a$ and $b$ are tabulated in \ref{tab:constants}.
-
+This gyrochronology relation was calibrated using open clusters.
+Clusters are invaluable calibration tools, however unfortunately the majority of nearby clusters are young---there is a significant dearth of precisely measured ages for old stars and it is for this reason that the current gyrochronology relations are poorly calibrated at late ages.
+\citet{Barnes2007} used 8 young open clusters, aged between 30 and 650 Myrs to calibrate the dependence of rotation period on mass, and the Sun to calibrate the dependence on age.
+Best-fit values of $n$, $a$ and $b$, reported in \citet{Barnes2007} are tabulated in \ref{tab:constants}.
 This relation was further calibrated by \citet{Mamajek2008} using updated rotation period and age measurements of stars in open clusters $\alpha$ Per \citep{Prosser1995}, Pleiades (\citealt{Prosser2005}; \citealt{Krishnamurthi1998}), M34 \citep{Meibom2011_M34}, and Hyades (\citealt{Radick1987}; \citealt{Prosser1995}; \citealt{Radick1995}; \citealt{Paulson2004}; Henry, priv. comm.).
-The Sun was used to determine the rotation period-age relation.
-\citet{Mamajek2008} only retained fits that reproduced the rotation period of the Sun to within 0.1 days.
-This approach relies on the Copernican principle---they assume that the Sun is a typical rotator for its mass and age.
-If this assumption is invalid (it is, at least, not well motivated) then their resulting gyrochronological relation will incorrectly predict ages of stars older than the Hyades.
-Once again the gyrochronology relation was treated as a separable function of colour and age and obtained minimum \chit best fit values of $n$, $a$ and $b$.
-Whereas \citet{Barnes2007} fixes the position of the `colour discontinuity' at 0.4, \citet{Mamajek2008} allow it to be a free parameter in their model, calling it `$c$'.
-Their best-fit values are also tabulated in \ref{tab:constants}.
-
-Open clusters are invaluable tools for calibrating gyrochronology.
-Unfortunately, the majority of nearby clusters are young---there is a significant dearth of precisely measured ages for old stars and it is for this reason that the current gyrochronology relations are poorly calibrated at late ages.
-The Kepler cluster study \citep{Meibom2011} aims to measure rotation periods for stars in all four open clusters in the Kepler field of view: NGC 6866 (0.5 Gyr), NGC 6811 (1.1 Gyr), NGC 6819 (2.5 Gyr) and NGC 6791 (9 Gyr).
-So far, rotation periods for 71 stars in NGC 6811 have been measured and member identification for the other three clusters is underway.
-Once completed, the older Kepler clusters will provide excellent anchors for gyrochronology.
+Once again, the Sun was used as an age anchor---a single data point specifying the shape of the period-age relation.
+Whereas \citet{Barnes2007} fixed the position of the `colour discontinuity' at 0.4, \citet{Mamajek2008} allow it to be a free parameter in their model, calling it `$c$'.
+The values of $n$, $a$ and $b$, resulting from their fit are tabulated in \ref{tab:constants}.
+% \citet{Mamajek2008} only retained fits that reproduced the rotation period of the Sun to within 0.1 days.
+% This approach relies on the Copernican principle---they assume that the Sun is a typical rotator for its mass and age.
+% If this assumption is invalid (it is, at least, not well motivated) then their resulting gyrochronological relation will incorrectly predict ages of stars older than the Hyades.
+In both of these studies a minimum \chit fitting approach was used.
+Simple minimum \chit fitting relies on the assumption that uncertainties are Gaussian, which may not always be the case (although could be a reasonable approximation) and only takes observational uncertainties on the dependent variable into account.
+As described later in this article, we adopt a fitting method that properly accounts for observational uncertainties on all three variables: colour, period and age.
 
 \begin{deluxetable}{lccc}
 \label{tab:constants}
@@ -157,8 +153,7 @@ n & $0.5189 \pm 0.0070$ & $0.566 \pm 0.008$ & $0.482~^{+0.013}_{0.030}$\\
 \label{sec:asteroseismic_targets}
 
 Acoustic (pressure) mode oscillations produce periodic luminosity variations on timescales of $\sim$ 5 minutes in Solar-like stars.
-These oscillations can be detected in short-cadence Kepler data---a fourier transform of the time series reveals a series of narrow peaks at discrete frequencies, overtones of high radial order, $n$.
-Non-radial oscillations with angular degree, $l$ are also detectable in Solar-like stars.
+These oscillations are detectable in short-cadence Kepler data---a fourier transform of the time series reveals a series of narrow peaks at discrete frequencies, overtones of high radial order, $n$.
 The frequency spacing, (or large frequency separation, $\Delta\nu_{nl} = \nu_{n+1l}-\nu_{nl}$) between consecutive overtones, $n$, of the same degree, $l$, is a fundamental asteroseismic observable.
 The series of peaks in the Fourier transform is modulated by a gaussian envelope, the maximum of which is another fundamental asteroseismic observable, $\nu_{\mathrm{max}}$.
 These two fundamental asteroseismic parameters together with effective temperature can be used, via the scaling relations below, to derive stellar masses and radii.
@@ -175,31 +170,29 @@ These two fundamental asteroseismic parameters together with effective temperatu
 
 In particular, the mean large frequency separation, $\Delta\nu$ is proportional to the mean stellar density---since stellar density changes over the MS lifetime of a star, this parameter enables us to measure ages.
 
-\citet{Chaplin2013} calculated the ages of 505 Kepler targets using the above scaling relations with estimates of $\Delta\nu$ and $\nu_{\mathrm{max}}$.
-A grid-based approach was used to measure stellar properties: values of $\Delta\nu$ were calculated for each R and M on the grid and compared with the observed $\Delta\nu$.
-Ages quoted in \citet{Chaplin2013} are the combined result of six different grid-based model pipelines.
-The uncertainties on the ages reflect discrepancies between results obtained using different sets.
-Two sets of effective temperatures were used: one was derived using an Infra-Red Flux Method (IRFM) calibration (\citealt{Casagrande2010}, \citealt{SilvaAguirre2012}) and the other from a recalibration of the SDSS griz filter KIC photometry by \citet{Pinsonneault2012} using Yale Rotating Stellar Evolution Code (YREC) models \citep{Demarque2004}.
-We use the second set of temperatures since they are slightly more precise.
-% test: is our analysis sensitive to this choice?
-
-The asteroseismic ages in \citet{Chaplin2013} have typical uncertainties of $\sim$ 35\%; however, it will be possible to derive more precise ages for some of these stars.
-By measuring the frequency of each oscillation mode individually, not just the mean large serparation, one can build up a density profile of the star and provide a tighter constraint on its age.
-Ages derived from individual oscillation mode measurements can have uncertainties as small as 10\% (\citet{Brown1994}, \citet{SilvaAguirre2013}), however measuring frequencies for individual oscillation modes is a manual process and can only be applied in the highest signal-to-noise cases.
-\citet{Chaplin2013} predict that around 150 of the 505 stars will be suitable for this individual oscillation mode treatment.
-We obtained precise ages for 42 stars from \citet{Metcalfe2014}, modelled with the Asteroseismic Modeling Portal (AMP) and 23 from Silva Aguirre (private communication).
-Precise effective temperatures and metallicities were obtained from \citet{Bruntt2012}.
-% Of the 42 stars in \citep{Metcalfe2014}, we only integrate the `simple stars' (cool dwarfs) into our sample---we ignore the `F stars' and `mixed mode' (subgiant) stars as these are not expected to follow the simple gyrochronology relation.
-% {\color{red} Shouldn't I include these to be consistent?}
-
+% \citet{Chaplin2013} calculated the ages of 505 Kepler targets using the above scaling relations.
+% A grid-based approach was used to measure stellar properties: values of $\Delta\nu$ were calculated for each R and M on the grid and compared with the observed $\Delta\nu$.
+% Ages quoted in \citet{Chaplin2013} are the combined result of six different grid-based model pipelines.
+% The uncertainties on the ages reflect discrepancies between results obtained using different sets.
+% Two sets of effective temperatures were used: one was derived using an Infra-Red Flux Method (IRFM) calibration (\citealt{Casagrande2010}, \citealt{SilvaAguirre2012}) and the other from a recalibration of the SDSS griz filter KIC photometry by \citet{Pinsonneault2012} using Yale Rotating Stellar Evolution Code (YREC) models \citep{Demarque2004}.
+% We use the second set of temperatures since they are slightly more precise, however our analysis is relatively insensitive to this choice.
+% % test: is our analysis sensitive to this choice?
+%
+% The asteroseismic ages in \citet{Chaplin2013} have typical uncertainties of $\sim$ 35\%; however, it will be possible to derive more precise ages for some of these stars.
+% By measuring the frequency of each oscillation mode individually, not just the mean large serparation, one can build up a density profile of the star and provide a tighter constraint on its age.
+% Ages derived from individual oscillation mode measurements can have uncertainties as small as 10\% (\citet{Brown1994}, \citet{SilvaAguirre2013}), however measuring frequencies for individual oscillation modes is a manual process and can only be applied in the highest signal-to-noise cases.
+% \citet{Chaplin2013} predict that around 150 of the 505 stars will be suitable for this individual oscillation mode treatment.
+% We obtained precise ages for 42 stars from \citet{Metcalfe2014}, modelled with the Asteroseismic Modeling Portal (AMP), with effective temperatures and metallicities from \citet{Bruntt2012}.
+% % Of the 42 stars in \citep{Metcalfe2014}, we only integrate the `simple stars' (cool dwarfs) into our sample---we ignore the `F stars' and `mixed mode' (subgiant) stars as these are not expected to follow the simple gyrochronology relation.
+% % {\color{red} Shouldn't I include these to be consistent?}
+%
 % Notes - apparently asteroseismic ages are easier to derive for older stars!
-% Probably don't want to include the youngest clusters since they have so much spread and haven't converged!
 % We are calibrating the relation between period, age and colour---this is different to the relation between period, age and mass because
 % colour-mass relation is different for different compositions and this adds a level of systematic uncertainty.
 
-\subsection{Paper structure}
-
-This paper is laid out as follows: .....
+This paper is laid out as follows: in \textsection\ref{section:supplementary} we describe the data.
+The rotation period measurement method is outlined in \textsection\ref{section:rotation_period_measurement} and our model fitting method is described in \textsection\ref{section:calibration}.
+The results are discussed in \textsection\ref{section:discussion}.
 
 \section{Rotation Period Measurements}
 \label{sec:rotation_period_measurement}
@@ -556,14 +549,15 @@ Figures \ref{fig:650} - \ref{fig:13gyr} show the new gyrochronology relation in 
 The shaded region shows the 16th and 84th percentile uncertainties of the new relation.
 The stars plotted have ages that fall within 1 $\sigma$ of the reference age.
 
-% % comment this out for now - slows down compile time cos it's so biiiig
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/noisy-plane/triangle45_2.png}
-\caption{Marginalised posterior probability distributions of all parameters in our model. The blue lines are centred on the maximum \emph{a posteriori} parameter values. This figure was made using triangle.py \citep{Foreman-Mackey_triangle}. {\color{red}Note - this is just a placeholder and not the final plot!}}
-\label{fig:triangle_full}
-\end{center}
-\end{figure}
+% % % comment this out for now - slows down compile time cos it's so biiiig
+% \begin{figure}[ht]
+% \begin{center}
+% % \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/noisy-plane/triangle45_2.png}
+% \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/noisy-plane/final_triangle.png}
+% \caption{Marginalised posterior probability distributions of all parameters in our model. The blue lines are centred on the maximum \emph{a posteriori} parameter values. This figure was made using triangle.py \citep{Foreman-Mackey_triangle}. {\color{red}Note - this is just a placeholder and not the final plot!}}
+% \label{fig:triangle_full}
+% \end{center}
+% \end{figure}
 
 % Figures \ref{fig:p_vs_bv_solar} and \ref{fig:p_vs_a_solar} show rotation period vs colour and age for stars that lie within 2 $\sigma$ of the Sun's colour and age: 0.65 and 4.568 Gyr.
 Figure \ref{fig:p_vs_bv_solar} shows rotation period vs colour for stars with age within 1 $\sigma$ of the Sun's: 4.568 Gyr.
@@ -701,7 +695,7 @@ We would like to thank Eric Mamajek, Marc Pinsonneault, Sydney Barnes, Steve Kaw
 \label{fig:lc}
 \end{center}
 \end{figure}
-%
+
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/angusr/ACF/ind_qs_figs/3223000.pdf}
@@ -709,5 +703,137 @@ We would like to thank Eric Mamajek, Marc Pinsonneault, Sydney Barnes, Steve Kaw
 \label{fig:ind_qs}
 \end{center}
 \end{figure}
+
+\begin{deluxetable}{lcccc}
+\label{tab:results}
+\tablewidth{0pc}
+\tablecaption{Rotation periods measured using the ACF method, with ages and temperatures.}
+\tablehead{
+\colhead{KIC ID}&
+\colhead{$P_{rot}$ (days)}&
+\colhead{Age (Gyr)}&
+\colhead{$T_{eff}$ (K)}&
+\colhead{log $g$}}
+\startdata
+2998253 & 6.76 $\pm$ 0.1 & 3.200$^{+2.100}_{-1.300}$ & 6333 $\pm$ 54 & 4.22$^{+0.03}_{-0.03}$ \\
+3223000 & 4.86 $\pm$ 0.0 & 3.300$^{+2.800}_{-2.200}$ & 6198 $\pm$ 47 & 4.35$^{+0.03}_{-0.03}$ \\
+3236382 & 3.57 $\pm$ 0.1 & 1.900$^{+0.500}_{-0.900}$ & 6831 $\pm$ 58 & 4.17$^{+0.01}_{-0.01}$ \\
+3633847 & 10.71 $\pm$ 0.2 & 4.900$^{+1.100}_{-1.000}$ & 6122 $\pm$ 51 & 4.00$^{+0.02}_{-0.02}$ \\
+3633889 & 4.28 $\pm$ 0.1 & 2.200$^{+1.100}_{-1.000}$ & 6452 $\pm$ 49 & 4.28$^{+0.01}_{-0.01}$ \\
+3733735 & 2.56 $\pm$ 0.0 & 1.100$^{+1.100}_{-0.700}$ & 6711 $\pm$ 66 & 4.27$^{+0.02}_{-0.02}$ \\
+3735871 & 11.22 $\pm$ 0.2 & 3.000$^{+3.000}_{-2.300}$ & 6176 $\pm$ 50 & 4.39$^{+0.02}_{-0.02}$ \\
+4543171 & 12.91 $\pm$ 0.2 & 3.800$^{+0.900}_{-0.800}$ & 6129 $\pm$ 59 & 4.11$^{+0.02}_{-0.02}$ \\
+4554830 & 7.73 $\pm$ 0.1 & 12.400$^{+3.100}_{-2.900}$ & 5466 $\pm$ 60 & 4.17$^{+0.01}_{-0.01}$ \\
+4638884 & 6.02 $\pm$ 0.2 & 2.900$^{+0.600}_{-0.800}$ & 6662 $\pm$ 57 & 4.04$^{+0.01}_{-0.01}$ \\
+4646780 & 4.43 $\pm$ 0.3 & 2.800$^{+0.600}_{-0.900}$ & 6856 $\pm$ 138 & 4.03$^{+0.02}_{-0.02}$ \\
+4756112 & 5.35 $\pm$ 0.2 & 3.600$^{+0.800}_{-0.800}$ & 6182 $\pm$ 60 & 3.74$^{+0.02}_{-0.02}$ \\
+5468089 & 11.01 $\pm$ 0.2 & 2.100$^{+1.000}_{-0.700}$ & 6728 $\pm$ 429 & 4.03$^{+0.02}_{-0.03}$ \\
+5689219 & 0.98 $\pm$ 0.0 & 3.000$^{+0.700}_{-0.700}$ & 6574 $\pm$ 54 & 4.07$^{+0.01}_{-0.01}$ \\
+5773345 & 11.04 $\pm$ 0.6 & 3.400$^{+0.600}_{-0.600}$ & 6214 $\pm$ 61 & 4.00$^{+0.01}_{-0.01}$ \\
+5774694 & 11.98 $\pm$ 0.1 & 0.000$^{+0.000}_{-0.000}$ & 5438 $\pm$ 144 & 0.00$^{+0.00}_{-0.00}$ \\
+6049366 & 9.49 $\pm$ 0.2 & 4.800$^{+0.900}_{-1.200}$ & 6220 $\pm$ 62 & 4.00$^{+0.02}_{-0.02}$ \\
+6232600 & 6.36 $\pm$ 0.2 & 2.300$^{+1.800}_{-1.300}$ & 6435 $\pm$ 70 & 4.27$^{+0.03}_{-0.03}$ \\
+6363365 & 8.97 $\pm$ 0.1 & 4.600$^{+1.800}_{-1.600}$ & 6282 $\pm$ 76 & 4.19$^{+0.02}_{-0.02}$ \\
+6448798 & 6.48 $\pm$ 0.1 & 3.800$^{+0.700}_{-1.300}$ & 6349 $\pm$ 67 & 3.83$^{+0.02}_{-0.02}$ \\
+6508366 & 3.74 $\pm$ 0.2 & 3.300$^{+1.000}_{-0.800}$ & 6499 $\pm$ 46 & 3.94$^{+0.01}_{-0.01}$ \\
+6520835 & 12.89 $\pm$ 0.2 & 4.300$^{+0.700}_{-1.200}$ & 6146 $\pm$ 50 & 3.90$^{+0.02}_{-0.02}$ \\
+6689943 & 11.51 $\pm$ 0.2 & 4.700$^{+1.000}_{-1.000}$ & 6011 $\pm$ 54 & 4.17$^{+0.01}_{-0.01}$ \\
+6853020 & 4.97 $\pm$ 0.2 & 4.400$^{+0.700}_{-1.600}$ & 6437 $\pm$ 56 & 3.96$^{+0.02}_{-0.02}$ \\
+7218053 & 3.58 $\pm$ 0.2 & 0.000$^{+0.000}_{-0.000}$ & 5985 $\pm$ 232 & 0.00$^{+0.00}_{-0.00}$ \\
+7386523 & 7.60 $\pm$ 0.3 & 5.500$^{+1.600}_{-0.700}$ & 5796 $\pm$ 67 & 3.86$^{+0.02}_{-0.02}$ \\
+7622208 & 3.30 $\pm$ 0.1 & 3.200$^{+1.700}_{-0.700}$ & 6606 $\pm$ 99 & 4.01$^{+0.01}_{-0.01}$ \\
+7668623 & 4.82 $\pm$ 2.4 & 4.100$^{+0.900}_{-1.200}$ & 6277 $\pm$ 48 & 3.86$^{+0.02}_{-0.02}$ \\
+7739672 & 11.93 $\pm$ 1.0 & 4.600$^{+2.300}_{-1.100}$ & 6069 $\pm$ 55 & 4.05$^{+0.02}_{-0.03}$ \\
+7771282 & 11.80 $\pm$ 0.3 & 3.200$^{+1.400}_{-0.700}$ & 6407 $\pm$ 74 & 4.12$^{+0.02}_{-0.02}$ \\
+7910848 & 12.33 $\pm$ 0.3 & 6.300$^{+1.900}_{-2.200}$ & 6074 $\pm$ 56 & 4.09$^{+0.03}_{-0.02}$ \\
+8016496 & 10.95 $\pm$ 0.2 & 3.200$^{+0.700}_{-0.800}$ & 6446 $\pm$ 73 & 3.98$^{+0.01}_{-0.01}$ \\
+8174981 & 17.79 $\pm$ 2.1 & 4.000$^{+1.200}_{-0.700}$ & 6065 $\pm$ 53 & 3.95$^{+0.01}_{-0.02}$ \\
+8179536 & 5.44 $\pm$ 1.6 & 1.800$^{+1.200}_{-0.900}$ & 6418 $\pm$ 50 & 4.27$^{+0.01}_{-0.01}$ \\
+8216936 & 3.13 $\pm$ 0.1 & 3.400$^{+1.300}_{-0.700}$ & 6437 $\pm$ 50 & 4.01$^{+0.02}_{-0.02}$ \\
+8249189 & 3.19 $\pm$ 0.0 & 3.400$^{+1.500}_{-0.800}$ & 6432 $\pm$ 65 & 4.09$^{+0.03}_{-0.03}$ \\
+8289241 & 8.12 $\pm$ 0.1 & 4.000$^{+1.900}_{-1.500}$ & 6306 $\pm$ 52 & 4.24$^{+0.02}_{-0.02}$ \\
+8367710 & 3.89 $\pm$ 0.6 & 3.400$^{+0.800}_{-0.800}$ & 6352 $\pm$ 66 & 3.98$^{+0.01}_{-0.01}$ \\
+8379927 & 17.29 $\pm$ 0.1 & 1.200$^{+1.200}_{-1.000}$ & 6034 $\pm$ 74 & 4.40$^{+0.01}_{-0.01}$ \\
+8408931 & 18.45 $\pm$ 0.3 & 2.900$^{+0.700}_{-1.200}$ & 6252 $\pm$ 120 & 3.70$^{+0.02}_{-0.02}$ \\
+8414062 & 11.31 $\pm$ 0.3 & 2.900$^{+1.100}_{-0.700}$ & 6578 $\pm$ 61 & 4.10$^{+0.02}_{-0.02}$ \\
+8435400 & 6.85 $\pm$ 0.3 & 3.100$^{+1.200}_{-0.700}$ & 6322 $\pm$ 59 & 3.86$^{+0.02}_{-0.02}$ \\
+8491374 & 11.08 $\pm$ 0.4 & 3.300$^{+1.500}_{-0.700}$ & 6520 $\pm$ 65 & 3.99$^{+0.02}_{-0.02}$ \\
+8516041 & 7.96 $\pm$ 0.3 & 4.800$^{+2.400}_{-1.900}$ & 6214 $\pm$ 65 & 4.25$^{+0.02}_{-0.02}$ \\
+8579578 & 3.51 $\pm$ 3.4 & 3.800$^{+1.100}_{-0.900}$ & 6308 $\pm$ 45 & 3.91$^{+0.02}_{-0.02}$ \\
+8656342 & 1.44 $\pm$ 0.0 & 6.200$^{+1.800}_{-2.200}$ & 6074 $\pm$ 71 & 4.07$^{+0.03}_{-0.02}$ \\
+8696343 & 10.40 $\pm$ 0.2 & 3.400$^{+2.500}_{-1.700}$ & 6178 $\pm$ 65 & 4.33$^{+0.01}_{-0.02}$ \\
+8950146 & 8.52 $\pm$ 0.2 & 2.300$^{+1.700}_{-1.100}$ & 6374 $\pm$ 60 & 4.27$^{+0.02}_{-0.02}$ \\
+8952800 & 13.80 $\pm$ 0.6 & 3.900$^{+1.000}_{-0.600}$ & 6122 $\pm$ 55 & 3.95$^{+0.01}_{-0.01}$ \\
+9093289 & 6.86 $\pm$ 0.2 & 3.700$^{+2.200}_{-1.400}$ & 6285 $\pm$ 57 & 4.20$^{+0.02}_{-0.02}$ \\
+9098294 & 19.22 $\pm$ 0.7 & 6.700$^{+2.800}_{-2.200}$ & 6020 $\pm$ 51 & 4.31$^{+0.01}_{-0.01}$ \\
+9116461 & 3.09 $\pm$ 0.0 & 1.400$^{+1.500}_{-1.100}$ & 6470 $\pm$ 47 & 4.32$^{+0.01}_{-0.02}$ \\
+9163769 & 3.17 $\pm$ 0.0 & 2.200$^{+1.000}_{-0.600}$ & 6438 $\pm$ 100 & 4.19$^{+0.02}_{-0.02}$ \\
+9202077 & 14.99 $\pm$ 0.8 & 3.800$^{+0.700}_{-0.800}$ & 6119 $\pm$ 70 & 4.00$^{+0.01}_{-0.01}$ \\
+9225600 & 8.37 $\pm$ 0.2 & 4.100$^{+1.100}_{-0.900}$ & 6262 $\pm$ 56 & 4.05$^{+0.02}_{-0.02}$ \\
+9226926 & 2.21 $\pm$ 0.0 & 1.800$^{+0.500}_{-0.800}$ & 7149 $\pm$ 132 & 4.17$^{+0.02}_{-0.02}$ \\
+9287845 & 10.00 $\pm$ 0.5 & 3.000$^{+0.900}_{-0.900}$ & 6488 $\pm$ 62 & 3.90$^{+0.02}_{-0.02}$ \\
+9289275 & 11.43 $\pm$ 0.4 & 3.700$^{+0.900}_{-0.600}$ & 6227 $\pm$ 48 & 4.07$^{+0.01}_{-0.01}$ \\
+9328372 & 3.78 $\pm$ 0.1 & 2.900$^{+1.000}_{-0.700}$ & 6572 $\pm$ 80 & 4.09$^{+0.02}_{-0.02}$ \\
+9390670 & 3.54 $\pm$ 0.2 & 4.300$^{+1.400}_{-1.100}$ & 6246 $\pm$ 50 & 4.09$^{+0.02}_{-0.02}$ \\
+9414417 & 10.73 $\pm$ 0.2 & 4.700$^{+0.600}_{-1.200}$ & 6278 $\pm$ 52 & 4.00$^{+0.02}_{-0.01}$ \\
+9446628 & 9.97 $\pm$ 1.9 & 4.300$^{+0.800}_{-1.100}$ & 6298 $\pm$ 59 & 3.97$^{+0.02}_{-0.02}$ \\
+9579208 & 5.27 $\pm$ 0.1 & 3.600$^{+1.400}_{-0.600}$ & 6422 $\pm$ 56 & 4.02$^{+0.01}_{-0.01}$ \\
+9697131 & 6.34 $\pm$ 0.3 & 3.200$^{+0.800}_{-0.800}$ & 6491 $\pm$ 69 & 4.02$^{+0.01}_{-0.02}$ \\
+9702369 & 11.67 $\pm$ 0.6 & 2.000$^{+1.000}_{-0.800}$ & 6431 $\pm$ 50 & 4.26$^{+0.01}_{-0.01}$ \\
+9715099 & 4.75 $\pm$ 2.1 & 4.000$^{+1.000}_{-0.700}$ & 6225 $\pm$ 53 & 3.78$^{+0.02}_{-0.02}$ \\
+9762786 & 2.35 $\pm$ 1.0 & 3.400$^{+1.500}_{-0.800}$ & 6482 $\pm$ 52 & 3.99$^{+0.01}_{-0.01}$ \\
+9812421 & 12.00 $\pm$ 0.2 & 4.100$^{+1.500}_{-1.500}$ & 5265 $\pm$ 63 & 3.56$^{+0.01}_{-0.01}$ \\
+9812850 & 5.06 $\pm$ 0.2 & 3.700$^{+1.300}_{-0.700}$ & 6407 $\pm$ 47 & 4.05$^{+0.01}_{-0.02}$ \\
+10016239 & 4.83 $\pm$ 0.1 & 1.100$^{+1.100}_{-0.900}$ & 6482 $\pm$ 51 & 4.32$^{+0.01}_{-0.01}$ \\
+10024648 & 10.53 $\pm$ 7.7 & 3.200$^{+0.700}_{-0.800}$ & 6409 $\pm$ 157 & 3.99$^{+0.01}_{-0.01}$ \\
+10025841 & 11.63 $\pm$ 0.1 & 9.000$^{+4.600}_{-3.900}$ & 5738 $\pm$ 187 & 4.10$^{+0.03}_{-0.02}$ \\
+10186764 & 11.29 $\pm$ 0.2 & 3.100$^{+1.500}_{-0.600}$ & 6488 $\pm$ 74 & 4.09$^{+0.01}_{-0.02}$ \\
+10322381 & 12.82 $\pm$ 0.4 & 2.800$^{+1.500}_{-1.100}$ & 6464 $\pm$ 63 & 4.21$^{+0.03}_{-0.03}$ \\
+10324098 & 10.28 $\pm$ 0.2 & 3.700$^{+0.600}_{-1.000}$ & 6370 $\pm$ 68 & 3.91$^{+0.01}_{-0.01}$ \\
+10355856 & 4.50 $\pm$ 0.1 & 2.800$^{+0.500}_{-0.700}$ & 6558 $\pm$ 56 & 4.09$^{+0.01}_{-0.01}$ \\
+10454113 & 14.53 $\pm$ 0.2 & 2.700$^{+1.500}_{-1.200}$ & 6197 $\pm$ 45 & 4.31$^{+0.01}_{-0.01}$ \\
+10462940 & 9.10 $\pm$ 0.3 & 2.200$^{+1.700}_{-1.400}$ & 6265 $\pm$ 48 & 4.32$^{+0.02}_{-0.02}$ \\
+10610027 & 1.73 $\pm$ 0.0 & 1.800$^{+1.400}_{-0.700}$ & 6704 $\pm$ 58 & 4.22$^{+0.02}_{-0.02}$ \\
+10655953 & 6.59 $\pm$ 0.1 & 0.800$^{+1.200}_{-0.800}$ & 6594 $\pm$ 61 & 4.33$^{+0.02}_{-0.02}$ \\
+10727922 & 11.59 $\pm$ 0.2 & 4.400$^{+0.800}_{-1.200}$ & 6319 $\pm$ 66 & 3.96$^{+0.02}_{-0.02}$ \\
+10794845 & 1.41 $\pm$ 0.0 & 1.200$^{+1.800}_{-1.200}$ & 6398 $\pm$ 55 & 4.38$^{+0.02}_{-0.02}$ \\
+10959362 & 15.75 $\pm$ 1.1 & 5.300$^{+1.600}_{-0.700}$ & 5806 $\pm$ 94 & 3.84$^{+0.02}_{-0.02}$ \\
+10972252 & 12.08 $\pm$ 0.7 & 2.800$^{+1.300}_{-0.500}$ & 6237 $\pm$ 60 & 3.86$^{+0.01}_{-0.02}$ \\
+11081729 & 2.72 $\pm$ 0.0 & 1.200$^{+0.800}_{-0.600}$ & 6605 $\pm$ 51 & 4.26$^{+0.01}_{-0.01}$ \\
+11133100 & 8.74 $\pm$ 0.4 & 3.800$^{+1.000}_{-1.400}$ & 6222 $\pm$ 51 & 3.85$^{+0.03}_{-0.03}$ \\
+11229052 & 8.10 $\pm$ 0.5 & 2.800$^{+1.500}_{-1.000}$ & 6495 $\pm$ 51 & 4.20$^{+0.01}_{-0.02}$ \\
+11919192 & 3.70 $\pm$ 0.2 & 2.300$^{+1.000}_{-0.600}$ & 6788 $\pm$ 81 & 3.92$^{+0.02}_{-0.02}$ \\
+11962180 & 12.79 $\pm$ 0.3 & 3.800$^{+1.100}_{-0.800}$ & 6329 $\pm$ 80 & 3.98$^{+0.02}_{-0.02}$ \\
+11971746 & 5.24 $\pm$ 0.1 & 6.000$^{+4.000}_{-1.700}$ & 5952 $\pm$ 75 & 4.21$^{+0.02}_{-0.02}$ \\
+12009504 & 9.45 $\pm$ 0.2 & 2.900$^{+0.900}_{-0.700}$ & 6270 $\pm$ 61 & 4.22$^{+0.01}_{-0.01}$ \\
+12258514 & 14.26 $\pm$ 0.6 & 5.200$^{+2.200}_{-0.900}$ & 5990 $\pm$ 85 & 4.11$^{+0.01}_{-0.02}$ \\
+9139151 & 11.56 $\pm$ 0.2 & 2.800$^{+2.800}_{-2.000}$ & 6134 $\pm$ 48 & 4.37$^{+0.02}_{-0.02}$ \\
+9410862 & 23.12 $\pm$ 0.5 & 3.400$^{+1.900}_{-1.500}$ & 6230 $\pm$ 53 & 4.32$^{+0.01}_{-0.01}$ \\
+7871531 & 35.49 $\pm$ 2.0 & 11.800$^{+4.000}_{-6.200}$ & 5378 $\pm$ 57 & 4.48$^{+0.02}_{-0.02}$ \\
+9025370 & 24.59 $\pm$ 2.3 & 13.100$^{+3.400}_{-5.400}$ & 5659 $\pm$ 73 & 4.39$^{+0.02}_{-0.01}$ \\
+11414712 & 36.41 $\pm$ 1.1 & 5.300$^{+1.300}_{-0.700}$ & 5673 $\pm$ 61 & 3.79$^{+0.01}_{-0.01}$ \\
+5955122 & 18.26 $\pm$ 6.1 & 5.000$^{+0.800}_{-0.600}$ & 5930 $\pm$ 55 & 3.88$^{+0.01}_{-0.01}$ \\
+7940546 & 11.45 $\pm$ 0.3 & 3.800$^{+1.000}_{-0.600}$ & 6350 $\pm$ 111 & 3.99$^{+0.01}_{-0.01}$ \\
+11026764 & 34.02 $\pm$ 1.6 & 5.700$^{+0.700}_{-0.600}$ & 5722 $\pm$ 57 & 3.88$^{+0.01}_{-0.01}$ \\
+10068307 & 19.60 $\pm$ 0.4 & 4.000$^{+0.800}_{-0.700}$ & 6332 $\pm$ 45 & 3.94$^{+0.01}_{-0.01}$ \\
+1435467 & 6.91 $\pm$ 0.2 & 4.700$^{+0.700}_{-1.700}$ & 6433 $\pm$ 86 & 4.09$^{+0.02}_{-0.01}$ \\
+7103006 & 4.65 $\pm$ 0.3 & 3.400$^{+1.200}_{-0.700}$ & 6421 $\pm$ 51 & 4.01$^{+0.01}_{-0.02}$ \\
+2837475 & 3.69 $\pm$ 0.6 & 1.900$^{+0.400}_{-0.700}$ & 6688 $\pm$ 57 & 4.17$^{+0.01}_{-0.01}$ \\
+7206837 & 4.07 $\pm$ 0.0 & 3.000$^{+1.000}_{-0.800}$ & 6392 $\pm$ 59 & 4.17$^{+0.01}_{-0.01}$ \\
+3424541 & 6.77 $\pm$ 0.3 & 2.900$^{+1.100}_{-0.800}$ & 6475 $\pm$ 66 & 3.82$^{+0.02}_{-0.02}$ \\
+8018599 & 15.59 $\pm$ 0.1 & 2.900$^{+0.800}_{-0.600}$ & 6013 $\pm$ 62 & 3.58$^{+0.02}_{-0.02}$ \\
+10147635 & 20.72 $\pm$ 0.5 & 3.300$^{+0.700}_{-1.300}$ & 6155 $\pm$ 66 & 3.75$^{+0.02}_{-0.01}$ \\
+4931390 & 15.20 $\pm$ 0.2 & 1.000$^{+0.800}_{-0.600}$ & 6557 $\pm$ 51 & 4.27$^{+0.01}_{-0.01}$ \\
+2852862 & 20.57 $\pm$ 0.3 & 3.000$^{+0.700}_{-0.700}$ & 6417 $\pm$ 58 & 3.96$^{+0.01}_{-0.01}$ \\
+5450445 & 13.57 $\pm$ 0.3 & 3.600$^{+0.600}_{-0.700}$ & 6212 $\pm$ 49 & 3.99$^{+0.01}_{-0.01}$ \\
+5371516 & 5.50 $\pm$ 0.1 & 3.700$^{+1.000}_{-0.800}$ & 6350 $\pm$ 81 & 3.97$^{+0.01}_{-0.01}$ \\
+9512063 & 22.97 $\pm$ 0.9 & 5.100$^{+1.400}_{-0.700}$ & 5977 $\pm$ 58 & 3.88$^{+0.02}_{-0.02}$ \\
+7680114 & 27.62 $\pm$ 0.9 & 8.100$^{+3.000}_{-2.400}$ & 5800 $\pm$ 56 & 4.17$^{+0.01}_{-0.01}$ \\
+5950854 & 41.88 $\pm$ 4.5 & 8.400$^{+3.100}_{-2.700}$ & 5913 $\pm$ 61 & 4.24$^{+0.01}_{-0.01}$ \\
+11401708 & 16.24 $\pm$ 0.3 & 4.100$^{+0.500}_{-0.500}$ & 5859 $\pm$ 63 & 3.77$^{+0.01}_{-0.01}$ \\
+7216846 & 62.68 $\pm$ 1.9 & 4.200$^{+1.200}_{-1.300}$ & 5124 $\pm$ 84 & 3.59$^{+0.01}_{-0.02}$ \\
+4346201 & 22.30 $\pm$ 0.8 & 3.800$^{+0.600}_{-0.800}$ & 6147 $\pm$ 51 & 3.97$^{+0.01}_{-0.01}$ \\
+\enddata
+\end{deluxetable}
 
 \end{document}

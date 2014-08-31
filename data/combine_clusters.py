@@ -23,6 +23,10 @@ a = data[4]
 a_err = data[5]
 a_errp = data[5]
 a_errm = data[5]
+flag = np.ones_like(data[0])*4
+
+pl.clf()
+pl.errorbar(bv, p, xerr=bv_err, yerr=p_err, fmt='r.', ecolor='r')
 
 # add praesepe
 data = np.genfromtxt('/Users/angusr/Python/Gyro/data/praesepe.txt').T
@@ -35,6 +39,9 @@ a = np.concatenate((a, np.ones_like(data[5])*.588))
 a_err = np.concatenate((a_err, np.ones_like(data[5])*.137))
 a_errp = np.concatenate((a_errp, np.ones_like(data[5])*.137))
 a_errm = np.concatenate((a_errm, np.ones_like(data[5])*.137))
+flag = np.concatenate((flag, np.ones_like(data[5])*5))
+
+pl.errorbar((data[5]-data[6]), (1./data[3]), xerr=(np.ones_like(data[5])*c_err), yerr=((1./data[3])*(data[4]/data[3])), fmt='b.', ecolor='b')
 
 # add NGC6811
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/NGC6811.txt", skip_header=44).T
@@ -48,6 +55,9 @@ a = np.concatenate((a, np.ones_like(data[3])*1.1))
 # a_err = np.concatenate((a_err, np.ones_like(data[3])*.1))
 a_err = np.concatenate((a_err, np.ones_like(data[3])*.2))
 # print np.mean(data[4]/data[3])
+flag = np.concatenate((flag, np.ones_like(data[1])*6))
+
+pl.errorbar(mbv, data[3], xerr=np.ones_like(mbv)*c_err, yerr=data[4], fmt='g.', ecolor='g')
 
 # add Coma Berenices
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/ComaBer_bv.txt").T
@@ -57,6 +67,10 @@ bv = np.concatenate((bv, data[1]))
 bv_err = np.concatenate((bv_err, np.ones_like(data[1])*c_err))
 a = np.concatenate((a, np.ones_like(data[0])*.5))
 a_err = np.concatenate((a_err, np.ones_like(data[0])*.1))
+flag = np.concatenate((flag, np.ones_like(data[0])*7))
+
+pl.errorbar(data[1], data[0], xerr=np.ones_like(data[1])*c_err, yerr=data[0]*pe, fmt='y.', ecolor='y')
+pl.show()
 
 # # add the Pleiades
 # data = np.genfromtxt("/Users/angusr/Python/Gyro/data/pleiades.txt", skip_header=1).T
@@ -84,6 +98,7 @@ p = np.concatenate((p, data[2]))
 p_err = np.concatenate((p_err, data[3]))
 a = np.concatenate((a, data[4]))
 a_err = np.concatenate((a_err, data[5]))
+flag = np.concatenate((flag, np.ones_like(data[0])*8))
 
 # add field stars (convert to lists first)
 bv = list(bv)
@@ -92,6 +107,7 @@ p = list(p)
 p_err = list(p_err)
 a = list(a)
 a_err = list(a_err)
+flag = list(flag)
 
 # add 18sco
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/18sco.txt", skip_header=2).T
@@ -101,6 +117,7 @@ p.append(data[2])
 p_err.append(data[3])
 a.append(data[4])
 a_err.append(data[5])
+flag.append(8)
 
 # add 16cygB
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/16CygB.txt", skip_header=2).T
@@ -110,6 +127,7 @@ p.append(data[2])
 p_err.append(data[3])
 a.append(data[4])
 a_err.append(data[5])
+flag.append(8)
 
 bv = np.array(bv)
 bv_err = np.array(bv_err)
@@ -122,7 +140,7 @@ a_err = np.array(a_err)
 logg = np.ones_like(bv)*g
 logg_err = np.ones_like(bv)*g_err
 
-data = np.zeros((8, len(bv)+1))
+data = np.zeros((9, len(bv)+1))
 data[0,:-1] = bv
 data[1,:-1] = bv_err
 data[2,:-1] = p
@@ -131,11 +149,13 @@ data[4,:-1] = a
 data[5,:-1] = a_err
 data[6,:-1] = logg
 data[7,:-1] = logg_err
+data[8,:-1] = flag
 
 # add the sun
 datasun = list(np.genfromtxt("/Users/angusr/Python/Gyro/data/sun.txt", skip_header=2).T)
 datasun.append(4.5)
 datasun.append(logg_err[-1])
+datasun.append(8)
 datasun = np.array(datasun)
 data[:,-1] = datasun
 
