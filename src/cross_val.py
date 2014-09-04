@@ -9,13 +9,13 @@ from gyro_like import period_model
 def period_model(par, age, bv, c):
     return par[0] * (age*1e3)**par[1] * (bv-.45)**par[2]
 
-def scoring(fname, test):
+def scoring(fname, n, test):
     # load test data
     a_test, age_err, age_errp, a_errm, p_test, p_err, bv_test, bv_err, g, g_err, \
             g_errp, g_errm, flag = load_dat(fname, test, cv=True)
 
     # load parameters from training data
-    data = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters%s.txt'%fname).T
+    data = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters%s%s.txt'%(n,fname)).T
     pars = data[0][:3]
 
     # calculate score

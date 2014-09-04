@@ -199,12 +199,15 @@ The results are discussed in \textsection\ref{section:discussion}.
 
 The Kepler light curves of the 505 asteroseismic targets display quasi-periodic variations on timescales corresponding to rotational periods of the stars.
 Flux variations are produced by active regions on the stellar surface, rotating in and out of view.
-In order to measure periodic signals in the light curves we used the auto-correlation function (ACF) method, developed by \citet{McQuillan2013}.
+% In order to measure periodic signals in the light curves we used the auto-correlation function (ACF) method, developed by \citet{McQuillan2013}.
+We use rotation periods from \citet{Garcia2014} who use a combination of autocorrelation and wavelet transforms to measure surface rotation of the Kepler asteroseismic targets.
 An autocorrelation function describes the self-similarity of a light curve at a range of lags and the highest peak in the ACF (usually also the first peak) is centered on the dominant periodic signal in the time series.
 As an alternative to the standard Fourier decomposition and least-squares fitting of sinusoidal models \citep{Zechmeister}, autocorrelation is better suited to signals that are not sinusoidal or strictly periodic and is more effective at distinguishing a true signal from its harmonics and sub-harmonics.
 For a more detailed description of the advantages of the ACF method over sine-fitting periodograms, see \citet{McQuillan}.
 
-Long cadence PDC-MAP data were used throughout this analysis (\citet{Smith_2012}, \citet{Stumpe_2012}).
+\citet{Garcia2014} used the Simple Aperture Photometry (SAP) data \citep{Thompson2013} and KADACS data to measure rotation periods.
+Therefore, we use Simple Aperture Photometry (SAP) time se- ries (Thompson et al. 2013) and we correct outliers, jumps, and drifts following the procedures described in Garc ¿¿a et al. (2011), usually denoted as KADACS (Kepler Asteroseismic Data Analysis and Calibration Software) light curves. These data are high-pass filtered using two triangular smoothing func- tions with cut-off periods at 30 and 100 days. The latter pro- duces noisier light curves than the 30-days one. Therefore we use the smaller filter when the results are the same and we flag in Table 2 the results obtained with the 100-day-filter light curves. Moreover, to minimize the dependency of the correction soft- ware, we also use Kepler light curves processed using ¿Pre Data Conditioning Maximum a Posteriori¿ methods (PDC-MAP, e.g. Thompson et al. 2013). Unfortunately, this methodology works in a quarter-by-quarter basis, which filters all periods close to 90 days, as well as, sometimes, everything longer than 20 days with a growing attenuation for periods longer than 3 days.
+% Long cadence PDC-MAP data were used throughout this analysis (\citet{Smith_2012}, \citet{Stumpe_2012}).
 The PDC-MAP data are the product of an initial systematics removal process applied by the Kepler team, in which large-scale linear trends are removed in order to improve planet transit search and modelling capability.
 PDC-MAP data are not, however, optimised to preserve stellar variability: periodic signals longer than around 30 days are reduced in power.
 Additionally, light curves still contain large systematic features, such as the exponential decays that appear after telescope shutdowns, which affect period measurement precision.
@@ -628,7 +631,7 @@ SKF with all data
 4 & 1, 2, 3 \& 5 & 10.582 \\
 5 & 1, 2, 3 \& 4 & 9.381 \\
 SKF with Hyades and Coma Ber only & & \\
-1 & 2, 3, 4 \& 5 & \\
+1 & 2, 3, 4 \& 5 & 12.246 \\
 2 & 1, 3, 4 \& 5 & \\
 3 & 1, 2, 4 \& 5 & \\
 4 & 1, 2, 3 \& 5 & \\
