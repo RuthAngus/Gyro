@@ -27,14 +27,17 @@ def scoring(fname, test):
     return np.sqrt((np.sum((p_test[l] - p_pred[l])**2))/n)
 
 if __name__ == "__main__":
-    trains = ['p_PF45', 'CF45', 'NF45', 'HF45']
-    tests = ['CANH', 'APNH', 'CAPH', 'CAPN']
+#     trains = ['p_PF45', 'CF45', 'NF45', 'HF45']
+    trains = ['CF45', 'HF45']
+#     tests = ['CANH', 'APNH', 'CAPH', 'CAPN']
+#     tests = ['A', 'A', 'A', 'A']
+    tests = ['AC', 'AH']
     RMS = []
 
     for i in range(len(tests)):
         # load test data
         a_test, age_err, age_errp, a_errm, p_test, p_err, bv_test, bv_err, g, g_err, \
-                g_errp, g_errm, flag = load_dat(tests[i])
+                g_errp, g_errm, flag = load_dat(tests[i], False, False)
 
         # load parameters from training data
         data = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters%s.txt'%trains[i]).T
