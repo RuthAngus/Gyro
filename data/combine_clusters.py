@@ -24,6 +24,7 @@ a_err = data[5]
 a_errp = data[5]
 a_errm = data[5]
 flag = np.ones_like(data[0])*4
+print len(bv)
 
 pl.clf()
 pl.errorbar(bv, p, xerr=bv_err, yerr=p_err, fmt='r.', ecolor='r')
@@ -40,6 +41,7 @@ a_err = np.concatenate((a_err, np.ones_like(data[5])*.137))
 a_errp = np.concatenate((a_errp, np.ones_like(data[5])*.137))
 a_errm = np.concatenate((a_errm, np.ones_like(data[5])*.137))
 flag = np.concatenate((flag, np.ones_like(data[5])*5))
+print len(bv), len(data[0])
 
 pl.errorbar((data[5]-data[6]), (1./data[3]), xerr=(np.ones_like(data[5])*c_err), yerr=((1./data[3])*(data[4]/data[3])), fmt='b.', ecolor='b')
 
@@ -56,6 +58,7 @@ a = np.concatenate((a, np.ones_like(data[3])*1.1))
 a_err = np.concatenate((a_err, np.ones_like(data[3])*.2))
 # print np.mean(data[4]/data[3])
 flag = np.concatenate((flag, np.ones_like(data[1])*6))
+print len(bv), len(data[0])
 
 pl.errorbar(mbv, data[3], xerr=np.ones_like(mbv)*c_err, yerr=data[4], fmt='g.', ecolor='g')
 
@@ -68,6 +71,7 @@ bv_err = np.concatenate((bv_err, np.ones_like(data[1])*c_err))
 a = np.concatenate((a, np.ones_like(data[0])*.5))
 a_err = np.concatenate((a_err, np.ones_like(data[0])*.1))
 flag = np.concatenate((flag, np.ones_like(data[0])*7))
+print len(bv), len(data[0])
 
 pl.errorbar(data[1], data[0], xerr=np.ones_like(data[1])*c_err, yerr=data[0]*pe, fmt='y.', ecolor='y')
 pl.show()

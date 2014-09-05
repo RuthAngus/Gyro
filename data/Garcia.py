@@ -56,8 +56,10 @@ print len(KID)
 
 # load victor and travis data and replace
 data = np.genfromtxt("vandt.txt", skip_header=1).T
+n=0
 for i, kid in enumerate(data[0]):
     l = KID==kid
+    print KID[l]
     t[l] = data[1][i]
     t_err[l] = data[2][i]
     a[l] = data[3][i]
@@ -71,6 +73,8 @@ for i, kid in enumerate(data[0]):
     feh[l] = data[11][i]
     feh_err[l] = data[12][i]
     flag[l] = 2
+    n+=1
+print n, 'n'
 
 l = (a!=0) * (t!=0)
 data = np.zeros((14, len(KID[l])))
