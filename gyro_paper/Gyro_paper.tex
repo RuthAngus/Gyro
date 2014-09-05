@@ -200,23 +200,35 @@ The results are discussed in \textsection\ref{section:discussion}.
 The Kepler light curves of the 505 asteroseismic targets display quasi-periodic variations on timescales corresponding to rotational periods of the stars.
 Flux variations are produced by active regions on the stellar surface, rotating in and out of view.
 % In order to measure periodic signals in the light curves we used the auto-correlation function (ACF) method, developed by \citet{McQuillan2013}.
-We use rotation periods from \citet{Garcia2014} who use a combination of autocorrelation and wavelet transforms to measure surface rotation of the Kepler asteroseismic targets.
+We use rotation periods from \citet{Garcia2014} who used a combination of autocorrelation and wavelet transforms to measure surface rotation of the Kepler asteroseismic targets.
 An autocorrelation function describes the self-similarity of a light curve at a range of lags and the highest peak in the ACF (usually also the first peak) is centered on the dominant periodic signal in the time series.
 As an alternative to the standard Fourier decomposition and least-squares fitting of sinusoidal models \citep{Zechmeister}, autocorrelation is better suited to signals that are not sinusoidal or strictly periodic and is more effective at distinguishing a true signal from its harmonics and sub-harmonics.
 For a more detailed description of the advantages of the ACF method over sine-fitting periodograms, see \citet{McQuillan}.
 
-\citet{Garcia2014} used the Simple Aperture Photometry (SAP) data \citep{Thompson2013} and KADACS data to measure rotation periods.
-Therefore, we use Simple Aperture Photometry (SAP) time se- ries (Thompson et al. 2013) and we correct outliers, jumps, and drifts following the procedures described in Garc ¿¿a et al. (2011), usually denoted as KADACS (Kepler Asteroseismic Data Analysis and Calibration Software) light curves. These data are high-pass filtered using two triangular smoothing func- tions with cut-off periods at 30 and 100 days. The latter pro- duces noisier light curves than the 30-days one. Therefore we use the smaller filter when the results are the same and we flag in Table 2 the results obtained with the 100-day-filter light curves. Moreover, to minimize the dependency of the correction soft- ware, we also use Kepler light curves processed using ¿Pre Data Conditioning Maximum a Posteriori¿ methods (PDC-MAP, e.g. Thompson et al. 2013). Unfortunately, this methodology works in a quarter-by-quarter basis, which filters all periods close to 90 days, as well as, sometimes, everything longer than 20 days with a growing attenuation for periods longer than 3 days.
+\citet{Garcia2014} used both Simple Aperture Photometry (SAP) data \citep{Thompson2013}, detrended using the Kepler Asteroseismic Data Analysis and Calibration Software (KADACS) \citep{Garcia2011} and Pre-Data Conditioning Maximum \emph{a Posteriori} (PDC-MAP) data in their analysis.
+Moreover, to minimize the dependency of the correction soft- ware, we also use Kepler light curves processed using ¿Pre Data Conditioning Maximum a Posteriori¿ methods (PDC-MAP, e.g. Thompson et al. 2013).
+Unfortunately, this methodology works in a quarter-by-quarter basis, which filters all periods close to 90 days, as well as, sometimes, everything longer than 20 days with a growing attenuation for periods longer than 3 days.
 % Long cadence PDC-MAP data were used throughout this analysis (\citet{Smith_2012}, \citet{Stumpe_2012}).
 The PDC-MAP data are the product of an initial systematics removal process applied by the Kepler team, in which large-scale linear trends are removed in order to improve planet transit search and modelling capability.
-PDC-MAP data are not, however, optimised to preserve stellar variability: periodic signals longer than around 30 days are reduced in power.
+PDC-MAP data are not, however, optimised to preserve stellar variability: in particular, periodic signals longer than around 20 days are reduced in power.
 Additionally, light curves still contain large systematic features, such as the exponential decays that appear after telescope shutdowns, which affect period measurement precision.
-The Astrophysically Robust Correction (ARC), a detrending method developed by \citet{Roberts2013}, is better at preserving astrophysical signals, however, it has not yet been applied to all Kepler quarters, so we opt to use PDC-MAP.
-% {\color{red} So why are we still using it then?! - explain!}
-% Note - I HAVE done some injection tests... could talk about these, although it would probably involve quite a lot more work...
+For this reason, \citet{Garcia2014} chose to use their own set of KADACS light curves in addition to the PDC-MAP data.
+The Astrophysically Robust Correction (ARC) is another detrending method, developed by \citet{Roberts2013}, which preserves astrophysical signals.
+However, it has not yet been applied to all Kepler quarters.
 
-In our implementation of the ACF method the first two peaks in the ACF were identified and the central value of the first peak was temporarily accepted as the period (unless the second peak was higher than the first in which case {\it its} central value was taken).
+\citet{Garcia2014} use a combination of a wavelet transform method and an ACF method to measure the surface rotation periods of Kepler asteroseismic stars.
+A wavelet power spectrum of each light curve calculated, using a Morlet mother wavelet, and then projected along the period axis to produce a global wavelet power spectrum (GWPS).
+This projection reinforces the height of the fundamental peak and reduces those of the harmonic and sub-harmonic peaks.
+The GWPS method is outlined in detail in \citep{Mathur2014}.
+A Gaussian profile is fitted to each peak in the GWPS.
+The highest peak is selected as the rotation period and the uncertainty quoted on the period measurement the half width of half maximum (HWHM) of the Gaussian profile.
+The GWPS provides an indication of whether a persistent sinusoidal pattern, commensurate with star spot modulation is present in the light curves, allowing the authors to eliminate signals produced by light curve glitches.
+\citet{Garcia2014} only report rotation periods for stars with at least four full sinusoidal modulations in their light curves.
+The GWPS and ACF methods are applied to both PDC-MAP and KADACS light curves.
+They ensure that at least two of the four possible light curve and method combinations return rotation periods consistent to within 20\%.
+A visual check is performed to confirm that the measured period is representative of the timescale of variability in the light curves and report final rotation periods measured from KADACS light curves using the GWPS method with HWHM uncertainties.
 
+% In our implementation of the ACF method the first two peaks in the ACF were identified and the central value of the first peak was temporarily accepted as the period (unless the second peak was higher than the first in which case {\it its} central value was taken).
 Note that an important advantage of the ACF method over a periodogram approach is in its ability to differentiate between harmonic signals produced by multiple active regions on the stellar surface from the true periodic signal: these scenarios usually produce ACFs in which the second peak is higher than the first.
 Subsequent peaks in the ACF lying within 10\% of an integer multiple of the period were identified.
 The final, reported period is calculated from the mean separation between peaks that lie at integer multiples of the period and the uncertainty on the period is calculated from the distribution of central peak values.
@@ -248,15 +260,6 @@ Of those 153, 13 of them have precise asteroseismic ages from AMP modelling.
 \label{fig:p_vs_a}
 \end{center}
 \end{figure}
-
-\citet{Garcia2014} use a combination of wavelet transforms and ACFs to measure the surface rotation periods of Kepler asteroseismic stars.
-They use a Morlet mother wavelet which is the convolution of a sinusoid and a Gaussian.
-They require that at least four full rotation periods are present in the data
-They use two sets of data: PDC-MAP and KADACS and two periodicity measurement methods: ACF and wavelet transform.
-They require all four of these possible data and analysis method combinations to be consistent to within 20\%.
-They then visually check the data.
-compute a wavelet transform for each light curve and project it onto the period axis, reinforcing the true period and suppresing harmonic and sub-harmonic signals.
-The details of this method are outlined in \citet{Mathur2014}.
 
 \subsection{Observational data}
 
