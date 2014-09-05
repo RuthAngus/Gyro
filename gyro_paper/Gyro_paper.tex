@@ -29,6 +29,30 @@
 \newcommand{\feh}{[Fe/H]}
 \newcommand{\dd}{\ensuremath{\,\mathrm{d}}}
 
+% numbers
+\newcommand{\nastero}{122}
+\newcommand{\nprecise}{13}
+\newcommand{\ncluster}{150}
+
+% Notes for paper:
+% Want to provide an estimate of the amount of intrinsic uncertainty on an age calculated with our method.
+% Are the rapid rotators in our sample members of the "C" sequence?
+% talk about uncertainties: infer rotation period uncertainties?
+% could infer colour uncertainties, but this would be very hard so we assign them some value that we feel is representative.
+
+% set up likelihood as if you're going to ignore uncertainties.
+% Explain the fact that you can have samples falling in different regimes for the different stars.
+% look for papers citing older ones.
+% show fit for individual clusters.
+% The sun would be hard to detect in our survey.
+% don't worry about this too much.
+% If there is an intrinsic spread in the relation and we only measure the lower envelope.
+% repeat the fit with a simulation - cutting off rotation periods.
+
+% Notes - apparently asteroseismic ages are easier to derive for older stars!
+% We are calibrating the relation between period, age and colour---this is different to the relation between period, age and mass because
+% colour-mass relation is different for different compositions and this adds a level of systematic uncertainty.
+
 \begin{document}
 
 \title{Calibrating Gyrochronology using Kepler Asteroseismic targets}
@@ -39,12 +63,6 @@
 \affil{$^3$Centre for Cosmology and Particle Physics, New York University, New York, NY, USA}
 \affil{$^4$School of Physics and Astronomy, University of Birmingham, Edgbaston, Birmingham, B15 2TT, UK}
 
-% Notes for paper:
-% Want to provide an estimate of the amount of intrinsic uncertainty on an age calculated with our method.
-% Are the rapid rotators in our sample members of the "C" sequence?
-% talk about uncertainties: infer rotation period uncertainties?
-% could infer colour uncertainties, but this would be very hard so we assign them some value that we feel is representative.
-
 \begin{abstract}
 \label{abs}
 
@@ -53,7 +71,7 @@ Among the available methods, gyrochronology is a powerful one because it require
 However, it is not well calibrated at late ages and suffers from large uncertainties.
 Asteroseismology provides age measurements for some of the brightest stars observed by Kepler.
 % We measured the photometric rotation periods of 153 stars with asteroseismic ages in order to calibrate the gyrochronology relations and improve upon current methods of measuring the ages of MS field stars. %pchange
-We use rotation periods measurements of 283 stars with asteroseismic ages and 265 cluster and field stars with precise age measurements to calibrate the gyrochronology relations.
+We use rotation periods measurements of \nastero stars with asteroseismic ages, \ncluster cluster stars and 5 field stars (including the Sun) with precise age measurements to calibrate the gyrochronology relations.
 Advanced statistical methods are used to model the relationship between rotation period, age and colour while accounting for measurement uncertainties in all three quantities.
 Our sample includes both MS stars and subgiants, and straddles the Kraft break (only MS stars cooler than the Kraft break, $\sim$ 6250 K, are expected to follow gyrochronology relations); and this must be taken into account when modelling the data.
 Our method has been applied to the extended sample of published rotation periods for stars with reliable age measurements.
@@ -81,15 +99,6 @@ The current gyrochronology relations are entirely empirically calibrated and sti
 Kepler data provides the perfect opportunity to calibrate gyrochronology at late ages---it not only provides the means to measure surface rotation of thousands of stars, it also provides new age estimates for hundreds of stars via asteroseismology.
 We use new asteroseismic age measurements to improve the gyrochronology relations at late ages.
 % contributing a small advancement to the large problem of dating stars.
-
-% set up likelihood as if you're going to ignore uncertainties.
-% Explain the fact that you can have samples falling in different regimes for the different stars.
-% look for papers citing older ones.
-% show fit for individual clusters.
-% The sun would be hard to detect in our survey.
-% don't worry about this too much.
-% If there is an intrinsic spread in the relation and we only measure the lower envelope.
-% repeat the fit with a simulation - cutting off rotation periods.
 
 \subsection{Gyrochronology}
 
@@ -185,10 +194,6 @@ In particular, the mean large frequency separation, $\Delta\nu$ is proportional 
 % We obtained precise ages for 42 stars from \citet{Metcalfe2014}, modelled with the Asteroseismic Modeling Portal (AMP), with effective temperatures and metallicities from \citet{Bruntt2012}.
 % % Of the 42 stars in \citep{Metcalfe2014}, we only integrate the `simple stars' (cool dwarfs) into our sample---we ignore the `F stars' and `mixed mode' (subgiant) stars as these are not expected to follow the simple gyrochronology relation.
 % % {\color{red} Shouldn't I include these to be consistent?}
-%
-% Notes - apparently asteroseismic ages are easier to derive for older stars!
-% We are calibrating the relation between period, age and colour---this is different to the relation between period, age and mass because
-% colour-mass relation is different for different compositions and this adds a level of systematic uncertainty.
 
 This paper is laid out as follows: in \textsection\ref{section:supplementary} we describe the data.
 The rotation period measurement method is outlined in \textsection\ref{section:rotation_period_measurement} and our model fitting method is described in \textsection\ref{section:calibration}.
@@ -228,30 +233,8 @@ The GWPS and ACF methods are applied to both PDC-MAP and KADACS light curves.
 They ensure that at least two of the four possible light curve and method combinations return rotation periods consistent to within 20\%.
 A visual check is performed to confirm that the measured period is representative of the timescale of variability in the light curves and report final rotation periods measured from KADACS light curves using the GWPS method with HWHM uncertainties.
 
-% In our implementation of the ACF method the first two peaks in the ACF were identified and the central value of the first peak was temporarily accepted as the period (unless the second peak was higher than the first in which case {\it its} central value was taken).
-Note that an important advantage of the ACF method over a periodogram approach is in its ability to differentiate between harmonic signals produced by multiple active regions on the stellar surface from the true periodic signal: these scenarios usually produce ACFs in which the second peak is higher than the first.
-Subsequent peaks in the ACF lying within 10\% of an integer multiple of the period were identified.
-The final, reported period is calculated from the mean separation between peaks that lie at integer multiples of the period and the uncertainty on the period is calculated from the distribution of central peak values.
-Measuring the mean peak separation removes a bias that can sometimes be introduced when a long-term, slowly decaying trend dominates the ACF at small periods.
-If the first ACF peak is small when superimposed onto this trend, the period will be underestimated as the central peak value will be shifted towards smaller periods.
-In cases where only one peak was present in the ACF, i.e. for stars with periods that are a significant fraction of the time coverage of a Kepler quarter, the central peak value was kept as the period and the uncertainty measured from the width of the peak.
-Example ACFs for Kepler light curves are shown in figure \ref{fig:subfigures} at the end of this document.
-An example light curve and ACF for KIC 322300 is shown in figure \ref{fig:lc} and quarter-by-quarter period measurements in figure \ref{fig:ind_qs}.
-All but one of the quarters for this star produced an ACF with a significant initial peak and repeating subsequent peaks and, of those, all period measurements lie within 15\% of the median value.
-
-We used Kepler quarters 3-16 to measure rotation periods for the stars in our sample.
-While some light curves displayed high amplitude, regular flux variations produced by star spots, others were dominated by random noise or instrumental systematics.
-To ensure that the periodicities measured were truly representative of stellar rotation periods, we computed an ACF for each Kepler quarter, individually, for each star and required that the resulting periods were mutually consistent.
-We required that period measurements lie within 15\% of the median period value, or within 15\% of twice and half the median in order to catch aliases.
-The maximum period, detectable in one Kepler quarter with our ACF method was just over 20 days.
-% Why? 90 / 2 = 45, /2 ~ 20
-In order to include stars with rotation periods longer than 20 days, we also calculated ACFs for quarters 3-6, 7-11 and 12-15, joined together.
-Those stars with rotation periods consitent across all three years were examined by eye and included in our sample if a reasonable rotation period was measured.
-The final, reported rotation periods were calculated from quarters 3-16, joined together.
-
-Of the 505 targets in the original sample 122 rotation periods were reliably measured using the above process.
-We added an additional 31 targets with rotation periods measured by \citet{McQuillan_2014}, increasing our sample to 153.
-Of those 153, 13 of them have precise asteroseismic ages from AMP modelling.
+Of the 505 targets in the original sample \nastero, rotation periods were reliably measured using the above process.
+Of those \nastero, \nprecise of them have precise asteroseismic ages from AMP modelling.
 
 \begin{figure}[ht]
 \begin{center}
@@ -276,15 +259,13 @@ By measuring the frequency of each oscillation mode individually, not just the m
 Ages derived from individual oscillation mode measurements can have uncertainties as small as 10\% (\citet{Brown1994}, \citet{SilvaAguirre2013}), however measuring frequencies for individual oscillation modes is a manual process and can only be applied in the highest signal-to-noise cases.
 \citet{Chaplin2013} predict that around 150 of the 505 stars will be suitable for this individual oscillation mode treatment.
 We obtained precise ages for 42 stars from \citet{Metcalfe2014}, modelled with the Asteroseismic Modeling Portal (AMP), with effective temperatures and metallicities from \citet{Bruntt2012}.
-% Of the 42 stars in \citep{Metcalfe2014}, we only integrate the `simple stars' (cool dwarfs) into our sample---we ignore the `F stars' and `mixed mode' (subgiant) stars as these are not expected to follow the simple gyrochronology relation.
-% {\color{red} Shouldn't I include these to be consistent?}
+Of the 42 stars in \citep{Metcalfe2014}, we only integrate the `simple stars' (cool dwarfs) into our sample---we ignore the `F stars' and `mixed mode' (subgiant) stars as these are not expected to follow the simple gyrochronology relation.
 
-% Notes - apparently asteroseismic ages are easier to derive for older stars!
 % We are calibrating the relation between period, age and colour---this is different to the relation between period, age and mass because
 % colour-mass relation is different for different compositions and this adds a level of systematic uncertainty.
 The asteroseismic sample covers a large range of ages (see figure \ref{fig:p_vs_a}), however it does not provide good mass coverage across the entire range.
 There are very few stars with temperatures below 6000 K (B-V $\sim$ 0.55) and of the low mass stars, most of them are old (note---the paucity of massive, old stars is an effect of MS turn-off).
-We therefore added 261 stars to our sample from young clusters Coma Berenices (0.5 Gyr), Praesepe (0.588 Gyr), the Hyades (0.625 Gyr) and NGC6811 (1.1 Gyr) (see table \ref{tab:clusters}).
+We therefore added \ncluster stars to our sample from young clusters Coma Berenices (0.5 Gyr), Praesepe (0.588 Gyr), the Hyades (0.625 Gyr) and NGC6811 (1.1 Gyr) (see table \ref{tab:clusters}).
 We only added clusters with ages greater than 0.5 Gyrs as these younger clusters often have large populations of rapid rotators that have not yet converged onto the gyrochronology plane.
 
 \begin{deluxetable}{lcccc}
@@ -643,10 +624,8 @@ SKF with Hyades and Coma Ber only & & \\
 \end{deluxetable}
 
 We also performed a stratified k-fold (SKF) cross validation with $K=5$.
-In regular k-fold cross validation, the data is divided in to k subsets with each subset used as a test set, whilst the remaining data is used to train the model.
-SKF cross validation is useful when the data is made up of different populations.
-Instead of selecting test and train data from the entire data set at random, a consistent percentage of stars is drawn from each population.
-This reduces the variance of the cross validation score.
+In regular K-fold cross validation, the data is divided in to k subsets with each subset used as a test set, whilst the remaining data is used to train the model.
+SKF cross validation is useful when the data is made up of different populations: instead of randomly drawing test and train data from the entire data set, a consistent percentage of stars is drawn from each population.
 The results of the 5-fold SKF are tabulated in \ref{tab:skf}.
 
 \begin{deluxetable}{lcc}
@@ -744,7 +723,7 @@ It is clear that we do not have many Solar analogues in our sample: most stars o
 \label{fig:p_vs_bv_solar}
 \end{center}
 \end{figure}
-%
+
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_a_solar.png}
@@ -772,23 +751,15 @@ Unfortunately, we cannot answer these questions here: the asteroseismic ages are
 A future study might include an extra parameter that describes the `width' of the gyrochronological plane and attempt to detect an element of scatter above the noise level.
 The success of this approach would strongly depend on having truely representative observational uncertainties.
 
-% THEORY
-
 A rift exists between theory and observation in the field of gyrochronology.
 Attempts to unite the two are ongoing \citep{Barnes2011}, \citep{vanSaders2013}.
 The gyrochronology relation of \citet{Barnes2010} attemps to reconcile empirical gyrochronology with physical models.
 However it requires knowledge of stars' initial rotation periods---in practise, this information is rarely (if ever) available.
 
-% Core-envelope decoupling
-
 {\color{red} to do: read up on sample biases.}
 Asteroseismic surveys are biased towards relatively quiet, bright stars, slightly more massive than the Sun.
 There are very few young K stars in the \citet{Chaplin2013} sample---presumably because these stars are active.
 Unfortunately, those stars that are ideal asteroseismic targets are often less-than-ideal for a rotation survey.
-
-% List of figures:
-% marginalised plot
-% completeness plot?
 
 \section{Conclusions}
 \label{sec:conclusions}
@@ -810,29 +781,5 @@ We would like to thank Eric Mamajek, Marc Pinsonneault, Sydney Barnes, Steve Kaw
 
 \bibliographystyle{plainnat}
 \bibliography{Gyro_paper}
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/angusr/ACF/ACF2/PDCQ3_output/plots_acf/3223000_full.png}
-\caption{\emph{Top:} Quarter 3 PDC-MAP light curve of KIC 3223000. \emph{Middle:} The light curve with linear trends removed and gaps interpolated across. \emph{bottom:} The ACF. This star shows high amplitude variability. We measured a rotation period of 4.86 $\pm$ 0.05 days}
-\label{fig:lc}
-\end{center}
-\end{figure}
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/angusr/ACF/ACF2/PDCQ3_output/plots_acf/3429205_full.png}
-\caption{\emph{Top:} Quarter 3 PDC-MAP light curve of KIC 3429205. \emph{Middle:} The light curve with linear trends removed and gaps interpolated across. \emph{bottom:} The ACF. This star does not display high amplitude variability---no rotation period was measured for this target.}
-\label{fig:lc}
-\end{center}
-\end{figure}
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/angusr/ACF/ind_qs_figs/3223000.pdf}
-\caption{Period measurements for quarters 3 - 16 of star `KIC 7771282'. The blue solid line indicates the median value and the shaded blue region marks its 15\% margin. The blue dashed line with surrounding shaded area indicates one half of the median period measurement with 15\% margin.  More than two thirds of the period measurements were present and consistent to within 15\% of the median for this star, so it passed the selection process.}
-\label{fig:ind_qs}
-\end{center}
-\end{figure}
 
 \end{document}
