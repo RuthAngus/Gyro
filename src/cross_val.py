@@ -27,10 +27,7 @@ def scoring(fname, n, test):
     return np.sqrt((np.sum((p_test[l] - p_pred[l])**2))/n)
 
 if __name__ == "__main__":
-#     trains = ['p_PF45', 'CF45', 'NF45', 'HF45']
     trains = ['CF45', 'HF45']
-#     tests = ['CANH', 'APNH', 'CAPH', 'CAPN']
-#     tests = ['A', 'A', 'A', 'A']
     tests = ['AC', 'AH']
     RMS = []
 

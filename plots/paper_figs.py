@@ -124,7 +124,7 @@ pl.xlabel("$\mathrm{Age~(Gyr)}$")
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")
 # pl.ylim(0,70)
 pl.xlim(0,15)
-pl.loglog()
+# pl.loglog()
 pl.savefig("p_vs_a_paper2")
 
 # data = np.empty((len(tKID)+len(vKID), 14))

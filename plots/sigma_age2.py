@@ -41,8 +41,7 @@ def iso_calc(pars, age):
     y = 10**log_period_model(pars, np.log10(age*1000), x)
     return x, y
 
-# data = np.genfromtxt("/Users/angusr/Python/Gyro/data/all_astero.txt", skip_header=1).T
-data = np.genfromtxt("/Users/angusr/Python/Gyro/data/all_astero_plusgarcia.txt")
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/garcia_all_astero.txt")
 
 # make up bv_errs
 c_err = .01
@@ -50,34 +49,6 @@ c_err = .01
 # remove subs
 subgiant = 4.
 g = data[8] > subgiant
-
-# p1 = data[1][g]
-# p_err1 = data[2][g]
-# a1 = data[3][g]
-# a_errp1 = data[4][g]
-# a_errm1 = data[5][g]
-# a_err1 = .5 * (a_errp1 + a_errm1)
-# t1 = data[12][g]
-# t_err1 = data[13][g]
-# logg1 = data[9][g]
-# logg_err1 = data[10][g]
-# bv1 = teff2bv(t1, logg1, np.ones_like(t1)*-.02, t_err1, logg_err1, \
-#         np.ones_like(t1)*.001, error=False)
-
-# p1 = data[1][g]
-# p_err1 = data[2][g]
-# t1 = data[3][g]
-# t_err1 = data[4][g]
-# a1 = data[13][g]
-# a_errp1 = data[14][g]
-# a_errm1 = data[15][g]
-# a_err1 = .5 * (a_errp1 + a_errm1)
-# logg1 = data[10][g]
-# logg_err1 = data[11][g]
-# feh1 = data[5][g]
-# feh_err1 = data[6][g]
-# bv1 = teff2bv_orig(t1, logg1, feh1)
-# bv_err1 = np.ones_like(bv1)*c_err
 
 p1 = data[6][g]
 p_err1 = data[7][g]
@@ -106,7 +77,6 @@ a_err2 = data[5]
 a_errp2 = data[5]
 a_errm2 = data[5]
 logg2 = data[6]
-
 logg_err2 = data[7]
 
 bv = np.concatenate((bv1, data[0]))
@@ -134,14 +104,7 @@ pars5 = [0.41229508, 0.54640667, 0.46986845, .5]
 # sun = [0.40117544, 0.55100903, 0.40028554, .45] # sun
 pars3_err = np.array([.03, .03, .03, .00])
 
-# params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameterssun.txt').T # sun fixed
-# params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parametersgyro.txt').T
-# params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters45_2.txt').T
-# params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters45.txt').T # sun free
-# params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parametersgyrosun.txt').T
-# params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parametersgarcia.txt').T #
-# params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_45.txt').T # current
-params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_45_2acf.txt').T # current
+params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameterspg_ACHF45.txt').T
 params4 = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_50.txt').T # .5
 params5 = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_45acf.txt').T # .5
 params6 = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_40.txt').T # .5
@@ -149,43 +112,37 @@ pars3 = np.zeros(4)
 pars4 = np.zeros(4)
 pars5 = np.zeros(4)
 pars6 = np.zeros(4)
-
 err = np.zeros((2, 4))
 err4 = np.zeros((2, 4))
 err5 = np.zeros((2, 4))
 err6 = np.zeros((2, 4))
-
 pars3[:3] = params[0][:3]
 pars3[-1] = .45; err[:,3] = .0
 err[0,:3] = params[1][:3]
 err[1,:3] = params[2][:3]
-
 pars4_err = np.zeros(4)
 pars4[:3] = params4[0][:3]
 pars4[-1] = .5; err4[:,3] = .0
 err4[0,:3] = params4[1][:3]
 err4[1,:3] = params4[2][:3]
-
 pars5_err = np.zeros(4)
 pars5[:3] = params5[0][:3]
 pars5[-1] = .45; err5[:,3] = .0
 err5[0,:3] = params5[1][:3]
 err5[1,:3] = params5[2][:3]
-
 pars6_err = np.zeros(4)
 pars6[:3] = params6[0][:3]
 pars6[-1] = .4; err6[:,3] = .0
 err6[0,:3] = params6[1][:3]
 err6[1,:3] = params6[2][:3]
-
 pars3_err = np.zeros(4)
 pars4_err = np.zeros(4)
 pars5_err = np.zeros(4)
 pars6_err = np.zeros(4)
 
 for i in range(4):
-#     pars3_err[i] = .5*sum(err[:,i])
-    pars3_err[i] = min(err[:,i])
+    pars3_err[i] = .5*sum(err[:,i])
+#     pars3_err[i] = min(err[:,i])
     pars4_err[i] = min(err4[:,i])
     pars5_err[i] = min(err5[:,i])
     pars6_err[i] = min(err6[:,i])
@@ -195,8 +152,8 @@ for i, age in enumerate(ages):
     sig = 1.
     l11 = (a1-(a_errm1*sig) < age) * (age < a1+(a_errp1*sig)) # cool astero
     l12 = (a2-(a_errm2*sig) < age) * (age < a2+(a_errp2*sig)) # cool clusters
-    l21 = (a1-(a_errm1*sig) < age) * (age < a1+(a_errp1*sig)) * (bv1 < .4) # hot astero
-    l22 = (a2-(a_errm2*sig) < age) * (age < a2+(a_errp2*sig)) * (bv2 < .4) # hot clusters
+    l21 = (a1-(a_errm1*sig) < age) * (age < a1+(a_errp1*sig)) * (bv1 < pars3[-1]) # hot astero
+    l22 = (a2-(a_errm2*sig) < age) * (age < a2+(a_errp2*sig)) * (bv2 < pars3[-1]) # hot clusters
     sun = a2==4.568
 
     dist = distance2(a1, age, a_errp1)
