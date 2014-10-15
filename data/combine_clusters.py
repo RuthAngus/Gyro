@@ -16,13 +16,14 @@ g_err = .001
 # add hyades
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/hyades.txt", skip_header=2).T
 bv = data[0]
-bv_err = data[1]
+bv_err = data[1]*4
 p = data[2]
 p_err = data[3]
 a = data[4]
 a_err = data[5]
 a_errp = data[5]
 a_errm = data[5]
+feh = np.ones_like(data[0]*.15)
 flag = np.ones_like(data[0])*4
 
 pl.clf()
@@ -43,6 +44,7 @@ a = np.concatenate((a, np.ones_like(data[5])*.588))
 a_err = np.concatenate((a_err, np.ones_like(data[5])*.137))
 a_errp = np.concatenate((a_errp, np.ones_like(data[5])*.137))
 a_errm = np.concatenate((a_errm, np.ones_like(data[5])*.137))
+feh = np.concatenate((feh, np.ones_like(data[5])*.15))
 flag = np.concatenate((flag, np.ones_like(data[5])*5))
 
 pl.clf()
@@ -63,6 +65,7 @@ bv_err = np.concatenate((bv_err, np.ones_like(mbv)*c_err))
 a = np.concatenate((a, np.ones_like(data[3])*1.1))
 # a_err = np.concatenate((a_err, np.ones_like(data[3])*.1))
 a_err = np.concatenate((a_err, np.ones_like(data[3])*.2))
+feh = np.concatenate((feh, np.ones_like(data[1])*.15))
 flag = np.concatenate((flag, np.ones_like(data[1])*6))
 
 pl.errorbar(mbv, data[3], xerr=np.ones_like(mbv)*c_err, yerr=data[4], fmt='g.', ecolor='g')
@@ -75,6 +78,7 @@ bv = np.concatenate((bv, data[1]))
 bv_err = np.concatenate((bv_err, np.ones_like(data[1])*c_err))
 a = np.concatenate((a, np.ones_like(data[0])*.5))
 a_err = np.concatenate((a_err, np.ones_like(data[0])*.1))
+feh = np.concatenate((feh, np.ones_like(data[0])*.05))
 flag = np.concatenate((flag, np.ones_like(data[0])*7))
 
 pl.errorbar(data[1], data[0], xerr=np.ones_like(data[1])*c_err, yerr=data[0]*pe, fmt='y.', ecolor='y')

@@ -13,18 +13,21 @@ KID = data[0]
 p = data[1]
 p_err = data[2]
 
+sdss, sdss_err = 5, 6
+irfm, irfm_err = 7, 8
+teff, teff_err = irfm, irfm_err
 # Load Astero data from table 1 - KIDs, teffs and feh
 data1 = np.genfromtxt('/Users/angusr/Python/Gyro/data/ApJtable_zeros.txt', \
-        skiprows=30, skip_footer=1335, invalid_raise=False, usecols=(0,5,6,7,8,9,10)).T
+        skiprows=30, skip_footer=1335, invalid_raise=False, usecols=(0,teff,teff_err,7,8,9,10)).T
 KID1 = data1[0]
 IRFM = data1[3]
 # Load Astero data from table 1 - KIDs, teffs and feh
 data1 = np.genfromtxt('/Users/angusr/Python/Gyro/data/ApJtable_zeros.txt', \
-        skiprows=30, skip_footer=1335, invalid_raise=False, usecols=(0,5,6,9,10)).T
+        skiprows=30, skip_footer=1335, invalid_raise=False, usecols=(0,teff,teff_err,9,10)).T
 table = np.zeros((11, len(KID)))
 # Load Astero data from table 2 - KIDs, teffs and feh 5,6,7,8
 data12 = np.genfromtxt('/Users/angusr/Python/Gyro/data/ApJtable_zeros.txt', \
-        skiprows=576, skip_footer=1222, invalid_raise=False, usecols=(0,5,6,7,8)).T
+        skiprows=576, skip_footer=1222, invalid_raise=False, usecols=(0,teff,teff_err,7,8)).T
 
 sf = 671
 # load astero data from table 4 - KID, logg, age with SDSS teffs
@@ -160,7 +163,8 @@ data = KID[l], t[l], t_err[l], a[l], a_errp[l], a_errm[l], p[l], p_err[l], logg[
         logg_errp[l], logg_errm[l], feh[l], feh_err[l], flag[l]
 print len(KID[l])
 # print data[ll]
-np.savetxt("garcia_all_astero.txt", data)
+# np.savetxt("garcia_all_astero.txt", data)
+np.savetxt("garcia_irfm.txt", data)
 
 pl.clf()
 pl.errorbar(a[l], p[l], xerr=(a_errp[l], a_errm[l]), yerr=p_err[l], capsize=0, fmt='k.')

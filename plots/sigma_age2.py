@@ -5,7 +5,7 @@ from teff_bv import teff2bv_orig, teff2bv_err
 import pretty5
 
 plotpar = {'axes.labelsize': 20, 'text.fontsize': 20,
-           'legend.fontsize': 15,
+           'legend.fontsize': 10,
            'xtick.labelsize': 18,
            'ytick.labelsize': 18,
            'text.usetex': True}
@@ -44,7 +44,7 @@ def iso_calc(pars, age):
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/garcia_all_astero.txt")
 
 # make up bv_errs
-c_err = .01
+c_err = .04
 
 # remove subs
 subgiant = 4.
@@ -68,16 +68,18 @@ bv1, bv_err1 = teff2bv_err(t1, logg1, feh1, t_err1, logg_err1, feh_err1)
 
 # add clusters
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/clusters.txt").T
-bv2 = data[0]
-bv_err2 = data[1]
-p2 = data[2]
-p_err2 = data[3]
-a2 = data[4]
-a_err2 = data[5]
-a_errp2 = data[5]
-a_errm2 = data[5]
-logg2 = data[6]
-logg_err2 = data[7]
+aaa = data[4]
+l = (aaa!=1.1) * (aaa!=.588)
+bv2 = data[0][l]
+bv_err2 = data[1][l]
+p2 = data[2][l]
+p_err2 = data[3][l]
+a2 = data[4][l]
+a_err2 = data[5][l]
+a_errp2 = data[5][l]
+a_errm2 = data[5][l]
+logg2 = data[6][l]
+logg_err2 = data[7][l]
 
 bv = np.concatenate((bv1, data[0]))
 bv_err = np.concatenate((bv_err1, data[1]))
@@ -90,7 +92,7 @@ a_errm = np.concatenate((a_errm1, data[5]))
 logg = np.concatenate((logg1, data[6]))
 logg_err = np.concatenate((logg_err1, data[7]))
 
-ages = [.6, 1, 2, 3, 4.568, 6, 8, 10]
+ages = [.625, 2, 4.568, 8, 10]
 
 pars = [.7725, .5189, .601, .4] # Barnes
 pars_err = [.0070, .011, .024, 0.]
@@ -163,11 +165,11 @@ for i, age in enumerate(ages):
     pl.clf()
     cm = pl.cm.get_cmap('Greys')
     pl.errorbar(bv1[l11], p1[l11], xerr=bv_err1[l11], yerr=p_err1[l11], color='k', \
-            fmt='o', mec='k', capsize=0, markersize=2, ecolor='.7', zorder=3)
+            fmt='o', mec='k', capsize=0, markersize=3, ecolor='.7', zorder=3)
     if age == 4.568:
         print 'sun'
         pl.errorbar(bv2[sun], p2[sun], xerr=bv_err2[sun], yerr=p_err2[sun], color='r', \
-                fmt='o', mec='r', capsize=0, markersize=3, ecolor='.7', zorder=3)
+                fmt='o', mec='r', capsize=0, markersize=4, ecolor='.7', zorder=3)
     pl.errorbar(bv2[l12], p2[l12], xerr=bv_err2[l12], yerr=p_err2[l12], color='r', \
             fmt='.', mec='r', capsize=0, markersize=8, ecolor='0.7', zorder=0)
 
@@ -181,7 +183,7 @@ for i, age in enumerate(ages):
     xs, ys = iso_calc(pars3, ages[i])
     pl.plot(xs, ys, color='k', linestyle='-', linewidth=lw, \
             label = '$%s~\mathrm{Gyr}$~ \
-            $\mathrm{Angus~\emph{et~al.}~(in~prep)}$' %ages[i], zorder=0)
+            $\mathrm{Angus~\emph{et~al.}~(2014)}$' %ages[i], zorder=0)
 #     if age == 6.:
 #         tryage = 8.2
 #         xs, ys = iso_calc(pars3, tryage)
@@ -199,7 +201,8 @@ for i, age in enumerate(ages):
 
     pl.xlabel("$\mathrm{B-V}$")
     pl.ylabel("$\mathrm{P_{rot} (days)}$")
+#     pl.loglog()
     pl.xlim(.2, 1.)
-    pl.ylim(0, 70)
+    pl.ylim(0, 50)
     pl.legend(loc='upper left')
     pl.savefig("p_vs_bv%s"%i)
