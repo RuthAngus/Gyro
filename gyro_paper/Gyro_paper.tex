@@ -506,36 +506,23 @@ We used {\tt emcee} \citep{Foreman-Mackey2013}, an affine invariant, ensemble sa
 \section{Results and Discussion}
 \label{sec:results}
 
-We initially fit a gyrochronology relation to all the data combined: asteroseismic, cluster and field stars, however the results were concerning since the posteriors of the three model parameters, $a$, $b$ \& $n$ were highly multimodal and the age of the Sun was significantly underpredicted with the resulting MAP parameter values.
-We therefore set out to understand whether any specific subset of our data was problematic.
-We fit a gyrochronology relation to each cluster individually, with the field stars providing the age dependence.
-% The parameter $c$ determines the position of the colour discontinuity; the point beyond which the gyrochronology relation is no longer defined.
-% Physically it corresponds to the Kraft break: the colour at which a star does not have a thick enough convective envelope to induce strong magnetic breaking.
-% Stars with colours less than the value of $c$ are modelled with a log-normal distribution.
-
-\subsection{Tests with individual clusters}
-
 \begin{figure}[ht]
 \begin{center}
 	\subfigure[Coma Berenices and field stars with $c=0.45$.]{
             \label{fig:CF45}
 	    \includegraphics[width=2in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/showCF45.png}
         }
-	\subfigure[Praesepe and field stars with $c=0.5$]{
-            \label{fig:P45}
-	    \includegraphics[width=2in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/showp_PF5.png}
-        }
 	\subfigure[Hyades and field stars with $c=0.45$]{
             \label{fig:HF45}
 	    \includegraphics[width=2in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/showHF45.png}
         }
     \end{center}
-    \caption{ Individual fits to the clusters and field stars. The Sun is the red point. Top panels show period vs B-V with Solar and cluster age isochrones. Bottom panels show period vs age with the period-age relation for a constant B-V value of 0.65 (Solar B-V). A good fit to the praesepe cluster was not found. {\color{red} join these plots together!}
+    \caption{ Individual fits to the clusters and field stars. The Sun is the red point. Top panels show period vs B-V with Solar and cluster age isochrones. Bottom panels show period vs age with the period-age relation for a constant B-V value of 0.65 (Solar B-V).}
     }
    \label{fig:subfigures2}
 \end{figure}
 
-\begin{deluxetable}{lcccc}
+\begin{deluxetable}{lccc}
 \label{tab:cluster_results}
 \tablewidth{0pc}
 \tablecaption{Values of a, b, c \& n for individual clusters.}
@@ -545,54 +532,29 @@ We fit a gyrochronology relation to each cluster individually, with the field st
 % 4.168186485767364502e-01 7.603647351264947174e-02 7.084242939949036977e-02
 % 5.419188737869262695e-01 3.261894941329956943e-02 2.841459274291990855e-02
 % 2.705982029438018799e-01 6.450089812278747559e-02 5.467687547206878662e-02
-\colhead{Praesepe}&
-% 4.430593252182006836e-01 8.647853136062622070e-02 5.029895901679992676e-02
-% 5.444628596305847168e-01 1.908445358276367188e-02 2.789610147476195845e-02
-% 4.898126125335693359e-01 4.025483131408658100e-03 1.105946302413940430e-02
 \colhead{Hyades}}
 % 3.120428621768951416e-01 5.508434772491455078e-02 3.818729519844055176e-02
 % 5.986626744270324707e-01 2.472090721130371094e-02 2.724212408065795898e-02
 % 4.098003208637237549e-01 3.636732697486877441e-02 5.420684814453125000e-02
-% \colhead{NGC 6811}}
-% 1.463411152362823486e-01 5.997582376003265381e-01 2.462424337863922119e-02
-% 6.267792582511901855e-01 1.889470100402834696e-02 2.298845350742340088e-01
-% 4.420346394181251526e-02 2.393952384591102600e-02 9.345348924398422241e-03
 \startdata
-a & $0.417^{+0.08}_{-0.07}$ & $0.443^{+0.05}_{-0.08}$ & $0.312^{+0.04}_{-0.06}$ \\ % & $0.146^{+0.02}_{-0.6}$ \\
-b & $0.271^{+0.05}_{-0.06}$ & $0.490^{+0.01}_{-0.004}$ & $0.410^{+0.05}_{-0.04}$ \\ % & $0.044^{+0.01}_{-0.02}$ \\
-n & $0.542 \pm 0.03$ & $0.544^{+0.03}_{-0.02}$ & $0.599^{+0.03}_{-0.02}$ & \\ % $0.626^{+0.2}_{-0.02}$ \\
+a & $0.417^{+0.08}_{-0.07}$ & $0.312^{+0.04}_{-0.06}$ \\
+b & $0.271^{+0.05}_{-0.06}$ & $0.410^{+0.05}_{-0.04}$ \\
+n & $0.542 \pm 0.03$ & $0.599^{+0.03}_{-0.02}$ & \\
 \enddata
 \end{deluxetable}
 
-We fitted a separate gyrochronology relation to each cluster, with the field stars providing the age dependence.
-The resulting fits are shown in figures \ref{fig:CF45} - \ref{fig:PF5} and the MAP parameter values with their 16th and 84th percentile uncertainties are provided in table \ref{tab:cluster_results}.
-Each cluster has a different period-colour relation---in particular the position of the colour discontinuity appears to be higher for Praesepe.
+A gyrochronology relation was initially fit to the asteroseismic stars, the field stars and the three clusters: the Hyades, Coma Ber and Praesepe.
+However, the resulting posteriors for the gyrochronology parameters, $a$, $b$ and $n$ were multi-modal and the age of the Sun was significantly underpredicted by the best-fitting gyrochronology relation.
+After fitting a separate relation to each cluster individually, it became evident that including Praesepe in our sample produced a multi-modal posterior.
+The reason for this multimodality is unclear, however we tentatively attribute it to an incompatible $c$ value for Praesepe.
+We calculated the likelihood for Praesepe and the field stars with two different values of $c$: $0.45$ and $0.5$ and finding that $c=0.5$ produces a higher likelihood.
+Since we do not fully understand the cause of the variation in the c parameter, and in order to keep our model simple, we chose to exclude praesepe from our final data set.
+We fitted a gyrochronology relation to each cluster individually, with the field stars providing the age dependence.
+The resulting fits are shown in figures \ref{fig:CF45} - \ref{fig:HF45} and the MAP parameter values with their 16th and 84th percentile uncertainties are provided in table \ref{tab:cluster_results}.
+None of the three gyrochronology parameters is consistent between the two clusters.
 The maximum log-likelihood value for our fit to Praesepe and the field stars was higher for $c=0.5$ than for $c=0.45$.
 Clearly, the optimum position of the colour discontinuity, $c$, takes a different value for Praesepe than for the Hyades and Coma Ber, however the reason for this is unclear.
-% We tested the validity of our model, with $c=0.45$ using cross validation.
-% Cross validation provides a way to test the predictive power of a model: the model is first conditioned on a set of training data and then tested by comparing model predictions to observations.
-% We conducted cross validation with three different sets of training and test data: the clusters and field stars were used to train the model and the remaining data
-% (the asteroseismic stars and the three other clusters) were used to test it.
-% The resulting likelihood for each trial is shown in table \ref{tab:cross_val}.
-% In both cases Coma and the Hyades provided the best training sets.
-%
-% \begin{deluxetable}{lcc}
-% \label{tab:skf}
-% \tablewidth{0pc}
-% \tablecaption{Cross validation results. C = Coma Berenices, P = Praesepe, H = Hyades, N = NGC 6811, F = field stars and A = Kepler asteroseismic targets.}
-% \tablehead{
-% \colhead{Training data}&
-% \colhead{Test data}&
-% \colhead{\chit}}
-% \startdata
-% C \& F & P, H, A & 10.367 \\
-% P \& F & C, H, A & 13.159 \\
-% H \& F & C, P, A & 10.355 \\
-% \enddata
-% \end{deluxetable}
-%
-% Due to its overall poor performance in the cross validation tests we chose to exlude praesepe from the final calibration sample.
-% however we also provide a version of the gyrochronology relation calibrated with these two clusters (see table \ref{tab:results}).
+
 Due to the different behaviour of the period-colour relation of Praesepe, we chose to exlude praesepe from the final calibration sample and fit a gyrochronology relation with $c=0.45$ to the remaining data.
 We also tested values of $c$ ranging from 0.4 to 0.55 and found that the results were not very sensitive to this choice.
 % On this basis we used a value of $c=0.45$ in the final fit.
