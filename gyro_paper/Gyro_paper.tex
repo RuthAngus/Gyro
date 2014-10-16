@@ -334,22 +334,6 @@ $\alpha$ Cen B & 6 $\pm$ 1$^{10,11}$ & 38.7 $\pm$ 5.0$^{13}$ & 0.90 $\pm$ 0.01$^
 % \end{center}
 % \end{figure}
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv_paper2.png}
-\caption{Photometric rotation period vs B-V colour for \nastero Kepler targets (black) plus cluster and field stars (blue). The Sun is shown in red}
-\label{fig:3d}
-\end{center}
-\end{figure}
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_a_paper2.png}
-\caption{Photometric rotation period vs age for the data described in figure \ref{fig:3d}.}
-\label{fig:p_vs_a}
-\end{center}
-\end{figure}
-
 \section{Calibrating the Gyrochronology relation}
 \label{sec:gyro_cal}
 
@@ -369,14 +353,6 @@ We do not simply exclude hot stars and subgiants from our sample during the mode
 This allows for the fact that stars have some probability mass lying in all three regimes due to their large observational uncertainties.
 In addition to hot stars and subgiants, there is further population of contaminating stars in our sample: rapid rotators.
 This stars do not lie on the standard gyrochronology mass-period-age plane and could plausibly be synchronised binaries, stars with unseen, close-in, massive planets (\citet{Poppenhaeger2014}, \citet{Beky2014}) or stars which have not yet converged onto the gyro-plane.
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/logg_vs_t_paper.png}
-\caption{\logg vs \teff for the \nastero asteroseismic stars. Stars with \teff $>$ 6250 K are red and those with \logg $<$ 4.0 are blue. The triangular data points are those with precise ages. Only the black cool dwarfs are expected to follow the gyrochronology relation in equation \ref{eq:Barnes2007_2}.}
-\label{fig:p_vs_a}
-\end{center}
-\end{figure}
 
 We model four stellar populations simultaneously: cool MS stars, hot MS stars, subgiants and rapid rotators.
 The hot MS stars are defined as those with B-V $<$ 0.45, corresponding to \teff $\approx$ 6250 K for Solar metallicity and \logg.
@@ -516,21 +492,6 @@ We used {\tt emcee} \citep{Foreman-Mackey2013}, an affine invariant, ensemble sa
 \section{Results}
 \label{sec:results}
 
-\begin{figure}[ht]
-\begin{center}
-	\subfigure[Coma Berenices and field stars.]{
-            \label{fig:CF45}
-	    \includegraphics[width=4in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/showCF45.png}
-        }
-	\subfigure[Hyades and field stars.]{
-            \label{fig:HF45}
-	    \includegraphics[width=4in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/showHF45.png}
-        }
-    \end{center}
-    \caption{ Individual fits to the clusters and field stars. The Sun is the red point. Top panels show period vs B-V with Solar and cluster age isochrones. Bottom panels show period vs age with the period-age relation for a constant B-V value of 0.65 (Solar B-V).}
-   \label{fig:subfigures2}
-\end{figure}
-
 \begin{deluxetable}{lccc}
 \label{tab:cluster_results}
 \tablewidth{0pc}
@@ -566,14 +527,6 @@ The fit to the final data set is shown in figure \ref{fig:subfigures2}.
 Marginal posterior distributions for the three gyrochronology parameters are shown in figure \ref{fig:marg_posteriors}.
 % and posterior distributions for all 10 of our model parameters in figure \ref{fig:triangle_full}.
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/marg_posteriors.png}
-\caption{Marginalised posterior PDFs of the three gyrochronology parameters; $a$, $b$ and $n$.}
-\label{fig:marg_posteriors}
-\end{center}
-\end{figure}
-
 Resulting MAP values of $a$, $b$ and $n$, with their 16th and 84th percentile uncertainties are tabulated in \ref{tab:constants}.
 Figures \ref{fig:625} - \ref{fig:8gyr} show the new gyrochronology relation in period-colour space over a sequence of ages.
 The stars plotted have ages that fall within 1 $\sigma$ of the reference age.
@@ -594,46 +547,6 @@ Our final, newly calibrated gyrochronology relation can be written in full as
 \label{eq:Barnes2007_2}
 \end{equation}
 with $P$ in days and $A$ in Myr.
-
-\begin{figure}[ht]
-\begin{center}
-	\subfigure[0.625 Gyr (age of the Hyades)]{
-            \label{fig:625}
-	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv0.png}
-        }
-	\subfigure[2 Gyr]{
-            \label{fig:2gyr}
-	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv1.png}
-        }
-	\subfigure[4.568 Gyr (Solar age)]{
-            \label{fig:sungyr}
-	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv2.png}
-        }
-	\subfigure[8 Gyr]{
-            \label{fig:8gyr}
-	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv3.png}
-        }
-    \end{center}
-    \caption{ \prot vs B-V colour for dwarfs within 1$\sigma$ of the reference age with the new gyrochronology relation and \citet{Barnes2007}, and \citet{Mamajek2008} for comparison. Asteroseismic targets are black and cluster and field stars are red. The shaded region represents the 16th and 84th percentile uncertainties.
-     }
-   \label{fig:subfigures2}
-\end{figure}
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv_solar.png}
-\caption{Rotation period vs B-V colour for dwarfs with age within 1$\sigma$ of the Sun's age, 4.568 Gyr. The grey stars are hotter than 6250 K. The Sun is the red point and the blue points are $\alpha$ Cen A, 18 Sco and 16 Cyg from left to right.}
-\label{fig:p_vs_bv_solar}
-\end{center}
-\end{figure}
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_a_solar.png}
-\caption{Rotation period vs age for cool dwarfs with colour within 10\% of the Sun's: 0.65, with gyrochronology relations of \citet{Barnes2007}, \citet{Mamajek2008} and this work. The shaded region represents the 16th and 84th percentile uncertainties. The Sun is shown as a large grey circle.}
-\label{fig:p_vs_a_solar}
-\end{center}
-\end{figure}
 
 
 In order to test the predictive power of the new gyrochronology relation we inverted equation \ref{eq:Barnes2007_2}
@@ -705,5 +618,92 @@ We would like to thank Eric Mamajek, Marc Pinsonneault, Sydney Barnes, Steve Kaw
 
 \bibliographystyle{plainnat}
 \bibliography{Gyro_paper}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv_paper2.png}
+\caption{Photometric rotation period vs B-V colour for \nastero Kepler targets (black) plus cluster and field stars (blue). The Sun is shown in red}
+\label{fig:3d}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_a_paper2.png}
+\caption{Photometric rotation period vs age for the data described in figure \ref{fig:3d}.}
+\label{fig:p_vs_a}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/logg_vs_t_paper.png}
+\caption{\logg vs \teff for the \nastero asteroseismic stars. Stars with \teff $>$ 6250 K are red and those with \logg $<$ 4.0 are blue. The triangular data points are those with precise ages. Only the black cool dwarfs are expected to follow the gyrochronology relation in equation \ref{eq:Barnes2007_2}.}
+\label{fig:p_vs_a}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+	\subfigure[Coma Berenices and field stars.]{
+            \label{fig:CF45}
+	    \includegraphics[width=4in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/showCF45.png}
+        }
+	\subfigure[Hyades and field stars.]{
+            \label{fig:HF45}
+	    \includegraphics[width=4in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/showHF45.png}
+        }
+    \end{center}
+    \caption{ Individual fits to the clusters and field stars. The Sun is the red point. Top panels show period vs B-V with Solar and cluster age isochrones. Bottom panels show period vs age with the period-age relation for a constant B-V value of 0.65 (Solar B-V).}
+   \label{fig:subfigures2}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/marg_posteriors.png}
+\caption{Marginalised posterior PDFs of the three gyrochronology parameters; $a$, $b$ and $n$.}
+\label{fig:marg_posteriors}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+	\subfigure[0.625 Gyr (age of the Hyades)]{
+            \label{fig:625}
+	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv0.png}
+        }
+	\subfigure[2 Gyr]{
+            \label{fig:2gyr}
+	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv1.png}
+        }
+	\subfigure[4.568 Gyr (Solar age)]{
+            \label{fig:sungyr}
+	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv2.png}
+        }
+	\subfigure[8 Gyr]{
+            \label{fig:8gyr}
+	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv3.png}
+        }
+    \end{center}
+    \caption{ \prot vs B-V colour for dwarfs within 1$\sigma$ of the reference age with the new gyrochronology relation and \citet{Barnes2007}, and \citet{Mamajek2008} for comparison. Asteroseismic targets are black and cluster and field stars are red. The shaded region represents the 16th and 84th percentile uncertainties.
+     }
+   \label{fig:subfigures2}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv_solar.png}
+\caption{Rotation period vs B-V colour for dwarfs with age within 1$\sigma$ of the Sun's age, 4.568 Gyr. The grey stars are hotter than 6250 K. The Sun is the red point and the blue points are $\alpha$ Cen A, 18 Sco and 16 Cyg from left to right.}
+\label{fig:p_vs_bv_solar}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_a_solar.png}
+\caption{Rotation period vs age for cool dwarfs with colour within 10\% of the Sun's: 0.65, with gyrochronology relations of \citet{Barnes2007}, \citet{Mamajek2008} and this work. The shaded region represents the 16th and 84th percentile uncertainties. The Sun is shown as a large grey circle.}
+\label{fig:p_vs_a_solar}
+\end{center}
+\end{figure}
 
 \end{document}
