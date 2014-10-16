@@ -12,7 +12,7 @@ plotpar = {'axes.labelsize': 20, 'text.fontsize': 20,
 pl.rcParams.update(plotpar)
 ocols = ['#FF9933','#66CCCC' , '#FF33CC', '#3399FF', '#CC0066', '#9933FF', '#CC0000', '#9933FF', '#99cc99', '#CC0000']
 
-lw = 1
+lw = .5
 
 def log_period_model(par, log_a, bv):
     return np.log10(par[0]) + par[1] * log_a + par[2] * np.log10(bv - par[3]) # colour
