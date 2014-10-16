@@ -5,14 +5,14 @@ from teff_bv import teff2bv_orig, teff2bv_err
 import pretty5
 
 plotpar = {'axes.labelsize': 20, 'text.fontsize': 20,
-           'legend.fontsize': 20,
+           'legend.fontsize': 15,
            'xtick.labelsize': 18,
            'ytick.labelsize': 18,
            'text.usetex': True}
 pl.rcParams.update(plotpar)
 ocols = ['#FF9933','#66CCCC' , '#FF33CC', '#3399FF', '#CC0066', '#9933FF', '#CC0000', '#9933FF', '#99cc99', '#CC0000']
 
-lw = .5
+lw = 1
 
 def log_period_model(par, log_a, bv):
     return np.log10(par[0]) + par[1] * log_a + par[2] * np.log10(bv - par[3]) # colour
@@ -25,7 +25,8 @@ def iso_calc(pars, age):
     y = 10**log_period_model(pars, np.log10(age*1000), x)
     return x, y
 
-data = np.genfromtxt("/Users/angusr/Python/Gyro/data/garcia_all_astero.txt")
+# data = np.genfromtxt("/Users/angusr/Python/Gyro/data/garcia_all_astero.txt")
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/garcia_irfm.txt")
 
 # make up bv_errs
 c_err = .04

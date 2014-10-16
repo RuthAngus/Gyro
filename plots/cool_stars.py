@@ -38,7 +38,8 @@ def iso(age):
     return xp, yp
 
 # data = np.genfromtxt('/Users/angusr/Python/Gyro/data/garcia_all_astero.txt')
-data = np.genfromtxt('/Users/angusr/Python/Gyro/data/all_astero_plusgarcia.txt')
+# data = np.genfromtxt('/Users/angusr/Python/Gyro/data/all_astero_plusgarcia.txt')
+data = np.genfromtxt('/Users/angusr/Python/Gyro/data/garcia_irfm.txt')
 KID = data[0]
 teff = data[1]
 age = data[3]

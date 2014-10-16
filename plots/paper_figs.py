@@ -89,18 +89,22 @@ sun = a2 == 4.568
 pl.clf()
 
 # astero stars
-pl.errorbar(bv1, p1, xerr=bv1_err, yerr=p1_err, fmt='k.', capsize=0, ecolor='.7')
+pl.errorbar(bv1, p1, xerr=bv1_err, yerr=p1_err, fmt='k.',
+            capsize=0, ecolor='.7')
 
 # cluster + field
-pl.errorbar(bv2, p2, xerr=bv2_err, yerr=p2_err, fmt='.', color='r', capsize=0, ecolor='.7')
+pl.errorbar(bv2, p2, xerr=bv2_err, yerr=p2_err, fmt='.',
+            color='b', capsize=0, ecolor='.7')
 
 # sun
-pl.errorbar(bv2[sun], p2[sun], xerr=bv2_err[sun], yerr=p2_err[sun], fmt='*', color='k', capsize=0, ecolor='.7',\
-        markersize = 8, mec='k')
+pl.errorbar(bv2[sun], p2[sun], xerr=bv2_err[sun], yerr=p2_err[sun],
+            fmt='.', color='r', capsize=0, ecolor='.7',
+            markersize=8, mec='k')
 
 # Travis and victor
 pl.errorbar(vtbv, vtp, xerr=vtbv_err, yerr=vtp_err, fmt='.', \
-        color='b', capsize=0, ecolor='.7')
+        color='k', capsize=0, ecolor='.7')
+
 pl.xlabel("$\mathrm{B-V}$")
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")
 # pl.ylim(0,70)
@@ -114,11 +118,11 @@ p1 = p1[l]
 a1_err = a1_err[l]
 p1_err = p1_err[l]
 pl.errorbar(a1, p1, xerr=a1_err, yerr=p1_err, fmt='k.', capsize=0, ecolor='.7')
-pl.errorbar(a2, p2, xerr=a2_err, yerr=p2_err, fmt='.', color='r', capsize=0, ecolor='.7')
+pl.errorbar(a2, p2, xerr=a2_err, yerr=p2_err, fmt='.', color='b', capsize=0, ecolor='.7')
 pl.errorbar(a2[sun], p2[sun], xerr=a2_err[sun], yerr=p2_err[sun], \
-        fmt='*', color='k', capsize=0, ecolor='.7', markersize = 8, mec='k')
+        fmt='.', color='r', capsize=0, ecolor='.7', markersize=8, mec='r')
 pl.errorbar(vta, vtp, xerr=vta_err, yerr=vtp_err, fmt='.', \
-        color='b', capsize=0, ecolor='.7')
+        color='k', capsize=0, ecolor='.7')
 sun = 10**a2==4.568
 pl.xlabel("$\mathrm{Age~(Gyr)}$")
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")

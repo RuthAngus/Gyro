@@ -4,7 +4,7 @@
 \usepackage{amsmath}
 \usepackage{breqn}
 \usepackage{cite,natbib}
-\usepackage{natbib}
+% \usepackage{natbib}
 \usepackage{verbatim}
 \usepackage{epsfig}
 \usepackage{cases}
@@ -31,7 +31,7 @@
 \newcommand{\dd}{\ensuremath{\,\mathrm{d}}}
 
 % numbers
-\newcommand{\nastero}{310~}
+\newcommand{\nastero}{310}
 \newcommand{\nprecise}{14~}
 \newcommand{\ncluster}{282~}
 \newcommand{\ntotal}{597~}
@@ -208,16 +208,17 @@ In particular, the mean large frequency separation, $\Delta\nu$ is proportional 
 \subsection{Ages}
 \label{sec:ages}
 
-\citet{Chaplin2013} calculated the ages of 505 Kepler dwarfs and giants using the above scaling relations.
-A grid-based approach was used to measure stellar properties: values of $\Delta\nu$ were calculated for each R and M on the grid and compared with the observed $\Delta\nu$.
-Ages quoted in \citet{Chaplin2013} are the combined result of six different grid-based model pipelines.
-The uncertainties on the ages reflect discrepancies between results obtained using different sets.
+The ages of 505 Kepler dwarfs and giants were published in \citet{Chaplin2013}.
+They used a grid-based approach to measure stellar properties: values of $\Delta\nu$ were calculated for each R and M on the grid and compared with the observed $\Delta\nu$.
+Ages quoted in \citet{Chaplin2013} are the combined result of six different grid-based model pipelines and the uncertainties on the ages reflect discrepancies between results obtained using different sets.
 Two sets of effective temperatures were used: one was derived using an Infra-Red Flux Method (IRFM) calibration (\citealt{Casagrande2010}, \citealt{SilvaAguirre2012}) and the other from a recalibration of the SDSS griz filter KIC photometry by \citet{Pinsonneault2012} using Yale Rotating Stellar Evolution Code (YREC) models \citep{Demarque2004}.
-We use the second set of temperatures since they are slightly more precise, however our analysis is relatively insensitive to this choice.
-87 stars in the asteroseismic catalogue have spectroscopic measurements of \teff and \logg which we used where possible.
-% test: is our analysis sensitive to this choice?
+We use the IRFM temperatures since they are less dependent on metallicity, which is not well constrained for the asteroseismic sample, and their uncertainites are more conservative.
+Our analysis however, is relatively insensitive to this choice.
+87 stars in the asteroseismic catalogue have spectroscopic measurements of \teff and \logg which were incorporated where possible.
+In order to produce a relation that predicts the age of a star using only observable properties, we chose to convert \teff to B-V for the asteroseismic sample using the relation of \citet{Sekiguchi2000}.
+This conversion adds an extra element of noise to our data since the metallicities provided for the asteroseismic stars are simply an average value for the field: $0.2\pm0.3$ dex (e.g. see \citealt{Silva_Aguirre}) however, since the age uncertainties dominate this analysis we do not expect this to have a significant impact on our results.
 
-Asteroseismic ages in \citet{Chaplin2013} have typical uncertainties of $\sim$ 35\%; however, it will be possible to derive more precise ages for some of these stars.
+The asteroseismic ages in \citet{Chaplin2013} have typical uncertainties of $\sim$ 35\%; however, for some of these stars it will be possible to derive more precise ages.
 By measuring the frequency of each oscillation mode individually, not just the mean large serparation, one can build up a density profile of the star and provide a tighter constraint on its age.
 Ages derived from individual oscillation mode measurements can have uncertainties as small as 10\% (\citet{Brown1994}, \citet{SilvaAguirre2013}), however measuring frequencies for individual oscillation modes is a manual process and can only be applied in the highest signal-to-noise cases.
 \citet{Chaplin2013} predict that around 150 of the 505 stars will be suitable for this individual oscillation mode treatment.
@@ -252,19 +253,19 @@ For this reason, \citet{Garcia2014} chose to use their own set of KADACS light c
 The GWPS and ACF methods were applied to both PDC-MAP and KADACS light curves and at least two of the four possible light curve and method combinations were required return rotation periods consistent to within 20\%.
 A visual check was then performed to confirm that the measured period is representative of the timescale of variability in the light curves.
 The final reported rotation periods were those measured from KADACS light curves using the GWPS method with HWHM uncertainties.
-
 Of the 505 targets in the original sample, \nastero rotation periods were reliably measured using the above process.
 Of those \nastero, \nprecise of them have precise asteroseismic ages from AMP modelling.
 
 The asteroseismic sample covers a large range of ages (see figure \ref{fig:p_vs_a}), however it does not provide good mass coverage across the entire range.
 Few stars have temperatures below 6000 K (B-V $\sim$ 0.55) and of the low mass stars, most of them are old (note---the paucity of massive, old stars in the sample is an effect of MS turn-off).
-We therefore added \ncluster stars to our sample from young clusters Coma Berenices (0.5 Gyr), Praesepe (0.588 Gyr), the Hyades (0.625 Gyr) and NGC6811 (1.1 Gyr) (see table \ref{tab:clusters}).
+We therefore added \ncluster stars to our sample from young clusters Coma Berenices (0.5 Gyr), Praesepe (0.588 Gyr) and the Hyades (0.625 Gyr) (see table \ref{tab:clusters}).
 Uncertainties on B-V colours associated with each cluster star were not provided in the catalogues from which rotation periods and ages were obtained.
 Since the uncertainty associated with each measurement plays such a key role in our analysis (see \textsection \ref{sec:calibration}), we assigned an uncertainity of $\pm 0.04$ to each colour measurement, based on the mean uncertainty in the asteroseismic temperature-converted colours.
 We found that the period-colour relation for the 1.1 Gyr open cluster, NGC 6811, is different to the other clusters and not compatible with the asteroseismic data set.
 We therefore do not include NCG 6811 in our analysis.
 Only clusters older than 0.5 Gyrs were added as younger clusters often have large populations of rapid rotators that have not yet converged onto the gyrochronology plane.
 A further 5 field stars with precise age measurements were added to the sample: 16 Cyg B, Alpha Cen A and B, 18 Sco and, of course, the Sun (see table \ref{tab:field_stars}).
+The entire set of \ntotal stars is shown in figure \ref{fig:3d}. Asteroseismic targets are shown in black, with cluster and field stars in red.
 
 \begin{deluxetable}{lcccc}
 \label{tab:clusters}
@@ -305,39 +306,38 @@ $\alpha$ Cen B & 6 $\pm$ 1$^{10,11}$ & 38.7 $\pm$ 5.0$^{13}$ & 0.90 $\pm$ 0.01$^
 \enddata
 \end{deluxetable}
 
-\begin{figure}[ht]
-\begin{center}
-	\subfigure[$P_{rot}$ vs \teff]{
-            \label{fig:p_vs_t}
-	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_t_paper.png}
-        }
-	\subfigure[$P_{rot}$ vs B-V colour]{
-            \label{fig:p_vs_bv}
-	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv_paper.png}
-        }
-    \end{center}
-    \caption{ Photometric rotation period vs effective temperature and B-V colour for \nastero Kepler asteroseismic targets. \teff was converted to B-V using \citet{Sekigchi2000}.
-     }
-   \label{fig:subfigures}
-\end{figure}
+% \begin{figure}[ht]
+% \begin{center}
+% 	\subfigure[$P_{rot}$ vs \teff]{
+%             \label{fig:p_vs_t}
+% 	    \includegraphics[width=4in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_t_paper.png}
+%         }
+% 	\subfigure[$P_{rot}$ vs B-V colour]{
+%             \label{fig:p_vs_bv}
+% 	    \includegraphics[width=4in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv_paper.png}
+%         }
+%     \end{center}
+%     \caption{ Photometric rotation period vs effective temperature and B-V colour for \nastero Kepler asteroseismic targets. \teff was converted to B-V using the relation of \citet{Sekiguchi2000}.
+%      }
+%    \label{fig:subfigures}
+% \end{figure}
 
-For each of the asteroseismic targets, we converted $T_{eff}$ to B-V colour using the relation in \citet{Sekiguchi2000}.
-This conversion, shown in figure \ref{fig:subfigures}, is imprecise since the metallicites of the asteroseismic targets are the field average and not calculated per star.
-We intend to eventually provide an effective temperature calibration in addition to this colour calibration.
-The entire set of \ntotal stars is shown in figure \ref{fig:3d}. Asteroseismic targets are shown in black, with cluster and field stars in red.
+% For each of the asteroseismic targets, we converted $T_{eff}$ to B-V colour using the relation in \citet{Sekiguchi2000}.
+% This conversion, shown in figure \ref{fig:subfigures}, is imprecise since the metallicites of the asteroseismic targets are the field average and not calculated per star.
+% We intend to eventually provide an effective temperature calibration in addition to this colour calibration.
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/3d_angled.png}
-\caption{Colour, age and rotation periods of all \ntotal stars. Asteroseismic stars are black and additional cluster and field stars are red.}
-\label{fig:3d}
-\end{center}
-\end{figure}
+% \begin{figure}[ht]
+% \begin{center}
+% \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/3d_angled.png}
+% \caption{Colour, age and rotation periods of all \ntotal stars. Asteroseismic stars are black and additional cluster and field stars are red.}
+% \label{fig:3d}
+% \end{center}
+% \end{figure}
 
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv_paper2.png}
-\caption{Photometric rotation period vs B-V colour for \nastero Kepler targets (black) plus cluster and field stars (red). The blue stars have precise asteroseismic ages.}
+\caption{Photometric rotation period vs B-V colour for \nastero Kepler targets (black) plus cluster and field stars (blue). The Sun is shown in red}
 \label{fig:3d}
 \end{center}
 \end{figure}
@@ -345,7 +345,7 @@ The entire set of \ntotal stars is shown in figure \ref{fig:3d}. Asteroseismic t
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_a_paper2.png}
-\caption{Photometric rotation period vs age for \nastero Kepler targets (black) plus cluster and field stars (red). The blue stars have precise ages.}
+\caption{Photometric rotation period vs age for the data described in figure \ref{fig:3d}.}
 \label{fig:p_vs_a}
 \end{center}
 \end{figure}
@@ -520,11 +520,11 @@ We used {\tt emcee} \citep{Foreman-Mackey2013}, an affine invariant, ensemble sa
 \begin{center}
 	\subfigure[Coma Berenices and field stars.]{
             \label{fig:CF45}
-	    \includegraphics[width=2in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/showCF45.png}
+	    \includegraphics[width=4in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/showCF45.png}
         }
 	\subfigure[Hyades and field stars.]{
             \label{fig:HF45}
-	    \includegraphics[width=2in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/showHF45.png}
+	    \includegraphics[width=4in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/showHF45.png}
         }
     \end{center}
     \caption{ Individual fits to the clusters and field stars. The Sun is the red point. Top panels show period vs B-V with Solar and cluster age isochrones. Bottom panels show period vs age with the period-age relation for a constant B-V value of 0.65 (Solar B-V).}
@@ -599,19 +599,19 @@ with $P$ in days and $A$ in Myr.
 \begin{center}
 	\subfigure[0.625 Gyr (age of the Hyades)]{
             \label{fig:625}
-	    \includegraphics[width=4in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv0.png}
+	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv0.png}
         }
 	\subfigure[2 Gyr]{
             \label{fig:2gyr}
-	    \includegraphics[width=4in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv1.png}
+	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv1.png}
         }
 	\subfigure[4.568 Gyr (Solar age)]{
             \label{fig:sungyr}
-	    \includegraphics[width=4in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv2.png}
+	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv2.png}
         }
 	\subfigure[8 Gyr]{
             \label{fig:8gyr}
-	    \includegraphics[width=4in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv3.png}
+	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv3.png}
         }
     \end{center}
     \caption{ \prot vs B-V colour for dwarfs within 1$\sigma$ of the reference age with the new gyrochronology relation and \citet{Barnes2007}, and \citet{Mamajek2008} for comparison. Asteroseismic targets are black and cluster and field stars are red. The shaded region represents the 16th and 84th percentile uncertainties.
@@ -622,7 +622,7 @@ with $P$ in days and $A$ in Myr.
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/p_vs_bv_solar.png}
-\caption{Rotation period vs B-V colour for dwarfs with age within 1$\sigma$ of the Sun's age, 4.568 Gyr. The grey stars are hotter than 6250 K. The Sun is shown as a large grey circle.}
+\caption{Rotation period vs B-V colour for dwarfs with age within 1$\sigma$ of the Sun's age, 4.568 Gyr. The grey stars are hotter than 6250 K. The Sun is the red point and the blue points are $\alpha$ Cen A, 18 Sco and 16 Cyg from left to right.}
 \label{fig:p_vs_bv_solar}
 \end{center}
 \end{figure}
@@ -636,11 +636,11 @@ with $P$ in days and $A$ in Myr.
 \end{figure}
 
 
-In order to test the predictive power of the new gyrochronology relation, we used the inverse of equation \ref{eq:Barnes2007_2},
-\begin{equation}
-	A = \left(\frac{P}{a}\right)^{1/n} (B-V-c)^{-b/n},
-\label{eq:Barnes2007_3}
-\end{equation}
+In order to test the predictive power of the new gyrochronology relation we inverted equation \ref{eq:Barnes2007_2}
+% \begin{equation}
+% 	A = \left(\frac{P}{a}\right)^{1/n} (B-V-c)^{-b/n},
+% \label{eq:Barnes2007_3}
+% \end{equation}
 to compare previously measured ages with new age predictions for the 5 field stars---see table \ref{tab:loo}.
 Uncertainties on the new gyrochronological ages were calculated using posterior samples of the three parameters, $a$, $b$ and $n$.
 The ages of 18 Sco, Alpha Cen A and 16 Cyg B are consistent to within 1$\sigma$ and the Sun and Alpha Cen B to within 2$\sigma$.
