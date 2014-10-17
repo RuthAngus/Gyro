@@ -16,7 +16,7 @@
 \floatplacement{figure}{H}
 
 \newcommand{\logg}{log \emph{g}~}
-\newcommand{\teff}{$T_{eff}~$}
+\newcommand{\teff}{$T_{eff}$}
 \newcommand{\prot}{$P_{rot}~$}
 
 \newcommand{\ah}{$\hat{A}_n$}
@@ -340,7 +340,7 @@ $\alpha$ Cen B & 6 $\pm$ 1$^{10,11}$ & 38.7 $\pm$ 5.0$^{13}$ & 0.90 $\pm$ 0.01$^
 
 \subsection{The model}
 
-The \nastero asteroseismic stars in our sample have B-V colours converted from effective temperatures, photometric rotation periods, P and asteroseismically derived ages, A and surface gravities, \logg (G).
+The \nastero$~$ asteroseismic stars in our sample have B-V colours converted from effective temperatures, photometric rotation periods, P and asteroseismically derived ages, A and surface gravities, \logg (G).
 Each measurement of these properties is assumed to be independent and has an associated uncertainty, assumed to be Gaussian.
 The assumption of independence breaks down in the case where there is significant systematic bias in the rotation period, colour or age measurement methods, however we do not expect very large biases, so we do not expect this to be a problem.
 The 265 cluster and field stars added to our sample do not have \logg values; however, since we only use \logg to separate the populations of subgiants and dwarfs (and we assume that the cluster and field stars are dwarfs) this shouldn't hurt our analysis.
@@ -515,7 +515,7 @@ n & $0.542 \pm 0.03$ & $0.599^{+0.03}_{-0.02}$ & \\
 \enddata
 \end{deluxetable}
 
-A gyrochronology relation was initially fit to the asteroseismic stars, the field stars and the three clusters: Hyades, Coma Berenices and Praesepe altogether, however this resulted in multi-modal posteriors for $a$, $b$ and $n$ and a significantly overpredicted age for the Sun.
+A gyrochronology relation was initially fit to the asteroseismic stars, the field stars and the three clusters (Hyades, Coma Berenices and Praesepe) altogether, however this resulted in multi-modal posteriors for $a$, $b$ and $n$ and a significantly overpredicted age for the Sun.
 After fitting a separate relation to various subsets of the data, it became evident that the multi-modal posterior was only produced when Praesepe was included in our sample.
 The reason for this multimodality is unclear, however we tentatively attribute it to the position of the colour discontinuity, $c$ taking a different value for Praesepe than for the Hyades and Coma Berenices.
 We calculated the likelihood for Praesepe, plus the field stars (to provide the age dependence) with two different values of $c$: $0.45$ and $0.5$, finding a higher likelihood for $c=0.5$.
@@ -523,6 +523,8 @@ Since we do not fully understand the cause of this variation in $c$, and in orde
 We also fit relations with $c$ values ranging from 0.4 to 0.55 to the final data set (asteroseismic stars, field stars, Hyades and Coma Ber), and found that the results were relatively insensitive to variations in $c$.
 Individual fits to Hyades and Coma Berenices, plus the field stars are shown in figures \ref{fig:CF45} and \ref{fig:HF45}.
 Maximum {\it a posteriori} (MAP) parameter values with their 16th and 84th percentile uncertainties for the fits to the two clusters are provided in table \ref{tab:cluster_results}.
+Note that none of these parameters are consistent between the two clusters.
+These results paint a concerning picture for gyrochronology and are discussed further below.
 
 The fit to the final, full data set is shown in figure \ref{fig:subfigures2} and marginal posterior distributions for the three gyrochronology parameters are shown in figure \ref{fig:marg_posteriors}.
 % and posterior distributions for all 10 of our model parameters in figure \ref{fig:triangle_full}.
@@ -552,67 +554,117 @@ In order to test the predictive power of the new gyrochronology relation we inve
 % 	A = \left(\frac{P}{a}\right)^{1/n} (B-V-c)^{-b/n},
 % \label{eq:Barnes2007_3}
 % \end{equation}
-to compare previously measured ages with new age predictions for the 5 field stars---see table \ref{tab:loo}.
-Uncertainties on the new gyrochronological ages were calculated using posterior samples of the three parameters, $a$, $b$ and $n$.
-The ages of 18 Sco, Alpha Cen A and 16 Cyg B are consistent to within 1$\sigma$ and the Sun and Alpha Cen B to within 2$\sigma$.
+to compare previously measured ages with new age predictions for the 5 field stars---see table \ref{tab:comparison}.
+Uncertainties on the ages predicted with the new gyrochronology relation were calculated using posterior samples of the three parameters, $a$, $b$ and $n$.
+For comparison, gyrochronological ages for the field stars were also computed using the relations of \citet{Barnes2007} and \citet{Mamajek2008}.
+% The ages of 18 Sco, Alpha Cen A and 16 Cyg B predicted by the new relation are consistent to within 1$\sigma$ and the Sun and Alpha Cen B to within 2$\sigma$.
 The uncertainty on the age of 16 Cyg B is dominated by the large observational uncertainties on rotation period and colour.
 In contrast, the uncertainty on the age of the Sun is dominated by uncertainties in the gyrochronology parameters.
 The minimum uncertainty achievable for a gyrochronological age (i.e. the uncertainty obtained for a star with negligable observational uncertainties) is $^{+0.245}_{-0.115}$.
+We performed leave-one-out (LOO) cross validation on the field stars in order to assess the ability of this new relation to predict ages for field stars not included in the fitting process.
+Each field star, was `left out' of the sample, one at a time, and the model trained the remaining data.
+Ages predicted for each field star from the resulting, independently trained models are presented in table \ref{tab:loo}.
+These ages are similar to those in table \ref{tab:comparison}, where the model was trained on the entire data set, {\it except} for the Sun's age which has both a different MAP value and a larger uncertainty.
+This demonstrates the key role played by the Sun in the fitting process.
+Just as with the models of \citet{Barnes2007} and \citet{Mamajek2008} the Sun dominates the fit, however in {\it this} case the dominance arises naturally from the data as a consequence of the Sun's smaller observational uncertainties, and is not enforced by `pinning' the model to the Solar datum as has previously been necessary due to the lack of old stars with age measurements.
+
+\begin{deluxetable}{lcccc}
+\label{tab:comparison}
+\tablewidth{0pc}
+\tablecaption{Field star ages taken from the literature, compared with predictions from this work (1), \citet{Mamajek2008} (2) and \citet{Barnes2007} (3).}
+\tablehead{
+\colhead{Star}&
+\colhead{Literature age (Gyr)}&
+	\colhead{Age 1 (Gyr)}&
+	\colhead{Age 2 (Gyr)}&
+	\colhead{Age 3 (Gyr)}}
+\startdata
+18 Sco      & $3.7 \pm 0.2$     & $3.9^{+0.3}_{-0.2}$ & $3.5^{+0.6}_{-0.5}$ & $3.7^{+0.8}_{-0.6}$ \\
+The Sun     & $4.568 \pm 0.001$ & $4.9^{+0.3}_{-0.2}$ & $4.7^{+0.7}_{-0.6}$ & $4.8^{+0.9}_{-0.8}$   \\
+Alpha Cen A & $6.0 \pm 1$       & $4.9^{+0.9}_{-0.7}$ & $4.5^{+1}_{-0.9}$   & $5\pm1$             \\
+Alpha Cen B & $6.0 \pm 1$       & $5 \pm 1$ 	      & $4\pm1$             & $5^{+2}_{-1}$       \\
+16 Cyg B    & $6.4 \pm 0.4$     & $6^{+3}_{-2}$       & $6^{+3}_{-2}$       & $6^{+3}_{-2}$ 	\\
+\enddata
+\end{deluxetable}
 
 \begin{deluxetable}{lcc}
 \label{tab:loo}
 \tablewidth{0pc}
-\tablecaption{Age predictions for the field stars.}
+\tablecaption{Field star ages taken from the literature, compared with leave-one-out cross validation predictions from this work.}
 \tablehead{
 \colhead{Star}&
-\colhead{Previous age measurement (Gyr)}&
-\colhead{Gyrochronology age (Gyr)}}
+\colhead{Literature age (Gyr)}&
+\colhead{Cross validation age (Gyr)}}
 \startdata
 18 Sco      & $3.7 \pm 0.2$     & $3.9^{+0.3}_{-0.2}$ \\
-The Sun     & $4.568 \pm 0.001$ & $4.9^{+0.3}_{-0.2}$ \\
-Alpha Cen A & $6.0 \pm 1$       & $4.9^{+0.9}_{-0.7}$ \\
-Alpha Cen B & $6.0 \pm 1$       & $5 \pm 1$ \\
-16 Cyg B    & $6.4 \pm 0.4$     & $6^{+3}_{-2}$ \\
+The Sun     & $4.568 \pm 0.001$ & $5.3^{+0.7}_{-0.4}$ \\
+Alpha Cen A & $6.0 \pm 1$       & $4.8^{+0.7}_{-0.7}$ \\
+Alpha Cen B & $6.0 \pm 1$       & $5 \pm 1$ 	      \\
+16 Cyg B    & $6.4 \pm 0.4$     & $6^{+3}_{-2}$       \\
 \enddata
 \end{deluxetable}
-% 6.0 [ 4.86338692  0.9206241   0.72054495]
-% 6.0 [ 5.06075064  1.3486667   1.06989838]
-% 3.66 [ 3.85053402  0.30452868  0.22614753]
-% 6.4 [ 6.28518199  2.60609396  2.03456812]
-% 4.568 [ 4.89703867  0.32038323  0.22650605]
+
+% 6.0
+% my age: [ 4.86249428  0.91858675  0.72173538]
+% loo age: [ 4.80259502  0.7481147   0.68834212]
+% my age2: [ 4.77827093  1.30150945  1.01005843]
+% Barnes age: [ 4.46914112  1.05441286  0.87392436]
+% M&H age: [ 4.73988512  1.21159353  0.97468723]
+% 6.0
+% loo age: [ 5.1342248   1.25879911  1.06899847]
+% my age: [ 5.06016467  1.34914819  1.07059415]
+% my age2: [ 4.93703787  1.61140508  1.24182021]
+% Barnes age: [ 4.20032481  1.27854229  1.05337476]
+% M&H age: [ 5.2395179   1.61821763  1.30129483]
+% 3.66
+% loo age: [ 3.85451871  0.29975302  0.23491226]
+% my age: [ 3.8507832   0.30362745  0.22582191]
+% my age2: [ 3.83284439  0.84418907  0.66293486]
+% Barnes age: [ 3.52568606  0.55896436  0.47253454]
+% M&H age: [ 3.70244514  0.75006068  0.60580702]
+% 6.4
+% loo age: [ 6.358571    2.67754382  2.0685649 ]
+% my age: [ 6.27975219  2.60139702  2.030095  ]
+% my age2: [ 6.07199527  2.73697687  2.07840037]
+% Barnes age: [ 6.0192399   2.87411089  2.22756589]
+% M&H age: [ 6.09432674  2.82342997  2.16446201]
+% 4.568
+% loo age: [ 5.27873238  0.66057265  0.44263986]
+% my age: [ 4.89614469  0.3208018   0.22625288]
+% my age2: [ 4.88594592  1.06992154  0.84365024]
+% Barnes age: [ 4.66418365  0.71642434  0.60282528]
+% M&H age: [ 4.81052903  0.95203161  0.77054736]
 
 The goal of gyrochronology in general is to provide a means of predicting the age of a star, given observations of its \teff, or colour, and rotation period.
-The `narrowness' of the gyrochronology relation has hitherto been an unknown; do the three properties, age, mass and rotation period truely lie on an infinitely narrow plane?
-Does age depend solely on rotation period and mass, or do other variables influence stellar spin down---perhaps only becoming important after many Myrs?
-Metallicity, for example, could play a role---a future study might explore the influence of this property on angular momentum loss rate.
-Unfortunately, we cannot answer these questions here: the asteroseismic ages are noisy and observational and intrinsic scatter are ambiguously interwoven.
+The discrepancies in period-colour relations between individual clusters found in the above analysis does not bode well for gyrochronology as a dating method: values of $a$, $b$ and $n$ measured for the Hyades and Coma Berenices were not consistent within uncertainties (see table \ref{tab:cluster_results}).
+Until now it has been assumed that one single relation between period, mass and age could be used to describe all F, G \& K MS stars, however the results of this study show that a different relation is required to describe each cluster.
+It follows that a different relation might be required for each field star.
+The `narrowness' of the gyrochronology relation has hitherto been an unknown; do the three properties, age, mass and rotation period truly lie on an infinitely narrow plane?
+Does age depend solely on rotation period and mass, or do other variables (e.g. metallicity) influence stellar spin down---perhaps only becoming important after many Myrs?
+Unfortunately we cannot fully answer these questions here as the asteroseismic ages are noisy and observational and intrinsic scatter are ambiguously interwoven.
 A future study might include an extra parameter that describes the `width' of the gyrochronological plane and attempt to detect an element of scatter above the noise level.
-The success of this approach would strongly depend on having truely representative observational uncertainties.
+The success of this approach would strongly depend on having truly representative observational uncertainties.
 
-The discrepancies in period-colour relations between individual clusters does not bode well for gyrochronology as a dating method.
-Values of $a$, $b$ and $n$ measured for the Hyades and Coma Berenices are not consistent within uncertainties (see table \ref{tab:cluster_results}).
-Until now it was assumed that one single relation between period, mass and age could be used to describe all F, G \& K MS stars however the results of this study suggest that in fact a different relation may be required for each star cluster and it follows that a different relation might be required for each field star.
+The picture of gyrochronology will become clearer as the sample of asteroseismic stars with individual mode analysis grows and their age uncertainties shrink.
+Unfortunately, the best targets for asteroseismic studies are relatively inactive---they allow the easier detection of Solar-like oscillations.
+These are also the best targets for gyrochronology as inactive stars are often old and slowly rotating, however these targets are not well suited for rotation measurements which are most easily and precisely determined for active, rapidly rotating stars.
+In addition, despite the encouraging number of stars that were targeted for asteroseismic studies with short cadence Kepler observations, only a fraction of these are cool MS stars, suitable for gyrochronology studies.
+K2, the repurposed Kepler mission, will present new targets for rotation studies; in particular, some relatively old clusters have and will continue to be monitored by the spacecraft.
+These clusters may be useful for gyrochronology, however the observing seasons of K2 are relatively short ($\sim$ 90 days) and fields will only be observed once, so the maximum rotation periods measureable from K2 light curves will be considerably shorter than with Kepler.
 
 \section{Conclusions}
 \label{sec:conclusions}
 
-We have calibrated the relation between rotational period, B-V colour and age for MS stars with \teff $<$ 6250 K using \nastero Kepler asteroseismic targets, supplemented with 5 field stars and \ncluster$~$ cluster stars.
-Unlike previous gyrochronology calibrations, our sample covers a large range of ages and this new gyrochronology relation is therefore more accurate at predicting the ages of old stars.
-We have taken observational uncertainties into account throughout this analysis.
-These uncertainties, particularly on the asteroseismic ages, are significant and this was therefore an essential part of our model fitting method.
-Four populations: hot dwarfs, cool dwarfs, rapid rotators and subgiants, were modelled simulataneously in order to account for potential misclassifications arising from the large observational uncertainties.
-
-We find that a single relation between rotation period, colour and age does not adequately describe the cluster data in our sample and for this reason we only used the Hyades and Coma Berenices clusters to provide a newly calibrated gyrochronology model.
-In order to include all available data, a new functional form for the gyrochronology relation may need to be explored or an 'intrinsic width' assigned to the gyrochronology plane.
-
+We have calibrated the relation between rotational period, B-V colour and age for MS stars with \teff $<$ 6250 K using \nastero$~$ Kepler asteroseismic targets, supplemented with 5 field stars and \ncluster$~$ cluster stars.
+The results are presented in table \ref{tab:constants}.
+Unlike previous gyrochronology calibrations, our sample covers a large range of ages and observational uncertainties were accounted for---this was an essential part of the model fitting process since the uncertainties, particularly on the asteroseismic ages, were significant.
+Four populations: hot dwarfs, cool dwarfs, rapid rotators and subgiants, were modelled simulataneously in order to account for potential misclassifications that might have arisen from large observational uncertainties and to allow for background population of stars that have not converged onto the gyrochronology plane.
+We found that a single relation between rotation period, colour and age did not adequately describe the cluster data and for this reason only the Hyades and Coma Berenices clusters were used to calibrate the model.
+The observed variation between clusters provides a concern for the reliability of gyrochronology: perhaps it should only be used to constrain the ages of populations of stars, rather than for providing age estimates for individual stars.
+% In order to incorporate all available data it may be necessary to explore a new functional form for the gyrochronology relation.
+A future study may benefit from allowing there to be a `width' to the gyrochronology plane---i.e. not assuming that there is one `true' value of age for a given rotation period and colour, but rather a spread of ages, each with some probability.
 % Asteroseismic surveys are biased towards relatively quiet, bright stars, slightly more massive than the Sun.
-% There are very few young K stars in the \citet{Chaplin2013} sample---presumably because these stars are active.
-% Unfortunately, those stars that are ideal asteroseismic targets are often less-than-ideal for a rotation survey.
-
-The picture of gyrochronology  will become clearer over the coming months as the sample of asteroseismic stars with individual mode analysis grows.
-New rotation periods will become availiable with K2; the repurposed Kepler mission.
-Rotation periods for cluster stars, provided by K2 will be invaluable for studying the connection between rotation period, mass and age; they will provide a far more comprehensive view of the period-mass-age plane than has been possible so far.
-We are entering an era where cluster studies and asteroseismology will deliver precise ages for stars with measureable rotation periods: the picture of gyrochronology will continue to advance over the coming years.
+The K2 mission will contribute new rotation periods and continued asteroseismic studies will produce more precise age measurements enabling further improvement of gyrochronology over the coming years.
 
 The code used in this project can be found at https://github.com/RuthAngus/Gyro.
 We would like to thank Eric Mamajek, Marc Pinsonneault, Sydney Barnes, Steve Kawaler, Jerome Bouvier, Daniel Mortlock and David Hogg for useful insight and discussion.
