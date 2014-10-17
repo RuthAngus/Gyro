@@ -14,22 +14,24 @@ ocols = ['#FF9933','#66CCCC' , '#FF33CC', '#3399FF', '#CC0066',
 '#99CC99', '#9933FF', '#CC0000', '#99CC00']
 
 # load asteroseismic data
-data = np.genfromtxt("/Users/angusr/Python/Gyro/data/garcia_all_astero.txt")
-KID = data[0]
-t1 = data[1]
-t1_err = data[2]
-a1 = data[3]
-a1_errp = data[4]
-a1_errm = data[5]
+# data = np.genfromtxt("/Users/angusr/Python/Gyro/data/garcia_all_astero.txt")
+data = np.genfromtxt("/Users/angusr/Python/Gyro/data/garcia_irfm.txt")
+l = data[1] > 100
+KID = data[0][l]
+t1 = data[1][l]
+t1_err = data[2][l]
+a1 = data[3][l]
+a1_errp = data[4][l]
+a1_errm = data[5][l]
 a1_err = .5*(a1_errp+a1_errm)
-p1 = data[6]
-p1_err = data[7]
-logg1 = data[8]
-logg1_errp = data[9]
-logg1_errm = data[10]
+p1 = data[6][l]
+p1_err = data[7][l]
+logg1 = data[8][l]
+logg1_errp = data[9][l]
+logg1_errm = data[10][l]
 logg1_err = .5*(logg1_errp+logg1_errm)
-feh1 = data[11]
-feh1_err = data[12]
+feh1 = data[11][l]
+feh1_err = data[12][l]
 bv1, bv1_err = teff2bv_err(t1, logg1, feh1, t1_err, logg1_err, feh1_err)
 
 # load travis and victor data
@@ -51,9 +53,9 @@ vtfeh = data[11]
 vtfeh_err = data[12]
 vtbv, vtbv_err = teff2bv_err(vtt, vtlogg, vtfeh, vtt_err, vtlogg_err, vtfeh_err)
 
-l = (t1>0)*(logg1>0)
+l = (t1>100)*(logg1>0)
 hot = t1[l]>6250
-sub = logg1[l]<4.
+sub = logg1[l]<4.2
 pl.clf()
 pl.errorbar(t1[l], logg1[l], xerr=t1_err[l], yerr=(logg1_errp[l], logg1_errm[l]), \
         fmt='k.', capsize=0, ecolor='.7', mec='k')
@@ -61,19 +63,22 @@ pl.errorbar(t1[l][hot], logg1[l][hot], xerr=t1_err[l][hot], yerr=(logg1_errp[l][
         logg1_errm[l][hot]), fmt='r.', capsize=0, ecolor='.7', mec='r')
 pl.errorbar(t1[l][sub], logg1[l][sub], xerr=t1_err[l][sub], yerr=(logg1_errp[l][sub], \
         logg1_errm[l][sub]), fmt='b.', capsize=0, ecolor='.7', mec='b')
+print len(t1[l]), len(t1[l][hot]), len(t1[l][sub])
+print len(t1[l])-len(t1[l][hot+sub])
 hot = vtt>6250
-sub = vtlogg<4.
+sub = vtlogg<4.2
 pl.errorbar(vtt, vtlogg, xerr=vtt_err, yerr=(vtlogg_errp, vtlogg_errm), \
-        capsize=0, ecolor='.7', mec='k', fmt="k^", markersize=4)
+        capsize=0, ecolor='.7', mec='k', fmt=".", markersize=4)
 pl.errorbar(vtt[hot], vtlogg[hot], xerr=vtt_err[hot], yerr=(vtlogg_errp[hot], \
-        vtlogg_errm[hot]), capsize=0, ecolor='.7', mec='r', fmt="r^", markersize=4)
+        vtlogg_errm[hot]), capsize=0, ecolor='.7', mec='r', fmt=".", markersize=4)
 pl.errorbar(vtt[sub], vtlogg[sub], xerr=vtt_err[sub], yerr=(vtlogg_errp[sub], \
-        vtlogg_errm[sub]), capsize=0, ecolor='.7', mec='b', fmt="b^", markersize=4)
+        vtlogg_errm[sub]), capsize=0, ecolor='.7', mec='b', fmt=".", markersize=4)
 pl.xlabel("$T_{eff}~\mathrm{(K)}$")
 pl.ylabel("$\mathrm{log}~g$")
 pl.ylim(pl.gca().get_ylim()[::-1])
 pl.xlim(pl.gca().get_xlim()[::-1])
 pl.savefig("logg_vs_t_paper")
+print len(vtt)-len(vtt[hot])-len(vtt[sub])
 
 # load cluster data
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/clusters.txt").T
@@ -99,11 +104,11 @@ pl.errorbar(bv2, p2, xerr=bv2_err, yerr=p2_err, fmt='.',
 # sun
 pl.errorbar(bv2[sun], p2[sun], xerr=bv2_err[sun], yerr=p2_err[sun],
             fmt='.', color='r', capsize=0, ecolor='.7',
-            markersize=8, mec='k')
+            markersize=8, mec='r')
 
 # Travis and victor
 pl.errorbar(vtbv, vtp, xerr=vtbv_err, yerr=vtp_err, fmt='.', \
-        color='k', capsize=0, ecolor='.7')
+         color='k', capsize=0, ecolor='.7')
 
 pl.xlabel("$\mathrm{B-V}$")
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")

@@ -13,6 +13,7 @@ pl.rcParams.update(plotpar)
 ocols = ['#FF9933','#66CCCC' , '#FF33CC', '#3399FF', '#CC0066', '#9933FF', '#CC0000', '#9933FF', '#99cc99', '#CC0000']
 
 lw = 1
+ms = 8
 
 def log_period_model(par, log_a, bv):
     return np.log10(par[0]) + par[1] * log_a + par[2] * np.log10(bv - par[3]) # colour
@@ -105,12 +106,12 @@ for i, age in enumerate(ages):
     # Plot data
     pl.clf()
     pl.errorbar(bv1[l11], p1[l11], xerr=bv_err1[l11], yerr=p_err1[l11], color='k', \
-            fmt='o', mec='k', capsize=0, markersize=3, ecolor='.7', zorder=3)
+            fmt='o', mec='k', capsize=0, markersize=ms, ecolor='.7', zorder=3)
     if age == 4.568:
         pl.errorbar(bv2[sun], p2[sun], xerr=bv_err2[sun], yerr=p_err2[sun], color='r', \
-                fmt='o', mec='r', capsize=0, markersize=4, ecolor='.7', zorder=3)
+                fmt='o', mec='r', capsize=0, markersize=ms, ecolor='.7', zorder=3)
     pl.errorbar(bv2[l12], p2[l12], xerr=bv_err2[l12], yerr=p_err2[l12], color='r', \
-            fmt='.', mec='r', capsize=0, markersize=8, ecolor='0.7', zorder=0)
+            fmt='.', mec='r', capsize=0, markersize=ms, ecolor='0.7', zorder=0)
 
     # Add Isochrones
     xs, ys = iso_calc(pars, ages[i])
