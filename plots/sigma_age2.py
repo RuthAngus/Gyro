@@ -78,7 +78,7 @@ a_errm = np.concatenate((a_errm1, data[5]))
 logg = np.concatenate((logg1, data[6]))
 logg_err = np.concatenate((logg_err1, data[7]))
 
-ages = [.625, 2, 4.568, 8, 10]
+ages = [0.5, .625, 2, 5, 8, 10]
 pars = [.7725, .5189, .601, .4] # Barnes
 pars_err = [.0070, .011, .024, 0.]
 pars2 = [.407, .566, .325, .495] # MH
