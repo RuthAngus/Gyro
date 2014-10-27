@@ -21,6 +21,7 @@
 \newcommand{\teff}{$T_{eff}$}
 \newcommand{\prot}{$P_{rot}~$}
 
+\newcommand{\wh}{$\hat{w}_n$}
 \newcommand{\ah}{$\hat{A}_n$}
 \newcommand{\ph}{$\hat{P}_n$}
 \newcommand{\ch}{$\hat{C}_n$}
@@ -35,9 +36,9 @@
 % numbers
 \newcommand{\nastero}{310}
 \newcommand{\nprecise}{14~}
-\newcommand{\ncluster}{282~}
+\newcommand{\ncluster}{211~}
 \newcommand{\nHC}{50~}
-\newcommand{\ntotal}{597~}
+\newcommand{\ntotal}{521~}
 \newcommand{\ngarcia}{310~}
 \newcommand{\ncooldwarfs}{23~}
 
@@ -59,23 +60,24 @@
 
 \title{Calibrating Gyrochronology using Kepler Asteroseismic targets}
 
-\author{Ruth Angus$^1$, Suzanne Aigrain$^1$, Amy McQuillan$^2$, Daniel Foreman-Mackey$^3$,  William, J. Chaplin$^4$, Tsevi Mazeh$^2$}
+\author{Ruth Angus$^1$, Suzanne Aigrain$^1$, Amy McQuillan$^2$, Daniel Foreman-Mackey$^3$,  William, J. Chaplin$^{4, 5}$, Tsevi Mazeh$^2$}
 \affil{$^1$Department of Physics, University of Oxford, OX1 3RH, UK}
 \affil{$^2$School of Physics and Astronomy, Raymond and Beverly Sackler, Faculty of Exact Sciences, Tel Aviv University, 69978, Tel Aviv, Israel}
 \affil{$^3$Centre for Cosmology and Particle Physics, New York University, New York, NY, USA}
 \affil{$^4$School of Physics and Astronomy, University of Birmingham, Edgbaston, Birmingham, B15 2TT, UK}
+\affil{$^5$Stellar Astrophysics Centre (SAC), Department of Physics and Astronomy, Aarhus University, DK-8000 Aarhus C, Denmark}
 
 \begin{abstract}
 \label{abs}
 
 Measuring ages for intermediate and low-mass stars on the Main Sequence (MS) is challenging but important for a wide range of studies, from Galactic dynamics to stellar and planetary evolution.
-Among the available methods, gyrochronology is a powerful one because it requires knowledge of only the star's mass (or effective temperature, or colour) and its rotation period.
-However, it is not well calibrated at late ages and suffers from large uncertainties.
+Among the available methods, gyrochronology is a powerful one because it requires knowledge of only the star's mass and rotation period.
+However, it is not well calibrated at late ages and suffers from large, systematic uncertainties.
 Asteroseismology provides age measurements for some of the brightest stars observed by Kepler.
 % We measured the photometric rotation periods of 153 stars with asteroseismic ages in order to calibrate the gyrochronology relations and improve upon current methods of measuring the ages of MS field stars. %pchange
 We use rotation periods measurements of \nastero$~$stars with asteroseismic ages, \nHC stars from the Hyades and Coma Berenices clusters and 5 field stars (including the Sun) with precise age measurements to calibrate the gyrochronology relations.
-Advanced statistical methods are used to model the relationship between rotation period, age and colour while accounting for measurement uncertainties in all three quantities.
-Our sample includes both main sequence (MS) stars and subgiants, and straddles the Kraft break (only MS stars cooler than the Kraft break, $\sim$ 6250 K, are expected to follow gyrochronology relations); and this must be taken into account when modelling the data.
+We model the relationship between rotation period, age and colour while accounting for measurement uncertainties in all three quantities.
+Our sample includes both MS stars and subgiants, and straddles the Kraft break (only MS stars cooler than the Kraft break, $\sim$ 6250 K, are expected to follow gyrochronology relations); and this must be taken into account when modelling the data.
 % Our method has been applied to the extended sample of published rotation periods for stars with reliable age measurements.
 Our method enables us to estimate an age for any cool MS star with a measured rotation period and colour, along with an associated uncertainty that reflects both measurement errors and the intrinsic scatter in the gyrochronology relations.
 Although we provide a newly calibrated gyrochronology relation that best describes the available data, we find that no single relation beween rotation period, colour and age can adequately describe each cluster.
@@ -98,6 +100,8 @@ Gyrochronology is a dating method that utilises the predictable rotation period 
 It requires only knowledge of the rotation period---which is often easily extracted from Kepler light curves---and mass (or appropriate proxy) of a star, however the current gyrochronology relations are entirely empirically calibrated and still need refining at large stellar ages.
 Kepler provides the perfect opportunity to calibrate gyrochronology at late ages---it provides surface rotation periods of thousands of stars and new age estimates for hundreds of stars via asteroseismology.
 We use these new asteroseismic age measurements to improve the gyrochronology relations at late ages.
+These clusters may be useful for gyrochronology, however
+These clusters may be useful for gyrochronology, however
 
 \subsection{Gyrochronology}
 
@@ -135,7 +139,7 @@ The values of $n$, $a$ and $b$, resulting from their fit are tabulated in \ref{t
 % \citet{Mamajek2008} only retained fits that reproduced the rotation period of the Sun to within 0.1 days.
 % This approach relies on the Copernican principle---they assume that the Sun is a typical rotator for its mass and age.
 % If this assumption is invalid (it is, at least, not well motivated) then their resulting gyrochronological relation will incorrectly predict ages of stars older than the Hyades.
-In both of these studies a minimum \chit$~$fitting approach was used.
+In both of these studies a maximum likelihood fitting approach was used.
 Simple minimum \chit$~$fitting relies on the assumption that uncertainties are Gaussian, which may not always be the case, and only takes observational uncertainties on the dependent variable into account.
 As described in \textsection \ref{sec:gyro_cal}, we adopt a fitting method that properly accounts for observational uncertainties on all three variables: colour, period and age.
 
@@ -147,7 +151,7 @@ As described in \textsection \ref{sec:gyro_cal}, we adopt a fitting method that 
 \colhead{Parameter}&
 \colhead{\citet{Barnes2007}}&
 \colhead{\citet{Mamajek2008}}&
-\colhead{This work}}
+\colhead{Angus et al. (2014)}}
 % 2.726685106754302979e-01 7.484385967254647554e-03 1.548099517822265625e-02
 % 6.197596788406372070e-01 3.800292015075590335e-03 4.473507404327392578e-03
 % 4.090114831924438477e-01 2.897063493728646577e-03 3.478863596916198508e-02
@@ -197,7 +201,7 @@ This conversion adds an extra element of noise to our data since the metalliciti
 
 The asteroseismic ages in \citet{Chaplin2013} have typical uncertainties of $\sim$ 35\%; however, it will be possible to derive more precise ages for a subset of these stars.
 By measuring the frequency of each oscillation mode individually, not just the mean large serparation, one can build up a density profile of the star and provide a tighter constraint on its age.
-Ages derived from individual oscillation mode measurements can have uncertainties as small as 10\% (\citet{Brown1994}, \citet{SilvaAguirre2013}), however measuring frequencies for individual oscillation modes is a manual process and can only be applied in the highest signal-to-noise cases.
+Ages derived from individual oscillation mode measurements can have uncertainties as small as 10\% \citep{Brown1994, SilvaAguirre2013}, however measuring frequencies for individual oscillation modes is a manual process and can only be applied in the highest signal-to-noise cases.
 \citet{Chaplin2013} predict that around 150 of the 505 stars will be suitable for this individual oscillation mode treatment.
 We obtained precise ages for 42 stars from \citet{Metcalfe2014}, modelled with the Asteroseismic Modeling Portal (AMP), with effective temperatures and metallicities from \citet{Bruntt2012}.
 Of the 42 stars in \citet{Metcalfe2014}, we only integrate the `simple stars' (cool dwarfs) into our sample, ignoring the `F stars' and `mixed mode' (subgiant) stars as these are not expected to follow the simple gyrochronology relation.
@@ -234,14 +238,6 @@ Of the 505 targets in the original sample, \nastero$~$rotation periods were reli
 The asteroseismic sample covers a large range of ages (see figure \ref{fig:p_vs_a}), however it does not provide good mass coverage across the entire range.
 Few stars have temperatures below 6000 K (B-V $\sim$ 0.55) and of the low mass stars, most of them are old (note---the paucity of massive, old stars in the sample is an effect of MS turn-off).
 We therefore added \ncluster stars to our sample from young clusters Coma Berenices (0.5 Gyr), Praesepe (0.588 Gyr) and the Hyades (0.625 Gyr) (see table \ref{tab:clusters}).
-Only clusters older than 0.5 Gyrs were added as younger clusters often have large populations of rapid rotators that have not yet converged onto the gyrochronology plane.
-Uncertainties on B-V colours associated with each cluster star were not provided in the catalogues from which rotation periods and ages were obtained.
-Since the uncertainty associated with each measurement plays such a key role in our analysis (see \textsection \ref{sec:gyro_cal}), we assigned an uncertainity of $\pm 0.04$ to each colour measurement, based on the mean uncertainty in the asteroseismic temperature-converted colours.
-The 1.1 Gyr open cluster, NGC 6811, was originally included in our analysis, however we discovered that its period-colour relation was different to the other clusters and not compatible with our data set and therefore did not include it in our analysis.
-A further 5 field stars with precise age measurements were added to the sample: 16 Cyg B, Alpha Cen A and B, 18 Sco and, of course, the Sun (see table \ref{tab:field_stars}).
-The entire set of \ntotal stars is shown in figures \ref{fig:p_vs_a} and \ref{fig:3d}.
-Asteroseismic targets are shown in black, with cluster and field stars in blue and the Sun in red.
-
 \begin{deluxetable}{lcccc}
 \label{tab:clusters}
 \tablewidth{0pc}
@@ -262,7 +258,13 @@ Hyades & 0.625 $\pm$ 0.05 & 22 & 5 & 6 \\
 % NGC 6811 & 1.1 $\pm$ 0.2 & 71 & 11 & 12 \\
 \enddata
 \end{deluxetable}
-
+Only clusters older than 0.5 Gyrs were added as younger clusters often have large populations of rapid rotators that have not yet converged onto the gyrochronology plane.
+Uncertainties on B-V colours associated with each cluster star were not provided in the catalogues from which rotation periods and ages were obtained.
+Since the uncertainty associated with each measurement plays such a key role in our analysis (see \textsection \ref{sec:gyro_cal}), we assigned an uncertainity of $\pm 0.04$ to each colour measurement, based on the mean uncertainty in the asteroseismic temperature-converted colours.
+The 1.1 Gyr open cluster, NGC 6811, was originally included in our analysis, however we discovered that its period-colour relation was different to the other clusters and not compatible with our data set and therefore did not include it in our analysis.
+A further 5 field stars with precise age measurements were added to the sample: 16 Cyg B, Alpha Cen A and B, 18 Sco and, of course, the Sun (see table \ref{tab:field_stars}).
+The entire set of \ntotal stars is shown in figures \ref{fig:p_vs_a} and \ref{fig:3d}.
+Asteroseismic targets are shown in black, with cluster and field stars in blue and the Sun in red.
 \begin{deluxetable}{lccc}
 \label{tab:field_stars}
 \tablewidth{0pc}
@@ -316,155 +318,125 @@ $\alpha$ Cen B & 6 $\pm$ 1$^{10,11}$ & 38.7 $\pm$ 5.0$^{13}$ & 0.90 $\pm$ 0.01$^
 \subsection{The model}
 
 The \nastero$~$asteroseismic stars in our sample have B-V colours converted from effective temperatures, photometric rotation periods, P and asteroseismically derived ages, A and surface gravities, \logg$~$(G).
-Each measurement of these properties is assumed to be independent with an associated Gaussian uncertainty.
-The assumption of independence breaks down in the case where there is significant systematic bias in the rotation period, colour or age measurement methods, however we do not expect such biases so this should be a reasonable assumption.
-The cluster and field stars added to our sample do not have \logg$~$values; however, since we only use \logg$~$to separate the populations of subgiants and dwarfs (and we assume that the cluster and field stars are dwarfs) this shouldn't hurt our analysis.
+ Each measurement of these properties is assumed to be independent with an associated Gaussian uncertainty.
+% The assumption of independence breaks down in the case where there is significant systematic bias in the rotation period, colour or age measurement methods, however we do not expect such biases so this should be a reasonable assumption.
+The cluster and field stars added to our sample do not have \logg$~$values; however, since we only use \logg$~$to separate the populations of subgiants and dwarfs (and we assume that the cluster and field stars are dwarfs) this shouldn't affect our results.
 
 Hot stars and subgiants follow a different gyrochronology relation to MS dwarfs: stars with effective temperatures above the Kraft-break, $T_{eff} \sim$ 6250 K, \citep{Kraft1967} do not have a thick convective envelope and cannot support a strong magnetic dynamo, so do not spin down appreciably during their MS lifetimes.
 Subgiants spin down rapidly as they expand, due to angular momentum conservation, and thus diverge from the gyrochronological mass-period-age plane.
 The point in their evolution at which they turn off the `gyrochronological MS turnoff' is difficult to define.
 Classically, MS turnoff is defined as the hottest point on a star's path on the HR diagram (before it ascends the giant branch) but theory predicts that evolving stars begin the process of spinning down relatively slowly after leaving the classically defined MS \citep{vanSaders2013}.
-For this reason we chose a very simple definition of MS turnoff---we use a \logg$~$cut of 4.2 to differentiate dwarfs from giants.
-This cut adequately reduced the effect of subgiant contamination during the model fitting process.
-We did not simply exclude hot stars and subgiants from our sample during the modelling process---we modelled all three populations simultaneously.
+For this reason we chose a very simple definition of MS turnoff---we define a \logg$~$boundary of 4.2 to mark the transition between dwarfs from giants.
+This boundary was chosen through trial and error; it adequately reduced the effect of subgiant contamination during the model fitting process.
+We did not exclude hot stars and subgiants from our sample during the modelling process---we modelled all three populations simultaneously.
 This allowed for the fact that stars have some probability mass lying in all three regimes due to their large observational uncertainties.
 In addition to hot stars and subgiants, there was a further population of contaminating stars in our sample: rapid rotators.
-This stars do not lie on the standard gyrochronology mass-period-age plane and could plausibly be synchronised binaries, stars with unseen, close-in, massive planets (\citet{Poppenhaeger2014}, \citet{Beky2014}) or stars which have not yet converged onto the gyrochronology plane.
+This stars do not lie on the standard gyrochronology mass-period-age plane and could plausibly be synchronised binaries, stars with unseen, close-in, massive planets \citep{Poppenhaeger2014, Beky2014} or stars which have not yet converged onto the gyrochronology plane.
 
 We modelled all four stellar populations simultaneously: cool dwarfs, hot dwarfs, subgiants and rapid rotators.
 The hot MS stars were defined as those with B-V $<$ 0.45, corresponding to \teff$~\approx$ 6250 K for Solar metallicity and \logg.
-Since there is no dependence of age on rotation period for massive MS stars, their ages were modelled as a log-normal distribution with mean and standard deviation, Y and V, as free parameters.
-Subgiant ages \emph{do} depend on period and $T_{eff}$; however, since we are not interested in the rotational properties of these stars for the purposes of gyrochronology calibration, we also model them with a log-normal distribution with mean and standard deviation, Z and U, free parameters.
-% We could model the subgiants with an analytic expression for age, given colour and period, such as the one in \citet{vanSaders2013}, however, we would like to remain as model \emph{independent} as possible throughout this process.
+Since there is no dependence of age on rotation period for massive MS stars, their ages were modelled as a normal distribution with mean and standard deviation, Y and V, as free parameters.
+Subgiant ages \emph{do} depend on period and $T_{eff}$; however, since we are not interested in the rotational properties of these stars for the purposes of gyrochronology calibration, we also model them with a normal distribution with mean and standard deviation, Z and U, free parameters.
 We used a mixture model for the remaining two populations of cool MS stars: those that follow the gyrochronology relation and those with unusually fast rotation periods.
-We treated the fast rotators as if they had been drawn from a background log normal distribution with mean and standard deviation, X and U, again inferred from the data and another parameter, $P_b$, was the probability of each star belonging to the background population.
+We treated the fast rotators as if they had been drawn from a background normal distribution with mean and standard deviation, X and U, again inferred from the data and another parameter, $P_b$, was the probability of each star belonging to the background population.
 
-The chosen cuts left only \ncooldwarfs cool, MS stars in our sample (see figure \ref{fig:logg_vs_t}), however they were necessary in order to avoid {\it all} potential contamination from subgiants: these stars rotate more slowly than MS stars and, if left in the sample, would significantly bias the resulting gyrochronology relation.
+The boundaries separating cool dwarfs, hot dwarfs and subgiants left only \ncooldwarfs stars classified as cool dwarfs in our sample (see figure \ref{fig:logg_vs_t}), however they were necessary in order to avoid {\it all} potential contamination from subgiants: these stars rotate more slowly than MS stars and, if left in the sample, would significantly bias the resulting gyrochronology relation.
 Ideally both the hot star (B-V $<$ 0.45) and subgiant (\logg$~<$ 4.2) boundaries would be free parameters in our model.
-However, since these two populations were modelled with a relatively unconstraining log-normal distributions, these boundary parameters would not be well behaved.
-Both would be pushed to higher and higher values until all stars were modelled with a log normal distribution.
+However, since these two populations were modelled with a relatively unconstraining normal distributions, these boundary parameters would not be well behaved.
+Both would be pushed to higher and higher values until all stars were modelled with a normal distribution.
 In order to avoid this problem, we fixed these two boundaries.
-A future analysis could deal with this issue by maximising likelihood over a grid of boundary parameter values.
-% {\color{red}Try using different values and seeing how sensitive you are!}
-Alternatively, one could avoid the assumption that the gyrochronology relation is infinitely narrow and assign it some intrinsic width, which would also be a free parameter.
+A future analysis could avoid the assumption that the gyrochronology relation is infinitely narrow and assign it some intrinsic width, which would also be a free parameter.
 
-Our likelihood function for the cool dwarf regime can be written as follows:
-
-% \begin{eqnarray}
-% 	\mathcal{L}_{gyro} = \prod_{i=1}^N \left[ \frac{1-P_b}{\sqrt{2\pi\sigma_{i}^2}}
-% 	\exp\left({-\frac{\left(\sum_{j=1}^J [A_{i}- (P_{ij} \times \frac{1}{a}([B-V]_{ij}-c)^{-b})^{\frac{1}{n}}]\right)^2} {2\sigma_{i}^2}} \right)  \right] \nonumber \\
-% 	+ \frac{P_b}{\sqrt{2\pi[U+\sigma_{i}^2]}} \exp \left( -\frac{[A_i - X]^2}{2[U+\sigma_{i}^2]}  \right)
-% \end{eqnarray}
-% \label{eq:likelihood}
-
-\begin{eqnarray}
-	\mathcal{L}_{gyro} = \prod_{i=1}^N \left[ \frac{1-P_b}{\sqrt{2\pi\sigma_{i}^2}}
-	\exp\left({-\frac{\left[P_i - A_i^n \times a(B_i-V_i-c)^b\right]^2}{2\sigma_{i}^2}} \right)  \right] \nonumber \\
-	+ \frac{P_b}{\sqrt{2\pi[U+\sigma_{i}^2]}} \exp \left( -\frac{[A_i - X]^2}{2[U+\sigma_{i}^2]}  \right)
-\end{eqnarray}
-\label{eq:likelihood}
-
-where $P_b$ is the probability that a star is drawn from the background log-normal distribution, with mean, X and standard deviation, U.
-
-The likelihood function for the hot and subgiant regimes can be written
-\begin{eqnarray}
-	\mathcal{L}_{hot} = \prod_{i=1}^N \left[ \frac{1}{\sqrt{2\pi[V+\sigma_{i}^2]}}
-	\exp\left({-\frac{\left(A_{i}- Y\right)^2} {2[V+\sigma_{i}^2]}} \right)  \right] \\
-	\nonumber \\
-	\mathcal{L}_{subgiant} = \prod_{i=1}^N \left[ \frac{1}{\sqrt{2\pi[W+\sigma_{i}^2]}}
-	\exp\left({-\frac{\left(A_{i}- Z\right)^2} {2[W+\sigma_{i}^2]}} \right)  \right] \nonumber \\
-\end{eqnarray}
-% {\color{red} why should the Ns be different? It's the same N, surely.}
-respectively, where Y and Z are the respective means and V and W the respective standard deviations.
-The total likelihood can be written as the sum of likelihoods over the three different regimes:%, k:
-
-\begin{equation}
-	\mathcal{L} = \mathcal{L}_{gyro} + \mathcal{L}_{hot} + \mathcal{L}_{sub}
-\end{equation}
-
-\subsection{Accounting for observational uncertainties}
-
-We postulate that there is a deterministic relationship between the `true' rotation period, $P_n$, of a star and its `true' age, $A_n$, and colour, $C_n$, described by equation \ref{eq:Barnes2007_2}.
+We postulate that there is a deterministic relationship between the `true' rotation period, of a star and its `true' age and colour, described by equation \ref{eq:Barnes2007_2}.
 By `true' we mean the value an observable property would take, given infinitely high signal-to-noise measurements.
-$P_n$ also depends on \logg$~$($G_n$) since this property determines whether a star falls in the dwarf or subgiant regime.
+$P_n$ also depends on \logg$~$since this property determines whether a star falls in the dwarf or subgiant regime.
+In what follows we use $w = (A, B-V, log~g)$ to denote the set of observational properties.
 
-We sampled the posterior probability of the parameter vector $\theta = \{a, b, n, X, Y, Z, U, V, W, P_b\}$ conditioned on a set of noisy observations \ph, \ah, \ch, and \gh.
-To do this we needed to compute the marginalised likelihood,
+In order to explore the posterior probability distributions of the model parameters, $\theta$ conditioned on a set of noisy observations \wh$~$it was necessary to compute the marginalised likelihood,
 
 \begin{equation}
-	p(\{\hat{P}_n,\hat{A}_n,\hat{C}_n,\hat{G}\}|\theta) =
-	\prod_{n=1}^{n} \int p(\hat{P}_n,\hat{A}_n,\hat{C}_n,\hat{G}_n,P_n,A_n,C_n,G_n|\theta)
-	{\rm d}P_n {\rm d}A_n {\rm d}C_n,{\rm d}G_n
+	p(\{\hat{P}_n,\hat{w}_n\}|\theta) =
+	\prod_{n=1}^{n} \int p(\hat{P}_n,\hat{w}_n,P_n,w_n|\theta)
+	{\rm d}P_n {\rm d}w_n
 \label{eq:fulll}
 \end{equation}
 
 The joint probability can be factorised as
 
 \begin{align}
-	p(\hat{P}_n,\hat{A}_n,\hat{C}_n,\hat{G}_n,P_n,A_n,C_n,G_n\,|\,\theta) = & \nonumber \\
-	p(P_n)\,p(C_n)\,p(G_n)\,p(P_n\,| & \,A_n,C_n,G_n,\theta)\
-        p(\hat{P}_n\,|\,P_n)\,p(\hat{A}_n\,|\,A_n)\,p(\hat{C}_n\,|\,C_n)\,p(\hat{G}_n\,|\,G_n)
+	p(\hat{P}_n,\hat{w}_n,P_n,w_n|\theta) = p(P_n\,| & \,w_n,\theta) p(\hat{P}_n\,|\,P_n)\,p(\hat{w}_n\,|\,w_n) p(P_n)p(w_n)
 \nonumber
 \end{align}
 
-where, in the cool dwarf regime
+and the above integral written
+
+\begin{equation}
+	p(\{\hat{P}_n,\hat{w}_n\}|\theta) \propto
+	\prod_{n=1}^{n} \int p(\hat{w}_n|w_n) {\rm d}w_n \int p(P_n|w_n,\theta) p(\hat{P}_n\,|\,P_n) {\rm d}P_n
+\label{eq:fac}
+\end{equation}
+
+The left hand integral is the same for hot dwarfs, cool dwarfs and subgiants alike.
+In our model, the probability of the `true' rotation period given the `true' observed parameters and the model parameters, $p(\hat{P}_n|w_n, \theta)$, is different in each regime because a different generative process is responsible for producing rotation period---so the right hand integral is different in regime.
+
+For cool dwarfs (B-V $<$ 0.45 and \logg $>$ 4.2):
 \begin{eqnarray}
-p(P_n\,|\,A_n,C_n,G_n,\theta) =
-	& (1-P_b)~\delta \left [P_n - \left(\left[A^n \times a(B-V - c)^b\right]^n\right) \right] \quad \\
-	& +~P_b~\times \left(\sqrt{2\pi[U^2+\sigma^2]}\right)^{-1/2}~\exp\left({\frac{(P_n-X)^2}{2[U^2+\sigma^2]}}\right),
+p(P_n|w_n,\theta) =
+	& (1-Q)~\delta \left [P_n - \left(\left[A^n \times a(B-V - c)^b\right]^n\right) \right] \quad \\
+	& +~Q~\times \left(\sqrt{2\pi[U^2+\sigma^2]}\right)^{-1/2}~\exp\left({\frac{(P_n-X)^2}{2[U^2+\sigma^2]}}\right),
 \end{eqnarray}
-in the hot dwarf regime
+Where $Q$ is the probability that a star is drawn from the population of rapidly rotating stars.
+For hot dwarfs (B-V $<$ 0.45 and \logg $>$ 4.2):
 \begin{eqnarray}
-p(P_n\,|\,A_n,C_n,G_n,\theta) = \left(\sqrt{2\pi[V^2+\sigma^2]}\right)^{-1/2}~\exp\left({\frac{(P_n-Y)^2}{2[V^2+\sigma^2]}}\right)
+p(P_n\,|\,w_n,\theta) = \left(\sqrt{2\pi[V^2+\sigma^2]}\right)^{-1/2}~\exp\left({\frac{(P_n-Y)^2}{2[V^2+\sigma^2]}}\right),
 \end{eqnarray}
-and in the subgiant regime
+and for subgiants,
 \begin{eqnarray}
-p(P_n\,|\,A_n,C_n,G_n,\theta) = \left(\sqrt{2\pi[W^2+\sigma^2]}\right)^{-1/2}~\exp\left({\frac{(P_n-Z)^2}{2[W^2+\sigma^2]}}\right),
+p(P_n\,|\,w_n,\theta) = \left(\sqrt{2\pi[W^2+\sigma^2]}\right)^{-1/2}~\exp\left({\frac{(P_n-Z)^2}{2[W^2+\sigma^2]}}\right).
 \end{eqnarray}
 
-We computed equation \ref{eq:fulll}, up to an unimportant constant, using a sampling approximation.
-The values of \ah, \ch~ (or \teffh) and \gh with uncertainties, $\sigma_A$, $\sigma_C$ and $\sigma_G$, reported in catalogues provide constraints on the posterior probability of those variables, under a choice of prior.
-Ideally, these catalogues would provide samples from their posterior PDFs for the asteroseismically determined parameters \ah, \teffh and \gh which we could use directly.
+\subsection{Accounting for Observational Uncertainties}
+
+Equation \ref{eq:fulll} was computed, up to an unimportant constant, using a sampling approximation.
+The values of \wh$~$with uncertainties, $\sigma_w$, reported in catalogues provide constraints on the posterior probability of those variables, under a choice of prior.
+Ideally, these catalogues would provide posterior samples, not just point estimates, which we could use directly.
 i.e. samples from
 \begin{equation}
-p(\hat{Y}_n|D_n) = \frac{1}{Z}p(D_n|\hat{Y}_n)p_0(\hat{Y}_n)
+p(w_n|D_n) = \frac{1}{Z}p(D_n|\hat{w}_n)p_0(\hat{w}_n)
 \end{equation}
-where $p(D_n|\hat{A}_n, \hat{C}_n, \hat{G}_n)$ is the likelihood of the data, $D_n$ (in this case, the set of Kepler lightcurves and supplementary \teff$~$and \feh values), given the model parameters, $\hat{Y}_n$.
-$Z$ is a normalisation constant and $p_0(\hat{A}_n, \hat{C}_n, \hat{G}_n)$ is an uninformative prior PDF, chosen by the fitter (\citet{Chaplin2013} use a flat prior in age and log $g$).
+where $p(D_n|\hat{w}_n)$ is the likelihood of the data, $D_n$ (in this case, the set of Kepler lightcurves and supplementary \teff$~$and \feh values), given the model parameters, $w_n$.
+$Z$ is a normalisation constant and $p_0(\hat{w}_n)$ is an uninformative prior PDF, chosen by the fitter (\citet{Chaplin2013} used a flat prior in age and log $g$).
 
-In the absence of posterior PDF samples we generated our own from Gaussian distributions with means, \ah, \ch, \gh and standard deviations, $\sigma_A^2$, $\sigma_C^2$ and $\sigma_G^2$.
-We generated $J$ posterior samples for each star:
+In the absence of posterior PDF samples we generated our own from Gaussian distributions with means, \wh$~$and standard deviations, $\sigma_w^2$.
+$J$ posterior samples were generated for each star (we used $J$ = 50):
 \begin{eqnarray}
-A_n^{(j)} &\sim& p(A_n\,|\,\hat{a}_n) \nonumber \\
-C_n^{(j)} &\sim& p(C_n\,|\,\hat{C}_n) \nonumber \\
-G_n^{(j)} &\sim& p(G_n\,|\,\hat{G}_n)
+w_n^{(j)} &\sim& p(w_n\,|\,\hat{w}_n)
 \end{eqnarray}
-and used these to evaluate $p(\hat{P_n}|P_n)$ up to a normalisation constant.
+and were used to evaluate $p(\hat{P_n}|P_n)$ up to a normalisation constant.
 We then evaluated the marginalized likelihood for a single star as follows
 
 \begin{align}
-	p(\hat{P}_n,\hat{A}_n,\hat{C}_n,\hat{G_n}\,|\,\theta) = & \nonumber\\
-\int
-p(P_n)\,p(C_n)\, & p(G_n)\,p(P_n\,|\,A_n,C_n,G_n,\theta)\,
-	p(\hat{P}_n\,|\,P_n)\,p(\hat{A}_n\,|\,A_n)\,p(\hat{C}_n\,|\,C_n),p(\hat{G}_n\,|\,G_n)
-    \dd P_n \dd A_n \dd C_n \dd G_n \nonumber\\
+	p(\hat{P}_n,\hat{w_n}\,|\,\theta) = & \int p(P_n)p(w_n) |w_n, \theta)\ p(\hat{P}_n\,|\,P_n)\,p(\hat{w}_n\,|\,w_n) \dd P_n \dd w_n \nonumber\\
 &\propto \int
-    p(P_n\,|\,A_n,C_n,G_n,\theta)\,p(\hat{P}_n\,|\,P_n)\,
-    p(A_n\,|\,\hat{A}_n)\,p(C_n\,|\,\hat{C}_n),p(G_n\,|\,\hat{G}_n)
-    \dd P_n \dd A_n \dd C_n \dd G_n \nonumber\\
+    p(P_n\,|\,w_n\theta)\,p(\hat{P}_n\,|\,P_n)\,
+    p(w_n\,|\,\hat{w}_n)
+    \dd P_n \dd w_n \nonumber\\
 &\approx \frac{1}{J_n} \sum_{j=1}^{J_n}p(\hat{P}_n\,|\,P_n^{(j)})
 \end{align}
 
 where $P_n^{(j)}$ was computed from the posterior samples.
 Finally, the full marginalized log-likelihood can be written
 \begin{eqnarray}
-	\log p(\{\hat{P}_n,\hat{A}_n,\hat{C}_n,\hat{G}_n\}\,|\,\theta) &\approx&
+	\log p(\{\hat{P}_n,\hat{w}_n\}\,|\,\theta) &\approx&
     \log Z + \sum_{n=1}^N
         \log \left[ \sum_{j=1}^{J_n}p(\hat{P}_n\,|\,P_n^{(j)}) \right ]
 \end{eqnarray}
-where $Z$ is an irrelevant normalization constant and $p(\hat{P}_n|P_n)$ is defined in \ref{eq:likelihood}.
+where $Z$ is an irrelevant normalization constant.
 We used {\tt emcee} \citep{Foreman-Mackey2013}, an affine invariant, ensemble sampler Markov Chain Monte Carlo (MCMC) algorithm, to explore the posterior probability distributions of the model parameters, $\theta$.
-
+For each star, a likelihood was computed as follows: $J$ samples were drawn from normal distributions in colour, age and \logg.
+For those samples that fell in the cool dwarf regime (B-V $>$ 0.45 and \logg$~>$ 4.2), a model rotation period was calculated using equation \ref{eqn:Barnes2007_2} and a likelihood calculated using a Gaussian mixture model likelihood function.
+For the samples that fell in the hot dwarf (B-V $<$ 4.2 and \logg$~>$ 4.2) and subgiant (\logg$~<$ 4.2) regimes, likelihoods were calculated by comparing observed rotation periods with the mean rotation periods of the two populations: $Y$ and $Z$.
+The total likelihood for each star was calculated as the product of the likelihoods of each of the $J$ samples.
 
 \section{Results and Discussion}
 \label{sec:results}
@@ -528,22 +500,6 @@ In order to test the predictive power of the new gyrochronology relation we inve
 % \label{eq:Barnes2007_3}
 % \end{equation}
 to compare previously measured ages with new age predictions for the 5 field stars (see table \ref{tab:comparison}).
-Uncertainties on ages predicted with the new relation were calculated using posterior samples of the three parameters, $a$, $b$ and $n$.
-For comparison, gyrochronological ages for the field stars were also computed using the relations of \citet{Barnes2007} and \citet{Mamajek2008}.
-% The ages of 18 Sco, Alpha Cen A and 16 Cyg B predicted by the new relation are consistent to within 1$\sigma$ and the Sun and Alpha Cen B to within 2$\sigma$.
-The uncertainty on the predicted ages of 16 Cyg B are dominated by the large observational uncertainties on rotation period and colour.
-In contrast, uncertainties on the ages of the Sun are dominated by uncertainties in the gyrochronology parameters.
-The minimum uncertainty achievable for a gyrochronological age (i.e. the uncertainty obtained for a star with negligable observational uncertainties) is $^{+0.245}_{-0.115}$.
-One would expect the \citet{Barnes2007} and \citet{Mamajek2008} relations to accurately predict an age for the Sun since they are strongly anchored to it.
-Our relation, on the other hand, uses additional age information from the asteroseismic stars so, although it does not predict such an accurate age for the Sun, it should predict more representative ages for other stars.
-% After all, the Copernican principle should only be taken so literally.
-We performed leave-one-out (LOO) cross validation on the field stars in order to assess the ability of this new relation to predict ages for field stars not included in the fitting process.
-Each field star, was `left out' of the sample, one at a time, and the model trained the remaining data.
-Ages predicted for each field star from the resulting, independently trained models are presented in table \ref{tab:loo}.
-These ages are similar to those in table \ref{tab:comparison}, where the model was trained on the entire data set, {\it except} for the Sun's age which has both a different MAP value and a larger uncertainty.
-This demonstrates the key role played by the Sun in the fitting process.
-Just as with the models of \citet{Barnes2007} and \citet{Mamajek2008} the Sun dominates the fit, however in {\it this} case the dominance arises naturally from the data as a consequence of the Sun's smaller observational uncertainties, and is not enforced by anchoring the model to the Solar datum as has previously been necessary due to the lack of old stars with age measurements.
-
 \begin{deluxetable}{lcccc}
 \label{tab:comparison}
 \tablewidth{0pc}
@@ -562,7 +518,18 @@ Alpha Cen B & $6.0 \pm 1$       & $5 \pm 1$ 	      & $4\pm1$             & $5^{+
 16 Cyg B    & $6.4 \pm 0.4$     & $6^{+3}_{-2}$       & $6^{+3}_{-2}$       & $6^{+3}_{-2}$ 	\\
 \enddata
 \end{deluxetable}
-
+Uncertainties on ages predicted with the new relation were calculated using posterior samples of the three parameters, $a$, $b$ and $n$.
+For comparison, gyrochronological ages for the field stars were also computed using the relations of \citet{Barnes2007} and \citet{Mamajek2008}.
+% The ages of 18 Sco, Alpha Cen A and 16 Cyg B predicted by the new relation are consistent to within 1$\sigma$ and the Sun and Alpha Cen B to within 2$\sigma$.
+The uncertainty on the predicted ages of 16 Cyg B are dominated by the large observational uncertainties on rotation period and colour.
+In contrast, uncertainties on the ages of the Sun are dominated by uncertainties in the gyrochronology parameters.
+The minimum uncertainty achievable for a gyrochronological age (i.e. the uncertainty obtained for a star with negligable observational uncertainties) is $^{+0.245}_{-0.115}$.
+One would expect the \citet{Barnes2007} and \citet{Mamajek2008} relations to accurately predict an age for the Sun since they are strongly anchored to it.
+Our relation, on the other hand, uses additional age information from the asteroseismic stars so, although it does not predict such an accurate age for the Sun, it should predict more representative ages for other stars.
+% After all, the Copernican principle should only be taken so literally.
+We performed `leave-one-out' cross validation on the field stars in order to assess the ability of this new relation to predict ages for field stars not included in the fitting process.
+Each field star, was `left out' of the sample, one at a time, and the model trained the remaining data.
+Ages predicted for each field star from the resulting, independently trained models are presented in table \ref{tab:loo}.
 \begin{deluxetable}{lcc}
 \label{tab:loo}
 \tablewidth{0pc}
@@ -579,6 +546,9 @@ Alpha Cen B & $6.0 \pm 1$       & $5 \pm 1$ 	      \\
 16 Cyg B    & $6.4 \pm 0.4$     & $6^{+3}_{-2}$       \\
 \enddata
 \end{deluxetable}
+These ages are similar to those in table \ref{tab:comparison}, where the model was trained on the entire data set, {\it except} for the Sun's age which has both a different MAP value and a larger uncertainty.
+This demonstrates the key role played by the Sun in the fitting process.
+Just as with the models of \citet{Barnes2007} and \citet{Mamajek2008} the Sun dominates the fit, however in {\it this} case the dominance arises naturally from the data as a consequence of the Sun's smaller observational uncertainties, and is not enforced by anchoring the model to the Solar datum as has previously been necessary due to the lack of old stars with age measurements.
 
 % 6.0
 % my age: [ 4.86249428  0.91858675  0.72173538]
@@ -641,6 +611,9 @@ A future study may benefit from allowing there to be a `width' to the gyrochrono
 % Asteroseismic surveys are biased towards relatively quiet, bright stars, slightly more massive than the Sun.
 The K2 mission will contribute new rotation periods and continued asteroseismic studies will produce more precise age measurements enabling further improvement of gyrochronology over the coming years.
 
+The research leading to these results has received funding from the the UK Science and Technology Facilities Council (STFC).
+Funding for the Stellar Astrophysics Centre is provided by The Danish National Research Foundation (Grant agreement no.: DNRF106).
+A.M. and T.M. acknowledge funding from the European Research Council under the EU’s Seventh Framework Programme (FP7/(2007-2013)/ERC Grant Agreement No. 291352). T.M. also acknowledges support from the Israel Science Foundation (grant No. 1423/11) and the Israeli Centers of Research Excellence (I-CORE, grant No. 1829/12).
 The code used in this project can be found at https://github.com/RuthAngus/Gyro.
 We would like to thank Eric Mamajek, Marc Pinsonneault, Sydney Barnes, Steve Kawaler, Jerome Bouvier, Daniel Mortlock and David Hogg for useful insight and discussion that hugely improved this paper.
 
@@ -666,7 +639,7 @@ We would like to thank Eric Mamajek, Marc Pinsonneault, Sydney Barnes, Steve Kaw
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{/Users/angusr/Python/Gyro/plots/logg_vs_t_paper.png}
-\caption{\logg$~$vs \teff$~$for the \nastero$~$asteroseismic stars. Stars with \teff$~>$ 6250 K are red and those with \logg$~<$ 4.2 are blue. The triangular data points are those with precise ages. Only the black cool dwarfs are expected to follow the gyrochronology relation in equation \ref{eq:Barnes2007_2}.}
+\caption{\logg$~$vs \teff$~$for the \nastero$~$asteroseismic stars. Hot dwarfs with \teff$~>$ 6250 K and \logg$~>$ 4.2 are red, subgiants with \logg$~<$ 4.2 are blue. Only the black cool dwarfs with \teff$~<$ 6250 K and \logg$~<$ 4.2 are expected to follow the gyrochronology relation in equation \ref{eq:Barnes2007_2}.}
 \label{fig:logg_vs_t}
 \end{center}
 \end{figure}
