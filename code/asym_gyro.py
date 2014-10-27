@@ -53,6 +53,7 @@ def MCMC(fname, c):
     nsamp, nrough = 100, 1000
     s = 12
     age_samp = np.zeros((len(age_obs), nsamp))
+    logg_samp = np.zeros((len(age_obs), nsamp))
     for i, obs in enumerate(age_obs):
         np.random.seed(s)
         age_sampp = obs+age_errp[i]*np.random.randn(nrough)
@@ -62,6 +63,15 @@ def MCMC(fname, c):
         age_samp_temp = np.concatenate((age_sampp[lp], age_sampm[lm]))
         r = np.random.randint(0, nrough, nsamp)
         age_samp[i, :] = age_samp_temp[r]
+
+        np.random.seed(s)
+        logg_sampp = logg_obs[i]+logg_errp[i]*np.random.randn(nrough)
+        np.random.seed(s)
+        logg_sampm = logg_obs[i]+logg_errm[i]*np.random.randn(nrough)
+        lp, lm = logg_sampp>logg_obs[i], logg_sampm<logg_obs[i]
+        logg_samp_temp = np.concatenate((logg_sampp[lp], logg_sampm[lm]))
+        r = np.random.randint(0, nrough, nsamp)
+        logg_samp[i, :] = logg_samp_temp[r]
 
 #         pl.clf()
 #         pl.subplot(2,1,1)
@@ -77,8 +87,6 @@ def MCMC(fname, c):
 
     np.random.seed(s)
     bv_samp = np.vstack([x0+xe*np.random.randn(nsamp) for x0, xe in zip(bv_obs, bv_err)])
-    np.random.seed(s)
-    logg_samp = np.vstack([x0+xe*np.random.randn(nsamp) for x0, xe in zip(logg_obs, logg_err)])
     np.random.seed(s)
     period_samp = np.vstack([x0+xe*np.random.randn(nsamp) for x0, xe in zip(period_obs, period_err)])
 
