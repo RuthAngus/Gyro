@@ -6,6 +6,7 @@ from all_plotting import load_dat
 import h5py
 import datetime
 from gyro_like import lnlike, period_model
+from sampling import simple_sample
 
 def lnprior(m):
     if -10. < m[0] < 10. and .0< m[1] < 1. and 0. < m[2] < 1. \
@@ -41,8 +42,9 @@ def MCMC(fname, c):
         print par_true
 
     # load real data
-    age_obs, age_err, age_errp, age_errm, period_obs, period_err, bv_obs, bv_err, \
-            logg_obs, logg_err, logg_errp, logg_errm, flag = load_dat(fname, False, False)
+    age_obs, age_err, age_errp, age_errm, period_obs, period_err, \
+            bv_obs, bv_err, logg_obs, logg_err, logg_errp, \
+            logg_errm, flag = load_dat(fname, False, False)
 
     pl.clf()
     pl.errorbar(age_obs, period_obs, xerr=age_err, yerr=period_err, fmt='k.',
@@ -50,36 +52,37 @@ def MCMC(fname, c):
     pl.show()
 
     # Now generate samples
-    nsamp = 100
-    np.random.seed(12)
-    age_samp = np.vstack([x0+xe*np.random.randn(nsamp) for x0, xe in zip(age_obs, age_err)])
-    np.random.seed(12)
-    bv_samp = np.vstack([x0+xe*np.random.randn(nsamp) for x0, xe in zip(bv_obs, bv_err)])
-    np.random.seed(12)
-    logg_samp = np.vstack([x0+xe*np.random.randn(nsamp) for x0, xe in zip(logg_obs, logg_err)])
-    np.random.seed(12)
-    period_samp = np.vstack([x0+xe*np.random.randn(nsamp) for x0, xe in zip(period_obs, period_err)])
+    age_samp, bv_samp, logg_samp, period_samp = \
+            simple_sample(age_obs, age_err, bv_obs, bv_err, period_obs,
+                          period_err, logg, logg_err, 100, 12):
 
-    print 'initial likelihood = ', lnlike(par_true, age_samp, bv_samp, \
-            period_samp, logg_samp, age_obs, age_err, bv_obs, bv_err, period_obs, period_err, \
-            logg_obs, logg_err, c)
+    print 'initial likelihood = ', \
+            lnlike(par_true, age_samp, bv_samp, period_samp, logg_samp,
+                   age_obs, age_err, bv_obs, bv_err, period_obs, period_err,
+                   logg_obs, logg_err, c)
 
     nwalkers, ndim = 32, len(par_true)
     p0 = [par_true+1e-4*np.random.rand(ndim) for i in range(nwalkers)]
-    args = (age_samp, bv_samp, period_samp, logg_samp, age_obs, age_err, bv_obs, \
+    args = (age_samp, bv_samp, period_samp, logg_samp, age_obs, age_err, bv_obs,
             bv_err, period_obs, period_err, logg_obs, logg_err, c)
     sampler = emcee.EnsembleSampler(nwalkers, ndim, lnprob, args = args)
 
+#     print("Burn-in")
+#     p0, lp, state = sampler.run_mcmc(p0, 5000)
+#     sampler.reset()
+#     print("Production run")
+#     nstep = 20000
+#     nruns = 2000.
     print("Burn-in")
-    p0, lp, state = sampler.run_mcmc(p0, 5000)
+    p0, lp, state = sampler.run_mcmc(p0, 5)
     sampler.reset()
     print("Production run")
-    nstep = 20000
-    nruns = 2000.
+    nstep = 2
+    nruns = 2
 
     for j in range(int(nstep/nruns)):
 
-        print fname, n
+        print fname
         print datetime.datetime.now()
         print 'run', j
         p0, lp, state = sampler.run_mcmc(p0, nruns)

@@ -1,23 +1,30 @@
 import numpy as np
 import matplotlib.pyplot as pl
 
-def simple_sample(age_obs, age_err, bv_obs, bv_err, period_obs, period_err, nsamp, s):
+def simple_sample(age_obs, age_err, bv_obs, bv_err, period_obs, period_err,
+                  logg, logg_err, nsamp, s):
     np.random.seed(s)
-    age_samp = np.vstack([x0+xe*np.random.randn(nsamp) for x0, xe in zip(age_obs, age_err)])
+    age_samp = np.vstack([x0+xe*np.random.randn(nsamp)
+                         for x0, xe in zip(age_obs, age_err)])
     np.random.seed(s)
-    bv_samp = np.vstack([x0+xe*np.random.randn(nsamp) for x0, xe in zip(bv_obs, bv_err)])
+    bv_samp = np.vstack([x0+xe*np.random.randn(nsamp)
+                        for x0, xe in zip(bv_obs, bv_err)])
     np.random.seed(s)
-    logg_samp = np.vstack([x0+xe*np.random.randn(nsamp) for x0, xe in zip(logg_obs, logg_err)])
+    logg_samp = np.vstack([x0+xe*np.random.randn(nsamp)
+                          for x0, xe in zip(logg_obs, logg_err)])
     np.random.seed(s)
-    period_samp = np.vstack([x0+xe*np.random.randn(nsamp) for x0, xe in zip(period_obs, period_err)])
+    period_samp = np.vstack([x0+xe*np.random.randn(nsamp)
+                            for x0, xe in zip(period_obs, period_err)])
     return age_samp, bv_samp, logg_samp, period_samp
 
-def asym_sample(age_obs, age_err, bv_obs, bv_err, period_obs, period_err, nsamp, s):
+def asym_sample(age_obs, age_errp, age_errm, bv_obs, bv_err, period_obs, period_err,
+                logg_obs, logg_errp, logg_errm, nsamp, s):
 
     nrough = 1000
     age_samp = np.zeros((len(age_obs), nsamp))
     logg_samp = np.zeros((len(age_obs), nsamp))
     for i, obs in enumerate(age_obs):
+
         np.random.seed(s)
         age_sampp = obs+age_errp[i]*np.random.randn(nrough)
         np.random.seed(s)
@@ -43,8 +50,19 @@ def asym_sample(age_obs, age_err, bv_obs, bv_err, period_obs, period_err, nsamp,
 #         pl.subplot(2,1,2)
 #         pl.hist(age_sampp[lp], 50, color='r', alpha=.3)
 #         pl.hist(age_sampm[lm], 50, color='b', alpha=.3)
-#         pl.hist(age_samp, 100, color='k', alpha=.3)
+#         pl.hist(age_samp[i, :], 100, alpha=.3)
 #         pl.xlim(-2, 14)
+#         pl.show()
+#         raw_input('etner')
+#
+#         pl.clf()
+#         pl.subplot(2,1,1)
+#         pl.hist(logg_sampp, 50, color='r', alpha=.3)
+#         pl.hist(logg_sampm, 50, color='b', alpha=.3)
+#         pl.subplot(2,1,2)
+#         pl.hist(logg_sampp[lp], 50, color='r', alpha=.3)
+#         pl.hist(logg_sampm[lm], 50, color='b', alpha=.3)
+#         pl.hist(logg_samp[i, :], 100, alpha=.3)
 #         pl.show()
 #         raw_input('etner')
 
@@ -52,4 +70,4 @@ def asym_sample(age_obs, age_err, bv_obs, bv_err, period_obs, period_err, nsamp,
     bv_samp = np.vstack([x0+xe*np.random.randn(nsamp) for x0, xe in zip(bv_obs, bv_err)])
     np.random.seed(s)
     period_samp = np.vstack([x0+xe*np.random.randn(nsamp) for x0, xe in zip(period_obs, period_err)])
-    return age_samp, bv_samp, logg_samp, period_samp
+    return age_samp, bv_samp, period_samp, logg_samp

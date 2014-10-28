@@ -45,19 +45,19 @@ def MCMC(fname, c):
     age_obs, age_err, age_errp, age_errm, period_obs, period_err, bv_obs, bv_err, \
             logg_obs, logg_err, logg_errp, logg_errm, flag = load_dat(fname, False, False)
 
-#     pl.clf()
-#     pl.errorbar(age_obs, period_obs, xerr=age_err, yerr=period_err, fmt='k.',
-#                  capsize=0, ecolor='.8')
-#     pl.show()
+    pl.clf()
+    pl.errorbar(age_obs, period_obs, xerr=age_err, yerr=period_err, fmt='k.',
+                 capsize=0, ecolor='.8')
+    pl.show()
 
     # Now generate samples
     age_samp, bv_samp, logg_samp, period_samp = \
-            asym_sample(age_obs, age_err, bv_obs, bv_err, period_obs,
-                        period_err, nsamp, s)
+            asym_sample(age_obs, age_errp, age_errm, bv_obs, bv_err, period_obs,
+                        period_err, logg_obs, logg_errp, logg_errm, 100, 12)
 
     print 'initial likelihood = ', lnlike(par_true, age_samp, bv_samp, \
-            period_samp, logg_samp, age_obs, age_err, bv_obs, bv_err, period_obs, period_err, \
-            logg_obs, logg_err, c)
+            period_samp, logg_samp, age_obs, age_err, bv_obs, bv_err, \
+            period_obs, period_err, logg_obs, logg_err, c)
 
     nwalkers, ndim = 32, len(par_true)
     p0 = [par_true+1e-4*np.random.rand(ndim) for i in range(nwalkers)]
@@ -66,15 +66,18 @@ def MCMC(fname, c):
     sampler = emcee.EnsembleSampler(nwalkers, ndim, lnprob, args = args)
 
     print("Burn-in")
-    p0, lp, state = sampler.run_mcmc(p0, 5000)
+#     p0, lp, state = sampler.run_mcmc(p0, 5000)
+    p0, lp, state = sampler.run_mcmc(p0, 5)
     sampler.reset()
     print("Production run")
-    nstep = 20000
-    nruns = 2000.
+#     nstep = 20000
+#     nruns = 2000.
+    nstep = 2
+    nruns = 2
 
     for j in range(int(nstep/nruns)):
 
-        print fname, n
+        print fname
         print datetime.datetime.now()
         print 'run', j
         p0, lp, state = sampler.run_mcmc(p0, nruns)
