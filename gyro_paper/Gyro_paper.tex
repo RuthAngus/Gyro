@@ -395,7 +395,7 @@ i.e. samples from
 p(w_n|D_n) = \frac{1}{Z}p(D_n|\hat{w}_n)p_0(\hat{w}_n),
 \end{equation}
 where $p(D_n|\hat{w}_n)$ is the likelihood of the data, $D_n$ (in this case, the set of {\it Kepler} lightcurves and supplementary \teff$~$and \feh values), given the model parameters, $w_n$.
-$Z$ is a normalisation constant and $p_0(\hat{w}_n)$ is an uninformative prior PDF, chosen by the fitter (\citet{Chaplin2014} used a flat prior in age and log $g$).
+$Z$ is a normalisation constant and $p_0(\hat{w}_n)$ is an uninformative prior PDF, chosen by the fitter \citep[][used a flat prior in age and \logg]{Chaplin2014}.
 In the absence of posterior PDF samples we generated our own from Gaussian distributions with means, \wh$~$and standard deviations, $\sigma_w^2$.
 $J$ posterior samples were generated for each star (we used $J$ = 50):
 \begin{eqnarray}
@@ -450,7 +450,7 @@ n & $0.542 \pm 0.03$ & $0.599^{+0.03}_{-0.02}$ & \\
 \enddata
 \end{deluxetable}
 
-A gyrochronology relation was initially fit to the asteroseismic stars, the field stars and the three clusters (Hyades, Coma Berenices and Praesepe) altogether, however this resulted in extremely multi-modal posteriors for $a$, $b$ and $n$ and a best-fitting model which significantly overpredicted the age of the Sun.
+A gyrochronology relation was initially fit to the asteroseismic stars, the field stars and the three clusters (Hyades, Coma Berenices and Praesepe) all together, however this resulted in extremely multi-modal posteriors for $a$, $b$ and $n$ and a best-fitting model which significantly overpredicted the age of the Sun.
 After fitting a separate relation to various subsets of the data it became evident that the multi-modal posterior was only produced when Praesepe was included in our sample.
 The reason for this multimodality is unclear, however we tentatively attribute it to the position of the colour discontinuity, $c$ taking a different value for Praesepe than for the Hyades and Coma Berenices.
 We calculated the likelihood for Praesepe, plus the field stars (to provide the age dependence) with two different values of $c$: $0.45$ and $0.5$, finding a higher likelihood for $c=0.5$.
@@ -458,13 +458,13 @@ Since we do not fully understand the cause of this variation in $c$, and in orde
 We also fit relations with $c$ values ranging from 0.4 to 0.55 to this final data set, finding that the results were relatively insensitive to variations in $c$ (solar ages predicted from each best-fitting model were consistent).
 Individual fits to Hyades and Coma Berenices, plus the field stars are shown in figures \ref{fig:CF45} and \ref{fig:HF45}.
 Maximum {\it a posteriori} (MAP) parameter values with their 16th and 84th percentile uncertainties for the fits to the two clusters are provided in table \ref{tab:cluster_results}.
-Note that none of these parameters are consistent between the two clusters; there seems to be some intrinsic scatter in the gyrochronology parameters.
+Note that none of these parameters are fully consistent between the two clusters; there seems to be some intrinsic scatter in the gyrochronology parameters.
 The fact that each cluster seems to prefer a different value of $a$, $b$, $n$ and $c$ paints a concerning picture for gyrochronology which assumes one set of parameters can describe for all stars. The implications of these results are discussed further below.
 
 The fit to the final data set is shown in figure \ref{fig:subfigures2} and marginal posterior distributions for the three gyrochronology parameters are shown in figure \ref{fig:marg_posteriors}.
 % and posterior distributions for all 10 of our model parameters in figure \ref{fig:triangle_full}.
 Resulting MAP values of $a$, $b$ and $n$, with their 16th and 84th percentile uncertainties are tabulated in \ref{tab:constants}.
-Figures \ref{fig:625} - \ref{fig:8gyr} show the new gyrochronology relation in period-colour space over a sequence of ages.
+Figures \ref{fig:625} --- \ref{fig:8gyr} show the new gyrochronology relation in period-colour space over a sequence of ages.
 The stars included in these plots have ages that fall within 1 $\sigma$ of the reference age and are all dwarfs (the subgiants are not shown).
 The shaded region shows the 16th and 84th percentile uncertainties of the new relation.
 % \begin{figure}[ht]
@@ -511,7 +511,8 @@ For comparison, gyrochronological ages for the field stars were also computed us
 % The ages of 18 Sco, Alpha Cen A and 16 Cyg B predicted by the new relation are consistent to within 1$\sigma$ and the Sun and Alpha Cen B to within 2$\sigma$.
 The uncertainty on the predicted ages of 16 Cyg B are dominated by the large observational uncertainties on rotation period and colour.
 In contrast, uncertainties on the ages of the Sun are dominated by uncertainties in the gyrochronology parameters.
-The minimum uncertainty achievable for a gyrochronological age (i.e. the uncertainty obtained for a star with negligable observational uncertainties) is $^{+0.245}_{-0.115}$ Gyr.
+The minimum uncertainty achievable for a gyrochronological age at the age of the Sun (i.e. the uncertainty obtained for a star with negligable observational uncertainties) is $^{+0.245}_{-0.115}$ Gyr.
+This minumum uncertainty depends on age and is smaller for younger stars and larger for older stars.
 One would expect the \citet{Barnes2007} and \citet{Mamajek2008} relations to accurately predict an age for the Sun since they are strongly anchored to it.
 Our relation, on the other hand, uses additional age information from the asteroseismic stars so, although it does not predict such an accurate age for the Sun, it should predict more representative ages for other stars.
 % After all, the Copernican principle should only be taken so literally.
@@ -570,7 +571,7 @@ Just as with the models of \citet{Barnes2007} and \citet{Mamajek2008} the Sun do
 % M&H age: [ 4.81052903  0.95203161  0.77054736]
 
 The goal of gyrochronology in general is to provide a means of predicting the age of a star given observations of its \teff, or colour, and rotation period.
-The discrepancies in period-colour relations between individual clusters found in the above analysis does not bode well for gyrochronology as a dating method: values of $a$, $b$ and $n$ measured for the Hyades and Coma Berenices were not consistent within uncertainties (see table \ref{tab:cluster_results}) and Praesepe and NGC 6811 were so discrepant that they could not be included in the final sample.
+The discrepancies in period-colour relations between individual clusters found in the above analysis do not bode well for gyrochronology as a dating method: values of $a$, $b$ and $n$ measured for the Hyades and Coma Berenices were not consistent within uncertainties (see table \ref{tab:cluster_results}) and Praesepe and NGC 6811 were so discrepant that they could not be included in the final sample.
 Until now it has been hoped that one single relation between period, mass and age could be used to describe all F, G and K MS stars, however the results of this study show that a different relation is required to describe each cluster.
 It follows that a different relation might be required for each field star.
 The `narrowness' of the gyrochronology relation has hitherto been an unknown; do the three properties, age, mass and rotation period truly lie on an infinitely narrow plane?
@@ -591,7 +592,7 @@ The observing seasons of K2 are relatively short ($\sim$ 90 days) and fields wil
 
 We have calibrated the relation between rotation period, $B-V$ colour and age for MS stars with \teff$~<$ 6250 K, using \nastero$~${\it Kepler} asteroseismic targets, supplemented with 5 field stars and \nHC$~$cluster stars.
 Unlike previous gyrochronology calibrations, our sample covers a large range of ages and we accounted for observational uncertainties---this was an essential part of the model fitting process since uncertainties, particularly on the asteroseismic ages, were significant.
-Four populations: hot dwarfs, cool dwarfs, rapid rotators and subgiants, were modelled simulataneously in order to account for potential misclassifications that might have arisen from large observational uncertainties and to allow for background population of rapidly rotating stars.
+Four populations: hot dwarfs, cool dwarfs, rapid rotators and subgiants, were modelled simulataneously in order to account for potential misclassifications that might have arisen from large observational uncertainties and to allow for a background population of rapidly rotating stars.
 We found that a single relation between rotation period, colour and age did not adequately describe the cluster data and for this reason only the Hyades and Coma Berenices clusters were used to calibrate the model.
 The observed variation between clusters provides a concern for the reliability of gyrochronology: perhaps it should only be used to constrain the ages of populations of stars, rather than for providing age estimates for individual stars.
 % In order to incorporate all available data it may be necessary to explore a new functional form for the gyrochronology relation.
