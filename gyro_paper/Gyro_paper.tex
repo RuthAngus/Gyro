@@ -177,20 +177,26 @@ The data used in this article are described in \textsection \ref{sec:data}, our 
 
 The ages of 505 {\it Kepler} dwarfs and subgiants were published by \citet{Chaplin2014}.
 They made use of two global asteroseismic parameters---the average large frequency separation and the frequency of maximum oscillations power---to estimate the ages, a grid-based approach that utilized several different search codes coupled to more than ten grids of stellar evolutionary models.
+
 The ages quoted in \citet{Chaplin2014} come from one of the grid-code combinations, with uncertainties reflecting the scatter between the different sets of results.
-\citet{Chaplin2014} used two different sets of effective temperatures. One was derived using an Infra-Red Flux Method (IRFM) calibration \citep{Casagrande2010, SilvaAguirre2012} and the other from a recalibration of the SDSS griz filter KIC photometry by \citet{Pinsonneault2012} using Yale Rotating Stellar Evolution Code (YREC) models \citep{Demarque2004}.
+\citet{Chaplin2014} used two different sets of effective temperatures.
+One was derived using an Infra-Red Flux Method (IRFM) calibration \citep{Casagrande2010, SilvaAguirre2012} and the other from a recalibration of the SDSS griz filter KIC photometry by \citet{Pinsonneault2012} using Yale Rotating Stellar Evolution Code (YREC) models \citep{Demarque2004}.
 We use the IRFM temperatures since they are less dependent on metallicity, which is not well constrained for the asteroseismic sample, and their uncertainites are more conservative, however our analysis is relatively insensitive to this choice.
 87 stars in the asteroseismic catalogue have spectroscopic measurements of \teff$~$and \logg$~$which were incorporated where possible.
 In order to produce a relation that predicts the age of a star using only observable properties, we chose to convert \teff$~$to $B-V$ for the asteroseismic sample using the relation of \citet{Sekiguchi2000}.
 This conversion adds an extra element of noise to our data since the metallicities provided for the asteroseismic stars are simply an average value for the field: $-0.2\pm0.3$ dex \citep[see e.g.][]{Silva_Aguirre2011}
 However, since the age uncertainties dominate this analysis, we do not expect this to have a significant impact on our results.
 
-The asteroseismic ages in \citet{Chaplin2014} have typical uncertainties of $\sim$ 35\%; however, it will be possible to derive more precise ages for a subset of these stars.
+"The ages quoted in Chaplin et al. (2014) have typical uncertainties of 35\%.
+These large uncertainties are the result of the fact that only approximate inferences can be made on the ages using the global asteroseismic parameters, neither of which has an explicit dependence on age.
+However, it will be possible to derive more precise ages for a subset of these stars.
 By measuring the frequency of each oscillation mode individually, not just the mean large serparation, one can build up a density profile of the star and provide a tighter constraint on its age.
 Ages derived from individual oscillation mode measurements can have uncertainties as small as 10\% \citep{Brown1994, SilvaAguirre2013}, however measuring frequencies for individual oscillation modes is a manual process and can only be applied in the highest signal-to-noise cases.
 \citet{Chaplin2014} predict that around 150 of the 505 stars will be suitable for this individual oscillation mode treatment.
 We obtained precise ages for 42 stars from \citet{Metcalfe2014}, modelled with the Asteroseismic Modeling Portal (AMP), with effective temperatures and metallicities from \citet{Bruntt2012}.
 Of the 42 stars in \citet{Metcalfe2014}, we only incorporate the `simple stars' (cool dwarfs) into our sample, ignoring the hotter F stars and more evolved subgiant stars as these are not expected to follow the simple gyrochronology relation.
+It should be noted that ages for stars with small convective cores were incorrectly estimated in \citet{Chaplin2014}.
+This issue is acknowledged in \citet{Metcalfe2014} and should not affect our analysis since it concerns stars that are hotter than the Kraft break, therefore not expected to follow the gyrochronology relation anyway.
 
 \subsection{Rotation Periods}
 \label{sec:rotation_periods}
@@ -602,7 +608,7 @@ The K2 mission will contribute new rotation periods and continued asteroseismic 
 
 The research leading to these results has received funding from the the UK Science and Technology Facilities Council (STFC).
 Funding for the Stellar Astrophysics Centre is provided by The Danish National Research Foundation (Grant agreement no.: DNRF106).
-A.M. and T.M. acknowledge funding from the European Research Council under the EU’s Seventh Framework Programme (FP7/(2007-2013)/ERC Grant Agreement No. 291352). T.M. also acknowledges support from the Israel Science Foundation (grant No. 1423/11) and the Israeli Centers of Research Excellence (I-CORE, grant No. 1829/12).
+A.M. acknowledges funding from the European Research Council under the EU’s Seventh Framework Programme (FP7/(2007-2013)/ERC Grant Agreement No. 291352).
 The code used in this project can be found at https://github.com/RuthAngus/Gyro.
 We would like to thank Eric Mamajek, Marc Pinsonneault, Sydney Barnes, Steve Kawaler, Jerome Bouvier, Daniel Mortlock and David Hogg for useful insight and discussion that hugely improved this paper.
 

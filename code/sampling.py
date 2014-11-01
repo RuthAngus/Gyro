@@ -20,8 +20,7 @@ def simple_sample(age_obs, age_err, bv_obs, bv_err, period_obs, period_err,
 def asym_sample(age_obs, age_errp, age_errm, bv_obs, bv_err, period_obs, period_err,
                 logg_obs, logg_errp, logg_errm, nsamp, s):
 
-    nrough = 100000
-    nsamp = 50000
+    nrough = 1000
     age_samp = np.zeros((len(age_obs), nsamp))
     logg_samp = np.zeros((len(age_obs), nsamp))
     for i, obs in enumerate(age_obs):
@@ -51,7 +50,6 @@ def asym_sample(age_obs, age_errp, age_errm, bv_obs, bv_err, period_obs, period_
         logg_samp_temp = np.concatenate((logg_samp_tempp[lp], logg_samp_tempm[lm]))
         ra = np.random.randint(0, len(logg_samp_temp), nsamp)
         logg_samp[i, :] = logg_samp_temp[ra]
-        print logg_errp[i], logg_errm[i]
 
 #         pl.clf()
 #         pl.subplot(2,1,1)

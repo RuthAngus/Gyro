@@ -48,7 +48,7 @@ def MCMC(fname, c):
     pl.clf()
     pl.errorbar(age_obs, period_obs, xerr=age_err, yerr=period_err, fmt='k.',
                  capsize=0, ecolor='.8')
-    pl.show()
+#     pl.show()
 
     # Now generate samples
     age_samp, bv_samp, logg_samp, period_samp = \
@@ -72,8 +72,8 @@ def MCMC(fname, c):
     print("Production run")
 #     nstep = 20000
 #     nruns = 2000.
-    nstep = 2
-    nruns = 2
+    nstep = 10
+    nruns = 10
 
     for j in range(int(nstep/nruns)):
 

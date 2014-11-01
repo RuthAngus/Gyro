@@ -10,9 +10,10 @@ def load_dat(fname, tn, cv):
     t = data[1]
     p = data[6]
     g = data[8]
+    p_err = data[7]
 
     # remove periods <= 0 and teff < 100
-    l = (p > 0.)*(t > 100.)*(g > 0.)
+    l = (p > 0.)*(t > 100.)*(g > 0.) * (p_err > 0.)
 
     KID = data[0][l]
     p = p[l]
