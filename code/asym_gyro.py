@@ -80,8 +80,6 @@ def MCMC(fname, c):
         p0, lp, state = sampler.run_mcmc(p0, nruns)
 
         flat = sampler.chain[:, 50:, :].reshape((-1, ndim))
-        print np.shape(flat)
-        raw_input('neter')
         mcmc_result = map(lambda v: (v[1], v[2]-v[1], v[1]-v[0]),
                           zip(*np.percentile(flat, [16, 50, 84], axis=0)))
         mres = np.array(mcmc_result)[:, 0]
