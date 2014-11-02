@@ -54,7 +54,7 @@ def MCMC(fname, c):
     # Now generate samples
     age_samp, bv_samp, logg_samp, period_samp = \
             simple_sample(age_obs, age_err, bv_obs, bv_err, period_obs,
-                          period_err, logg, logg_err, 100, 12):
+                          period_err, logg_obs, logg_err, 100, 12)
 
     print 'initial likelihood = ', \
             lnlike(par_true, age_samp, bv_samp, period_samp, logg_samp,

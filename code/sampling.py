@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as pl
 
 def simple_sample(age_obs, age_err, bv_obs, bv_err, period_obs, period_err,
-                  logg, logg_err, nsamp, s):
+                  logg_obs, logg_err, nsamp, s):
     np.random.seed(s)
     age_samp = np.vstack([x0+xe*np.random.randn(nsamp)
                          for x0, xe in zip(age_obs, age_err)])
