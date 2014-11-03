@@ -4,7 +4,7 @@ import matplotlib.pyplot as pl
 from teff_bv import teff2bv_err
 
 c = .45
-nsamp = 1000
+nsamp = 100000
 
 def period_model(par, age, bv, c):
     return par[0] * (age*1e3)**par[1] * (bv-c)**par[2]
@@ -32,7 +32,10 @@ def MC_errors_simple(par, errp, errm, ap, bv, c, nsamp, xmodel, model):
     b_samp = b+b_err*np.random.randn(nsamp)
 
     mean = xmodel(par, ap, bv, c)
-    distribution = model(a_samp, n_samp, b_samp, ap, bv, c)
+    distribution = amodel(a_samp, n_samp, b_samp, ap, bv, c)
+    pl.clf()
+    pl.hist(distribution, 100)
+#     pl.show()
     err = np.std(distribution)
 
     return mean, err
@@ -60,7 +63,8 @@ def MC_errors(par, errp, errm, ap, ap_err, bv, bv_err, c, nsamp, xmodel, model):
     return mean, err
 
 # result = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_45.txt').T
-result = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_45_2acf.txt').T
+# result = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters_45_2acf.txt').T
+result = np.genfromtxt('/Users/angusr/Python/Gyro/code/parametersACHF45.txt').T
 pars = result[0]
 errp = result[1]
 errm = result[2]
@@ -83,38 +87,59 @@ feh = data[11]
 feh_err = data[12]
 bv, bv_err = teff2bv_err(t, logg, feh, t_err, logg_err, feh_err)
 
-periods1 = np.zeros_like(p)
-period_errs1 = np.zeros_like(p)
-periods2 = np.zeros_like(p)
-period_errs2 = np.zeros_like(p)
-for i, ps in enumerate(p):
-    periods1[i], period_errs1[i] = MC_errors(pars, errp, errm, a[i], a_err[i], bv[i], bv_err[i], c, nsamp, period_model, model)
-    periods2[i], period_errs2[i] = MC_errors_simple(pars, errp, errm, a[i], bv[i], c, nsamp, period_model, model)
+# periods1 = np.zeros_like(p)
+# period_errs1 = np.zeros_like(p)
+# periods2 = np.zeros_like(p)
+# period_errs2 = np.zeros_like(p)
+# for i, ps in enumerate(p):
+#     periods1[i], period_errs1[i] = MC_errors(pars, errp, errm, a[i], a_err[i], bv[i], bv_err[i], c, nsamp, period_model, model)
+#     periods2[i], period_errs2[i] = MC_errors_simple(pars, errp, errm, a[i], bv[i], c, nsamp, period_model, model)
 
-l1 = (period_errs1>0) * (periods1>0)
-l2 = (period_errs2>0) * (periods2>0)
-print 'Typical uncertainty on rotation period, given typical observational uncertainties:'
-print np.median(period_errs1[l1]/periods1[l1])*100, '%'
+# l1 = (period_errs1>0) * (periods1>0)
+# l2 = (period_errs2>0) * (periods2>0)
+# print 'Typical uncertainty on rotation period, given typical observational uncertainties:'
+# print np.median(period_errs1[l1]/periods1[l1])*100, '%'
+#
+# print 'Typical intrinsic uncertainty on rotation period:'
+# print np.median(period_errs2[l2]/periods2[l2])*100, '%'
 
-print 'Typical intrinsic uncertainty on rotation period:'
-print np.median(period_errs2[l2]/periods2[l2])*100, '%'
+# ages1 = np.zeros_like(p)
+# age_errs1 = np.zeros_like(p)
+# ages2 = np.zeros_like(p)
+# age_errs2 = np.zeros_like(p)
+# for i, ass in enumerate(a):
+#     ages1[i], age_errs1[i] = MC_errors(pars, errp, errm, p[i], p_err[i], bv[i], bv_err[i], c, nsamp, age_model, model)
+#     ages2[i], age_errs2[i] = MC_errors_simple(pars, errp, errm, p[i], bv[i], c, nsamp, age_model, model)
 
-ages1 = np.zeros_like(p)
-age_errs1 = np.zeros_like(p)
-ages2 = np.zeros_like(p)
-age_errs2 = np.zeros_like(p)
-for i, ass in enumerate(a):
-    ages1[i], age_errs1[i] = MC_errors(pars, errp, errm, p[i], p_err[i], bv[i], bv_err[i], c, nsamp, age_model, model)
-    ages2[i], age_errs2[i] = MC_errors_simple(pars, errp, errm, p[i], bv[i], c, nsamp, age_model, model)
+# l1 = (age_errs1>0) * (ages1>0)
+# l2 = (age_errs2>0) * (ages2>0)
+# print 'Typical uncertainty on age, given typical observational uncertainties:'
+# print np.median(age_errs1[l1]/ages1[l1])*100, '%'
 
-l1 = (age_errs1>0) * (ages1>0)
-l2 = (age_errs2>0) * (ages2>0)
-print 'Typical uncertainty on age, given typical observational uncertainties:'
-print np.median(age_errs1[l1]/ages1[l1])*100, '%'
+# print 'Typical intrinsic uncertainty on age:'
+# print np.median(age_errs2[l2]/ages2[l2])*100, '%'
+print 'for the sun:'
+mn, std = MC_errors_simple(pars, errp, errm, 26.09, 0.65, 0.45, nsamp, age_model, amodel)
+print mn, std, std/mn*100
 
-print 'Typical intrinsic uncertainty on age:'
-print np.median(age_errs2[l2]/ages2[l2])*100, '%'
+hbv, hp = np.genfromtxt('/Users/angusr/Python/Gyro/data/hyades.txt',
+                      skip_header=1, usecols=(0, 2)).T
+l = hp == np.median(hp)
+print hp[l], hbv[l]
 
-pl.clf()
-pl.hist(age_errs2[l2]/ages2[l2])
-pl.show()
+print 'for a typical hyades star:'
+mn, std = MC_errors_simple(pars, errp, errm, 9.04, 0.741, 0.45, nsamp, age_model, amodel)
+print mn, std, std/mn*100
+
+l = a == max(a)
+print logg[l]
+print p[l], bv[l]
+
+print 'for the oldest star:'
+mn, std = MC_errors_simple(pars, errp, errm, 29.79, 0.79557, 0.45, nsamp, age_model, amodel)
+mn, std = MC_errors_simple(pars, errp, errm, 32.61, 0.64535227, 0.45, nsamp, age_model, amodel)
+print mn, std, std/mn*100
+
+# pl.clf()
+# pl.hist(age_errs2[l2]/ages2[l2])
+# pl.show()

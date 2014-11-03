@@ -38,7 +38,7 @@ if __name__ == "__main__":
     p_err = [2.5, 5.0, 0.5, 6.5, 0.1]
 
     for i, fname in enumerate(fnames):
-        with h5py.File("samples_%s" %fname, "r") as f:
+        with h5py.File("/Users/angusr/Python/noisy-plane/samples_%s" %fname, "r") as f:
             samples = f["samples"][:, 50:, :]
         nwalkers, n, ndim = samples.shape
         flatchain = samples.reshape((-1, ndim))

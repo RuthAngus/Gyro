@@ -48,15 +48,9 @@ def MCMC(fname, n, c, train, cv):
                  capsize=0, ecolor='.8')
 
     # Now generate samples
-    nsamp = 50 # FIXME
-    np.random.seed(1234)
-    age_samp = np.vstack([x0+xe*np.random.randn(nsamp) for x0, xe in zip(age_obs, age_err)])
-    np.random.seed(1234)
-    bv_samp = np.vstack([x0+xe*np.random.randn(nsamp) for x0, xe in zip(bv_obs, bv_err)])
-    np.random.seed(1234)
-    logg_samp = np.vstack([x0+xe*np.random.randn(nsamp) for x0, xe in zip(logg_obs, logg_err)])
-    np.random.seed(1234)
-    period_samp = np.vstack([x0+xe*np.random.randn(nsamp) for x0, xe in zip(period_obs, period_err)])
+    age_samp, bv_samp, logg_samp, period_samp = \
+            simple_sample(age_obs, age_err, bv_obs, bv_err, period_obs,
+                          period_err, logg_obs, logg_err, 100, 12)
 
     print 'initial likelihood = ', lnlike(par_true, age_samp, bv_samp,
                                           period_samp, logg_samp, age_obs,

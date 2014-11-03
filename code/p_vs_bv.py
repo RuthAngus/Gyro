@@ -113,7 +113,7 @@ if ck >= 0:
     npars = 4
 print npars
 
-params = np.genfromtxt('%s/code/parameters%s.txt' % (DIR, fname)).T
+params = np.genfromtxt('/Users/angusr/Python/Gyro/code/parameters%s.txt' % fname).T
 # print params
 # raw_input('enter')
 pars3 = np.zeros(npars)

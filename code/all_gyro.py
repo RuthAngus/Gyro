@@ -6,7 +6,7 @@ from all_plotting import load_dat
 import h5py
 import datetime
 from gyro_like import lnlike, period_model
-from sampling import simple_sample
+from sampling import simple_sample, asym_sample
 
 def lnprior(m):
     if -10. < m[0] < 10. and .0< m[1] < 1. and 0. < m[2] < 1. \
@@ -49,12 +49,17 @@ def MCMC(fname, c):
     pl.clf()
     pl.errorbar(age_obs, period_obs, xerr=age_err, yerr=period_err, fmt='k.',
                  capsize=0, ecolor='.8')
-    pl.show()
+#     pl.show()
+
+    # Now generate samples
+#     age_samp, bv_samp, logg_samp, period_samp = \
+#             simple_sample(age_obs, age_err, bv_obs, bv_err, period_obs,
+#                           period_err, logg_obs, logg_err, 100, 12)
 
     # Now generate samples
     age_samp, bv_samp, logg_samp, period_samp = \
-            simple_sample(age_obs, age_err, bv_obs, bv_err, period_obs,
-                          period_err, logg_obs, logg_err, 100, 12)
+            asym_sample(age_obs, age_errp, age_errm, bv_obs, bv_err, period_obs,
+                          period_err, logg_obs, logg_errp, logg_errm, 100, 12)
 
     print 'initial likelihood = ', \
             lnlike(par_true, age_samp, bv_samp, period_samp, logg_samp,
@@ -67,18 +72,12 @@ def MCMC(fname, c):
             bv_err, period_obs, period_err, logg_obs, logg_err, c)
     sampler = emcee.EnsembleSampler(nwalkers, ndim, lnprob, args = args)
 
-#     print("Burn-in")
-#     p0, lp, state = sampler.run_mcmc(p0, 5000)
-#     sampler.reset()
-#     print("Production run")
-#     nstep = 20000
-#     nruns = 2000.
     print("Burn-in")
-    p0, lp, state = sampler.run_mcmc(p0, 5)
+    p0, lp, state = sampler.run_mcmc(p0, 5000)
     sampler.reset()
     print("Production run")
-    nstep = 2
-    nruns = 2
+    nstep = 20000
+    nruns = 2000.
 
     for j in range(int(nstep/nruns)):
 
@@ -124,7 +123,7 @@ if __name__ == "__main__":
     DIR = '/Users/angusr/Python/Gyro'
 
     # proper runs
-    fname = 'ACHF45'  # This is the final version!
+    fname = 'asym2_ACHF45'  # This is the final version!
 
     print fname, "fname"
     MCMC(fname, .45)
