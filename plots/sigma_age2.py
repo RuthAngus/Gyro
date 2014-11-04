@@ -134,4 +134,4 @@ for i, age in enumerate(ages):
     pl.xlim(.2, 1.)
     pl.ylim(0, 50)
     pl.legend(loc='upper left')
-    pl.savefig("p_vs_bv%s"%i)
+    pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/p_vs_bv%s.pdf"%i)

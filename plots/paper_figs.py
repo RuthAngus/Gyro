@@ -77,7 +77,7 @@ pl.xlabel("$T_{eff}~\mathrm{(K)}$")
 pl.ylabel("$\mathrm{log}~g$")
 pl.ylim(pl.gca().get_ylim()[::-1])
 pl.xlim(pl.gca().get_xlim()[::-1])
-pl.savefig("logg_vs_t_paper")
+pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/logg_vs_t_paper.pdf")
 l = (t1>100)*(logg1>0) * (logg1 > 4.1) * (t1 < 6250)
 print len(t1[l]), 'ncool'
 l = (vtt < 6250) * (vtlogg > 4.1)
@@ -118,7 +118,7 @@ pl.xlabel("$\mathrm{B-V}$")
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")
 # pl.ylim(0,70)
 # pl.loglog()
-pl.savefig("p_vs_bv_paper2")
+pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/p_vs_bv_paper2.pdf")
 
 pl.clf()
 l = a1>0
@@ -139,7 +139,7 @@ pl.ylabel("$P_{rot}~\mathrm{(days)}$")
 pl.xlim(0,15)
 # pl.loglog()
 print a2[ll]
-pl.savefig("p_vs_a_paper2")
+pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/p_vs_a_paper2.pdf")
 
 # data = np.empty((len(tKID)+len(vKID), 14))
 # # ["KID", "t", "t_err", "a", "a_errp", "a_errm", "p", "p_err", "logg", "logg_errp", "logg_errm", "feh", "feh_err"]
