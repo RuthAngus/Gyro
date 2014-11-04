@@ -5,6 +5,7 @@
 *.pdf
 *.synctex*
 *.log
+*.out
 Makefile
 mpfit_example.py
 mpfit.py
