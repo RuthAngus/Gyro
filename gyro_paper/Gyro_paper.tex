@@ -616,8 +616,8 @@ where $p(D_n|\hat{\w}_n)$ is the likelihood of the data, $D_n$ (in this case,
 the set of {\it Kepler} lightcurves and supplementary \teff$~$and \feh values),
 given the model parameters, $\w_n$.
 $\mathcal{Z}_1$ is a normalisation constant and $p_0(\hat{\w}_n)$ is an
-uninformative prior PDF, chosen by the fitter \citep[][used a flat prior in age
-and \logg]{Chaplin2014}.
+uninformative prior probability distribution function (PDF), chosen by the
+fitter \citep[][used a flat prior in age and \logg]{Chaplin2014}.
 In the absence of posterior PDF samples we generated our own from Gaussian
 distributions with means, \wh$~$and standard deviations, $\sigma_{\mathbf{w}}$.
 Note that posterior samples for asteroseismic parameters are now beginning to
@@ -744,9 +744,19 @@ percentile uncertainties are shown in table \ref{tab:constants} and the
 additional parameters of our model, describing the distributions of hot star
 and subgiant rotation periods, are presented in table \ref{tab:nuisance}.
 Note the value of $Q$, the parameter describing the fraction of misclassified
-subgiants is $0.24^{+.06}_{-0.05}$.
-Based on our simple `\logg$=4.1$' definition of MS turn-off, a quarter of the
-cool dwarfs were actually misclassified subgiants.
+subgiants is $0.24^{+.06}_{-0.05}$, i.e., based on our simple `\logg$=4.1$'
+definition of MS turn-off, a quarter of the cool dwarfs were actually
+misclassified subgiants.
+The marginalised posterior PDFs and covariances of $a$, $b$ and $n$ are shown
+in figure \ref{triangle}.
+One can think of $\log(a)$ and $n$ as the slope and intercept of a straight
+line in log-space, thus the covariance between these parameters is not
+surprising.
+The posterior PDF for $b$ is clearly multi-modal.
+This multi-modality probably arises from the fact that the period--colour
+relation is slightly different for different clusters (it was this phenomenon
+that lead us to exlude Praesepe and NGC 6811 from the sample as these two
+clusters produced even more multi-modal posteriors for $b$).
 Figures \ref{fig:625} -- \ref{fig:8gyr} show the new gyrochronology relation
 in period-colour space over a sequence of ages.
 The stars included in these plots have ages that fall within 1 $\sigma$ of the
@@ -764,6 +774,14 @@ Our final, newly calibrated gyrochronology relation can be written in full as
 \label{eq:Barnes2007_3}
 \end{equation}
 where rotation period, $P$ is in days and age, $A$ is in Myr.
+An age can be calculated for a star with a rotation period and colour by
+inverting this relationship.
+Covariances between the gyrochronology parameters should
+be taken into account {\it whenever} the above relation is used to calculate
+uncertainties on an age or rotation period.
+In order to do this properly, posterior samples should be incorporated into
+Monte-Carlo uncertainty calculations.
+Figure  shows the
 
 In order to test the predictive power of the new gyrochronology relation, we
 inverted equation \ref{eq:Barnes2007_3} to compare previously measured ages
@@ -919,7 +937,7 @@ will only be observed once, so the maximum rotation periods measurable from
 K2 light curves will be considerably shorter than with {\it Kepler}.
 However these clusters may still be extremely useful for gyrochronology.
 
-\section{Conclusions}
+\section{Summary}
 \label{sec:conclusions}
 
 We have calibrated the relation between rotation period, $B-V$ colour and age
@@ -950,7 +968,7 @@ The K2 mission will contribute new rotation periods and continued
 asteroseismic studies will produce more precise age measurements enabling
 further improvement of gyrochronology over the coming years.
 
-Posterior samples and code used in this project can be found at
+The code used in this project can be found at
 https://github.com/RuthAngus/Gyro.
 The research leading to these results has received funding from the the UK
 Science and Technology Facilities Council (STFC).
@@ -1067,6 +1085,17 @@ equation \ref{eq:Barnes2007_2}.
 	field stars, $\alpha$ Cen A, 18 Sco and 16 Cyg from left to right, are
 	shown in blue.
 \label{fig:p_vs_a_solar}}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{small_triangleACHF45.pdf}
+\caption{1 and 2-D Marginalised likelihoods for the three gyrochronology
+parameters, $a$, $b$ and $n$. $a$ and $n$ are covariant. $b$ is slightly
+multi-modal. This plot was made using triangle.py
+\citep{Foreman-Mackey_triangle}.}
+\label{fig:triangle}
 \end{center}
 \end{figure}
 
