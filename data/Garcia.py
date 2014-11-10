@@ -83,6 +83,12 @@ for i, kid in enumerate(KID4):
         table[2][l] = data12[2][i]
         table[3][l] = data12[3][i]
         table[4][l] = data12[4][i]
+        table[5][l] = data4[0][i]
+        table[6][l] = data4[1][i]
+        table[7][l] = data4[2][i]
+        table[8][l] = data4[3][i]
+        table[9][l] = data4[4][i]
+        table[10][l] = data4[5][i]
 
 KID1, t, t_err, feh, feh_err, logg, logg_errp, logg_errm, a, a_errp, a_errm = table
 print KID1[KID1==0]
