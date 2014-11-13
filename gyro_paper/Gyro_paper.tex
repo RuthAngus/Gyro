@@ -66,21 +66,36 @@
 % \newcommand{\berrp}{0.01}
 % \newcommand{\berrm}{0.05}
 
+\newcommand{\U}{8}
+\newcommand{\V}{2.1}
+\newcommand{\W}{14.0}
+\newcommand{\X}{4.5}
+\newcommand{\Y}{19}
+\newcommand{\Z}{19}
+\newcommand{\Q}{0.24}
+\newcommand{\Uerr}{1}
+\newcommand{\Verrp}{0.6}
+\newcommand{\Verrm}{0.5}
+\newcommand{\Werrp}{1.0}
+\newcommand{\Werrm}{0.9}
+\newcommand{\Xerr}{2}
+\newcommand{\Yerrp}{0.7}
+\newcommand{\Yerrm}{0.5}
+\newcommand{\Zerr}{1}
+\newcommand{\Qerrp}{0.06}
+\newcommand{\Qerrm}{0.05}
+
 \begin{document}
 
 \title{Calibrating Gyrochronology using Kepler Asteroseismic targets}
 
-\author{Ruth Angus$^1$, Suzanne Aigrain$^1$, Amy McQuillan$^2$, Daniel Foreman-
-Mackey$^3$,  William, J. Chaplin$^{4, 5}$}
+\author{Ruth Angus$^1$, Suzanne Aigrain$^1$,
+Daniel Foreman-Mackey$^2$, Amy McQuillan$^3$}
 \affil{$^1$Department of Physics, University of Oxford, OX1 3RH, UK}
-\affil{$^2$School of Physics and Astronomy, Raymond and Beverly Sackler,
-Faculty of Exact Sciences, Tel Aviv University, 69978, Tel Aviv, Israel}
-\affil{$^3$Centre for Cosmology and Particle Physics, New York University, New
+\affil{$^2$Centre for Cosmology and Particle Physics, New York University, New
 York, NY, USA}
-\affil{$^4$School of Physics and Astronomy, University of Birmingham,
-Edgbaston, Birmingham, B15 2TT, UK}
-\affil{$^5$Stellar Astrophysics Centre (SAC), Department of Physics and
-Astronomy, Aarhus University, DK-8000 Aarhus C, Denmark}
+\affil{$^3$School of Physics and Astronomy, Raymond and Beverly Sackler,
+Faculty of Exact Sciences, Tel Aviv University, 69978, Tel Aviv, Israel}
 
 \begin{abstract}
 \label{abs}
@@ -415,7 +430,7 @@ observations with additional seismic constraints.}
 \colhead{\prot}&
 \colhead{$B-V$}}
 \startdata
-16 Cyg B & 6.4 $\pm$ 0.4$^a$ & 23.2 $^{+11.5}_{-3.2}^b$ & 0.66 $\pm$ 0.01$^c$ \\
+16 Cyg B & 6.4 $\pm$ 0.4$^a$ & 23.2 $^{+11.5}_{-3.2}$$^b$ & 0.66 $\pm$ 0.01$^c$ \\
 18 Sco & 3.66 $\pm$ 0.2$^d$ & 22.7 $\pm$ 0.5$^e$ & 0.64 $\pm$ 0.01$^f$ \\
 The Sun & 4.568 $\pm$ 0.001$^g$ & 26.09 $\pm$ 0.1$^h$ & 0.65 $\pm$ 0.001$^i$ \\
 $\alpha$ Cen A & 6 $\pm$ 1$^{j, k}$ & 28.8 $\pm$ 2.5$^{l}$ &
@@ -736,13 +751,13 @@ of parameters can be used to describe all stars.
 \colhead{Parameter}&
 \colhead{Median value}}
 \startdata
-$U$ & 8 $\pm$ 1 days \\
-$V$ & 2.1$^{+0.6}_{-0.5}$ days \\
-$W$ & 14.0$^{+1.0}_{-0.9}$ days \\
-$Y$ & 4.5$^{+0.7}_{-0.5}$ days \\
-$Z$ & 19$\pm$1 days \\
-$X$ & 19$\pm$ 2 days \\
-$Q$ & 0.24$^{+0.06}_{-0.05}$ \\
+$U$ & \U$\pm$\Uerr days \\
+$V$ & \V$^{+\Verrp}_{-\Verrm}$ days \\
+$W$ & \W$^{+\Werrp}_{-\Werrm}$ days \\
+$Y$ & \Y$^{+\Yerrp}_{-\Yerrm}$ days \\
+$Z$ & \Z$\pm$\Zerr days \\
+$X$ & \X$\pm$\Xerr days \\
+$Q$ & \Q$^{+\Qerrp}_{-\Qerrm}$ \\
 \enddata
 \end{deluxetable}
 
@@ -754,7 +769,7 @@ percentile uncertainties are shown in table \ref{tab:constants} and the
 additional parameters of our model, describing the distributions of hot star
 and subgiant rotation periods, are presented in table \ref{tab:nuisance}.
 Note the value of $Q$, the parameter describing the fraction of misclassified
-subgiants is $0.24^{+0.06}_{-0.05}$, i.e., based on our simple `\logg$=4.1$'
+subgiants is $\Q^{+\Qerrp}_{-\Qerrm}$, i.e., based on our simple `\logg$=4.1$'
 definition of MS turn-off, a quarter of the cool dwarfs were actually
 misclassified subgiants.
 The marginalised posterior PDFs and covariances of $a$, $b$ and $n$ are shown
