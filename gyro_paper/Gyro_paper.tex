@@ -417,10 +417,9 @@ from variation in chromospheric emission lines.
 High-resolution spectropolarimetric observations were used to measure
 a rotation period for 18 Sco.
 The age of 16 Cyg B was measured with asteroseismology.
-18 Sco's age was measured using asteroseismology, however, although this
-measurement was based chiefly on asteroseismic analysis, the rotation period
-of the star was used as an additional constraint, so the age estimate is not
-entirely independent of rotation period for this star.
+18 Sco's age measurement was based chiefly on an asteroseismic analysis,
+however its rotation period was used as an additional constraint, so the age
+estimate is not entirely independent of rotation period for this star.
 An age for the $\alpha$ Cen system was estimated from spectroscopic
 observations with additional seismic constraints.}
 \label{tab:field}
@@ -560,7 +559,7 @@ Rotation period also depends on \logg$~$since this property determines whether
 a star falls in the dwarf or subgiant regime.
 
 In what follows we use $P$ to denote rotation period and define
-$\mathbf{w} = (age, B-V, log~g)$ as the vector of additional observational
+$\mathbf{w} = (age, B-V,~\log~g)$ as the vector of additional observational
 properties.
 Observations are denoted as \ph$~$and $\hat{\mathbf{w}}_n$ and the unobserved
 (latent), `true' parameters as $P_n$ and $\mathbf{w}_n$ for stars $1,...,N$.
@@ -647,7 +646,7 @@ i.e. samples from
 % $p_0(\hat{\w}_n)$ is an uninformative prior probability distribution
 function $p_0(\mathbf{w}_n)$ is an uninformative prior PDF, chosen by the
 fitter \citep[][used a flat prior PDF in age and \logg]{Chaplin2014}.
-In the absence of posterior PDF samples\footnote{ Note that posterior samples
+In the absence of posterior PDF samples\footnote{Posterior PDF samples
 for asteroseismic parameters are now beginning to be published and will be made
 available in future publications.} we generated our own from Gaussian
 distributions with means, \wh$~$and standard deviations, $\sigma_{\mathbf{w}}$.
@@ -773,12 +772,12 @@ of parameters can be used to describe all stars.
 \colhead{Parameter}&
 \colhead{Median value}}
 \startdata
-$U$ & \U$\pm$\Uerr days \\
+$U$ & \U$\pm$\Uerr$~$days \\
 $V$ & \V$^{+\Verrp}_{-\Verrm}$ days \\
 $W$ & \W$^{+\Werrp}_{-\Werrm}$ days \\
-$X$ & \X$\pm$\Xerr days \\
+$X$ & \X$\pm$\Xerr$~$days \\
 $Y$ & \Y$^{+\Yerrp}_{-\Yerrm}$ days \\
-$Z$ & \Z$\pm$\Zerr days \\
+$Z$ & \Z$\pm$\Zerr$~$days \\
 $Q$ & \Q$^{+\Qerrp}_{-\Qerrm}$ \\
 \enddata
 \end{deluxetable}
@@ -846,11 +845,11 @@ using the relations of \citet{Barnes2007} and \citet{Mamajek2008}.
 Uncertainties on ages predicted with the new relation were calculated using
 posterior PDF samples of the three parameters, $a$, $b$ and $n$.
 In general, incorporating posterior PDF samples into uncertainty estimations is
-essential in order to account for covariances between parameters and, in this
-case, uncertainties on ages calculated without posterior PDF samples will be
-larger by up to around 50\%.
+essential in order to account for covariances between parameters.
+In this case, uncertainties on ages calculated without posterior PDF samples
+will be larger by up to around 50\%.
 The uncertainty on the predicted ages of 16 Cyg B are dominated by the large
-observational uncertainties on rotation period and colour.
+observational uncertainties on rotation period.
 In contrast, uncertainties on the ages predicted for the Sun are dominated by
 uncertainties in the gyrochronology parameters.
 \begin{deluxetable}{lcccc}
@@ -932,52 +931,52 @@ Our relation, on the other hand, uses additional age information from the
 asteroseismic stars so, although it does not predict such an accurate age for
 the Sun, it should predict more representative ages for other stars.
 % After all, the Copernican principle should only be taken so literally.
-We performed `leave-one-out' cross validation on the field stars in order to
-assess the ability of this new relation to predict ages for field stars not
-included in the fitting process.
-Each field star was left out of the sample, one at a time, and the model
-trained the remaining data.
-Ages predicted for each field star from the resulting, independently trained
-models are presented in table \ref{tab:loo}.
-These ages are similar to those in table \ref{tab:comparison}, where the model
-was trained on the entire data set, {\it except} for the Sun's age which has
-both a different median value and a larger uncertainty.
-This demonstrates the key role played by the Sun in the fitting process.
-Just as with the models of \citet{Barnes2007} and \citet{Mamajek2008} the Sun,
-dominates the fit.
-However in {\it this} case the dominance arises naturally
-from the data as a consequence of the Sun's smaller observational
-uncertainties, and is not enforced by anchoring the model to the solar datum
-as has previously been necessary due to the lack of old stars with age
-measurements.
+% We performed `leave-one-out' cross validation on the field stars in order to
+% assess the ability of this new relation to predict ages for field stars not
+% included in the fitting process.
+% Each field star was left out of the sample, one at a time, and the model
+% trained the remaining data.
+% Ages predicted for each field star from the resulting, independently trained
+% models are presented in table \ref{tab:loo}.
+% These ages are consistent with those in table \ref{tab:comparison}, where the
+% model was trained on the entire data set, {\it except} for the Sun's age which
+% has both a different median value and a larger uncertainty.
+% This demonstrates the key role played by the Sun in the fitting process.
+% Just as with the models of \citet{Barnes2007} and \citet{Mamajek2008} the Sun,
+% dominates the fit.
+% However in {\it this} case the dominance arises naturally
+% from the data as a consequence of the Sun's smaller observational
+% uncertainties, and is not enforced by anchoring the model to the solar datum
+% as has previously been necessary due to the lack of old stars with age
+% measurements.
 
-\begin{deluxetable}{lcc}
-\tablewidth{0pc}
-\tablecaption{Field star ages taken from the literature, compared with
-	leave-one-out cross validation predictions.
-\label{tab:loo}}
-\tablehead{
-\colhead{Star}&
-\colhead{Literature age (Gyr)}&
-\colhead{Cross validation age (Gyr)}}
-\startdata
-18 Sco      & $3.7 \pm 0.2$     & $5^{+2}_{-1}$ \\
-The Sun     & $4.568 \pm 0.001$ & $5.7^{+1}_{-0.5}$ \\
-Alpha Cen A & $6.0 \pm 1$       & $4.9^{+0.8}_{-0.7}$ \\
-Alpha Cen B & $6.0 \pm 1$       & $5 \pm 1$ 	      \\
-16 Cyg B    & $6.4 \pm 0.4$     & $4\pm2$       \\
-\enddata
-\end{deluxetable}
-% 6.0
-% my age: [ 4.9030144   0.78903078  0.7216685 ]
-% 6.0
-% my age: [ 5.55213363  1.35991813  1.19307143]
-% 3.66
-% my age: [ 5.05915859  1.57535277  1.30555195]
-% 6.4
-% my age: [ 3.7254493   2.25402795  1.77250786]
-% 4.568
-% my age: [ 5.72053402  1.10938536  0.52350016]
+% \begin{deluxetable}{lcc}
+% \tablewidth{0pc}
+% \tablecaption{Field star ages taken from the literature, compared with
+% 	leave-one-out cross validation predictions.
+% \label{tab:loo}}
+% \tablehead{
+% \colhead{Star}&
+% \colhead{Literature age (Gyr)}&
+% \colhead{Cross validation age (Gyr)}}
+% \startdata
+% 18 Sco      & $3.7 \pm 0.2$     & $5^{+2}_{-1}$ \\
+% The Sun     & $4.568 \pm 0.001$ & $5.7^{+1}_{-0.5}$ \\
+% Alpha Cen A & $6.0 \pm 1$       & $4.9^{+0.8}_{-0.7}$ \\
+% Alpha Cen B & $6.0 \pm 1$       & $5 \pm 1$ 	      \\
+% 16 Cyg B    & $6.4 \pm 0.4$     & $4\pm2$       \\
+% \enddata
+% \end{deluxetable}
+% % 6.0
+% % my age: [ 4.9030144   0.78903078  0.7216685 ]
+% % 6.0
+% % my age: [ 5.55213363  1.35991813  1.19307143]
+% % 3.66
+% % my age: [ 5.05915859  1.57535277  1.30555195]
+% % 6.4
+% % my age: [ 3.7254493   2.25402795  1.77250786]
+% % 4.568
+% % my age: [ 5.72053402  1.10938536  0.52350016]
 
 The goal of gyrochronology in general is to provide a means of predicting the
 age of a star given observations of its \teff, or colour, and rotation period.
