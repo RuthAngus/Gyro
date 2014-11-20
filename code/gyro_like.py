@@ -1,14 +1,16 @@
 import numpy as np
 import matplotlib.pyplot as pl
 
+# everywhere i've written temp, i mean bv.
+
 def period_model(par, age, bv, c):
     return par[0] * (age*1e3)**par[1] * (bv-c)**par[2]
 
-def lnlike(par, age_samp, bv_samp, period_samp, logg_samp, age_obs, age_err, \
-               bv_obs, bv_err, period_obs, period_err, logg_obs, logg_err, c):
+def lnlike(par, age_samp, temp_samp, period_samp, logg_samp, age_obs, age_err, \
+               temp_obs, temp_err, period_obs, period_err, logg_obs, logg_err, c):
     nobs, nsamp = age_samp.shape
 
-    period_pred = period_model(par[:3], age_samp, bv_samp, c)
+    period_pred = period_model(par[:3], age_samp, temp_samp, c)
     Y, V = par[3], par[4]
     Z, W = par[5], par[6]
     X, U, P = par[7], par[8], par[9]
@@ -18,7 +20,7 @@ def lnlike(par, age_samp, bv_samp, period_samp, logg_samp, age_obs, age_err, \
     for i in np.arange(nobs):
 
         # cool MS stars
-        l1 = (bv_samp[i,:] > c) * (logg_samp[i,:] > logg_cut) * (age_samp[i, :] > 0)
+        l1 = (temp_samp[i,:] > c) * (logg_samp[i,:] > logg_cut)
         if l1.sum() > 0:
             like11 = \
                 np.exp(-.5*((period_obs[i] - period_pred[i,l1])/period_err[i])**2) \
@@ -33,7 +35,7 @@ def lnlike(par, age_samp, bv_samp, period_samp, logg_samp, age_obs, age_err, \
             lik1 = 0.0
 
         # hot MS stars
-        l2 = (bv_samp[i,:] < c) * (logg_samp[i,:] > logg_cut) * (age_samp[i, :] > 0)
+        l2 = (temp_samp[i,:] < c) * (logg_samp[i,:] > logg_cut)
         if l2.sum() > 0:
             like2 = np.exp(-.5*((period_samp[i,l2] - Y)/(period_err[i]+V))**2) \
                 / (V + period_err[i])
@@ -42,7 +44,7 @@ def lnlike(par, age_samp, bv_samp, period_samp, logg_samp, age_obs, age_err, \
             lik2 = 0.0
 
         # subgiants
-        l3 = (logg_samp[i,:] < logg_cut) * (age_samp[i, :] > 0)
+        l3 = (logg_samp[i,:] < logg_cut)
         if l3.sum() > 0:
             like3 = np.exp(-.5*((period_samp[i,l3] - Z)/(period_err[i]+W))**2) \
                 / (W + period_err[i])
