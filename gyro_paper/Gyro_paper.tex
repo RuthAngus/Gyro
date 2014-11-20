@@ -502,7 +502,7 @@ their rotation periods were modelled as a normal distribution with mean and
 standard deviation, $Y$ and $V$, as free parameters.
 Subgiant rotation periods \emph{do} depend on age and $T_{\rm{eff}}$.
 However, since the rotational properties of these stars are not interesting for
-the purposes of gyrochronology calibration however, we also modelled them with
+the purposes of gyrochronology calibration, we also modelled them with
 a normal distribution with mean and standard deviation, $Z$ and $U$, as free
 parameters.
 We used a mixture model for the remaining population of stars, consisting of
@@ -614,7 +614,8 @@ For cool dwarfs ($B-V$ $<$ 0.45 and \logg$~>$ \subcut):
 \end{eqnarray}
 where $Q$ is the probability that a star is drawn from the population of
 misclassified subgiants.
-For hot dwarfs ($B-V$ $<$ 0.45 and \logg$~>$ \subcut):
+For hot dwarfs ($B-V$ $<$ 0.45 and \logg$~>$ \subcut) the generative process
+is:
 \begin{eqnarray}
 p(P_n\,|\,\w_n,\theta) = \left(\sqrt{2\pi V^2}\right)^{-1/2}~
 \exp\left({-\frac{(P_n-Y)^2}{2V^2}}\right),
@@ -664,7 +665,7 @@ $J$ posterior samples were generated for each star (we used $J$ = 100):
 and were used to evaluate $p(\mathbf{w}_n|\hat{\mathbf{w}}_n)$ up to a
 normalisation constant.
 % We then evaluated the marginalized likelihood for a single star as follows
-Using these samples we approximated the marginalised likelihood for a single
+Using these samples we computed the marginalised likelihood for a single
 star as follows,
 \begin{align}
 % 	p(\hat{P}_n,\hat{\w_n}\,|\,\theta) \approx \frac{1}{J_n}
