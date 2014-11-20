@@ -791,23 +791,25 @@ The fit to the final data set is shown in figure \ref{fig:subfigures2} and
 marginal posterior PDFs for the three gyrochronology parameters are
 shown in figure \ref{fig:triangle}.
 Resulting 50th percentile values of $a$, $b$ and $n$, with their 16th and 84th
-percentile uncertainties are shown in table \ref{tab:constants} and the
+percentile uncertainties are presented in table \ref{tab:constants} and the
 additional parameters of our model, describing the distributions of hot star
 and subgiant rotation periods, are presented in table \ref{tab:nuisance}.
 Note the value of $Q$, the parameter describing the fraction of misclassified
 subgiants is $\Q^{+\Qerrp}_{-\Qerrm}$, i.e., based on our simple `\logg$=4.1$'
 definition of MS turn-off, \Q$~$of the cool dwarfs were actually
 misclassified subgiants.
-The marginalised posterior PDFs and covariances of $a$, $b$ and $n$ are shown
-in figure \ref{fig:triangle}.
-One can think of $\log(a)$ and $n$ as the slope and intercept of a straight
-line in log-space, thus the covariance between these parameters is not
-surprising.
-The posterior PDF for $b$ is clearly multi-modal.
+The marginalised posterior PDFs of $a$, $b$ and $n$ are shown in figure
+\ref{fig:triangle}.
+% One can think of $\log(a)$ and $n$ as the slope and intercept of a straight
+% line in log-space, thus the covariance between these parameters is not
+% surprising.
+All three parameters are correlated and the posterior PDF for $b$ is clearly
+multi-modal.
 This multi-modality probably arises from the fact that the period--colour
 relation is slightly different for different clusters (it was this phenomenon
 that lead us to exlude Praesepe and NGC 6811 from the sample as these two
-clusters produced even more multi-modal posterior PDFs for $b$).
+clusters produced even more multi-modal posterior PDFs for $b$) and possibly
+for each field star.
 Figures \ref{fig:625} -- \ref{fig:8gyr} show the new gyrochronology relation
 in period-colour space over a sequence of ages.
 The stars included in these plots have ages that fall within 1 $\sigma$ of the
@@ -832,14 +834,13 @@ be taken into account {\it whenever} the above relation is used to calculate
 uncertainties on an age or rotation period.
 In order to do this properly, posterior PDF samples should be incorporated into
 Monte-Carlo uncertainty calculations.
-Figure \ref{fig:triangle} shows the 1 and 2 dimensional marginalised posterior
-PDFs of the three gyrochronology parameters.
-This figure shows that $a$ and $n$ are correlated (as one might expect: $a$ and
-$n$ can be thought of the slope and intercept of a straight line in log-space)
-and $b$ is slightly multi-modal.
-We do not fully understand the origin of this multi-modality but postulate that
-it could be produced by the clusters preferring different values of $b$, i.e.
-the colour-period relation takes a different shape for each cluster.
+% Figure \ref{fig:triangle} shows the 1 and 2 dimensional marginalised posterior
+% PDFs of the three gyrochronology parameters.
+% All three parameters are correlated and $b$ is slightly multi-modal.
+% We do not fully understand the origin of this multi-modality but postulate that
+% it could be caused by the clusters and field stars preferring different values
+% of $b$, i.e. the colour-period relation takes a different shape for each
+% cluster.
 
 In order to test the predictive power of the new gyrochronology relation, we
 inverted equation \ref{eq:Barnes2007_3} to compare previously measured ages
@@ -1191,8 +1192,8 @@ equation \ref{eq:Barnes2007_2}.
 \begin{center}
 \includegraphics[width=6in, clip=false, trim=0 0 0.5in 0]{small_triangleACHF45.pdf}
 \caption{1 and 2-D Marginalised likelihoods for the three gyrochronology
-parameters, $a$, $b$ and $n$. $a$ and $n$ are covariant. $b$ is slightly
-multi-modal. This plot was made using triangle.py
+parameters, $a$, $b$ and $n$. All three parameters are correlated and $b$ is
+slightly multi-modal. This plot was made using triangle.py
 \citep{Foreman-Mackey_triangle}.
 \label{fig:triangle}}
 \end{center}
