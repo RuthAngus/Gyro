@@ -570,7 +570,8 @@ Observations are denoted as \ph$~$and $\hat{\mathbf{w}}_n$ and the unobserved
 
 In order to explore the posterior Probability Distribution Functions (PDFs) of
 the model parameters, $\theta$, conditioned on a set of noisy observations,
-\wh, it was necessary to marginalise over the latent parameters.
+$\{\hat{P}_n, \hat{\mathbf{w}}_n\}$, it was necessary to marginalise over the
+latent parameters, $\{P_n, \mathbf{w}_n\}$.
 Assuming all measurements are independent, the marginalised likelihood can be
 written
 \begin{equation}
@@ -626,7 +627,8 @@ p(P_n\,|\,\w_n,\theta) = \left(\sqrt{2\pi W^2}\right)^{-1/2}~
 
 We used hierarchical inference to account for observational uncertainties,
 following the method of \citet{Hogg2010}, also used by
-\citet{Foreman-Mackey2014}, \citet{Rogers2014} and \citet{Morton2014}.
+\citet{Foreman-Mackey2014}, \citet{Rogers2014}, \citet{Morton2014} and
+\citet{Demory2014}.
 We computed equation \ref{eq:fac} up to an unimportant constant
 using a sampling approximation.
 The values of \ph$~$and \wh$~$with uncertainties, $\sigma_P$ and
@@ -665,21 +667,29 @@ normalisation constant.
 Using these samples we approximated the marginalised likelihood for a single
 star as follows,
 \begin{align}
+% 	p(\hat{P}_n,\hat{\w_n}\,|\,\theta) \approx \frac{1}{J_n}
+% 	\sum_{j=1}^{J_n}p(\hat{P}_n\,|\,\mathbf{w}_n^{(j)},\theta).
 	p(\hat{P}_n,\hat{\w_n}\,|\,\theta) \approx \frac{1}{J_n}
-	\sum_{j=1}^{J_n}p(\hat{P}_n\,|\,\mathbf{w}_n^{(j)},\theta),
+	\sum_{j=1}^{J_n}p(P_n\,|\,\mathbf{w}_n^{(j)},\theta)p(\hat{P}_n|P_n).
 \end{align}
-where $P_n^{(j)}$ was computed from the posterior PDF samples.
-For samples falling in the cool dwarf regime, $P_{n,j}$ was computed using
-equation \ref{eq:Barnes2007_2}.
-For those samples falling in the hot dwarf or subgiant regimes, $P_{n,j}$ was
-set equal to the mean of the normal distribution: $Y$ for hot dwarfs; $X$ for
-`misclassified' subgiants with \logg$~>4.1$ and $Z$ for subgiants with
-\logg$~<4.1$.
-Finally, the marginalized log-likelihood can be written
+% where $P_n^{(j)}$ was computed from the posterior PDF samples.
+For the cool dwarfs, $p(P_n|\mathbf{w}_n^{(j)}, \theta)p(\hat{P}_n|P_n)$,
+has a $\delta$-function component and a Gaussian component and can
+therefore be integrated analytically.
+For the subgiants and hot dwarfs,
+$p(P_n|\mathbf{w}_n^{(j)}, \theta)p(\hat{P}_n|P_n)$ is the product of two
+Gaussians, which is another Gaussian and, again, this integral is analytic.
+% For samples falling in the cool dwarf regime, $P_{n,j}$ was computed
+% using equation \ref{eq:Barnes2007_2}.
+% For those samples falling in the hot dwarf or subgiant regimes, $P_{n,j}$ was
+% set equal to the mean of the normal distribution: $Y$ for hot dwarfs; $X$ for
+% `misclassified' subgiants with \logg$~>4.1$ and $Z$ for subgiants with
+% \logg$~<4.1$.
+Finally, the marginalised log-likelihood can be written
 \begin{eqnarray}
 	\log p(\{\hat{P}_n,\hat{\w}_n\}\,|\,\theta) &\approx&
 	\log \mathcal{Z} + \sum_{n=1}^N
-	\log \left[ \sum_{j=1}^{J_n}p(\hat{P}_n\,|\,\mathbf{w}_n^{(j)}, \theta) \right ]
+	\log \left[ \sum_{j=1}^{J_n}p(P_n\,|\,\mathbf{w}_n^{(j)}, \theta)p(\hat{P}_n|P_n) \right ]
 \end{eqnarray}
 where $\mathcal{Z}$ is an irrelevant normalisation constant.
 We used {\tt emcee} \citep{Foreman-Mackey2013}, an affine invariant, ensemble
@@ -692,19 +702,19 @@ Following the above method, a likelihood was computed as follows:
 		distributions: one in colour, one in age and one in \logg,
 		where the means and standard deviations of those distributions
 		were the observed values and uncertainties.
-		To be clear, this step was performed just once and the
+		This step was performed just once and the
 		following steps were performed for each likelihood evaluation.
 	\item For those samples that fell in the cool dwarf regime
 		($B-V$ $>$ 0.45 and \logg$~>$ \subcut), model rotation
-		periods were calculated using equation \ref{eq:Barnes2007_2}
-		{\it and} were assigned the value of parameter $X$.
+		periods were both calculated using equation
+		\ref{eq:Barnes2007_2} and assigned the value of parameter $X$.
 % 		In the case that the sample was better described by equation
 % 		\ref{eq:Barnes2007_2} than by the normal distribution with mean
 % 		and standard deviation $X$ and $U$, that sample
-		Likelihoods of the two model rotation periods were then
+		A Likelihood for the two model rotation periods were then
 		evaluated using a Gaussian mixture model
 		likelihood function.
-	\item For the samples that fell in the hot dwarf ($B-V$ $<$ \subcut and
+	\item For the samples that fell in the hot dwarf ($B-V$ $<$ 0.45 and
 		\logg$~>$ \subcut) and subgiant (\logg$~<$ \subcut) regimes,
 		likelihoods were calculated by comparing observed rotation
 		periods with the model rotation periods for the two
@@ -851,10 +861,10 @@ For comparison, gyrochronological ages for the field stars were also computed
 using the relations of \citet{Barnes2007} and \citet{Mamajek2008}.
 Uncertainties on ages predicted with the new relation were calculated using
 posterior PDF samples of the three parameters, $a$, $b$ and $n$.
-In general, incorporating posterior PDF samples into uncertainty estimations is
-essential in order to account for covariances between parameters.
-In this case, uncertainties on ages calculated without posterior PDF samples
-will be larger by up to around 50\%.
+% In general, incorporating posterior PDF samples into uncertainty estimations is
+% essential in order to account for covariances between parameters.
+% In this case, uncertainties on ages calculated without posterior PDF samples
+% will be larger by up to around 50\%.
 The uncertainties on the predicted ages of 16 Cyg B are dominated by the large
 observational uncertainties on rotation period.
 In contrast, uncertainties on the ages predicted for the Sun are dominated by
@@ -1010,9 +1020,8 @@ the noise level.
 Does age depend solely on rotation period and mass or do other variables
 influence stellar spin down, perhaps only becoming important after many Myrs?
 The gyrochronology model calibrated here neglects the effects of metallicity.
-This property is bound to have an effect, albeit possibly a second-order one,
-on the angular momentum evolution of a star since it has an impact on internal
-stellar structure.
+This property is bound to have an effect on the angular momentum evolution
+of a star since it impacts internal stellar structure.
 
 The picture of gyrochronology will become clearer as the sample of
 asteroseismic stars with individual mode analysis grows and their age
