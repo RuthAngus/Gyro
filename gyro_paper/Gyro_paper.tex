@@ -606,14 +606,18 @@ observed parameters and the model parameters, $p(P_n|\w_n, \theta)$, is
 different in each regime because a different generative process is responsible
 for producing rotation periods.
 For cool dwarfs ($B-V$ $<$ 0.45 and \logg$~>$ \subcut):
-\begin{eqnarray}
-	p(P_n|\w_n,\theta) =
-	& (1-Q)~\delta \left (P_n - \left[A^n \times a(B-V - c)^b\right]
-	\right) \quad \\ & +~Q~\left(\sqrt{2\pi U^2}\right)^{-1/2}
+\begin{eqnarray} \label{eq:codw}
+p(P_n|\w_n,\theta) &=&
+    (1-Q)~\delta \left (P_n - f_\theta(\w_n)\right) \\
+    && +\quad Q\,\left(\sqrt{2\pi U^2}\right)^{-1/2}
 	~\exp\left({-\frac{(P_n-X)^2}{2U^2}}\right),
 \end{eqnarray}
 where $Q$ is the probability that a star is drawn from the population of
-misclassified subgiants.
+misclassified subgiants and
+\begin{eqnarray}
+f_\theta(\w_n) = A^n \times a(B-V - c)^b
+\end{eqnarray}
+is the gyrochronology relation.
 For hot dwarfs ($B-V$ $<$ 0.45 and \logg$~>$ \subcut) the generative process
 is:
 \begin{eqnarray}
@@ -670,27 +674,46 @@ star as follows,
 \begin{align}
 % 	p(\hat{P}_n,\hat{\w_n}\,|\,\theta) \approx \frac{1}{J_n}
 % 	\sum_{j=1}^{J_n}p(\hat{P}_n\,|\,\mathbf{w}_n^{(j)},\theta).
+	% p(\hat{P}_n,\hat{\w_n}\,|\,\theta) \approx \frac{1}{J_n}
+	% \sum_{j=1}^{J_n}p(P_n\,|\,\mathbf{w}_n^{(j)},\theta)p(\hat{P}_n|P_n).
 	p(\hat{P}_n,\hat{\w_n}\,|\,\theta) \approx \frac{1}{J_n}
-	\sum_{j=1}^{J_n}p(P_n\,|\,\mathbf{w}_n^{(j)},\theta)p(\hat{P}_n|P_n).
+	\sum_{j=1}^{J_n}p(\hat{P}_n\,|\,\mathbf{w}_n^{(j)},\theta) \quad.
 \end{align}
-% where $P_n^{(j)}$ was computed from the posterior PDF samples.
-For the cool dwarfs, $p(P_n|\mathbf{w}_n^{(j)}, \theta)p(\hat{P}_n|P_n)$,
-has a $\delta$-function component and a Gaussian component and can
-therefore be integrated analytically.
-For the subgiants and hot dwarfs,
-$p(P_n|\mathbf{w}_n^{(j)}, \theta)p(\hat{P}_n|P_n)$ is the product of two
-Gaussians, which is another Gaussian and, again, this integral is analytic.
+The argument inside this sum is given by the integral
+\begin{eqnarray}
+p(\hat{P}_n\,|\,\mathbf{w}_n^{(j)},\theta) =
+    \int p(P_n|\w_n,\theta) p(\hat{P}_n\,|\,P_n) {\rm d}P_n \quad.
+\end{eqnarray}
+Assuming that the period uncertainties are Gaussian with mean $\hat{P}_n$
+and variance ${\sigma_n}^2$, this integral can be evaluated analytically for
+each population.
+For example, starting from equation~\ref{eq:codw} the result for the cool
+dwarfs is
+\begin{eqnarray}
+p(\hat{P}_n\,|\,\mathbf{w}_n^{(j)},\theta) &=&
+    \frac{1-Q}{\sqrt{2\,\pi\,{\sigma_n}^2}} \exp\left( -
+        \frac{\left[\hat{P_n} - f_\theta (\w_n^{(j)}) \right] ^2}
+             {2\,{\sigma_n}^2}\right) \nonumber\\
+    && +
+    \frac{Q}{\sqrt{2\,\pi\,(U^2 + {\sigma_n}^2)}} \exp\left( -
+        \frac{[\hat{P_n} - X] ^2}{2\,[U^2 + {\sigma_n}^2]}\right) \quad.
+\end{eqnarray}
+A similar result can be derived for the other populations.
+
 % For samples falling in the cool dwarf regime, $P_{n,j}$ was computed
 % using equation \ref{eq:Barnes2007_2}.
 % For those samples falling in the hot dwarf or subgiant regimes, $P_{n,j}$ was
 % set equal to the mean of the normal distribution: $Y$ for hot dwarfs; $X$ for
 % `misclassified' subgiants with \logg$~>4.1$ and $Z$ for subgiants with
 % \logg$~<4.1$.
-Finally, the marginalised log-likelihood can be written
+
+Finally, using these analytic results for the inner integral, the
+marginalised log-likelihood from equation~\ref{eq:fac} becomes
 \begin{eqnarray}
 	\log p(\{\hat{P}_n,\hat{\w}_n\}\,|\,\theta) &\approx&
 	\log \mathcal{Z} + \sum_{n=1}^N
-	\log \left[ \sum_{j=1}^{J_n}p(P_n\,|\,\mathbf{w}_n^{(j)}, \theta)p(\hat{P}_n|P_n) \right ]
+	\log \left[ \sum_{j=1}^{J_n}p(\hat{P}_n\,|\,\mathbf{w}_n^{(j)},
+\theta) \right ]
 \end{eqnarray}
 where $\mathcal{Z}$ is an irrelevant normalisation constant.
 We used {\tt emcee} \citep{Foreman-Mackey2013}, an affine invariant, ensemble
