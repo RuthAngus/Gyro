@@ -636,14 +636,15 @@ i.e. samples from
 % 	p(\hat{\mathbf{w}}_n|D_n) =
 % 	\frac{p(D_n|\hat{\mathbf{w}}_n)p_0(\hat{\mathbf{w}}_n)}
 % 	{p_0(D_n)},
-	p(\mathbf{w}_n|\hat{\mathbf{w}}_n) =
-	\frac{p(\hat{\mathbf{w}}_n|\mathbf{w}_n)p_0(\mathbf{w}_n)}
-	{p_0(\hat{\mathbf{w}}_n)},
+	p(\mathbf{w}_n|\hat{\mathbf{D}}_n) =
+	\frac{p(\hat{\mathbf{D}}_n|\mathbf{w}_n)p_0(\mathbf{w}_n)}
+	{p_0(\hat{\mathbf{D}}_n)},
 \end{equation}
-% where $p(D_n|\hat{\w}_n)$ is the likelihood of the data, $D_n$ (in this case,
-% the set of {\it Kepler} lightcurves plus spectroscopic \teff$~$and
-% \feh$~$measurements), given the model parameters, $\hat{\mathbf{w}}_n$.
-% $p_0(\hat{\w}_n)$ is an uninformative prior probability distribution
+where $p(\hat{\mathbf{D}}_n|\w_n)$ is the likelihood of the data,
+$\hat{\mathbf{D}}_n$ (in this case,
+the set of {\it Kepler} lightcurves plus spectroscopic \teff$~$and
+\feh$~$measurements), given the model parameters, $\mathbf{w}_n$.
+$p_0(\hat{\w}_n)$ is an uninformative prior probability distribution
 function $p_0(\mathbf{w}_n)$ is an uninformative prior PDF, chosen by the
 fitter \citep[][used a flat prior PDF in age and \logg]{Chaplin2014}.
 In the absence of posterior PDF samples\footnote{Posterior PDF samples
@@ -784,7 +785,7 @@ $Q$ & \Q$^{+\Qerrp}_{-\Qerrm}$ \\
 
 The fit to the final data set is shown in figure \ref{fig:subfigures2} and
 marginal posterior PDFs for the three gyrochronology parameters are
-shown in figure \ref{fig:marg_posteriors}.
+shown in figure \ref{fig:triangle}.
 Resulting 50th percentile values of $a$, $b$ and $n$, with their 16th and 84th
 percentile uncertainties are shown in table \ref{tab:constants} and the
 additional parameters of our model, describing the distributions of hot star
@@ -848,7 +849,7 @@ In general, incorporating posterior PDF samples into uncertainty estimations is
 essential in order to account for covariances between parameters.
 In this case, uncertainties on ages calculated without posterior PDF samples
 will be larger by up to around 50\%.
-The uncertainty on the predicted ages of 16 Cyg B are dominated by the large
+The uncertainties on the predicted ages of 16 Cyg B are dominated by the large
 observational uncertainties on rotation period.
 In contrast, uncertainties on the ages predicted for the Sun are dominated by
 uncertainties in the gyrochronology parameters.
@@ -1061,10 +1062,11 @@ further improvement of gyrochronology over the coming years.
 
 The code used in this project can be found at
 https://github.com/RuthAngus/Gyro.
-The research leading to these results has received funding from the the UK
-Science and Technology Facilities Council (STFC).
-Funding for the Stellar Astrophysics Centre is provided by The Danish National
-Research Foundation (Grant agreement no.: DNRF106).
+We acknowledge funding from the Leverhulme Trust.
+% The research leading to these results has received funding from the the UK
+% Science and Technology Facilities Council (STFC).
+% Funding for the Stellar Astrophysics Centre is provided by The Danish National
+% Research Foundation (Grant agreement no.: DNRF106).
 A.M. acknowledges funding from the European Research Council under the EU’s
 Seventh Framework Programme (FP7/(2007-2013)/ERC Grant Agreement No. 291352).
 We would like to thank Bill Chaplin for his thoughtful and detailed comments
@@ -1152,13 +1154,13 @@ equation \ref{eq:Barnes2007_2}.
    \label{fig:subfigures2}}
 \end{figure}
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{marg_posteriors.pdf}
-\caption{Marginalised posterior PDFs of the three gyrochronology parameters; $a$, $b$ and $n$, conditioned on the asteroseismic stars, the field stars, the Hyades and Coma Berenices.
-\label{fig:marg_posteriors}}
-\end{center}
-\end{figure}
+% \begin{figure}[ht]
+% \begin{center}
+% \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{marg_posteriors.pdf}
+% \caption{Marginalised posterior PDFs of the three gyrochronology parameters; $a$, $b$ and $n$, conditioned on the asteroseismic stars, the field stars, the Hyades and Coma Berenices.
+% \label{fig:marg_posteriors}}
+% \end{center}
+% \end{figure}
 
 \begin{figure}[ht]
 \begin{center}

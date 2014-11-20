@@ -10,8 +10,10 @@ fname = sys.argv[1]
 print fname
 ck = fname.find('ck')
 
-DIR = '/Users/angusr/Python/Gyro'
-with h5py.File("%s/results/samples_%s" % (DIR, fname), "r") as f:
+# DIR = '/Users/angusr/Python/Gyro'
+# with h5py.File("%s/results/samples_%s" % (DIR, fname), "r") as f:
+DIR = '/Users/angusr/Python/noisy-plane'
+with h5py.File("%s/samples_%s" % (DIR, fname), "r") as f:
     samples = f["samples"][:, 15000:, :]
 nwalkers, n, ndim = samples.shape
 flatchain = samples.reshape((-1, ndim))
