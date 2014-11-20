@@ -361,6 +361,23 @@ measurements where the two catalogues overlap.
 The asteroseismic sample covers a large range of ages, however it does not
 provide good mass coverage across the entire range (see figures
 \ref{fig:p_vs_a} and \ref{fig:3d}).
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{p_vs_a_paper2.pdf}
+\caption{Photometric rotation period vs age for \nastero$~$ {\it Kepler}
+	targets (black) plus cluster and field stars (blue). The Sun is shown
+	in red.
+\label{fig:p_vs_a}}
+\end{center}
+\end{figure}
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{p_vs_bv_paper2.pdf}
+\caption{Photometric rotation period vs $B-V$ colour for the data described in
+	figure \ref{fig:p_vs_a}.
+\label{fig:3d}}
+\end{center}
+\end{figure}
 Few stars have temperatures below 6000 K ($B-V$ $\sim$ 0.55) and of the low
 mass stars, most of them are old (note that massive stars evolve rapidly and
 so we do not expect many in the sample).
@@ -531,6 +548,20 @@ gyrochronology calibration.
 We decided to use simple normal distributions rather than more physically
 motivated models in order to remain as model--independent as
 possible.
+Figure \ref{fig:logg_vs_t} shows \logg$~$vs \teff$~$for the asteroseismic stars.
+Stars classified as cool dwarfs are shown in black, hot dwarfs in red and
+subgiants in blue.
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{logg_vs_t_paper.pdf}
+\caption{\logg$~$vs \teff$~$for the \nastero$~$asteroseismic stars. Hot dwarfs
+with \teff$~>$ 6250 K and \logg$~>$ \subcut are red, subgiants with \logg$~<$
+\subcut are blue. Only the black cool dwarfs with \teff$~<$ 6250 K and
+\logg$~<$ \subcut are expected to follow the gyrochronology relation in
+equation \ref{eq:Barnes2007_2}.
+\label{fig:logg_vs_t}}
+\end{center}
+\end{figure}
 % We chose to use a Gaussian distribution because it is the maximum entropy
 % distribution, and therefore the most conservative choice, with only two
 % parameters.
@@ -793,6 +824,23 @@ in this parameter (solar ages predicted from each best-fitting model were
 consistent).
 Individual fits to Hyades and Coma Berenices, plus the field stars are shown
 in figures \ref{fig:CF45} and \ref{fig:HF45}.
+\begin{figure}[ht]
+\begin{center}
+	\subfigure[Coma Berenices and field stars.]{
+            \label{fig:CF45}
+	    \includegraphics[width=4in, clip=true, trim=0 0 0.5in 0]{showCF45.pdf}
+        }
+	\subfigure[Hyades and field stars.]{
+            \label{fig:HF45}
+	    \includegraphics[width=4in, clip=true, trim=0 0 0.5in 0]{showHF45.pdf}
+        }
+    \end{center}
+    \caption{ Individual fits to the clusters and field stars. The Sun is the
+	    red point. Top panels show period vs $B-V$ with Solar and cluster
+	    age isochrones. Bottom panels show period vs age with the period-
+	    age relation for a constant $B-V$ value of 0.65 (Solar $B-V$).
+\label{fig:subfigures1}}
+\end{figure}
 50th percentile parameter values with their 16th and 84th
 percentile uncertainties for the two clusters are provided in table
 \ref{tab:cluster_results}.
@@ -823,8 +871,44 @@ $Q$ & \Q$^{+\Qerrp}_{-\Qerrm}$ \\
 
 The fits to the final data set are shown in figures
 \ref{fig:5}-\ref{fig:8gyr} and
+\begin{figure}[ht]
+\begin{center}
+	\subfigure[0.5 Gyr (age of the Coma Ber)]{
+            \label{fig:5}
+	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{p_vs_bv0.pdf}
+        }
+	\subfigure[0.625 Gyr (age of the Hyades)]{
+            \label{fig:625}
+	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{p_vs_bv1.pdf}
+        }
+	\subfigure[2 Gyr]{
+            \label{fig:2gyr}
+	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{p_vs_bv2.pdf}
+        }
+	\subfigure[5 Gyr]{
+            \label{fig:sungyr}
+	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{p_vs_bv3.pdf}
+        }
+	\subfigure[8 Gyr]{
+            \label{fig:8gyr}
+	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{p_vs_bv4.pdf}
+        }
+    \end{center}
+    \caption{ \prot vs $B-V$ colour for dwarfs within 1$\sigma$ of the reference age with the new gyrochronology relation and \citet{Barnes2007}, and \citet{Mamajek2008} for comparison. Asteroseismic targets are black and cluster and field stars are red. The shaded regions represent the 16th and 84th percentile uncertainties.
+   \label{fig:subfigures2}}
+\end{figure}
 marginal posterior PDFs for the three gyrochronology parameters are
 shown in figure \ref{fig:triangle}.
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=false, trim=0 0 0.5in 0]{small_triangleACHF45.pdf}
+\caption{Marginalised likelihoods for the three gyrochronology
+parameters, $a$, $b$ and $n$. All three parameters are correlated and $b$ is
+slightly multi-modal. This plot was made using triangle.py
+\citep{Foreman-Mackey_triangle}.
+\label{fig:triangle}}
+\end{center}
+\end{figure}
 Resulting 50th percentile values of $a$, $b$ and $n$, with their 16th and 84th
 percentile uncertainties are presented in table \ref{tab:constants} and the
 additional parameters of our model, describing the distributions of hot star
@@ -855,6 +939,25 @@ Figure \ref{fig:p_vs_bv_solar} shows rotation period vs colour for stars with
 age within 1 $\sigma$ of the Sun's (4.568 Gyr) and figure
 \ref{fig:p_vs_a_solar} shows rotation period vs age for stars with $B-V$
 colour within 10\% of the Sun's (0.65).
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{p_vs_bv_solar.pdf}
+\caption{Rotation period vs $B-V$ colour for dwarfs with age within 1$\sigma$ of the Sun's age, 4.568 Gyr. The Sun is the red point.
+\label{fig:p_vs_bv_solar}}
+\end{center}
+\end{figure}
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{p_vs_a_solar.pdf}
+\caption{Rotation period vs age for cool dwarfs with colour within 10\% of the
+	Sun's: 0.65, with gyrochronology relations of \citet{Barnes2007},
+	\citet{Mamajek2008} and this work. The shaded region represents the
+	16th and 84th percentile uncertainties. The Sun is shown in red and the
+	field stars, $\alpha$ Cen A, 18 Sco and 16 Cyg from left to right, are
+	shown in blue.
+\label{fig:p_vs_a_solar}}
+\end{center}
+\end{figure}
 Our final, newly calibrated gyrochronology relation can be written in full as
 \begin{equation}
 	P = A^{\gyron^{+\nerrp}_{-\nerrm}} \times \gyroa^{+\aerrp}_{-\aerrm}
@@ -1100,121 +1203,5 @@ for useful insight and discussion that hugely contributed to this paper.
 
 \bibliographystyle{plainnat}
 \bibliography{Gyro_paper}
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{p_vs_a_paper2.pdf}
-\caption{Photometric rotation period vs age for \nastero$~$ {\it Kepler}
-	targets (black) plus cluster and field stars (blue). The Sun is shown
-	in red.
-\label{fig:p_vs_a}}
-\end{center}
-\end{figure}
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{p_vs_bv_paper2.pdf}
-\caption{Photometric rotation period vs $B-V$ colour for the data described in
-	figure \ref{fig:p_vs_a}.
-\label{fig:3d}}
-\end{center}
-\end{figure}
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{logg_vs_t_paper.pdf}
-\caption{\logg$~$vs \teff$~$for the \nastero$~$asteroseismic stars. Hot dwarfs
-with \teff$~>$ 6250 K and \logg$~>$ \subcut are red, subgiants with \logg$~<$
-\subcut are blue. Only the black cool dwarfs with \teff$~<$ 6250 K and
-\logg$~<$ \subcut are expected to follow the gyrochronology relation in
-equation \ref{eq:Barnes2007_2}.
-\label{fig:logg_vs_t}}
-\end{center}
-\end{figure}
-
-\begin{figure}[ht]
-\begin{center}
-	\subfigure[Coma Berenices and field stars.]{
-            \label{fig:CF45}
-	    \includegraphics[width=4in, clip=true, trim=0 0 0.5in 0]{showCF45.pdf}
-        }
-	\subfigure[Hyades and field stars.]{
-            \label{fig:HF45}
-	    \includegraphics[width=4in, clip=true, trim=0 0 0.5in 0]{showHF45.pdf}
-        }
-    \end{center}
-    \caption{ Individual fits to the clusters and field stars. The Sun is the
-	    red point. Top panels show period vs $B-V$ with Solar and cluster
-	    age isochrones. Bottom panels show period vs age with the period-
-	    age relation for a constant $B-V$ value of 0.65 (Solar $B-V$).
-\label{fig:subfigures1}}
-\end{figure}
-
-\begin{figure}[ht]
-\begin{center}
-	\subfigure[0.5 Gyr (age of the Coma Ber)]{
-            \label{fig:5}
-	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{p_vs_bv0.pdf}
-        }
-	\subfigure[0.625 Gyr (age of the Hyades)]{
-            \label{fig:625}
-	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{p_vs_bv1.pdf}
-        }
-	\subfigure[2 Gyr]{
-            \label{fig:2gyr}
-	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{p_vs_bv2.pdf}
-        }
-	\subfigure[5 Gyr]{
-            \label{fig:sungyr}
-	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{p_vs_bv3.pdf}
-        }
-	\subfigure[8 Gyr]{
-            \label{fig:8gyr}
-	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{p_vs_bv4.pdf}
-        }
-    \end{center}
-    \caption{ \prot vs $B-V$ colour for dwarfs within 1$\sigma$ of the reference age with the new gyrochronology relation and \citet{Barnes2007}, and \citet{Mamajek2008} for comparison. Asteroseismic targets are black and cluster and field stars are red. The shaded regions represent the 16th and 84th percentile uncertainties.
-   \label{fig:subfigures2}}
-\end{figure}
-
-% \begin{figure}[ht]
-% \begin{center}
-% \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{marg_posteriors.pdf}
-% \caption{Marginalised posterior PDFs of the three gyrochronology parameters; $a$, $b$ and $n$, conditioned on the asteroseismic stars, the field stars, the Hyades and Coma Berenices.
-% \label{fig:marg_posteriors}}
-% \end{center}
-% \end{figure}
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{p_vs_bv_solar.pdf}
-\caption{Rotation period vs $B-V$ colour for dwarfs with age within 1$\sigma$ of the Sun's age, 4.568 Gyr. The Sun is the red point.
-\label{fig:p_vs_bv_solar}}
-\end{center}
-\end{figure}
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{p_vs_a_solar.pdf}
-\caption{Rotation period vs age for cool dwarfs with colour within 10\% of the
-	Sun's: 0.65, with gyrochronology relations of \citet{Barnes2007},
-	\citet{Mamajek2008} and this work. The shaded region represents the
-	16th and 84th percentile uncertainties. The Sun is shown in red and the
-	field stars, $\alpha$ Cen A, 18 Sco and 16 Cyg from left to right, are
-	shown in blue.
-\label{fig:p_vs_a_solar}}
-\end{center}
-\end{figure}
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=false, trim=0 0 0.5in 0]{small_triangleACHF45.pdf}
-\caption{Marginalised likelihoods for the three gyrochronology
-parameters, $a$, $b$ and $n$. All three parameters are correlated and $b$ is
-slightly multi-modal. This plot was made using triangle.py
-\citep{Foreman-Mackey_triangle}.
-\label{fig:triangle}}
-\end{center}
-\end{figure}
 
 \end{document}
