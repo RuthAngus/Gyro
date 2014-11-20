@@ -519,7 +519,7 @@ away and we could model everything at once.
 % parameters.
 This was important because stars were classified according to their observed
 temperatures and \logg s, which are noisy.
-Due to the large uncertainties on \teff and \logg, each star therefore has some
+Due to the large uncertainties on \teff$~$and \logg, each star therefore has some
 probability of being a subgiant, some of being a cool dwarf and some of
 being a hot star.
 By throwing away data, one could accidentally throw away a misclassified star.
@@ -543,7 +543,7 @@ possible.
 % contamination from subgiants which rotate more slowly than MS stars and, if
 % left in the sample, would have significantly biased the resulting
 % gyrochronology relation.
-Ideally both the hot star ($B-V$ $<$ 0.45) and subgiant (\logg$~<$\subcut)
+Ideally both the hot star ($B-V$ $<$ 0.45) and subgiant (\logg $<$ \subcut)
 boundaries would be free parameters in our model.
 However, since these two populations were modelled with a relatively
 unconstraining normal distributions, these boundary parameters would not be
@@ -821,8 +821,8 @@ $Q$ & \Q$^{+\Qerrp}_{-\Qerrm}$ \\
 \enddata
 \end{deluxetable}
 
-The fits to the final data set are shown in figures \ref{fig:subfigures1} and
-\ref{fig:subfigures2} and
+The fits to the final data set are shown in figures
+\ref{fig:5}-\ref{fig:8gyr} and
 marginal posterior PDFs for the three gyrochronology parameters are
 shown in figure \ref{fig:triangle}.
 Resulting 50th percentile values of $a$, $b$ and $n$, with their 16th and 84th
@@ -831,7 +831,7 @@ additional parameters of our model, describing the distributions of hot star
 and subgiant rotation periods, are presented in table \ref{tab:nuisance}.
 Note the value of $Q$, the parameter describing the fraction of misclassified
 subgiants is $\Q^{+\Qerrp}_{-\Qerrm}$, i.e., based on our simple `\logg$=4.1$'
-definition of MS turn-off, \Q$~$of the cool dwarfs were actually
+definition of MS turn-off, 4 or 5 of the cool dwarfs were actually
 misclassified subgiants.
 The marginalised posterior PDFs of $a$, $b$ and $n$ are shown in figure
 \ref{fig:triangle}.
@@ -950,23 +950,6 @@ Alpha Cen B & $6.0 \pm 1$       & $6^{+2}_{-1}$       & $4^{+1}_{-0.9}$
 % The ages of 18 Sco, Alpha Cen A and 16 Cyg B predicted by the new relation
 % are consistent to within 1$\sigma$ and the Sun and Alpha Cen B to within
 % 2$\sigma$.
-\begin{deluxetable}{lcccc}
-\tablewidth{0pc}
-\tablecaption{Clusters and References: (1) \citet{Dobbie2009}, (2)
-	\citet{CollierCameron2009}, (3) \citet{Perryman1998}, (4)
-	\citet{Radick1987}.
-\label{tab:clusters}}
-\tablehead{
-\colhead{Cluster}&
-\colhead{Age (Gyr)}&
-\colhead{Number of stars}&
-\colhead{Age ref}&
-\colhead{Rotation period ref}}
-\startdata
-Coma Ber & 0.5 $\pm$ 0.1 & 28 & 1 & 2 \\
-Hyades & 0.625 $\pm$ 0.05 & 22 & 3 & 4 \\
-\enddata
-\end{deluxetable}
 One would expect the \citet{Barnes2007} and \citet{Mamajek2008} relations to
 accurately predict an age for the Sun since they are strongly anchored to it.
 Our relation, on the other hand, uses additional age information from the
@@ -1226,7 +1209,7 @@ equation \ref{eq:Barnes2007_2}.
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=6in, clip=false, trim=0 0 0.5in 0]{small_triangleACHF45.pdf}
-\caption{1 and 2-D Marginalised likelihoods for the three gyrochronology
+\caption{Marginalised likelihoods for the three gyrochronology
 parameters, $a$, $b$ and $n$. All three parameters are correlated and $b$ is
 slightly multi-modal. This plot was made using triangle.py
 \citep{Foreman-Mackey_triangle}.
