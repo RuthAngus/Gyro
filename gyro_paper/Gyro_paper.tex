@@ -1,25 +1,14 @@
-% \documentclass[11pt,preprint]{aastex}
-% \documentclass[useAMS,usenatbib]{mn2e}
 \documentclass[useAMS, usenatbib]{mn2e}
 \usepackage{times}
 
-\usepackage{deluxetable}
 \usepackage{aas_macros}
 
 \usepackage{hyperref}
-\usepackage{booktabs}
 \usepackage{tablefootnote}
 \usepackage{amsmath}
-\usepackage{breqn}
-% \usepackage{cite}
-% \usepackage{natbib}
-\usepackage{verbatim}
-\usepackage{epsfig}
-\usepackage{cases}
-\usepackage[section]{placeins}
 \usepackage{graphicx, subfigure}
 \usepackage{color}
-\usepackage{amsmath}
+
 \usepackage{float}
 \floatplacement{figure}{H}
 
@@ -97,29 +86,25 @@
 % 1.136524602770805359e-01 7.032055407762527466e-02 5.116277188062667847e-02  % P
 
 
-\begin{document}
 
 \title{Calibrating Gyrochronology using Kepler Asteroseismic targets}
 
-\author{Ruth~Angus,$^1$
-Suzanne~Aigrain,$^1$ Daniel Foreman-Mackey,$^2$
-Amy~McQuillan,$^3$
-$^1$Department of Physics, University of Oxford, UK \\
-$^2$Centre for Cosmology and Particle Physics, New York University, New
-York, NY, USA \\
-$^3$School of Physics and Astronomy, Raymond and Beverly Sackler,
-Faculty of Exact Sciences, Tel Aviv University, 69978, Tel Aviv, Israel}
+\author[R.~Angus \emph{et al.}]{%
+    Ruth~Angus,$^1$\thanks{ruth.angus@astro.ox.ac.uk}
+    Suzanne~Aigrain,$^1$
+    Daniel Foreman-Mackey,$^2$ and
+    Amy~McQuillan$^3$ \\
+    $^1$Department of Physics, University of Oxford, UK \\
+    $^2$Centre for Cosmology and Particle Physics, New York University, New York, NY, USA \\
+    $^3$School of Physics and Astronomy, Raymond and Beverly Sackler, Faculty of Exact Sciences, Tel Aviv University, 69978, Tel Aviv, Israel}
 
-% \author{Ruth Angus$^1$, Suzanne Aigrain$^1$,
-% Daniel Foreman-Mackey$^2$, Amy McQuillan$^3$}
-% \affil{$^1$Department of Physics, University of Oxford, OX1 3RH, UK}
-% \affil{$^2$Centre for Cosmology and Particle Physics, New York University, New
-% York, NY, USA}
-% \affil{$^3$School of Physics and Astronomy, Raymond and Beverly Sackler,
-% Faculty of Exact Sciences, Tel Aviv University, 69978, Tel Aviv, Israel}
+\begin{document}
+
+\date{Draft version 2014 November 24}
+\maketitle
 
 \begin{abstract}
-\label{abs}
+% \label{abs}
 
 Among the available methods for dating stars, gyrochronology is a powerful one
 because it requires knowledge of only the star's mass and rotation period.
@@ -152,6 +137,10 @@ gyrochronology as a dating method---further investigation into the level of
 intrinsic scatter in the gyrochronology parameters will be required.
 
 \end{abstract}
+
+\begin{keywords}
+ADD KEYWORDS
+\end{keywords}
 
 \section{Introduction}
 \label{intro}
@@ -267,23 +256,20 @@ As described in \textsection \ref{sec:gyro_cal}, we adopt a fitting method
 that properly accounts for uncertainties on all three observed variables:
 colour, period and age.
 
-\begin{deluxetable}{lccc}
-\tablewidth{0pc}
-\tablecaption{Values of a, b, c and n in \citet{Barnes2007} and
-	\citet{Mamajek2008} and Angus et al. (2014).
-\label{tab:constants}}
-\tablehead{
-\colhead{Parameter}&
-\colhead{\citet{Barnes2007}}&
-\colhead{\citet{Mamajek2008}}&
-\colhead{Angus et al. (2014)}}
-\startdata
-a & $0.7725 \pm 0.011$ & $0.407 \pm 0.021$ & $\gyroa^{+\aerrp}_{-\aerrm}$ \\
-b & $0.601 \pm 0.024$ & $0.325 \pm 0.024$ & $\gyrob^{+\aerrp}_{-\berrm}$\\
-c & $0.4$ & $0.495 \pm 0.010$ & $0.45$ \\
-n & $0.5189 \pm 0.0070$ & $0.566 \pm 0.008$ & $\gyron^{+\nerrp}_{-\nerrm}$\\
-\enddata
-\end{deluxetable}
+\begin{table*}
+\caption{Values of a, b, c and n in \citet{Barnes2007} and
+    \citet{Mamajek2008} and Angus et al. (2014). \label{tab:constants}}
+\begin{tabular}{lccc}
+\hline\hline
+    Parameter & \citet{Barnes2007} & \citet{Mamajek2008} & Angus et al. (2014) \\
+    \hline
+    a & $0.7725 \pm 0.011$ & $0.407 \pm 0.021$ & $\gyroa^{+\aerrp}_{-\aerrm}$ \\
+    b & $0.601 \pm 0.024$ & $0.325 \pm 0.024$ & $\gyrob^{+\aerrp}_{-\berrm}$\\
+    c & $0.4$ & $0.495 \pm 0.010$ & $0.45$ \\
+    n & $0.5189 \pm 0.0070$ & $0.566 \pm 0.008$ & $\gyron^{+\nerrp}_{-\nerrm}$\\
+\hline
+\end{tabular}
+\end{table*}
 
 The data used in this article are described in \textsection \ref{sec:data},
 our calibration and model fitting process is outlined in \textsection
@@ -378,23 +364,6 @@ measurements where the two catalogues overlap.
 The asteroseismic sample covers a large range of ages, however it does not
 provide good mass coverage across the entire range (see figures
 \ref{fig:p_vs_a} and \ref{fig:3d}).
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{p_vs_a_paper2.pdf}
-\caption{Photometric rotation period vs age for \nastero$~$ {\it Kepler}
-	targets (black) plus cluster and field stars (blue). The Sun is shown
-	in red.
-\label{fig:p_vs_a}}
-\end{center}
-\end{figure}
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{p_vs_bv_paper2.pdf}
-\caption{Photometric rotation period vs $B-V$ colour for the data described in
-	figure \ref{fig:p_vs_a}.
-\label{fig:3d}}
-\end{center}
-\end{figure}
 Few stars have temperatures below 6000 K ($B-V$ $\sim$ 0.55) and of the low
 mass stars, most of them are old (note that massive stars evolve rapidly and
 so we do not expect many in the sample).
@@ -407,7 +376,7 @@ Uncertainties on $B-V$ colours associated with each cluster star were not
 provided in the catalogues from which rotation periods and ages were obtained.
 Since the uncertainty associated with each measurement plays such a key role
 in our analysis (see \textsection \ref{sec:gyro_cal}), we assigned an
-uncertainity of $\pm 0.04$ mag to each colour measurement, based on the mean
+uncertainty of $\pm 0.04$ mag to each colour measurement, based on the mean
 uncertainty in the asteroseismic temperature-converted colours.
 The 1.1 and 0.588 Gyr open clusters, NGC 6811 and Praesepe, were originally
 included in our analysis.
@@ -421,27 +390,43 @@ The entire set of \ntotal stars is shown in figures \ref{fig:p_vs_a} and
 \ref{fig:3d}.
 Asteroseismic targets are shown in black, with cluster and field stars in blue
 and the Sun in red.
-\begin{deluxetable}{lcccc}
-\tablewidth{0pc}
-\tablecaption{Clusters and References: (1) \citet{Dobbie2009},
+
+\begin{figure*}
+\begin{center}
+\includegraphics[width=6in, clip=true]{p_vs_a_paper2.pdf}
+\caption{Photometric rotation period vs age for \nastero$~$ {\it Kepler}
+	targets (black) plus cluster and field stars (blue). The Sun is shown
+	in red.
+\label{fig:p_vs_a}}
+\end{center}
+\end{figure*}
+
+\begin{figure*}
+\begin{center}
+\includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{p_vs_bv_paper2.pdf}
+\caption{Photometric rotation period vs $B-V$ colour for the data described in
+	figure \ref{fig:p_vs_a}.
+\label{fig:3d}}
+\end{center}
+\end{figure*}
+
+
+\begin{table*}
+\caption{Clusters and References: (1) \citet{Dobbie2009},
 	(2) \citet{CollierCameron2009}, (3) \citet{Perryman1998},
-	(4) \citet{Radick1987}.}
-\label{tab:clust}
-\tablehead{
-\colhead{Cluster}&
-\colhead{Age (Gyr)}&
-\colhead{Number of stars}&
-\colhead{Age ref}&
-\colhead{Rotation period ref}}
-\startdata
+	(4) \citet{Radick1987}. \label{tab:clust}}
+\begin{tabular}{lcccc}
+\hline\hline
+Cluster & Age (Gyr) & Number of stars & Age ref & Rotation period ref \\
+\hline
 Coma Ber & 0.5 $\pm$ 0.1 & 28 & 1 & 2 \\
 Hyades & 0.625 $\pm$ 0.05 & 22 & 3 & 4 \\
-\enddata
-\end{deluxetable}
+\hline
+\end{tabular}
+\end{table*}
 
-\begin{deluxetable}{lccc}
-\tablewidth{0pc}
-\tablecaption{Rotation periods and $B-V$ colours for field stars with precise
+\begin{table*}
+\caption{Rotation periods and $B-V$ colours for field stars with precise
 	ages. References: (a) \citet{Metcalfe2012}, (b) \citet{Davies2014}, (c)
 \citet{Moffett1979}, (d) \citet{Li2012}, (e) \citet{Petit2008}, (f)
 \citet{Mermilliod1986}, (g) \citet{Bouvier2010}, (h) \citet{Donahue1996}, (i)
@@ -459,14 +444,12 @@ The age of 16 Cyg B was measured with asteroseismology.
 however its rotation period was used as an additional constraint, so the age
 estimate is not entirely independent of rotation period for this star.
 An age for the $\alpha$ Cen system was estimated from spectroscopic
-observations with additional seismic constraints.}
-\label{tab:field}
-\tablehead{
-\colhead{ID}&
-\colhead{age}&
-\colhead{\prot}&
-\colhead{$B-V$}}
-\startdata
+observations with additional seismic constraints.\label{tab:field}}
+
+\begin{tabular}{lccc}
+\hline\hline
+{ID} & {age} & {\prot} & {$B-V$} \\
+\hline
 16 Cyg B & 6.4 $\pm$ 0.4$^a$ & 23.2 $^{+11.5}_{-3.2}$$^b$ & 0.66 $\pm$ 0.01$^c$ \\
 18 Sco & 3.7 $\pm$ 0.2$^d$ & 22.7 $\pm$ 0.5$^e$ & 0.64 $\pm$ 0.01$^f$ \\
 The Sun & 4.568 $\pm$ 0.001$^g$ & 26.09 $\pm$ 0.1$^h$ & 0.65 $\pm$ 0.001$^i$ \\
@@ -474,8 +457,9 @@ $\alpha$ Cen A & 6 $\pm$ 1$^{j, k}$ & 28.8 $\pm$ 2.5$^{l}$ &
 0.69 $\pm$ 0.01$^f$ \\
 $\alpha$ Cen B & 6 $\pm$ 1$^{j, k}$ & 38.7 $\pm$ 5.0$^{m}$ &
 0.90 $\pm$ 0.01$^f$ \\
-\enddata
-\end{deluxetable}
+\hline
+\end{tabular}
+\end{table*}
 
 \section{Calibrating the Gyrochronology relation}
 \label{sec:gyro_cal}
@@ -568,7 +552,8 @@ possible.
 Figure \ref{fig:logg_vs_t} shows \logg$~$vs \teff$~$for the asteroseismic stars.
 Stars classified as cool dwarfs are shown in black, hot dwarfs in red and
 subgiants in blue.
-\begin{figure}[ht]
+
+\begin{figure*}
 \begin{center}
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{logg_vs_t_paper.pdf}
 \caption{\logg$~$vs \teff$~$for the \nastero$~$asteroseismic stars. Hot dwarfs
@@ -578,7 +563,8 @@ with \teff$~>$ 6250 K and \logg$~>$ \subcut are red, subgiants with \logg$~<$
 equation \ref{eq:Barnes2007_2}.
 \label{fig:logg_vs_t}}
 \end{center}
-\end{figure}
+\end{figure*}
+
 % We chose to use a Gaussian distribution because it is the maximum entropy
 % distribution, and therefore the most conservative choice, with only two
 % parameters.
@@ -800,20 +786,22 @@ Following the above method, a likelihood was computed as follows:
 \section{Results and Discussion}
 \label{sec:results}
 
-\begin{deluxetable}{lccc}
-\tablewidth{0pc}
-\tablecaption{Median values of a, b, c and n for individual clusters.
+\begin{table}
+\caption{Median values of a, b, c and n for individual clusters.
 \label{tab:cluster_results}}
-\tablehead{
-\colhead{Parameter}&
-\colhead{Coma Berenices}&
-\colhead{Hyades}}
-\startdata
+
+\begin{center}
+\begin{tabular}{lccc}
+\hline\hline
+{Parameter} & {Coma Berenices} & {Hyades} \\
+\hline
 a & $0.417^{+0.08}_{-0.07}$ & $0.312^{+0.04}_{-0.06}$ \\
 b & $0.271^{+0.05}_{-0.06}$ & $0.410^{+0.05}_{-0.04}$ \\
 n & $0.542 \pm 0.03$ & $0.599^{+0.03}_{-0.02}$ \\
-\enddata
-\end{deluxetable}
+\hline
+\end{tabular}
+\end{center}
+\end{table}
 
 A gyrochronology relation was initially fit to the asteroseismic stars, the
 field stars and four clusters (Hyades, Coma Berenices, Praesepe and NGC 6811)
@@ -841,23 +829,6 @@ in this parameter (solar ages predicted from each best-fitting model were
 consistent).
 Individual fits to Hyades and Coma Berenices, plus the field stars are shown
 in figures \ref{fig:CF45} and \ref{fig:HF45}.
-\begin{figure}[ht]
-\begin{center}
-	\subfigure[Coma Berenices and field stars.]{
-            \label{fig:CF45}
-	    \includegraphics[width=4in, clip=true, trim=0 0 0.5in 0]{showCF45.pdf}
-        }
-	\subfigure[Hyades and field stars.]{
-            \label{fig:HF45}
-	    \includegraphics[width=4in, clip=true, trim=0 0 0.5in 0]{showHF45.pdf}
-        }
-    \end{center}
-    \caption{ Individual fits to the clusters and field stars. The Sun is the
-	    red point. Top panels show period vs $B-V$ with Solar and cluster
-	    age isochrones. Bottom panels show period vs age with the period-
-	    age relation for a constant $B-V$ value of 0.65 (Solar $B-V$).
-\label{fig:subfigures1}}
-\end{figure}
 50th percentile parameter values with their 16th and 84th
 percentile uncertainties for the two clusters are provided in table
 \ref{tab:cluster_results}.
@@ -867,15 +838,34 @@ parameters.
 The fact that each cluster seems to prefer a different value of $a$, $b$, $n$
 and $c$ paints a concerning picture for gyrochronology which assumes one set
 of parameters can be used to describe all stars.
-\begin{deluxetable}{lcc}
-\tablewidth{0pc}
-\tablecaption{Median values of the parameters describing the populations of
-	non-gyrochronological stars.
-\label{tab:nuisance}}
-\tablehead{
-\colhead{Parameter}&
-\colhead{Median value}}
-\startdata
+
+\begin{figure}
+\begin{center}
+	\subfigure[Coma Berenices and field stars.]{
+            \label{fig:CF45}
+	    \includegraphics[width=\columnwidth]{showCF45.pdf}
+        }
+	\subfigure[Hyades and field stars.]{
+            \label{fig:HF45}
+	    \includegraphics[width=\columnwidth]{showHF45.pdf}
+        }
+    \end{center}
+    \caption{ Individual fits to the clusters and field stars. The Sun is the
+	    red point. Top panels show period vs $B-V$ with Solar and cluster
+	    age isochrones. Bottom panels show period vs age with the period-
+	    age relation for a constant $B-V$ value of 0.65 (Solar $B-V$).
+\label{fig:subfigures1}}
+\end{figure}
+
+\begin{table}
+\caption{Median values of the parameters describing the populations of
+	non-gyrochronological stars. \label{tab:nuisance}}
+
+\begin{center}
+\begin{tabular}{lcc}
+\hline\hline
+{Parameter} & {Median value} \\
+\hline
 $U$ & \U$^{+\Uerrp}_{-\Uerrm}$ days \\
 $V$ & \V$^{+\Verrp}_{-\Verrm}$ days \\
 $W$ & \W$^{+\Werrp}_{-\Werrm}$ days \\
@@ -883,40 +873,46 @@ $X$ & \X$^{+\Xerrp}_{-\Xerrm}$ days \\
 $Y$ & \Y$^{+\Yerrp}_{-\Yerrm}$ days \\
 $Z$ & \Z$^{+\Zerrp}_{-\Zerrm}$ days \\
 $Q$ & \Q$^{+\Qerrp}_{-\Qerrm}$ \\
-\enddata
-\end{deluxetable}
+\hline
+\end{tabular}
+\end{center}
+\end{table}
 
-The fits to the final data set are shown in figures
-\ref{fig:5}-\ref{fig:8gyr} and
-\begin{figure}[ht]
+The fits to the final data set are shown in figures \ref{fig:5}-\ref{fig:8gyr}
+and marginal posterior PDFs for the three gyrochronology parameters are shown
+in figure \ref{fig:triangle}.
+
+\begin{figure*}
 \begin{center}
 	\subfigure[0.5 Gyr (age of the Coma Ber)]{
             \label{fig:5}
-	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{p_vs_bv0.pdf}
+	    \includegraphics[width=\columnwidth]{p_vs_bv0.pdf}
         }
 	\subfigure[0.625 Gyr (age of the Hyades)]{
             \label{fig:625}
-	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{p_vs_bv1.pdf}
+	    \includegraphics[width=\columnwidth]{p_vs_bv1.pdf}
         }
 	\subfigure[2 Gyr]{
             \label{fig:2gyr}
-	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{p_vs_bv2.pdf}
+	    \includegraphics[width=\columnwidth]{p_vs_bv2.pdf}
         }
 	\subfigure[5 Gyr]{
             \label{fig:sungyr}
-	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{p_vs_bv3.pdf}
+	    \includegraphics[width=\columnwidth]{p_vs_bv3.pdf}
         }
 	\subfigure[8 Gyr]{
             \label{fig:8gyr}
-	    \includegraphics[width=3in, clip=true, trim=0 0 0.5in 0]{p_vs_bv4.pdf}
+	    \includegraphics[width=\columnwidth]{p_vs_bv4.pdf}
         }
     \end{center}
-    \caption{ \prot vs $B-V$ colour for dwarfs within 1$\sigma$ of the reference age with the new gyrochronology relation and \citet{Barnes2007}, and \citet{Mamajek2008} for comparison. Asteroseismic targets are black and cluster and field stars are red. The shaded regions represent the 16th and 84th percentile uncertainties.
-   \label{fig:subfigures2}}
-\end{figure}
-marginal posterior PDFs for the three gyrochronology parameters are
-shown in figure \ref{fig:triangle}.
-\begin{figure}[ht]
+    \caption{ \prot vs $B-V$ colour for dwarfs within 1$\sigma$ of the
+reference age with the new gyrochronology relation and \citet{Barnes2007}, and
+\citet{Mamajek2008} for comparison. Asteroseismic targets are black and
+cluster and field stars are red. The shaded regions represent the 16th and
+84th percentile uncertainties.  \label{fig:subfigures2}}
+\end{figure*}
+
+\begin{figure*}
 \begin{center}
 \includegraphics[width=6in, clip=false, trim=0 0 0.5in 0]{small_triangleACHF45.pdf}
 \caption{Marginalised likelihoods for the three gyrochronology
@@ -925,7 +921,8 @@ slightly multi-modal. This plot was made using triangle.py
 \citep{Foreman-Mackey_triangle}.
 \label{fig:triangle}}
 \end{center}
-\end{figure}
+\end{figure*}
+
 Resulting 50th percentile values of $a$, $b$ and $n$, with their 16th and 84th
 percentile uncertainties are presented in table \ref{tab:constants} and the
 additional parameters of our model, describing the distributions of hot star
@@ -956,14 +953,16 @@ Figure \ref{fig:p_vs_bv_solar} shows rotation period vs colour for stars with
 age within 1 $\sigma$ of the Sun's (4.568 Gyr) and figure
 \ref{fig:p_vs_a_solar} shows rotation period vs age for stars with $B-V$
 colour within 10\% of the Sun's (0.65).
-\begin{figure}[ht]
+
+\begin{figure*}
 \begin{center}
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{p_vs_bv_solar.pdf}
 \caption{Rotation period vs $B-V$ colour for dwarfs with age within 1$\sigma$ of the Sun's age, 4.568 Gyr. The Sun is the red point.
 \label{fig:p_vs_bv_solar}}
 \end{center}
-\end{figure}
-\begin{figure}[ht]
+\end{figure*}
+
+\begin{figure*}
 \begin{center}
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{p_vs_a_solar.pdf}
 \caption{Rotation period vs age for cool dwarfs with colour within 10\% of the
@@ -974,7 +973,8 @@ colour within 10\% of the Sun's (0.65).
 	shown in blue.
 \label{fig:p_vs_a_solar}}
 \end{center}
-\end{figure}
+\end{figure*}
+
 Our final, newly calibrated gyrochronology relation can be written in full as
 \begin{equation}
 	P = A^{\gyron^{+\nerrp}_{-\nerrm}} \times \gyroa^{+\aerrp}_{-\aerrm}
@@ -1014,19 +1014,16 @@ The uncertainties on the predicted ages of 16 Cyg B are dominated by the large
 observational uncertainties on rotation period.
 In contrast, uncertainties on the ages predicted for the Sun are dominated by
 uncertainties in the gyrochronology parameters.
-\begin{deluxetable}{lcccc}
-\tablewidth{0pc}
-\tablecaption{Field star ages taken from the literature, compared with
+
+\begin{table*}
+\caption{Field star ages taken from the literature, compared with
 	predictions from this work (1), \citet{Mamajek2008} (2)
-	and \citet{Barnes2007} (3).
-\label{tab:comparison}}
-\tablehead{
-\colhead{Star}&
-\colhead{Literature age (Gyr)}&
-	\colhead{Age 1 (Gyr)}&
-	\colhead{Age 2 (Gyr)}&
-	\colhead{Age 3 (Gyr)}}
-\startdata
+	and \citet{Barnes2007} (3). \label{tab:comparison}}
+
+\begin{tabular}{lcccc}
+\hline\hline
+{Star} & {Literature age (Gyr)} & {Age 1 (Gyr)} & {Age 2 (Gyr)} & {Age 3 (Gyr)} \\
+\hline
 18 Sco      & $3.7 \pm 0.2$     & $3.8^{+0.3}_{-0.2}$ & $3.5^{+0.6}_{-0.5}$
 	    & $3.7^{+0.8}_{-0.6}$ \\
 The Sun     & $4.568 \pm 0.001$ & $4.9^{+0.3}_{-0.2}$ & $4.7^{+0.7}_{-0.6}$
@@ -1037,8 +1034,9 @@ Alpha Cen B & $6.0 \pm 1$       & $6^{+2}_{-1}$       & $4^{+1}_{-0.9}$
 	    & $5^{+2}_{-1}$ \\
 16 Cyg B    & $6.4 \pm 0.4$     & $4^{+3}_{-2}$       & $3\pm2$
 	    & $4\pm2$ \\
-\enddata
-\end{deluxetable}
+\hline
+\end{tabular}
+\end{table*}
 
 % 6.0 0.69 28.8
 % my age: [ 5.03212155  1.03595731  0.77524429]
