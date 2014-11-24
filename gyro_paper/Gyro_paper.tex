@@ -1,12 +1,13 @@
 % \documentclass[11pt,preprint]{aastex}
-% \documentclass[useAMS,usenatbib]{mn2e}
-\documentclass{mn2e}
+\documentclass[useAMS,usenatbib]{mn2e}
+% \documentclass{mn2e}
 \usepackage{hyperref}
 \usepackage{booktabs}
 \usepackage{tablefootnote}
 \usepackage{amsmath}
 \usepackage{breqn}
-% \usepackage{cite,natbib}
+\usepackage{cite}
+\usepackage{natbib}
 \usepackage{verbatim}
 \usepackage{epsfig}
 \usepackage{cases}
@@ -94,13 +95,23 @@
 
 \title{Calibrating Gyrochronology using Kepler Asteroseismic targets}
 
-\author{Ruth Angus$^1$, Suzanne Aigrain$^1$,
-Daniel Foreman-Mackey$^2$, Amy McQuillan$^3$}
-\affil{$^1$Department of Physics, University of Oxford, OX1 3RH, UK}
-\affil{$^2$Centre for Cosmology and Particle Physics, New York University, New
-York, NY, USA}
-\affil{$^3$School of Physics and Astronomy, Raymond and Beverly Sackler,
+\author[Ruth Angus et al.]
+{Ruth~Angus,$^1$
+Suzanne~Aigrain,$^1$ Daniel Foreman-Mackey,$^2$
+Amy~McQuillan,$^3$
+$^1$Department of Physics, University of Oxford, UK \\
+$^2$Centre for Cosmology and Particle Physics, New York University, New
+York, NY, USA \\
+$^3$School of Physics and Astronomy, Raymond and Beverly Sackler,
 Faculty of Exact Sciences, Tel Aviv University, 69978, Tel Aviv, Israel}
+
+% \author{Ruth Angus$^1$, Suzanne Aigrain$^1$,
+% Daniel Foreman-Mackey$^2$, Amy McQuillan$^3$}
+% \affil{$^1$Department of Physics, University of Oxford, OX1 3RH, UK}
+% \affil{$^2$Centre for Cosmology and Particle Physics, New York University, New
+% York, NY, USA}
+% \affil{$^3$School of Physics and Astronomy, Raymond and Beverly Sackler,
+% Faculty of Exact Sciences, Tel Aviv University, 69978, Tel Aviv, Israel}
 
 \begin{abstract}
 \label{abs}
@@ -197,9 +208,9 @@ article can only be applied to F, S and K MS stars.
 Fully convective M dwarfs have a different dynamo-driven magnetic field: their
 rotation periods evolve over extremely long timescales and they often do not
 converge onto the mass-period-age plane, even after several Gyrs.
-Hot stars with effective temperatures $\gtrsim$ 6250 K have shallow convective
-zones---they are almost fully radiative---and, again, they have a different
-dynamo-driven magnetic field \citep{Kraft1967}.
+Hot stars with effective temperatures greater than $\sim$ 6250 K have shallow
+convective zones---they are almost fully radiative---and, again, they have
+a different dynamo-driven magnetic field \citep{Kraft1967}.
 These massive stars retain their initial rotation period throughout their
 brief MS lifetimes and are therefore not suitable gyrochronology targets.
 
@@ -1202,7 +1213,7 @@ We would also like to thank Tsevi Maseh, Eric Mamajek, Marc Pinsonneault,
 Sydney Barnes, Steve Kawaler, Jerome Bouvier, Daniel Mortlock and David Hogg
 for useful insight and discussion that hugely contributed to this paper.
 
-% \bibliographystyle{plainnat}
+\bibliographystyle{plainnat}
 \bibliography{Gyro_paper}
 
 \end{document}
