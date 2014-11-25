@@ -617,7 +617,8 @@ written
 The joint probability, on the right hand side of this equation, can be
 factorised as
 \begin{align}
-	p(\hat{P}_n,\hat{\w}_n,P_n,\w_n|\theta) = p(P_n\,| & \,\w_n,\theta)
+	p(\hat{P}_n,\hat{\w}_n,P_n,\w_n|\theta) = & \\
+	p(P_n\,| & \,\w_n,\theta)
 	p(\hat{P}_n\,|\,P_n)\,p(\hat{\w}_n\,|\,\w_n)p(\w_n),
 \nonumber
 \end{align}
@@ -625,12 +626,12 @@ where we have utilised the fact that the observations, \ph$~$and \wh$~$are
 {\it conditionally independent} of the model parameters, $\theta$: they only
 depend on $\theta$ through the latent parameters, $P_n$ and $\w_n$.
 The above integral can  be written
-\begin{equation}
-	p(\{\hat{P}_n,\hat{\w}_n\}|\theta) \propto
-	\prod_{n=1}^{N} \int p(\w_n|\hat{\w}_n)
-	{\rm d}\w_n \int p(P_n|\w_n,\theta) p(\hat{P}_n\,|\,P_n) {\rm d}P_n,
+\begin{eqnarray}
+	p(\{\hat{P}_n,\hat{\w}_n\}|\theta) \propto &
+	\prod_{n=1}^{N} \int p(\w_n|\hat{\w}_n) {\rm d}\w_n \\ \nonumber
+	& \int p(P_n|\w_n,\theta) p(\hat{P}_n\,|\,P_n) {\rm d}P_n,
 \label{eq:fac}
-\end{equation}
+\end{eqnarray}
 where we have used Bayes' theorem:
 $p(\w_n|\hat{\w}_n) \propto p(\hat{\w}_n|\w_n)p(\w_n)$.
 The outer integral is the same for hot dwarfs, cool dwarfs and subgiants
@@ -642,9 +643,9 @@ for producing rotation periods.
 For cool dwarfs ($B-V$ $<$ 0.45 and \logg$~>$ \subcut):
 \begin{eqnarray} \label{eq:codw}
 p(P_n|\w_n,\theta) &=&
-    (1-Q)~\delta \left (P_n - f_\theta(\w_n)\right) \\
-    && +\quad Q\,\left(\sqrt{2\pi U^2}\right)^{-1/2}
-	~\exp\left({-\frac{(P_n-X)^2}{2U^2}}\right),
+    (1-Q)~\delta \left (P_n - f_\theta(\w_n)\right) \\ \nonumber
+    && +\quad Q\,\left(\sqrt{2\pi U^2}\right)^{-1/2} \\ \nonumber
+    &&	~\exp\left({-\frac{(P_n-X)^2}{2U^2}}\right),
 \end{eqnarray}
 where $Q$ is the probability that a star is drawn from the population of
 misclassified subgiants and
@@ -697,9 +698,12 @@ for asteroseismic parameters are now beginning to be published and will be made
 available in future publications.} we generated our own from Gaussian
 distributions with means, \wh$~$and standard deviations, $\sigma_{\mathbf{w}}$.
 $J$ posterior samples were generated for each star (we used $J$ = 100):
-\begin{eqnarray}
-\w_n^{(j)} &\sim& p(\w_n\,|\,\hat{\w}_n),
-\end{eqnarray}
+% \begin{eqnarray}
+% \w_n^{(j)} &\sim& p(\w_n\,|\,\hat{\w}_n),
+% \end{eqnarray}
+\begin{equation}
+\w_n^{(j)} \sim p(\w_n\,|\,\hat{\w}_n),
+\end{equation}
 and were used to evaluate $p(\mathbf{w}_n|\hat{\mathbf{w}}_n)$ up to a
 normalisation constant.
 % We then evaluated the marginalized likelihood for a single star as follows
@@ -714,10 +718,14 @@ star as follows,
 	\sum_{j=1}^{J_n}p(\hat{P}_n\,|\,\mathbf{w}_n^{(j)},\theta) \quad.
 \end{align}
 The argument inside this sum is given by the integral
-\begin{eqnarray}
+% \begin{eqnarray}
+% p(\hat{P}_n\,|\,\mathbf{w}_n^{(j)},\theta) =
+%     \int p(P_n|\w_n,\theta) p(\hat{P}_n\,|\,P_n) {\rm d}P_n \quad.
+% \end{eqnarray}
+\begin{equation}
 p(\hat{P}_n\,|\,\mathbf{w}_n^{(j)},\theta) =
     \int p(P_n|\w_n,\theta) p(\hat{P}_n\,|\,P_n) {\rm d}P_n \quad.
-\end{eqnarray}
+\end{equation}
 Assuming that the period uncertainties are Gaussian with mean $\hat{P}_n$
 and variance ${\sigma_n}^2$, this integral can be evaluated analytically for
 each population.
@@ -744,8 +752,8 @@ A similar result can be derived for the other populations.
 Finally, using these analytic results for the inner integral, the
 marginalised log-likelihood from equation~\ref{eq:fac} becomes
 \begin{eqnarray}
-	\log p(\{\hat{P}_n,\hat{\w}_n\}\,|\,\theta) &\approx&
-	\log \mathcal{Z} + \sum_{n=1}^N
+	\log p(\{\hat{P}_n,\hat{\w}_n\}\,|\,\theta) \approx & \\ \nonumber
+    & \log \mathcal{Z} + \sum_{n=1}^N
 	\log \left[ \sum_{j=1}^{J_n}p(\hat{P}_n\,|\,\mathbf{w}_n^{(j)},
 \theta) \right ]
 \end{eqnarray}

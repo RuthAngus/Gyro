@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as pl
 from teff_bv import teff2bv_err
 
-plotpar = {'axes.labelsize': 20,
+plotpar = {'axes.labelsize': 15,
            'text.fontsize': 20,
            'legend.fontsize': 15,
            'xtick.labelsize': 18,

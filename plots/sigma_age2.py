@@ -4,7 +4,7 @@ import matplotlib.pyplot as pl
 from teff_bv import teff2bv_orig, teff2bv_err
 import pretty5
 
-plotpar = {'axes.labelsize': 20, 'text.fontsize': 20,
+plotpar = {'axes.labelsize': 15, 'text.fontsize': 20,
            'legend.fontsize': 15,
            'xtick.labelsize': 18,
            'ytick.labelsize': 18,
@@ -112,7 +112,7 @@ for i, age in enumerate(ages):
         pl.errorbar(bv2[sun], p2[sun], xerr=bv_err2[sun], yerr=p_err2[sun], color='r', \
                 fmt='o', mec='r', capsize=0, markersize=ms, ecolor='.7', zorder=3)
     pl.errorbar(bv2[l12], p2[l12], xerr=bv_err2[l12], yerr=p_err2[l12], color='r', \
-            fmt='.', mec='r', capsize=0, markersize=ms, ecolor='0.7', zorder=0)
+            fmt='o', mec='r', capsize=0, markersize=ms, ecolor='0.7', zorder=0)
 
     # Add Isochrones
     xs, ys = iso_calc(pars, ages[i])
