@@ -102,11 +102,8 @@ pars2_err = [0.008, 0.021, 0.024, 0.010]
 # fnames
 fnames = ['A', 'H', 'P', 'N', 'C', 'F', 'V']
 
-# fname = "ACHF45irfm2"
-# fname = "ACHF4541"
-# fname = "CF45"
-# fname = "HF45"
-fname = sys.argv[1]
+# fname = sys.argv[1]
+fname = "ACHF45_2"
 
 ck = 0
 
@@ -199,29 +196,6 @@ pl.loglog()
 pl.legend(loc='upper left')
 pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/p_vs_bv_solar.pdf")
 bv += 0.45
-
-# Plot p vs t
-tsun = 5777
-ll = (tsun-(.05*tsun) < t1) * (t1 < tsun+(.05*tsun))
-# lf = feh1[ll]!=-.2
-lf = feh1[ll] < 100
-sun = a==4.568
-pl.clf()
-pl.errorbar(a1[ll][lf], p1[ll][lf], xerr=a_err1[ll][lf], yerr=p_err1[ll][lf], color='k', \
-        fmt='o', mec='k', capsize=0, markersize=5, ecolor='.7')
-pl.plot(a[sun], p[sun], 'ro', mec='r', markersize=6)
-
-# xs = np.linspace(1, 10, 100)
-# pl.plot(xs, xs*pars3[1])
-
-pl.xlabel("$\mathrm{Age}$")
-pl.ylabel("$\mathrm{P_{rot} (days)}$")
-pl.ylim(0, 60)
-pl.loglog()
-pl.legend(loc='upper left')
-# pl.savefig("p_vs_at_solar")
-pl.savefig("p_vs_irfm_solar")
-
 colour = .65
 per = .1
 b = per
@@ -260,99 +234,3 @@ pl.ylim(10**.3, 10**2)
 pl.legend(loc='upper left')
 pl.loglog()
 pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/p_vs_a_solar.pdf")
-
-# turn astero target flags to '3' and take 3 away
-flag[flag==2] = 9
-flag -= 3
-flag[flag<0] = 0
-
-# select star group
-flist = []
-for i in range(len(fnames)):
-    if fname.find(fnames[i]) >= 0:
-        print fnames[i], 'yes'
-        flist.append(i)
-
-l = (np.sum([flag == i for i in flist], axis=0)) == 1
-
-# ages
-ages = [age, .625, 1.1, .588, .5, age, age]
-
-# field star data
-DIR = '/Users/angusr/Python/Gyro/data'
-scobv, ebv, scop, ep, scoa, ea = np.genfromtxt('%s/18sco.txt'%DIR, skip_header=2).T
-cygt, et, cygp, ep, cyga, ea, cygfeh, efeh, cygbv, ebv = \
-        np.genfromtxt('%s/16Cygb.txt'%DIR, skip_header=2).T
-acbv, ebv, acp, ep, aca, ea = np.genfromtxt('%s/alphacen.txt'%DIR, skip_header=2).T
-
-pl.clf()
-pl.subplot(2, 1, 1)
-pl.errorbar(bv[l], p[l], xerr=bv_err[l], yerr=p_err[l], fmt='k.', capsize=0,
-           ecolor='.7', markersize=6)
-
-lw = 1
-styles = ['-', '-', '-', '-', '-', '--', '-', '-', '-']
-# plot isochrones
-for i in range(len(fnames)):
-    if fname.find(fnames[i]) >= 0:
-        print fnames[i], styles[i]
-        xs, ys = iso_calc(pars3, ages[i])
-        pl.plot(xs, ys, color = c, linestyle=styles[i], linewidth=lw, \
-                label = '$%s~\mathrm{Gyr}$' %ages[i], zorder=0)
-pl.legend()
-# pl.text(1.45, 2, '$%s~\mathrm{Gyr}$'%ages[1])
-
-# plot field stars and predictions
-# pl.plot(scobv, scop, 'ko', markersize=4)
-# pl.plot(scobv, 10**log_period_model(pars3, np.log10(scoa*1000), scobv), '.', color='.7')
-# pl.plot(cygbv, cygp, 'ko', markersize=4)
-# pl.plot(cygbv, 10**log_period_model(pars3, np.log10(cyga*1000), cygbv), '.', color='.7')
-# pl.plot(acbv, acp, 'ko', markersize=4)
-# pl.plot(acbv, 10**log_period_model(pars3, np.log10(aca*1000), acbv), '.', color='.7')
-# pl.plot(.65, 26.09, 'ro', markersize=4)
-
-pl.xlabel('B-V')
-pl.ylim(0,70)
-pl.ylabel('Period (days)')
-pl.xlim(.2,1.8)
-pl.subplots_adjust(hspace=.3)
-pl.plot(.65, 26.09, 'ro', markersize=6, mec='r')
-pl.xlim(.2, 1.8)
-# pl.loglog()
-pl.subplot(2, 1, 2)
-pl.errorbar(a[l], p[l], xerr=(a_errp[l], a_errm[l]), yerr=p_err[l], fmt='k.',
-           capsize=0, ecolor='.7', markersize=ms)
-xs = np.linspace(0, 20, 1000)
-pl.plot(xs, 10**log_period_model(pars3, np.log10(xs*1000), .65), 'k',
-        label = '$\mathrm{B-V}$=0.65')
-pl.plot(4.568, 26.09, 'ro', markersize=ms, mec='r')
-# pl.text(1.2, 50, '$4.568~\mathrm{Gyr}$')
-pl.xlabel('Age (Gyr)')
-pl.ylabel('Period (days)')
-pl.ylim(0,70)
-pl.xlim(-5, 20)
-pl.legend()
-# pl.loglog()
-pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/show%s.pdf"%fname)
-
-# print 10**log_period_model(pars3, np.log10(4.568*1000), .65)
-
-l = (a!=0.625) * (a!=0.5) * (a!=1.1) * (a!=0.588)
-pl.clf()
-pl.subplot(2,1,1)
-# pl.plot(a, age_model(pars3, np.log10(p), bv), 'k.')
-pl.plot(a[l], 10**log_age_model(pars3, np.log10(p[l]), bv[l])/1000., 'k.')
-# pl.plot(a[l], 10**log_age_model(pars, np.log10(p[l]), bv[l])/1000., 'k.')
-x = np.linspace(min(a), max(a), 100)
-# x = np.linspace(min(p), max(p), 100)
-pl.plot(x, x)
-pl.subplot(2,1,2)
-pl.plot(p[l], 10**log_period_model(pars3, np.log10(a[l]*1000), bv[l]), 'k.')
-# pl.plot(a[l], 10**log_age_model(pars2, np.log10(p[l]), bv[l])/1000., 'k.')
-# x = np.linspace(min(a), max(a), 100)
-# pl.plot(x, x)
-# pl.subplot(3,1,3)
-# pl.plot(a[l], 10**log_age_model(pars, np.log10(p[l]), bv[l])/1000., 'k.')
-# x = np.linspace(min(a), max(a), 100)
-pl.plot(x, x)
-# pl.show()
