@@ -157,9 +157,9 @@ l = (age-b < a) * (a < age+b)
 l2 = (age-b < a) * (a < age+b) * (bv<.45)
 
 # Plot data
-sun = a==4.568
 pl.clf()
-p = np.log10(p)
+sun = a==4.568
+bv -= 0.45
 pl.errorbar(bv[l], p[l], xerr=bv_err[l], yerr=p_err[l], color='k', \
         fmt='o', mec='k', capsize=0, markersize=5, ecolor='.6')
 pl.errorbar(bv[l2], p[l2], xerr=bv_err[l2], yerr=p_err[l2], color='k', \
@@ -169,32 +169,36 @@ pl.errorbar(bv[sun], p[sun], xerr=bv_err[sun], yerr=p_err[sun], color='r', \
 
 # Add Isochrones
 xs, ys = iso_calc(pars, age)
-# ys = np.log10(ys)
+xs -= 0.4
 pl.plot(xs, ys, color=c, linestyle='-.', linewidth=lw, \
         label='$%s~\mathrm{Gyr}$~$\mathrm{(Barnes~2007)}$' %age, zorder=0)
 xs, ys = iso_calc(pars2, age)
-# ys = np.log10(ys)
+xs -= pars2[-1]
 pl.plot(xs, ys, color=c, linestyle='--', linewidth=lw, \
         label='$%s~\mathrm{Gyr}$~$\mathrm{(M\&H~2008)}$' %age, zorder=0)
 xs, ys = iso_calc(pars3, age)
-# ys = np.log10(ys)
+xs -= 0.45
 pl.plot(xs, ys, color = c, linestyle='-', linewidth=lw, \
         label = '$%s~\mathrm{Gyr}$~ \
         $\mathrm{Angus~\emph{et~al.}~(2014)}$' %age, zorder=0)
 xs, ys1 = iso_calc(pars3-pars3_err, age)
-# ys1 = np.log10(ys1)
+xs -= 0.45
 xs, ys2 = iso_calc(pars3+pars3_err, age)
-# ys2 = np.log10(ys2)
+xs -= 0.45
 pl.fill_between(xs, ys1, ys2, facecolor=c, alpha=0.1, edgecolor='None', \
         zorder=0)
 
-pl.xlabel("$\mathrm{B-V}$")
+pl.xlabel("$\mathrm{B-V-}~c$")
+# pl.xlabel("$\mathrm{B-V}$")
 pl.ylabel("$\mathrm{P_{rot} (days)}$")
-pl.xlim(.2, 1.)
-pl.ylim(0, 60)
-# pl.loglog()
+# pl.xlim(.2, 1.)
+pl.xlim(10**-3.5, 1.)
+pl.ylim(10**.6, 10**1.8)
+# pl.ylim(0, 60)
+pl.loglog()
 pl.legend(loc='upper left')
 pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/p_vs_bv_solar.pdf")
+bv += 0.45
 
 # Plot p vs t
 tsun = 5777
