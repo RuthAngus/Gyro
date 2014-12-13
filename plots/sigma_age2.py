@@ -13,7 +13,7 @@ pl.rcParams.update(plotpar)
 ocols = ['#FF9933','#66CCCC' , '#FF33CC', '#3399FF', '#CC0066', '#9933FF', '#CC0000', '#9933FF', '#99cc99', '#CC0000']
 
 lw = 1
-ms = 8
+ms = 3
 
 def log_period_model(par, log_a, bv):
     return np.log10(par[0]) + par[1] * log_a + par[2] * np.log10(bv - par[3]) # colour
@@ -34,7 +34,7 @@ c_err = .04
 
 # remove subs
 subgiant = 4.2
-g = data[8] > subgiant
+g = (data[8] > subgiant) * (data[1] > 0)
 
 p1 = data[6][g]
 p_err1 = data[7][g]
@@ -84,8 +84,7 @@ pars_err = [.0070, .011, .024, 0.]
 pars2 = [.407, .566, .325, .495] # MH
 pars2_err = [0.008, 0.021, 0.024, 0.010]
 pars3_err = np.array([.03, .03, .03, .00])
-# params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parametersACHF45irfm2.txt').T
-params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parametersACHF45_3.txt').T
+params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parametersACHF45_2.txt').T
 pars3 = np.zeros(4)
 err = np.zeros((2, 4))
 pars3[:3] = params[0][:3]
@@ -98,41 +97,60 @@ for i in range(4):
 
 for i, age in enumerate(ages):
     sig = 1.
-    l11 = (a1-(a_errm1*sig) < age) * (age < a1+(a_errp1*sig)) # cool astero
-    l12 = (a2-(a_errm2*sig) < age) * (age < a2+(a_errp2*sig)) # cool clusters
-    l21 = (a1-(a_errm1*sig) < age) * (age < a1+(a_errp1*sig)) * (bv1 < pars3[-1]) # hot astero
-    l22 = (a2-(a_errm2*sig) < age) * (age < a2+(a_errp2*sig)) * (bv2 < pars3[-1]) # hot clusters
+    # cool astero
+    l11 = (a1-(a_errm1*sig) < age) * (age < a1+(a_errp1*sig)) * (bv1>0)
+    # cool clusters
+    l12 = (a2-(a_errm2*sig) < age) * (age < a2+(a_errp2*sig)) * (bv2>0)
+    l21 = (a1-(a_errm1*sig) < age) * (age < a1+(a_errp1*sig)) \
+            * (bv1 < pars3[-1]) * (bv1>0) # hot astero
+    l22 = (a2-(a_errm2*sig) < age) * (age < a2+(a_errp2*sig)) \
+            * (bv2 < pars3[-1]) * (bv2>0) # hot clusters
     sun = a2==4.568
 
     # Plot data
     pl.clf()
-    pl.errorbar(bv1[l11], p1[l11], xerr=bv_err1[l11], yerr=p_err1[l11], color='k', \
-            fmt='o', mec='k', capsize=0, markersize=ms, ecolor='.7', zorder=3)
+#     bv1 -= .45
+#     bv2 -= .45
+    pl.errorbar(bv1[l11], p1[l11], xerr=bv_err1[l11], yerr=p_err1[l11],
+            color='k', fmt='o', mec='k', capsize=0, markersize=ms,
+            ecolor='.7', zorder=3)
+    print bv1[l11], 'bv'
+    print bv1
     if age == 4.568:
-        pl.errorbar(bv2[sun], p2[sun], xerr=bv_err2[sun], yerr=p_err2[sun], color='r', \
-                fmt='o', mec='r', capsize=0, markersize=ms, ecolor='.7', zorder=3)
-    pl.errorbar(bv2[l12], p2[l12], xerr=bv_err2[l12], yerr=p_err2[l12], color='r', \
-            fmt='o', mec='r', capsize=0, markersize=ms, ecolor='0.7', zorder=0)
+        pl.errorbar(bv2[sun], p2[sun], xerr=bv_err2[sun], yerr=p_err2[sun],
+                color='r', fmt='o', mec='r', capsize=0, markersize=ms,
+                ecolor='.7', zorder=3)
+    pl.errorbar(bv2[l12], p2[l12], xerr=bv_err2[l12], yerr=p_err2[l12],
+            color='r', fmt='o', mec='r', capsize=0, markersize=ms,
+            ecolor='0.7', zorder=0)
 
     # Add Isochrones
     xs, ys = iso_calc(pars, ages[i])
-    pl.plot(xs, ys, color='k', linestyle='-.', linewidth=lw, \
-            label='$%s~\mathrm{Gyr}$~$\mathrm{Barnes~(2007)}$' %ages[i], zorder=0)
+#     xs -= .4
+    pl.plot(xs, ys, color='k', linestyle='-.', linewidth=lw,
+            label='$%s~\mathrm{Gyr}$~$\mathrm{Barnes~(2007)}$' %ages[i],
+            zorder=0)
     xs, ys = iso_calc(pars2, ages[i])
-    pl.plot(xs, ys, color='k', linestyle='--', linewidth=lw, \
-            label='$%s~\mathrm{Gyr}$~$\mathrm{M\&H~(2008)}$' %ages[i], zorder=0)
+#     xs -= pars2[-1]
+    pl.plot(xs, ys, color='k', linestyle='--', linewidth=lw,
+            label='$%s~\mathrm{Gyr}$~$\mathrm{M\&H~(2008)}$' %ages[i],
+            zorder=0)
     xs, ys = iso_calc(pars3, ages[i])
-    pl.plot(xs, ys, color='k', linestyle='-', linewidth=lw, \
-            label = '$%s~\mathrm{Gyr}$~ \
-            $\mathrm{Angus~\emph{et~al.}~(2014)}$' %ages[i], zorder=0)
+#     xs -= .45
+    pl.plot(xs, ys, color='k', linestyle='-', linewidth=lw,
+            label = '$%s~\mathrm{Gyr}$~$\mathrm{Angus~\emph{et~al.}~(2014)}$'
+            % ages[i], zorder=0)
     xs, ys1 = iso_calc(pars3-pars3_err, ages[i])
+#     xs -= .45
     xs, ys2 = iso_calc(pars3+pars3_err, ages[i])
-    pl.fill_between(xs, ys1, ys2, facecolor='0.5', alpha=0.3, edgecolor='None', \
+#     xs -= .45
+    pl.fill_between(xs, ys1, ys2, facecolor='0.5', alpha=0.3, edgecolor='None',
             zorder=0)
 
     pl.xlabel("$\mathrm{B-V}$")
     pl.ylabel("$\mathrm{P_{rot} (days)}$")
-    pl.xlim(.2, 1.)
-    pl.ylim(0, 50)
+    pl.xlim(10**-3, 10**2)
+#     pl.ylim(0, 50)
     pl.legend(loc='upper left')
-    pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/p_vs_bv%s.pdf"%i)
+    pl.loglog()
+    pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/p_vs_bv%s.pdf" % i)
