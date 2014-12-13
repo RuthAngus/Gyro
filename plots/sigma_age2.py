@@ -39,6 +39,7 @@ g = (data[8] > subgiant) * (data[1] > 0)
 p1 = data[6][g]
 p_err1 = data[7][g]
 t1 = data[1][g]
+print t1
 t_err1 = data[2][g]
 a1 = data[3][g]
 a_errp1 = data[4][g]
