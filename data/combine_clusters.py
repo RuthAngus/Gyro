@@ -180,4 +180,4 @@ datasun.append(8)
 datasun = np.array(datasun)
 data[:,-1] = datasun
 
-np.savetxt("clusters.txt", np.transpose(data))
+# np.savetxt("clusters2.txt", np.transpose(data))

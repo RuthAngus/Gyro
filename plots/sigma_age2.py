@@ -34,12 +34,11 @@ c_err = .04
 
 # remove subs
 subgiant = 4.2
-g = (data[8] > subgiant) * (data[1] > 0)
+g = (data[8] > subgiant) * (data[1] > 100)
 
 p1 = data[6][g]
 p_err1 = data[7][g]
 t1 = data[1][g]
-print t1
 t_err1 = data[2][g]
 a1 = data[3][g]
 a_errp1 = data[4][g]
@@ -112,46 +111,45 @@ for i, age in enumerate(ages):
     pl.clf()
 #     bv1 -= .45
 #     bv2 -= .45
-    pl.errorbar(bv1[l11], p1[l11], xerr=bv_err1[l11], yerr=p_err1[l11],
+    pl.errorbar(bv1[l11]-.45, p1[l11], xerr=bv_err1[l11], yerr=p_err1[l11],
             color='k', fmt='o', mec='k', capsize=0, markersize=ms,
             ecolor='.7', zorder=3)
-    print bv1[l11], 'bv'
-    print bv1
+    print bv1[l11]-.45
     if age == 4.568:
-        pl.errorbar(bv2[sun], p2[sun], xerr=bv_err2[sun], yerr=p_err2[sun],
+        pl.errorbar(bv2[sun]-.45, p2[sun], xerr=bv_err2[sun], yerr=p_err2[sun],
                 color='r', fmt='o', mec='r', capsize=0, markersize=ms,
                 ecolor='.7', zorder=3)
-    pl.errorbar(bv2[l12], p2[l12], xerr=bv_err2[l12], yerr=p_err2[l12],
+    pl.errorbar(bv2[l12]-.45, p2[l12], xerr=bv_err2[l12], yerr=p_err2[l12],
             color='r', fmt='o', mec='r', capsize=0, markersize=ms,
             ecolor='0.7', zorder=0)
 
     # Add Isochrones
     xs, ys = iso_calc(pars, ages[i])
-#     xs -= .4
+    xs -= .4
     pl.plot(xs, ys, color='k', linestyle='-.', linewidth=lw,
             label='$%s~\mathrm{Gyr}$~$\mathrm{Barnes~(2007)}$' %ages[i],
             zorder=0)
     xs, ys = iso_calc(pars2, ages[i])
-#     xs -= pars2[-1]
+    xs -= pars2[-1]
     pl.plot(xs, ys, color='k', linestyle='--', linewidth=lw,
             label='$%s~\mathrm{Gyr}$~$\mathrm{M\&H~(2008)}$' %ages[i],
             zorder=0)
     xs, ys = iso_calc(pars3, ages[i])
-#     xs -= .45
+    xs -= .45
     pl.plot(xs, ys, color='k', linestyle='-', linewidth=lw,
             label = '$%s~\mathrm{Gyr}$~$\mathrm{Angus~\emph{et~al.}~(2014)}$'
             % ages[i], zorder=0)
     xs, ys1 = iso_calc(pars3-pars3_err, ages[i])
-#     xs -= .45
+    xs -= .45
     xs, ys2 = iso_calc(pars3+pars3_err, ages[i])
-#     xs -= .45
+    xs -= .45
     pl.fill_between(xs, ys1, ys2, facecolor='0.5', alpha=0.3, edgecolor='None',
             zorder=0)
 
-    pl.xlabel("$\mathrm{B-V}$")
+    pl.xlabel("$\mathrm{B-V-}~c$")
     pl.ylabel("$\mathrm{P_{rot} (days)}$")
-    pl.xlim(10**-3, 10**2)
-#     pl.ylim(0, 50)
+    pl.xlim(10**-3, 1)
+    pl.ylim(1, 10**2)
     pl.legend(loc='upper left')
     pl.loglog()
     pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/p_vs_bv%s.pdf" % i)

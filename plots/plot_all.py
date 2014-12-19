@@ -76,23 +76,125 @@ prl = a[l]==.588
 nl = a[l]==1.1
 ms = 6
 
+c = '.5'
 pl.errorbar(bv[l][prl], p[l][prl], xerr=bv_err[l][prl], yerr=p_err[l][prl],
         fmt='^', color=ocols.orange, capsize=0, ecolor='.7', markersize=ms,
-        label="$\mathrm{Praesepe}$", mec=ocols.orange)
+        label="$\mathrm{Praesepe}$", mec=c)
 pl.errorbar(bv[l][hl], p[l][hl], xerr=bv_err[l][hl], yerr=p_err[l][hl],
-        fmt='o', color=ocols.blue, capsize=0, ecolor='.7', markersize=ms,
-        label="$\mathrm{Hyades}$", mec=ocols.blue)
+        fmt='o', color=ocols.purple, capsize=0, ecolor='.7', markersize=ms,
+        label="$\mathrm{Hyades}$", mec=c)
 pl.errorbar(bv[l][cl], p[l][cl], xerr=bv_err[l][cl], yerr=p_err[l][cl],
         fmt='o', color=ocols.maroon, capsize=0, ecolor='.7', markersize=ms,
-        label="$\mathrm{Coma~Ber}$", mec=ocols.maroon)
+        label="$\mathrm{Coma~Ber}$", mec=c)
 pl.errorbar(bv[l][nl], p[l][nl], xerr=bv_err[l][nl], yerr=p_err[l][nl],
         fmt='^', color=ocols.green, capsize=0, ecolor='.7', markersize=ms,
-        label="$\mathrm{NGC~6811}$", mec=ocols.green)
+        label="$\mathrm{NGC~6811}$", mec=c)
 pl.xlabel('$\mathrm{B-V-}~c$')
 pl.ylabel('$\mathrm{Period~(days)}$')
-pl.subplots_adjust(hspace=.3)
 pl.xlim(10**-1.6, 10**0.1)
 pl.ylim(10**.6, 10**1.3)
 pl.loglog()
 pl.legend(loc="best")
-pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/show%s.pdf"%fname)
+pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/show%s.pdf" % fname)
+
+DIR = "/Users/angusr/Python/noisy-plane"
+
+pl.clf()
+xs = np.linspace(.2, 1.8, 100)
+pars = np.genfromtxt('%s/parametersHF45.txt' % DIR).T[0]
+ys = pars[0]*(.625*1e3)**pars[1]*(xs-.45)**pars[2]
+pl.errorbar(bv[l][prl], p[l][prl], xerr=bv_err[l][prl], yerr=p_err[l][prl],
+        fmt='^', color=c, capsize=0, ecolor='.7', markersize=ms,
+        label="$\mathrm{Praesepe}$", mec=c)
+pl.errorbar(bv[l][cl], p[l][cl], xerr=bv_err[l][cl], yerr=p_err[l][cl],
+        fmt='o', color=c, capsize=0, ecolor='.7', markersize=ms,
+        label="$\mathrm{Coma~Ber}$", mec=c)
+pl.errorbar(bv[l][nl], p[l][nl], xerr=bv_err[l][nl], yerr=p_err[l][nl],
+        fmt='^', color=c, capsize=0, ecolor='.7', markersize=ms,
+        label="$\mathrm{NGC~6811}$", mec=c)
+pl.plot(xs-.45, ys, color=ocols.purple)
+pl.errorbar(bv[l][hl], p[l][hl], xerr=bv_err[l][hl], yerr=p_err[l][hl],
+        fmt='o', color=ocols.purple, capsize=0, ecolor='.7', markersize=ms,
+        label="$\mathrm{Hyades}$", mec=c)
+pl.xlabel('$\mathrm{B-V-}~c$')
+pl.ylabel('$\mathrm{Period~(days)}$')
+pl.xlim(10**-1.6, 10**0.1)
+pl.ylim(10**.6, 10**1.3)
+pl.loglog()
+pl.legend(loc="best")
+pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/show%sH.pdf" % fname)
+
+pl.clf()
+xs = np.linspace(.2, 1.8, 100)
+pars = np.genfromtxt('%s/parametersHF45.txt' % DIR).T[0]
+ys = pars[0]*(.625*1e3)**pars[1]*(xs-.45)**pars[2]*.9
+pl.errorbar(bv[l][prl], p[l][prl], xerr=bv_err[l][prl], yerr=p_err[l][prl],
+        fmt='^', color=c, capsize=0, ecolor='.7', markersize=ms,
+        label="$\mathrm{Praesepe}$", mec=c)
+pl.errorbar(bv[l][hl], p[l][hl], xerr=bv_err[l][hl], yerr=p_err[l][hl],
+        fmt='o', color=c, capsize=0, ecolor='.7', markersize=ms,
+        label="$\mathrm{Hyades}$", mec=c)
+pl.errorbar(bv[l][nl], p[l][nl], xerr=bv_err[l][nl], yerr=p_err[l][nl],
+        fmt='^', color=c, capsize=0, ecolor='.7', markersize=ms,
+        label="$\mathrm{NGC~6811}$", mec=c)
+pl.errorbar(bv[l][cl], p[l][cl], xerr=bv_err[l][cl], yerr=p_err[l][cl],
+        fmt='o', color=ocols.maroon, capsize=0, ecolor='.7', markersize=ms,
+        label="$\mathrm{Coma~Ber}$", mec=c)
+pl.plot(xs-.45, ys, color=ocols.maroon)
+pl.xlabel('$\mathrm{B-V-}~c$')
+pl.ylabel('$\mathrm{Period~(days)}$')
+pl.xlim(10**-1.6, 10**0.1)
+pl.ylim(10**.6, 10**1.3)
+pl.loglog()
+pl.legend(loc="best")
+pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/show%sC.pdf" % fname)
+
+pl.clf()
+xs = np.linspace(.2, 1.8, 100)
+pars = np.genfromtxt('%s/parametersHF45.txt' % DIR).T[0]
+ys = pars[0]*(.625*1e3)**pars[1]*(xs-.45)**pars[2]*1.25
+pl.errorbar(bv[l][prl], p[l][prl], xerr=bv_err[l][prl], yerr=p_err[l][prl],
+        fmt='^', color=c, capsize=0, ecolor='.7', markersize=ms,
+        label="$\mathrm{Praesepe}$", mec=c)
+pl.errorbar(bv[l][hl], p[l][hl], xerr=bv_err[l][hl], yerr=p_err[l][hl],
+        fmt='o', color=c, capsize=0, ecolor='.7', markersize=ms,
+        label="$\mathrm{Hyades}$", mec=c)
+pl.errorbar(bv[l][cl], p[l][cl], xerr=bv_err[l][cl], yerr=p_err[l][cl],
+        fmt='o', color=c, capsize=0, ecolor='.7', markersize=ms,
+        label="$\mathrm{Coma~Ber}$", mec=c)
+pl.errorbar(bv[l][nl], p[l][nl], xerr=bv_err[l][nl], yerr=p_err[l][nl],
+        fmt='^', color=ocols.green, capsize=0, ecolor='.7', markersize=ms,
+        label="$\mathrm{NGC~6811}$", mec=c)
+pl.plot(xs-.45, ys, color=ocols.green)
+pl.xlabel('$\mathrm{B-V-}~c$')
+pl.ylabel('$\mathrm{Period~(days)}$')
+pl.xlim(10**-1.6, 10**0.1)
+pl.ylim(10**.6, 10**1.3)
+pl.loglog()
+pl.legend(loc="best")
+pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/show%sN.pdf" % fname)
+
+pl.clf()
+xs = np.linspace(.2, 1.8, 100)
+pars = np.genfromtxt('%s/parametersHF45.txt' % DIR).T[0]
+ys = pars[0]*(.625*1e3)**pars[1]*(xs-.45)**pars[2]*.91
+pl.errorbar(bv[l][hl], p[l][hl], xerr=bv_err[l][hl], yerr=p_err[l][hl],
+        fmt='o', color=c, capsize=0, ecolor='.7', markersize=ms,
+        label="$\mathrm{Hyades}$", mec=c)
+pl.errorbar(bv[l][cl], p[l][cl], xerr=bv_err[l][cl], yerr=p_err[l][cl],
+        fmt='o', color=c, capsize=0, ecolor='.7', markersize=ms,
+        label="$\mathrm{Coma~Ber}$", mec=c)
+pl.errorbar(bv[l][nl], p[l][nl], xerr=bv_err[l][nl], yerr=p_err[l][nl],
+        fmt='^', color=c, capsize=0, ecolor='.7', markersize=ms,
+        label="$\mathrm{NGC~6811}$", mec=c)
+pl.errorbar(bv[l][prl], p[l][prl], xerr=bv_err[l][prl], yerr=p_err[l][prl],
+        fmt='^', color=ocols.orange, capsize=0, ecolor='.7', markersize=ms,
+        label="$\mathrm{Praesepe}$", mec=c)
+pl.plot(xs-.45, ys, color=ocols.orange)
+pl.xlabel('$\mathrm{B-V-}~c$')
+pl.ylabel('$\mathrm{Period~(days)}$')
+pl.xlim(10**-1.6, 10**0.1)
+pl.ylim(10**.6, 10**1.3)
+pl.loglog()
+pl.legend(loc="best")
+pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/show%sP.pdf" % fname)

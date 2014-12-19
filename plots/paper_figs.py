@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as pl
 from teff_bv import teff2bv_err
+from colours import plot_colours
+cols = plot_colours()
 
 plotpar = {'axes.labelsize': 15,
            'text.fontsize': 20,
@@ -57,26 +59,41 @@ l = (t1>100)*(logg1>0)
 hot = t1[l]>6250
 sub = logg1[l]<4.1
 pl.clf()
-pl.errorbar(t1[l], logg1[l], xerr=t1_err[l], yerr=(logg1_errp[l], logg1_errm[l]), \
-        fmt='k.', capsize=0, ecolor='.7', mec='k', zorder=1)
-pl.errorbar(t1[l][hot], logg1[l][hot], xerr=t1_err[l][hot], yerr=(logg1_errp[l][hot], \
-        logg1_errm[l][hot]), fmt='r.', capsize=0, ecolor='.7', mec='r', zorder=2)
-pl.errorbar(t1[l][sub], logg1[l][sub], xerr=t1_err[l][sub], yerr=(logg1_errp[l][sub], \
-        logg1_errm[l][sub]), fmt='b.', capsize=0, ecolor='.7', mec='b', zorder=3)
+pl.errorbar(t1[l], logg1[l], xerr=t1_err[l], yerr=(logg1_errp[l],
+            logg1_errm[l]), fmt='k.', capsize=0, ecolor='.7', mec='k',
+            zorder=1, label="$\mathrm{Cool~Dwarfs}$")
+# pl.errorbar(t1[l][hot], logg1[l][hot], xerr=t1_err[l][hot], yerr=(logg1_errp[l][hot], \
+#         logg1_errm[l][hot]), fmt='r.', capsize=0, ecolor='.7', mec='r', zorder=2)
+# pl.errorbar(t1[l][sub], logg1[l][sub], xerr=t1_err[l][sub], yerr=(logg1_errp[l][sub], \
+#         logg1_errm[l][sub]), fmt='b.', capsize=0, ecolor='.7', mec='b', zorder=3)
+pl.errorbar(t1[l][hot], logg1[l][hot], xerr=t1_err[l][hot],
+            yerr=(logg1_errp[l][hot], logg1_errm[l][hot]), color=cols.orange,
+            fmt='.', capsize=0, ecolor='.7', mec=cols.orange, zorder=2,
+            label="$\mathrm{Hot~Dwarfs}$")
+pl.errorbar(t1[l][sub], logg1[l][sub], xerr=t1_err[l][sub], color=ocols[3],
+            yerr=(logg1_errp[l][sub], logg1_errm[l][sub]), fmt='.', capsize=0,
+            ecolor='.7', mec=ocols[3], zorder=3, label="$\mathrm{Subgiants}$")
 print len(t1[l]), len(t1[l][hot]), len(t1[l][sub])
 print len(t1[l])-len(t1[l][hot+sub])
 hot = vtt>6250
 sub = vtlogg<4.1
-pl.errorbar(vtt, vtlogg, xerr=vtt_err, yerr=(vtlogg_errp, vtlogg_errm), \
-        capsize=0, ecolor='.7', mec='k', fmt=".", markersize=4)
-pl.errorbar(vtt[hot], vtlogg[hot], xerr=vtt_err[hot], yerr=(vtlogg_errp[hot], \
-        vtlogg_errm[hot]), capsize=0, ecolor='.7', mec='r', fmt=".", markersize=4)
-pl.errorbar(vtt[sub], vtlogg[sub], xerr=vtt_err[sub], yerr=(vtlogg_errp[sub], \
-        vtlogg_errm[sub]), capsize=0, ecolor='.7', mec='b', fmt=".", markersize=4)
+pl.errorbar(vtt, vtlogg, xerr=vtt_err, yerr=(vtlogg_errp, vtlogg_errm),
+            capsize=0, ecolor='.7', mec='k', fmt=".", markersize=4)
+# pl.errorbar(vtt[hot], vtlogg[hot], xerr=vtt_err[hot], yerr=(vtlogg_errp[hot], \
+#         vtlogg_errm[hot]), capsize=0, ecolor='.7', mec='r', fmt=".", markersize=4)
+# pl.errorbar(vtt[sub], vtlogg[sub], xerr=vtt_err[sub], yerr=(vtlogg_errp[sub], \
+#         vtlogg_errm[sub]), capsize=0, ecolor='.7', mec='b', fmt=".", markersize=4)
+pl.errorbar(vtt[hot], vtlogg[hot], xerr=vtt_err[hot], yerr=(vtlogg_errp[hot],
+            vtlogg_errm[hot]), capsize=0, ecolor='.7', mec=cols.orange,
+            fmt=".", markersize=4)
+pl.errorbar(vtt[sub], vtlogg[sub], xerr=vtt_err[sub], yerr=(vtlogg_errp[sub],
+            vtlogg_errm[sub]), capsize=0, ecolor='.7', mec=ocols[3], fmt=".",
+            markersize=4)
 pl.xlabel("$T_{eff}~\mathrm{(K)}$")
 pl.ylabel("$\mathrm{log}~g$")
 pl.ylim(pl.gca().get_ylim()[::-1])
 pl.xlim(pl.gca().get_xlim()[::-1])
+pl.legend(loc='best')
 pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/logg_vs_t_paper.pdf")
 l = (t1>100)*(logg1>0) * (logg1 > 4.1) * (t1 < 6250)
 print len(t1[l]), 'ncool'
@@ -126,12 +143,23 @@ a1 = a1[l]
 p1 = p1[l]
 a1_err = a1_err[l]
 p1_err = p1_err[l]
-pl.errorbar(a1, p1, xerr=a1_err, yerr=p1_err, fmt='k.', capsize=0, ecolor='.7')
-pl.errorbar(a2[ll], p2[ll], xerr=a2_err[ll], yerr=p2_err[ll], fmt='.', color='b', capsize=0, ecolor='.7')
-pl.errorbar(a2[sun], p2[sun], xerr=a2_err[sun], yerr=p2_err[sun], \
-        fmt='.', color='r', capsize=0, ecolor='.7', markersize=8, mec='r')
+pl.errorbar(a1, p1, xerr=a1_err, yerr=p1_err, fmt='k.', capsize=0,
+            ecolor='.7', label="$\mathrm{Cool~Dwarfs}$")
+# pl.errorbar(a2[ll], p2[ll], xerr=a2_err[ll], yerr=p2_err[ll], fmt='.',
+#             color='b', capsize=0, ecolor='.7')
+pl.errorbar(a2[ll], p2[ll], xerr=a2_err[ll], yerr=p2_err[ll], fmt='.',
+            color=ocols[3], capsize=0, ecolor='.7',
+            label="$\mathrm{Clusters}$")
+pl.errorbar(a2[ll][-5:], p2[ll][-5:], xerr=a2_err[ll][-5:],
+            yerr=p2_err[ll][-5:], fmt='.', color=cols.green, capsize=0,
+            ecolor='.7', label="$\mathrm{Field~Stars}$")
+# pl.errorbar(a2[sun], p2[sun], xerr=a2_err[sun], yerr=p2_err[sun], \
+#         fmt='.', color=cols.green, capsize=0, ecolor='.7', markersize=8,
+#         mec=cols.green)
+# pl.errorbar(vta, vtp, xerr=vta_err, yerr=vtp_err, fmt='.', \
+#         color='k', capsize=0, ecolor='.7')
 pl.errorbar(vta, vtp, xerr=vta_err, yerr=vtp_err, fmt='.', \
-        color='k', capsize=0, ecolor='.7')
+        color=cols.pink, capsize=0, ecolor='.7', label="$\mathrm{AMP~Stars}$")
 sun = 10**a2==4.568
 pl.xlabel("$\mathrm{Age~(Gyr)}$")
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")
@@ -139,6 +167,9 @@ pl.ylabel("$P_{rot}~\mathrm{(days)}$")
 pl.xlim(0,15)
 # pl.loglog()
 print a2[ll]
+pl.yscale('log')
+pl.ylim(10**-.2, 10**2.2)
+pl.legend(loc="best")
 pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/p_vs_a_paper2.pdf")
 
 # data = np.empty((len(tKID)+len(vKID), 14))

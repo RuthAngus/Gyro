@@ -15,6 +15,7 @@ pl.rcParams.update(plotpar)
 ocols = ['#FF9933','.2','#FF33CC','#3399FF','#CC0066','#99CC99','#9933FF','#CC0000', '#33CC00']
 
 kbreak = .45
+kb = .45
 ms = 7
 
 # Mamajek and Hillenbrand
@@ -37,44 +38,73 @@ def iso(age):
     yp = age**nmh * amh * (xp-cmh)**bmh
     return xp, yp
 
-# data = np.genfromtxt('/Users/angusr/Python/Gyro/data/garcia_all_astero.txt')
-# data = np.genfromtxt('/Users/angusr/Python/Gyro/data/all_astero_plusgarcia.txt')
 data = np.genfromtxt('/Users/angusr/Python/Gyro/data/garcia_irfm.txt')
 KID = data[0]
-teff = data[1]
-age = data[3]
-age_errp = data[4]
-age_errm = data[5]
-teff_err = data[2]
-period = data[6]
-period_err = data[7]
-age_err = .5*(age_errp+age_errm)
-logg = data[8]
-logg_errp = data[9]
-logg_errm = data[10]
+t = data[1]
+p = data[6]
+g = data[8]
+# remove periods <= 0 and teff == 0 FIXME: why is this necessary?
+l = (p > 0.)*(t > 100.)*(g > 0.)  # *(t<5800)
+KID = data[0][l]
+period = p[l]
+period_err = data[7][l]
+teff = t[l]
+teff_err = data[2][l]
+logg = g[l]
+logg_errp = data[9][l]
+logg_errm = data[10][l]
 logg_err = .5*(logg_errp+logg_errm)
-feh = data[11]
-feh_err = data[12]
+age = data[3][l]
+age_errp = data[4][l]
+age_errm = data[5][l]
+feh = data[11][l]
+feh_err = data[12][l]
+flag = data[13][l]
+
+# KID = data[0]
+# teff = data[1]
+# age = data[3]
+# age_errp = data[4]
+# age_errm = data[5]
+# teff_err = data[2]
+# period = data[6]
+# period_err = data[7]
+# age_err = .5*(age_errp+age_errm)
+# logg = data[8]
+# logg_errp = data[9]
+# logg_errm = data[10]
+# logg_err = .5*(logg_errp+logg_errm)
+# feh = data[11]
+# feh_err = data[12]
 bv, bv_err = teff2bv_err(teff, logg, feh, teff_err, logg_err, feh_err)
 
 # cool dwarfs
 pl.clf()
+# bv -= kb
 pl.errorbar(bv, period, yerr=period_err, xerr=bv_err, color=ocols[1], mec=ocols[1], \
     ecolor='.7', capsize=0, fmt='.', markersize=ms)
 xp, yp = iso(1000.)
+# xp -= .4
 pl.plot(xp, yp, linestyle='--', color='.75', label=lab)
 xp, yp = iso(2000.)
+# xp -= .4
 pl.plot(xp, yp, linestyle='--', color='.75')
 xp, yp = iso(5000.)
+# xp -= .4
 pl.plot(xp, yp, linestyle='--', color='.75')
 xp, yp = iso(10000.)
+# xp -= .4
 pl.plot(xp, yp, linestyle='--', color='.75')
 pl.xlabel("$\mathrm{B-V}$")
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")
-pl.xlim(.2,1.)
+pl.xlim(.2, 1.)
 pl.legend(loc="upper left")
 # pl.ylim(0,70)
+# pl.loglog()
+pl.yscale('log')
+pl.ylim(10**-.1, 10**2.5)
 pl.savefig("cool_stars1")
+# pl.savefig("cool_stars1_log")
 
 # load travis and victor data
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/vandt.txt", skip_header=1).T
@@ -114,6 +144,8 @@ pl.legend(loc="upper left")
 pl.xlabel("$\mathrm{B-V}$")
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")
 pl.xlim(.2, 1.)
+pl.yscale('log')
+pl.ylim(10**-.1, 10**2.5)
 pl.savefig("cool_stars11")
 
 # p vs bv paper
@@ -135,6 +167,8 @@ pl.errorbar(bva, pa, yerr=pa_err, xerr=bva_err, color='k', mec='k', \
 pl.xlabel("$\mathrm{B-V}$")
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")
 pl.xlim(.2, 1.)
+pl.yscale('log')
+pl.ylim(10**-.1, 10**2.5)
 pl.savefig("p_vs_bv_paper")
 # p vs t paper
 pl.clf()
@@ -144,16 +178,19 @@ pl.xlabel("$T_{eff}~\mathrm{(K)}$")
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")
 pl.xlim(7000, 4500)
 # pl.ylim(0,70)
+pl.yscale('log')
+pl.ylim(10**-.1, 10**2.5)
 pl.savefig("p_vs_t_paper")
 
 # load clusters
 data = np.genfromtxt('/Users/angusr/Python/Gyro/data/clusters.txt').T
-cbv = data[0]
-cbv_err = data[1]
-cp = data[2]
-cp_err = data[3]
-ca = data[4]
-ca_err = data[5]
+l = (data[4]!= 1.1) * (data[4]!=.588)
+cbv = data[0][l]
+cbv_err = data[1][l]
+cp = data[2][l]
+cp_err = data[3][l]
+ca = data[4][l]
+ca_err = data[5][l]
 
 # cool stars with precise and cluster
 pl.clf()
@@ -161,7 +198,8 @@ pl.errorbar(bv, period, yerr=period_err, xerr=bv_err, color=ocols[1], mec=ocols[
         ecolor='.7', capsize=0, fmt='.', markersize=ms)
 pl.errorbar(vtbv, vtperiod, yerr=vtperiod_err, xerr=vtbv_err, color=ocols[2],\
         mec=ocols[2], ecolor='.7', capsize=0, fmt='.', markersize=ms+2)
-pl.errorbar(cbv[:-5], cp[:-5], yerr=cp_err[:-5], xerr=cbv_err[:-5], color=ocols[3], \
+pl.errorbar(cbv[:-5], cp[:-5], yerr=cp_err[:-5], xerr=cbv_err[:-5],
+        color=ocols[3],
         mec=ocols[3], ecolor='.7', capsize=0, fmt='.', markersize=ms)
 xp, yp = iso(1000.)
 pl.plot(xp, yp, linestyle='--', color='.75', label=lab)
@@ -176,6 +214,8 @@ pl.legend(loc="upper left")
 pl.xlabel("$\mathrm{B-V}$")
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")
 pl.xlim(.2, 1.)
+pl.yscale('log')
+pl.ylim(10**-.1, 10**2.5)
 pl.savefig("cool_stars12")
 
 # cool stars with precise, cluster and field
@@ -201,6 +241,8 @@ pl.legend(loc="upper left")
 pl.xlabel("$\mathrm{B-V}$")
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")
 pl.xlim(.2, 1.)
+pl.yscale('log')
+pl.ylim(10**-.1, 10**2.5)
 pl.savefig("cool_stars13")
 
 # hot dwarfs
@@ -234,6 +276,8 @@ pl.xlabel("$\mathrm{B-V}$")
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")
 pl.xlim(.2, 1.)
 pl.legend(loc="upper left")
+pl.yscale('log')
+pl.ylim(10**-.1, 10**2.5)
 pl.savefig("cool_stars2")
 
 # subs
@@ -273,6 +317,8 @@ pl.xlabel("$\mathrm{B-V}$")
 pl.ylabel("$P_{rot}~\mathrm{(days)}$")
 pl.xlim(.2, 1.)
 pl.legend(loc="upper left")
+pl.yscale('log')
+pl.ylim(10**-.1, 10**2.5)
 pl.savefig("cool_stars3")
 
 # removed
@@ -311,4 +357,6 @@ pl.ylim(0, 65)
 # pl.xlim(.2, 1.)
 pl.xlim(.38, 1.)
 pl.legend(loc="upper left")
+pl.yscale('log')
+pl.ylim(10**-.1, 10**2.5)
 pl.savefig("cool_stars4")

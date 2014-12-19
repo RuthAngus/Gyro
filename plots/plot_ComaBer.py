@@ -100,7 +100,7 @@ pars2_err = [0.008, 0.021, 0.024, 0.010]
 # fnames
 fnames = ['A', 'H', 'P', 'N', 'C', 'F', 'V']
 
-fname = "CF45"
+fname = "NF45"
 
 ck = 0
 
@@ -147,6 +147,9 @@ for i in range(len(fnames)):
         flist.append(i)
 
 l = (np.sum([flag == i for i in flist], axis=0)) == 1
+print bv[l]
+print a[a==1.1]
+raw_input('neter')
 
 # ages
 ages = [age, .625, 1.1, .588, .5, age, age]
@@ -182,7 +185,7 @@ pl.xlabel('$\mathrm{B-V-}~c$')
 pl.ylabel('$\mathrm{Period~(days)}$')
 # pl.xlim(.2,1.8)
 pl.subplots_adjust(hspace=.3)
-pl.plot(.65, 26.09, 'ro', markersize=6, mec='r')
+pl.plot(.65-.45, 26.09, 'ro', markersize=6, mec='r')
 # pl.xlim(.2, 1.8)
 pl.xlim(10**-1.6, 10**0.1)
 pl.ylim(10**.6, 10**1.8)
@@ -202,6 +205,6 @@ pl.ylabel('$\mathrm{Period~(days)}$')
 # pl.xlim(-5, 20)
 pl.legend(loc='upper left')
 pl.xlim(3e-1,20)
-pl.ylim(10**.3, 10**2)
+pl.ylim(10**.5, 10**1.9)
 pl.loglog()
 pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/show%s.pdf"%fname)
