@@ -1,14 +1,11 @@
 \documentclass[useAMS, usenatbib]{mn2e}
 \usepackage{times}
-
 \usepackage{aas_macros}
-
 \usepackage{hyperref}
 \usepackage{tablefootnote}
 \usepackage{amsmath}
 \usepackage{graphicx, subfigure}
 \usepackage{color}
-
 \usepackage{float}
 \floatplacement{figure}{H}
 
@@ -17,7 +14,6 @@
 \newcommand{\logg}{log \emph{g}}
 \newcommand{\teff}{$T_{\rm{eff}}$}
 \newcommand{\prot}{$P_{rot}~$}
-
 \newcommand{\w}{\mathbf{w}}
 \newcommand{\wh}{$\hat{\mathbf{w}}_n$}
 \newcommand{\ah}{$\hat{A}_n$}
@@ -27,10 +23,8 @@
 \newcommand{\yh}{$\hat{Y}_n$}
 \newcommand{\teffh}{$\hat{T}_n$}
 \newcommand{\chit}{$\chi^2$}
-
 \newcommand{\feh}{[Fe/H]}
 \newcommand{\dd}{\ensuremath{\,\mathrm{d}}}
-
 % numbers
 \newcommand{\nastero}{310}
 \newcommand{\nprecise}{14~}
@@ -41,7 +35,6 @@
 \newcommand{\ngarcia}{310~}
 \newcommand{\ncooldwarfs}{45~}
 \newcommand{\subcut}{4.1~}
-
 % results
 \newcommand{\gyroa}{0.34}
 \newcommand{\aerrp}{0.03}
@@ -52,10 +45,6 @@
 \newcommand{\gyrob}{0.34}
 \newcommand{\berrp}{0.04}
 \newcommand{\berrm}{0.02}
-% 3.345395922660827637e-01 3.447082638740539551e-02 3.368341922760009766e-02
-% 5.807839035987854004e-01 1.939980983734135300e-02 1.445889472961425781e-02
-% 3.414649069309234619e-01 4.333373904228210449e-02 1.554790139198303223e-02
-
 \newcommand{\U}{8}  % mix std
 \newcommand{\V}{2.2}  % hot std
 \newcommand{\W}{11.4}  % sub std
@@ -77,15 +66,6 @@
 \newcommand{\Zerrm}{0.9}
 \newcommand{\Qerrp}{0.07}
 \newcommand{\Qerrm}{0.05}
-% 5.027511596679687500e+00 8.713015365600584872e-01 7.579417228698730469e-01  % Y hot
-% 2.180496454238891602e+00 7.359344959259033203e-01 5.628101825714111328e-01  % V hot
-% 1.673530578613281250e+01 9.636192321777343750e-01 9.280376434326171875e-01  % Z sub
-% 1.142548561096191406e+01 5.774354934692382812e-01 5.075562667846682530e-01  % W sub
-% 1.353189229965209961e+01 4.791536808013916016e+00 4.006250858306884766e+00  % X mix
-% 8.121859550476074219e+00 5.122209548950195312e+00 2.673474311828613281e+00  % U mix
-% 1.136524602770805359e-01 7.032055407762527466e-02 5.116277188062667847e-02  % P
-
-
 
 \title{Calibrating Gyrochronology using Kepler Asteroseismic targets}
 
@@ -104,7 +84,6 @@
 \maketitle
 
 \begin{abstract}
-% \label{abs}
 
 Among the available methods for dating stars, gyrochronology is a powerful one
 because it requires knowledge of only the star's mass and rotation period.
@@ -113,7 +92,7 @@ systematic uncertainties.
 Asteroseismology provides age measurements for some of the brightest stars
 observed by {\it Kepler}.
 We use rotation period measurements of \nastero$~$stars with asteroseismic
-ages, \nHC stars from the Hyades and Coma Berenices clusters and 5 field stars
+ages, \nHC stars from the Hyades and Coma Berenices clusters and 6 field stars
 (including the Sun) with precise age measurements to calibrate the
 gyrochronology relations.
 We model the relationship between rotation period, age and colour while
@@ -323,9 +302,6 @@ these stars.
 By measuring the frequency of each oscillation mode individually,
 not just the global asteroseismic parameters, one can provide much tighter
 constraints on ages.
-% not just the
-% mean large separation, one can build up a density profile of the star and
-% provide a tighter constraint on its age.
 Ages derived from individual oscillation mode measurements can have
 uncertainties as small as 10\% \citep{Brown1994, SilvaAguirre2013}.
 However, measuring frequencies for individual oscillation modes is a manual
@@ -339,12 +315,6 @@ Of the 42 stars in \citet{Metcalfe2014}, we only incorporate the `simple
 stars' (cool dwarfs) into our sample, ignoring the hotter F stars and more
 evolved subgiant stars as these are not expected to follow the simple
 gyrochronology relation.
-% It should be noted that, due to a technical issue with their stellar evolution
-% code, ages for stars with small convective cores were incorrectly estimated in
-% \citet{Chaplin2014}.
-% This issue is acknowledged in \citet{Metcalfe2014} and should not affect our
-% analysis since it concerns stars that are hotter than the Kraft break and
-% therefore not expected to follow the gyrochronology relation.
 
 The {\it Kepler} light curves of the 505 asteroseismic targets display
 quasi-periodic variations on timescales corresponding to the rotational
@@ -384,9 +354,9 @@ included in our analysis.
 However we discovered that their period-colour relations were different to
 those of the Hyades and Coma Ber, as well as to each other's, and we therefore
 did not include them in our final analysis.
-A further 5 field stars with precise age measurements were added to the
-sample: 16 Cyg B, Alpha Cen A and B, 18 Sco and, of course, the Sun (see table
-\ref{tab:field}).
+A further 6 field stars with precise age measurements were added to the
+sample: 16 Cyg A and B, Alpha Cen A and B, 18 Sco and, of course, the Sun
+(see table \ref{tab:field}).
 The entire set of \ntotal stars is shown in figures \ref{fig:p_vs_a} and
 \ref{fig:3d}.
 Asteroseismic targets are shown in black, with cluster and field stars in blue
@@ -451,6 +421,7 @@ observations with additional seismic constraints.\label{tab:field}}
 \hline\hline
 {ID} & {age} & {\prot} & {$B-V$} \\
 \hline
+16 Cyg A & 6.8 $\pm$ 0.4$^a$ & 23.8 $^{+1.5}_{-1.8}$$^b$ & 0.66 $\pm$ 0.01$^c$ \\
 16 Cyg B & 6.4 $\pm$ 0.4$^a$ & 23.2 $^{+11.5}_{-3.2}$$^b$ & 0.66 $\pm$ 0.01$^c$ \\
 18 Sco & 3.7 $\pm$ 0.2$^d$ & 22.7 $\pm$ 0.5$^e$ & 0.64 $\pm$ 0.01$^f$ \\
 The Sun & 4.568 $\pm$ 0.001$^g$ & 26.09 $\pm$ 0.1$^h$ & 0.65 $\pm$ 0.001$^i$ \\
@@ -534,8 +505,6 @@ The results of this analysis were not particularly sensitive to the choice of
 distribution for the hot stars and subgiants.
 These models were put in place so that we did not have to throw any data
 away and we could model everything at once.
-% This was important due to the large uncertainties on the observational
-% parameters.
 This was important because stars were classified according to their observed
 temperatures and \logg s, which are noisy.
 Due to the large uncertainties on \teff$~$and \logg, each star therefore has some
@@ -566,18 +535,6 @@ equation \ref{eq:Barnes2007_2}.
 \end{center}
 \end{figure*}
 
-% We chose to use a Gaussian distribution because it is the maximum entropy
-% distribution, and therefore the most conservative choice, with only two
-% parameters.
-
-% The boundaries separating cool dwarfs, hot dwarfs and subgiants left only
-% \ncooldwarfs stars classified as cool dwarfs (plus some contaminating
-% subgiants) in our asteroseismic sample, 6 of which have precise ages from AMP
-% modelling (see figure \ref{fig:logg_vs_t}).
-% These boundaries were placed in order to avoid {\it all} potential
-% contamination from subgiants which rotate more slowly than MS stars and, if
-% left in the sample, would have significantly biased the resulting
-% gyrochronology relation.
 Ideally both the hot star ($B-V$ $<$ 0.45) and subgiant (\logg $<$ \subcut)
 boundaries would be free parameters in our model.
 However, since these two populations were modelled with a relatively
@@ -680,9 +637,6 @@ Ideally, these catalogues would provide posterior PDF samples, not just point
 estimates, which we could use directly.
 i.e. samples from
 \begin{equation}
-% 	p(\hat{\mathbf{w}}_n|D_n) =
-% 	\frac{p(D_n|\hat{\mathbf{w}}_n)p_0(\hat{\mathbf{w}}_n)}
-% 	{p_0(D_n)},
 	p(\mathbf{w}_n|\hat{\mathbf{D}}_n) =
 	\frac{p(\hat{\mathbf{D}}_n|\mathbf{w}_n)p_0(\mathbf{w}_n)}
 	{p_0(\hat{\mathbf{D}}_n)},
@@ -742,13 +696,6 @@ p(\hat{P}_n\,|\,\mathbf{w}_n^{(j)},\theta) &=&
         \frac{[\hat{P_n} - X] ^2}{2\,[U^2 + {\sigma_n}^2]}\right) \quad.
 \end{eqnarray}
 A similar result can be derived for the other populations.
-
-% For samples falling in the cool dwarf regime, $P_{n,j}$ was computed
-% using equation \ref{eq:Barnes2007_2}.
-% For those samples falling in the hot dwarf or subgiant regimes, $P_{n,j}$ was
-% set equal to the mean of the normal distribution: $Y$ for hot dwarfs; $X$ for
-% `misclassified' subgiants with \logg$~>4.1$ and $Z$ for subgiants with
-% \logg$~<4.1$.
 
 Finally, using these analytic results for the inner integral, the
 marginalised log-likelihood from equation~\ref{eq:fac} becomes
@@ -942,9 +889,6 @@ definition of MS turn-off, 4 or 5 of the cool dwarfs were actually
 misclassified subgiants.
 The marginalised posterior PDFs of $a$, $b$ and $n$ are shown in figure
 \ref{fig:triangle}.
-% One can think of $\log(a)$ and $n$ as the slope and intercept of a straight
-% line in log-space, thus the covariance between these parameters is not
-% surprising.
 All three parameters are correlated and the posterior PDF for $b$ is clearly
 multi-modal.
 This multi-modality probably arises from the fact that the period--colour
@@ -974,12 +918,12 @@ colour within 10\% of the Sun's (0.65).
 \begin{figure*}
 \begin{center}
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{p_vs_a_solar.pdf}
-\caption{Rotation period vs age for cool dwarfs with colour within 10\% of the
+\caption{Rotation period vs age for cool dwarfs with colour within 0.1 of the
 	Sun's: 0.65, with gyrochronology relations of \citet{Barnes2007},
 	\citet{Mamajek2008} and this work. The shaded region represents the
 	16th and 84th percentile uncertainties. The Sun is shown in red and the
-	field stars, $\alpha$ Cen A, 18 Sco and 16 Cyg from left to right, are
-	shown in blue.
+	field stars, $\alpha$ Cen A, 18 Sco and 16 Cyg B from left to right,
+	are shown in blue.
 \label{fig:p_vs_a_solar}}
 \end{center}
 \end{figure*}
@@ -999,13 +943,6 @@ uncertainties on an age or rotation period.
 In order to do this properly, posterior PDF samples should be incorporated
 into Monte-Carlo uncertainty calculations\footnote{Posterior samples for
 this project are available at https://github.com/RuthAngus/Gyro.}.
-% Figure \ref{fig:triangle} shows the 1 and 2 dimensional marginalised
-% posterior PDFs of the three gyrochronology parameters.
-% All three parameters are correlated and $b$ is slightly multi-modal.
-% We do not fully understand the origin of this multi-modality but postulate
-% that it could be caused by the clusters and field stars preferring different
-% values of $b$, i.e. the colour-period relation takes a different shape for
-% each cluster.
 
 In order to test the predictive power of the new gyrochronology relation, we
 inverted equation \ref{eq:Barnes2007_3} to compare previously measured ages
@@ -1015,10 +952,6 @@ For comparison, gyrochronological ages for the field stars were also computed
 using the relations of \citet{Barnes2007} and \citet{Mamajek2008}.
 Uncertainties on ages predicted with the new relation were calculated using
 posterior PDF samples of the three parameters, $a$, $b$ and $n$.
-% In general, incorporating posterior PDF samples into uncertainty estimations is
-% essential in order to account for covariances between parameters.
-% In this case, uncertainties on ages calculated without posterior PDF samples
-% will be larger by up to around 50\%.
 The uncertainties on the predicted ages of 16 Cyg B are dominated by the large
 observational uncertainties on rotation period.
 In contrast, uncertainties on the ages predicted for the Sun are dominated by
@@ -1047,88 +980,11 @@ Alpha Cen B & $6.0 \pm 1$       & $6^{+2}_{-1}$       & $4^{+1}_{-0.9}$
 \end{tabular}
 \end{table*}
 
-% 6.0 0.69 28.8
-% my age: [ 5.03212155  1.03595731  0.77524429]
-% my age2: [ 4.97351866  2.11748465  1.42734516]
-% Barnes age: [ 4.47187589  1.05232173  0.87640752]
-% M&H age: [ 4.7382581   1.21964969  0.9728286 ]
-% 6.0 0.9 38.7
-% my age: [ 5.75649163  1.75242347  1.28061472]
-% my age2: [ 5.69973563  2.67986     1.79670832]
-% Barnes age: [ 4.19864265  1.27610136  1.05065826]
-% M&H age: [ 5.24213066  1.62229712  1.3040881 ]
-% 3.66 0.64 22.7
-% my age: [ 3.80871266  0.30178098  0.21702416]
-% my age2: [ 3.80686693  1.45075668  0.99266676]
-% Barnes age: [ 3.52488799  0.5592996   0.47162913]
-% M&H age: [ 3.70345918  0.75347376  0.60435011]
-% 6.4 0.66 23.2
-% my age: [ 3.85587973  2.59797602  1.86409392]
-% my age2: [ 3.66314053  2.89839671  1.85227216]
-% Barnes age: [ 3.34380203  2.44745485  1.74583651]
-% M&H age: [ 3.55319823  2.41383824  1.75996241]
-% 4.568 0.65 26.9
-% my age: [ 4.92638117  0.29599679  0.20990847]
-% my age2: [ 4.94516029  1.90595755  1.29981027]
-% Barnes age: [ 4.66868246  0.71231002  0.60745356]
-% M&H age: [ 4.81069599  0.95010265  0.76933893]
-% minimum uncertainty [ 4.91011518  0.19499649  0.13067185]
-
-% The ages of 18 Sco, Alpha Cen A and 16 Cyg B predicted by the new relation
-% are consistent to within 1$\sigma$ and the Sun and Alpha Cen B to within
-% 2$\sigma$.
 One would expect the \citet{Barnes2007} and \citet{Mamajek2008} relations to
 accurately predict an age for the Sun since they are strongly anchored to it.
 Our relation, on the other hand, uses additional age information from the
 asteroseismic stars so, although it does not predict such an accurate age for
 the Sun, it should predict more representative ages for other stars.
-% After all, the Copernican principle should only be taken so literally.
-% We performed `leave-one-out' cross validation on the field stars in order to
-% assess the ability of this new relation to predict ages for field stars not
-% included in the fitting process.
-% Each field star was left out of the sample, one at a time, and the model
-% trained the remaining data.
-% Ages predicted for each field star from the resulting, independently trained
-% models are presented in table \ref{tab:loo}.
-% These ages are consistent with those in table \ref{tab:comparison}, where the
-% model was trained on the entire data set, {\it except} for the Sun's age which
-% has both a different median value and a larger uncertainty.
-% This demonstrates the key role played by the Sun in the fitting process.
-% Just as with the models of \citet{Barnes2007} and \citet{Mamajek2008} the Sun,
-% dominates the fit.
-% However in {\it this} case the dominance arises naturally
-% from the data as a consequence of the Sun's smaller observational
-% uncertainties, and is not enforced by anchoring the model to the solar datum
-% as has previously been necessary due to the lack of old stars with age
-% measurements.
-
-% \begin{deluxetable}{lcc}
-% \tablewidth{0pc}
-% \tablecaption{Field star ages taken from the literature, compared with
-% 	leave-one-out cross validation predictions.
-% \label{tab:loo}}
-% \tablehead{
-% \colhead{Star}&
-% \colhead{Literature age (Gyr)}&
-% \colhead{Cross validation age (Gyr)}}
-% \startdata
-% 18 Sco      & $3.7 \pm 0.2$     & $5^{+2}_{-1}$ \\
-% The Sun     & $4.568 \pm 0.001$ & $5.7^{+1}_{-0.5}$ \\
-% Alpha Cen A & $6.0 \pm 1$       & $4.9^{+0.8}_{-0.7}$ \\
-% Alpha Cen B & $6.0 \pm 1$       & $5 \pm 1$ 	      \\
-% 16 Cyg B    & $6.4 \pm 0.4$     & $4\pm2$       \\
-% \enddata
-% \end{deluxetable}
-% % 6.0
-% % my age: [ 4.9030144   0.78903078  0.7216685 ]
-% % 6.0
-% % my age: [ 5.55213363  1.35991813  1.19307143]
-% % 3.66
-% % my age: [ 5.05915859  1.57535277  1.30555195]
-% % 6.4
-% % my age: [ 3.7254493   2.25402795  1.77250786]
-% % 4.568
-% % my age: [ 5.72053402  1.10938536  0.52350016]
 
 The goal of gyrochronology in general is to provide a means of predicting the
 age of a star given observations of its \teff, or colour, and rotation period.
@@ -1168,9 +1024,6 @@ usually old and slowly rotating.
 However these targets are not well suited for
 rotation period measurements which are most easily and precisely determined
 for active, rapidly rotating stars.
-% Despite the relatively large number of stars that were targeted for
-% asteroseismic studies with short cadence {\it Kepler} observations, only
-% a fraction of these are cool dwarfs, suitable for gyrochronology studies.
 K2, the repurposed {\it Kepler} mission, will provide new targets for rotation
 studies; in particular, some relatively old clusters have been and will
 continue to be monitored by the spacecraft.
@@ -1213,10 +1066,6 @@ further improvement of gyrochronology over the coming years.
 The code used in this project can be found at
 https://github.com/RuthAngus/Gyro.
 We acknowledge funding from the Leverhulme Trust.
-% The research leading to these results has received funding from the the UK
-% Science and Technology Facilities Council (STFC).
-% Funding for the Stellar Astrophysics Centre is provided by The Danish National
-% Research Foundation (Grant agreement no.: DNRF106).
 A.M. acknowledges funding from the European Research Council under the EU’s
 Seventh Framework Programme (FP7/(2007-2013)/ERC Grant Agreement No. 291352).
 We would like to thank Bill Chaplin for his thoughtful and detailed comments

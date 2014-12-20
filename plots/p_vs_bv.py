@@ -10,7 +10,8 @@ plotpar = {'axes.labelsize': 18, 'text.fontsize': 10,
            'ytick.labelsize': 18,
            'text.usetex': True}
 pl.rcParams.update(plotpar)
-ocols = ['#FF9933','#66CCCC' , '#FF33CC', '#3399FF', '#CC0066', '#9933FF', '#CC0000', '#9933FF', '#99cc99', '#CC0000']
+ocols = ['#FF9933','#66CCCC' , '#FF33CC', '#3399FF', '#CC0066', '#9933FF', \
+        '#CC0000', '#9933FF', '#99cc99', '#CC0000']
 
 ms = 8
 lw = 1
@@ -20,36 +21,12 @@ c = 'k'
 def log_period_model(par, log_a, bv):
     return np.log10(par[0]) + par[1] * log_a + par[2] * np.log10(bv - par[3]) # colour
 
-def age_model(par, p, bv):
-    return ((p/(par[0]*(bv-par[3])**(par[2])))**(1./par[1]))/1000.
-
-def log_age_model(par, log_p, bv):
-    return (log_p - np.log10(par[0]) - par[2]*np.log10(bv - par[3])) / par[1]
-
-def distance(pars, a_obs, p_obs, bv_obs, a_err):
-    model = age_model(pars, p_obs, bv_obs)
-    return ((a_obs-model))**2/a_err
-
-def distance2(age_obs, age_model, a_err):
-    x = (age_obs-age_model)/a_err
-    y = 1./(1+np.exp((x**2-.05)/1.))
-    pl.clf()
-    pl.plot(x, y, 'k.')
-    pl.savefig('function')
-    return 1./(1+np.exp((x**2-.05)/.5))
-
-def distance3(age_obs, age_model, a_err):
-    x = (age_obs-age_model)/a_err
-    return 1./(1+np.exp((x**2-1)/10.))
-
 def iso_calc(pars, age):
     x = np.linspace(1.8, .1, 10000)
     y = 10**log_period_model(pars, np.log10(age*1000), x)
     return x, y
 
-# data = np.genfromtxt("/Users/angusr/Python/Gyro/data/garcia_all_astero.txt")
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/garcia_irfm.txt")
-# data = np.genfromtxt("/Users/angusr/Python/Gyro/data/all_astero_plusgarcia.txt")
 
 # remove subs
 subgiant = 4.2
@@ -75,7 +52,8 @@ data = np.genfromtxt("/Users/angusr/Python/Gyro/data/clusters.txt").T
 l = (data[4] != 1.1) * (data[4] != .588)
 bv2 = data[0][l]; bv_err2 = data[1][l]
 p2 = data[2][l]; p_err2 = data[3][l]
-a2 = data[4][l]; a_err2 = data[5][l]; a_errp2 = data[5][l]; a_errm2 = data[5][l]
+a2 = data[4][l]; a_err2 = data[5][l]; a_errp2 = data[5][l]
+a_errm2 = data[5][l]
 logg2 = data[6][l]; logg_err2 = data[7][l]
 flag2 = data[8][l]
 
@@ -102,19 +80,17 @@ pars2_err = [0.008, 0.021, 0.024, 0.010]
 # fnames
 fnames = ['A', 'H', 'P', 'N', 'C', 'F', 'V']
 
-# fname = sys.argv[1]
-fname = "ACHF45_2"
+fname = sys.argv[1]
+# fname = "ACHF45_2"
 
 ck = 0
 
 npars = 3
 if ck >= 0:
     npars = 4
-# print npars
 
-params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters%s.txt'%fname).T
-# print params
-# raw_input('enter')
+params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters%s.txt'
+                       % fname).T
 pars3 = np.zeros(npars)
 err = np.zeros((2, npars))
 
@@ -131,10 +107,7 @@ if ck <0 :
         pars3[-1] = .45; err[:,3] = .0
     if fname.rfind('5') != fname.find('5'):
         pars3[-1] = .55; err[:,3] = .0
-#         print pars3[-1]
-# print 'color', pars3[-1]
 pars3[-1] = .45
-# print pars3
 
 err[0,:npars] = params[1][:npars]
 err[1,:npars] = params[2][:npars]
