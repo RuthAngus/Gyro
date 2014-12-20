@@ -89,7 +89,7 @@ npars = 3
 if ck >= 0:
     npars = 4
 
-params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parameters%s.txt'
+params = np.genfromtxt('/Users/angusr/Python/Gyro/code/parameters%s.txt'
                        % fname).T
 pars3 = np.zeros(npars)
 err = np.zeros((2, npars))
@@ -207,3 +207,51 @@ pl.ylim(10**.3, 10**2)
 pl.legend(loc='upper left')
 pl.loglog()
 pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/p_vs_a_solar.pdf")
+
+# ages
+ages = [age, .625, 1.1, .588, .5, age, age]
+pl.clf()
+pl.subplot(2, 1, 1)
+# bv -= 0.45
+pl.errorbar(bv[l], p[l], xerr=bv_err[l], yerr=p_err[l], fmt='k.', capsize=0,
+           ecolor='.7', markersize=6)
+
+lw = 1
+styles = ['-', '-', '-', '-', '-', '--', '-', '-', '-']
+# plot isochrones
+for i in range(len(fnames)):
+    if fname.find(fnames[i]) >= 0:
+        print fnames[i], styles[i]
+        xs, ys = iso_calc(pars3, ages[i])
+#         xs -= .45
+        pl.plot(xs, ys, color = c, linestyle=styles[i], linewidth=lw, \
+                label = '$%s~\mathrm{Gyr}$' %ages[i], zorder=0)
+# pl.legend(loc='upper left')
+
+pl.xlabel('$\mathrm{B-V-}~c$')
+pl.ylim(0,70)
+pl.ylabel('$\mathrm{Period~(days)}$')
+pl.subplots_adjust(hspace=.3)
+# pl.plot(.65-.45, 26.09, 'ro', markersize=6, mec='r')
+pl.plot(.65, 26.09, 'ro', markersize=6, mec='r')
+pl.xlim(.2, 1.8)
+# pl.xlim(10**-1.6, 10**0.1)
+# pl.ylim(10**.6, 10**1.8)
+# pl.loglog()
+
+pl.subplot(2, 1, 2)
+pl.errorbar(a[l], p[l], xerr=(a_errp[l], a_errm[l]), yerr=p_err[l], fmt='k.',
+           capsize=0, ecolor='.7', markersize=ms)
+xs = np.linspace(0, 20, 1000)
+pl.plot(xs, 10**log_period_model(pars3, np.log10(xs*1000), .65), 'k',
+        label = '$\mathrm{B-V}$=0.65')
+pl.plot(4.568, 26.09, 'ro', markersize=ms, mec='r')
+pl.xlabel('$\mathrm{Age~(Gyr)}$')
+pl.ylabel('$\mathrm{Period~(days)}$')
+pl.ylim(0,70)
+pl.xlim(-5, 20)
+# pl.legend(loc='upper left')
+# pl.xlim(3e-1,20)
+# pl.ylim(10**.5, 10**1.9)
+# pl.loglog()
+pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/show%s.pdf" % fname)

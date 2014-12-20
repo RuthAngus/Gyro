@@ -20,28 +20,6 @@ c = 'k'
 def log_period_model(par, log_a, bv):
     return np.log10(par[0]) + par[1] * log_a + par[2] * np.log10(bv - par[3]) # colour
 
-def age_model(par, p, bv):
-    return ((p/(par[0]*(bv-par[3])**(par[2])))**(1./par[1]))/1000.
-
-def log_age_model(par, log_p, bv):
-    return (log_p - np.log10(par[0]) - par[2]*np.log10(bv - par[3])) / par[1]
-
-def distance(pars, a_obs, p_obs, bv_obs, a_err):
-    model = age_model(pars, p_obs, bv_obs)
-    return ((a_obs-model))**2/a_err
-
-def distance2(age_obs, age_model, a_err):
-    x = (age_obs-age_model)/a_err
-    y = 1./(1+np.exp((x**2-.05)/1.))
-    pl.clf()
-    pl.plot(x, y, 'k.')
-    pl.savefig('function')
-    return 1./(1+np.exp((x**2-.05)/.5))
-
-def distance3(age_obs, age_model, a_err):
-    x = (age_obs-age_model)/a_err
-    return 1./(1+np.exp((x**2-1)/10.))
-
 def iso_calc(pars, age):
     x = np.linspace(1.8, .1, 10000)
     y = 10**log_period_model(pars, np.log10(age*1000), x)
