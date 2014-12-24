@@ -6,6 +6,7 @@ import acor
 import sys
 
 fname = sys.argv[1]
+fname = str(fname)
 
 print fname
 ck = fname.find('ck')
