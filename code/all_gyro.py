@@ -96,13 +96,14 @@ def MCMC(fname, n, c, train, cv, sampling):
     sampler = emcee.EnsembleSampler(nwalkers, ndim, lnprob, args = args)
 
     print("Burn-in")
-    p0, lp, state = sampler.run_mcmc(p0, 5000)
+#     p0, lp, state = sampler.run_mcmc(p0, 5000)
+    p0, lp, state = sampler.run_mcmc(p0, 10000)
 #     p0, lp, state = sampler.run_mcmc(p0, 300)
     sampler.reset()
     print("Production run")
 #     nstep = 3000
 #     nruns = 500.
-    nstep = 50000
+    nstep = 100000
     nruns = 2000.
 
     for j in range(int(nstep/nruns)):
