@@ -70,7 +70,7 @@ def MCMC(fname, n, c, train, cv, sampling):
 #     pl.show()
 
     # Now generate samples
-    nsamp = 100 # FIXME
+    nsamp = 500
     np.random.seed(12)
     age_samp = np.vstack([x0+xe*np.random.randn(nsamp) for x0, xe in zip(age_obs, age_err)])
     np.random.seed(12)
