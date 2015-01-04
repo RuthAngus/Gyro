@@ -95,6 +95,13 @@ def load_dat(fname, tn, cv):
     l = diff < 0
     a_err[l] = a_err[l] + diff[l] - np.finfo(float).eps
 
+    # remove the sun
+    l = a!=4.568
+    a, a_err, a_errp, a_errm = a[l], a_err[l], a_errp[l], a_errm[l]
+    p, p_err, t, t_err = p[l], p_err[l], t[l], t_err[l]
+    g, g_err, g_errp, g_errm = g[l], g_err[l], g_errp[l], g_errm[l]
+    flag = flag[l]
+
     # LOO
     if cv:
         print 'cv', cv
