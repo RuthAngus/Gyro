@@ -50,7 +50,7 @@ def iso_calc(pars, age):
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/garcia_irfm.txt")
 
 # remove subs
-subgiant = 4.2
+subgiant = 4.1
 g = data[8] > subgiant
 
 p1 = data[6][g]
@@ -69,7 +69,7 @@ flag1 = data[13][g]
 bv1, bv_err1 = teff2bv_err(t1, logg1, feh1, t_err1, logg_err1, feh_err1)
 
 # add clusters
-data = np.genfromtxt("/Users/angusr/Python/Gyro/data/clusters.txt").T
+data = np.genfromtxt("/Users/angusr/Python/Gyro/code/clusters.txt").T
 l = (data[4] != 1.1) * (data[4] != .588)
 bv2 = data[0][l]; bv_err2 = data[1][l]
 p2 = data[2][l]; p_err2 = data[3][l]

@@ -9,7 +9,17 @@
 \usepackage{float}
 \floatplacement{figure}{H}
 
+% metallicity hyades = + 0.17
+% praesepe = + 0.14
+% Coma ber = - 0.05 collier cameron Cayrel de Strobel et al. (1997)
+% NGC 6811 =
 % \citep[text before][text after]{cite1, cite2}
+
+% First, try to figure out where that extra multimodality is coming from
+% second, try to incorporate new results into paper.
+% should go back and see what happens if you add loggs in
+% should go back and see what happens if you add praesepe back in
+% Why are the asteroseismic stars still falling beneath the field stars?
 
 \newcommand{\logg}{log \emph{g}}
 \newcommand{\teff}{$T_{\rm{eff}}$}
@@ -34,7 +44,7 @@
 \newcommand{\ntotal}{365~}
 \newcommand{\ngarcia}{310~}
 \newcommand{\ncooldwarfs}{45~}
-\newcommand{\subcut}{4.1~}
+\newcommand{\subcut}{4.2~}
 % results
 \newcommand{\gyroa}{0.34}
 \newcommand{\aerrp}{0.03}
@@ -109,9 +119,9 @@ Such an approach is adjustable for any gyrochronology study.
 We calibrated a relation of the form $P=A^n\times(B-V-c)^b$ where $P$ is
 rotation period in days, $A$ is age in Myr and $B$ and $V$ are magnitudes.
 $a$, $b$ and $n$ are the free parameters of our model.
-We find $a = \gyroa^{+\aerrp}_{_aerrm}$, $b = \gyrob^{+berrp}_{-berrm}$ and
-$n = \gyron^{+nerrp}_{-nerrm}$.
-We used Markov chain Monte Carlo (MCMC) to explore posterior probability
+We find $a = \gyroa^{+\aerrp}_{-\aerrm}$, $b = \gyrob^{+\berrp}_{-\berrm}$ and
+$n = \gyron^{+\nerrp}_{-\nerrm}$.
+We used Markov Chain Monte Carlo (MCMC) to explore posterior probability
 distribution functions of the gyrochronology parameters and carefully checked
 the effects of leaving out parts of our sample, leading us to find that no
 single relation beween rotation period, colour and age can adequately describe
@@ -147,12 +157,12 @@ observed by {\it Kepler} are often expensive or impractical spectroscopic
 targets.
 Where high resolution spectra are unavailable, gyrochronology can be
 extrememly useful.
-Gyrochronology is a dating method that utilises the
-(theoretically)  % referee
+Gyrochronology is a dating method that utilises the (theoretically)
 predictable rotation period evolution of low mass, MS stars.
-It requires only knowledge of the rotation period---which is often easily
-extracted from {\it Kepler} light curves---and mass (or appropriate proxy) of
-a star.
+% referee
+It requires only knowledge of the current rotation period---which is often
+easily extracted from {\it Kepler} light curves---and mass (or appropriate
+proxy) of a star.
 However the current gyrochronology relations are entirely empirically
 calibrated and still need refining at large stellar ages.
 {\it Kepler} provides the perfect opportunity to calibrate gyrochronology at
@@ -160,7 +170,9 @@ late ages---it provides surface rotation periods of thousands of stars and new
 age estimates for hundreds of stars via asteroseismology \footnote{Note that
 asteroseismic ages are only available for those Kepler stars which display
 high signal-to-noise Solar-like oscillations in their power
-spectra.}.  % referee
+spectra.
+The majority of stars that fall into this category are around the same
+temperature as, and slightly hotter than, the Sun}.  % referee
 This paper aims to use these new asteroseismic age measurements to improve the
 gyrochronology relations at late ages.
 
@@ -342,7 +354,9 @@ There is excellent agreement between rotation period
 measurements where the two catalogues overlap.
 Of the 114 stars which appear in both catalogues, only the rotation periods of
 4 were not consistent at the 1$\sigma$ level and of these only 1, KIC 4931390,
-was inconsistent at greater than 2$\sigma$.  % referee
+was inconsistent at greater than 2$\sigma$.
+The similarities between the two catalogues is further described in
+\citet{Garcia2014}.  % referee
 
 The asteroseismic sample covers a large range of ages, however it does not
 provide good mass coverage across the entire range (see figures
@@ -353,8 +367,8 @@ so we do not expect many in the sample).
 The exclusion of young, low-mass stars from the asteroseismic sample is due to
 the fact that these stars are more active and their power-spectra do not
 display high signal-to-noise acoustic oscillations.
-The omission of these, as well as other types of stars that are not ideal
-asteroseismic targets, from our sample should not bias our results.
+The omission of these as well as other types of stars that are not ideal
+asteroseismic targets from our sample should not bias our results.
 The mere lack of data in some regions of parameter space will not skew the
 best fitting model, however it is important to note that the resulting
 gyrochronology relation will not necessarily be descriptive of those stars not represented in this sample.  % referee
@@ -370,7 +384,8 @@ Since the uncertainty associated with each measurement plays such a key role
 in our analysis (see \textsection \ref{sec:gyro_cal}), we assigned an
 uncertainty of
 $\pm 0.01$ % referee
-mag to each colour measurement.
+mag to each colour measurement, based on a realistic estimate of the
+typical uncertainties expected.
 The 1.1 and 0.588 Gyr open clusters, NGC 6811 and Praesepe, were originally
 included in our analysis.
 However we discovered that their period-colour relations were different to
@@ -388,8 +403,8 @@ and the Sun in red.
 \begin{center}
 \includegraphics[width=6in, clip=true]{p_vs_a_paper2.pdf}
 \caption{Photometric rotation period vs age for \nastero$~$ {\it Kepler}
-	targets (black) plus cluster and field stars (blue). The Sun is shown
-	in red.
+	targets (grey filled circles) plus cluster and field stars (black
+	triangles). The Sun is shown as an open circle.
 \label{fig:p_vs_a}}
 \end{center}
 \end{figure*}
@@ -531,7 +546,7 @@ For this reason we chose a very simple definition of MS turnoff: we defined
 a \logg$~$boundary of \subcut to mark the transition between dwarfs and
 giants.
 We tried a range of boundary values and found that \subcut minimised subgiant
-contamination whilst maximising the cool dwarf sample.
+contamination whilst maximising the cool dwarf sample.  % referee
 It was also necessary to use a mixture model to account for misclassified
 subgiants---without it, subgiant contamination significantly biased the
 resulting fit.
@@ -720,7 +735,8 @@ In the absence of posterior PDF samples\footnote{Posterior PDF samples
 for asteroseismic parameters are now beginning to be published and will be made
 available in future publications.} we generated our own from Gaussian
 distributions with means, \wh$~$and standard deviations, $\sigma_{\mathbf{w}}$.
-$J$ posterior samples were generated for each star (we used $J$ = 100):
+$J$ posterior samples were generated for each star (we used $J$ = 500):
+% non referee
 % \begin{eqnarray}
 % \w_n^{(j)} &\sim& p(\w_n\,|\,\hat{\w}_n),
 % \end{eqnarray}
@@ -812,7 +828,7 @@ Following the above method, a likelihood was computed as follows:
 
 \begin{table}
 	\caption{Median values of $a$, $b$, $c$ and $n$ for individual clusters
-		(see equation \ref{eq:Barnes2007_2}).
+		(see equation \ref{eq:Barnes2007_2}).  % referee
 \label{tab:cluster_results}}
 
 \begin{center}
@@ -835,23 +851,26 @@ However, this resulted in extremely multi-modal posteriors PDFs for
 $a$, $b$ and $n$ and a best-fitting model which significantly overpredicted
 the age of the Sun.
 After fitting a separate relation to various subsets of the data, it became
-evident that the multi-modal posterior PDF was only produced when Praesepe and
-NGC 6811 were included in our sample.
+evident that a lower value of $b$ was preferred by NGC 6811,
+i.e. the slope of the $\log(\mathrm{period})-\log(B-V-c)$ relation was
+shallower for NGC 6811 than for the Hyades, Coma Berenices and Praesepe.
+We therefore exluded NGC 6811 from our sample and tried to fit a relation to
+the remaining data, however, multi-modal posterior PDFs were still produced
+until Praesepe was also removed from the sample.
 The reason for this multimodality is unclear, however we tentatively attribute
-it to the position of the colour discontinuity, $c$ taking a different value
-for Praesepe than for the Hyades and Coma Berenices and the shape of the
-period-colour relation for NGC 6811 being discrepant.
+it to Praesepe preffering a different value for the colour discontinuity, $c$,
+to the Hyades and Coma Berenices.  % referee
 We calculated the likelihood for Praesepe, plus the field stars (to provide
 the age dependence) with two different values of $c$: $0.45$ and $0.5$,
 finding a higher likelihood for $c=0.5$.
 Since we do not fully understand the cause of this variation in $c$, and in
-order to keep our model simple, we chose to exclude Praesepe and NGC 6811 from
+order to keep our model simple, we chose to also exclude Praesepe from
 our final data set and fit a gyrochronology relation with $c=0.45$ to the
 remaining data (asteroseismic stars, field stars, Hyades and Coma Ber).
 We also fitted relations with $c$ values ranging from 0.4 to 0.55 to this final
 data set, finding that the results were relatively insensitive to variations
 in this parameter (solar ages predicted from each best-fitting model were
-consistent).
+consistent within uncertainties).
 Individual fits to Hyades and Coma Berenices, plus the field stars are shown
 in figures \ref{fig:CF45} and \ref{fig:HF45}.
 50th percentile parameter values with their 16th and 84th
@@ -861,8 +880,22 @@ Note that none of these parameters are fully consistent between the two
 clusters; there seems to be some intrinsic scatter in the gyrochronology
 parameters.
 The fact that each cluster seems to prefer a different value of $a$, $b$, $n$
-and $c$ paints a concerning picture for gyrochronology which assumes one set
-of parameters can be used to describe all stars.
+and $c$ paints a concerning picture for this form of a gyrochronology relation
+which assumes one set of parameters can be used to describe all stars.
+It is likely that the inability of equation \ref{eq:Barnes2007_2} to fully
+describe the observed properties of our sample stars is due to the simplifying
+assumptions that go into this relationship.
+The fact that there is no dependence on metallicity, for example, may
+contribute to the deficiencies of this model.
+One might expect metallicity to have an effect on the rotational evolution of
+a star since it can impact its internal structure.
+We have not attempted to calibrate a metallicity-dependent gyrochronology
+relation, partly there are no precise metallicity measurements for the
+majority of the Kepler stars, on which this study is chiefly based.
+We anticipate that the majority of stars for which this new gyrochronology
+relation will be most useful are Kepler stars, or stars targeted by missions
+like Kepler, again, the majority of which are unlikely to have precise
+metallicities.  % referee
 
 \begin{figure}
 \begin{center}
@@ -942,8 +975,11 @@ cluster and field stars are red. The shaded regions represent the 16th and
 % \includegraphics[width=6in, clip=false, trim=0 0 0.5in 0]{small_triangleACHF45.pdf}
 \includegraphics[width=6in, clip=false, trim=0 0 0.5in 0]{small_triangleACHF.pdf}
 \caption{Marginalised likelihoods for the three gyrochronology
-parameters, $a$, $b$ and $n$. All three parameters are correlated and $b$ is
-slightly multi-modal. This plot was made using triangle.py
+parameters, $a$, $b$ and $n$. Parameters $a$ and $n$ are correlated and their
+posterior PDFs are multimodal. The main peaks in the posterior PDFs of $a$ and
+$n$ correspond to a fit to the Sun and field stars. The smaller peak
+corresponds to the a fit to the Kepler asteroseismic stars.
+This plot was made using triangle.py
 \citep{Foreman-Mackey_triangle}.
 \label{fig:triangle}}
 \end{center}
@@ -954,22 +990,57 @@ percentile uncertainties are presented in table \ref{tab:constants} and the
 additional parameters of our model, describing the distributions of hot star
 and subgiant rotation periods, are presented in table \ref{tab:nuisance}.
 Note the value of $Q$, the parameter describing the fraction of misclassified
-subgiants is $\Q^{+\Qerrp}_{-\Qerrm}$, i.e., based on our simple `\logg$=4.1$'
+subgiants is $\Q^{+\Qerrp}_{-\Qerrm}$, i.e., based on our simple `\logg$=4.2$'
 definition of MS turn-off, 4 or 5 of the cool dwarfs were actually
 misclassified subgiants.
 The marginalised posterior PDFs of $a$, $b$ and $n$ are shown in figure
 \ref{fig:triangle}.
-All three parameters are correlated and the posterior PDF for $b$ is clearly
-multi-modal.
-This multi-modality probably arises from the fact that the period--colour
-relation is slightly different for different clusters (it was this phenomenon
-that lead us to exlude Praesepe and NGC 6811 from the sample as these two
-clusters produced even more multi-modal posterior PDFs for $b$) and possibly
-for each field star.
+% All three parameters are correlated and the posterior PDF for $b$ is clearly
+% multi-modal.
+Parameters $a$ and $n$ are correlated and their posterior PDFs are multimodal.
+The cause of this multimodality is clear when the values of the parameters
+at the two peaks are plugged into the gyrochronology relation and plotted
+alongside the data.
+When the median values of the parameters are input into the model, the
+resulting line shown in figure \ref{fig:p_vs_a_solar} is a good fit to the Sun
+and field stars.
+When parameter values corresponding to the smaller peak in the posterior PDF
+are input into the model, the resulting line appears to be a good fit to the
+Kepler asteroseismic stars.  % not referee
+The Kepler asteroseismic stars in figure \ref{fig:p_vs_a_solar} fall below the
+line described by the gyrochronology relation with median parameter values.
+Although mostly consistent with the best-fitting model, they are not well
+described by it when taken in isolation.
+It is clear that one set of gyrochronology parameters is not capable of
+simulataneously describing the Sun and field stars and the Kepler asteroseismic
+stars.
+There is more than one possible explanation for this.
+Firstly, the asteroseismic ages could be systematically biased towards larger
+ages, which could potentially result from the fact that the Kepler stars do
+not have well constrained metallicities.
+Secondly, the rotation periods could be systematically underestimated.
+This could occur if, for example, these stars were rotating differentially
+and the dominant spotted regions on their surfaces were not equatorial.
+Thirdly, this could be a result of Malmquist bias (REFERENCE).
+If there were a large spread in rotation periods for a given stellar mass and
+age and, due to the bias that occurs because shorter periods are
+easier to detect than longer periods, this broad range of rotation periods
+might be truncated at some upper cut-off.
+It would therefore appear as though Solar-colour stars were all rotating
+rapidly when, in fact, there was a broad range of rotation periods but, due
+to detection bias, only the rapid rotators appeared in our sample.
+Finally, it is possible that the Kepler asteroseismic stars follow a
+\emph{different} spin-down relation to the Sun and field stars. % not referee
+% This multi-modality probably arises from the fact that the period--colour
+% relation is slightly different for different clusters (it was this phenomenon
+% that lead us to exlude Praesepe and NGC 6811 from the sample as these two
+% clusters produced even more multi-modal posterior PDFs for $b$) and possibly
+% for each field star.
 Figures \ref{fig:625} -- \ref{fig:8gyr} show the new gyrochronology relation
 in period-colour space over a sequence of ages.
 The stars included in these plots have ages that fall within 1 $\sigma$ of the
-reference age and are mostly dwarfs (stars with \logg$~<~$4.1 are not shown).
+reference age and are mostly dwarfs (stars with \logg$~<~$\subcut are not
+shown).
 The shaded region shows the 16th and 84th percentile uncertainties of the new
 relation.
 Figure \ref{fig:p_vs_bv_solar} shows rotation period vs colour for stars with

@@ -15,7 +15,10 @@ DIR = '/Users/angusr/Python/Gyro'
 # DIR = '/Users/angusr/Python/noisy-plane'
 # with h5py.File("%s/samples_%s" % (DIR, fname), "r") as f:
 with h5py.File("%s/code/samples_%s" % (DIR, fname), "r") as f:
-    samples = f["samples"][:, 15000:, :]
+    samples = f["samples"][:, 500:, :]
+#     samples = f["samples"][:, 45000:, :]
+#     samples = f["samples"][:, 15000:, :]
+print np.shape(samples)
 nwalkers, n, ndim = samples.shape
 flatchain = samples.reshape((-1, ndim))
 
@@ -52,12 +55,12 @@ np.savetxt("parameters%s.txt" %fname, np.array(mcmc_result))
 # fig = triangle.corner(flatchain, truths=mres, labels=fig_labels)
 # fig.savefig("triangle%s.png" %fname)
 #
-# print("Plotting traces")
-# pl.figure()
-# for i in range(ndim):
-#     pl.clf()
-#     pl.plot(samples[:, :, i].T, 'k-', alpha=0.3)
-#     pl.savefig("%s%s.png" %(i, fname))
+print("Plotting traces")
+pl.figure()
+for i in range(ndim):
+    pl.clf()
+    pl.plot(samples[:, :, i].T, 'k-', alpha=0.3)
+    pl.savefig("%s%s.png" %(i, fname))
 
 # tau, mean, sigma = acor.acor(samples[:, :, 0])
 

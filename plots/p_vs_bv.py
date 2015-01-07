@@ -135,7 +135,7 @@ pl.errorbar(bv[l], p[l], xerr=bv_err[l], yerr=p_err[l], color='k', \
 pl.errorbar(bv[l2], p[l2], xerr=bv_err[l2], yerr=p_err[l2], color='k', \
         fmt='o', mec='.7', capsize=0, markersize=5, ecolor='.6')
 pl.errorbar(bv[sun], p[sun], xerr=bv_err[sun], yerr=p_err[sun], color='r', \
-        fmt='o', mec='r', capsize=0, markersize=6, ecolor='.6')
+        fmt='o', mec='r', capsize=0, markersize=10, ecolor='.6')
 
 # Add Isochrones
 xs, ys = iso_calc(pars, age)
@@ -170,28 +170,44 @@ pl.legend(loc='upper left')
 pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/p_vs_bv_solar.pdf")
 bv += 0.45
 colour = .65
-per = .1
-b = per
+b = .1
 sig = 2
 l = (bv-(bv_err*sig) < colour) * (colour < bv+(bv_err*sig))
 l = (colour-b < bv) * (bv < colour+b)
+# l = (5778-300 < t1) * (t1 < 5778+300) # test colour conversion
 sun = a==4.568
 # print l[-5:]
 
 lw = .5
 # Plot data
+from colours import plot_colours
+cols = plot_colours()
 pl.clf()
 pl.errorbar(a[l], p[l], xerr=a_err[l], yerr=p_err[l], color='k', \
         fmt='o', mec='k', capsize=0, markersize=5, ecolor='.6', zorder=2)
-pl.errorbar(a[-5:][l[-5:]], p[-5:][l[-5:]], xerr=a_err[-5:][l[-5:]], yerr=p_err[-5:][l[-5:]], color='b', \
-        fmt='o', mec='b', capsize=0, markersize=5, ecolor='.6', zorder=2)
-pl.errorbar(a[sun], p[sun], xerr=a_err[sun], yerr=p_err[sun], color='r', \
-        fmt='o', mec='r', capsize=0, markersize=5, ecolor='.6', zorder=2)
+# pl.errorbar(a[-5:][l[-5:]], p[-5:][l[-5:]], xerr=a_err[-5:][l[-5:]], yerr=p_err[-5:][l[-5:]], color='b', \
+#         fmt='o', mec='b', capsize=0, markersize=5, ecolor='.6', zorder=2)
+pl.errorbar(a[-5:][l[-5:]], p[-5:][l[-5:]], xerr=a_err[-5:][l[-5:]],
+            yerr=p_err[-5:][l[-5:]], color=ocols[3], fmt='o', mec=ocols[3],
+            capsize=0, markersize=7, ecolor='.6', zorder=2)
+# pl.errorbar(a[sun], p[sun], xerr=a_err[sun], yerr=p_err[sun], color='r', \
+#         fmt='o', mec='r', capsize=0, markersize=5, ecolor='.6', zorder=2)
+pl.errorbar(a[sun], p[sun], xerr=a_err[sun], yerr=p_err[sun], color=cols.pink, \
+        fmt='o', mec=cols.pink, capsize=0, markersize=7, ecolor='.6', zorder=2)
 xs = np.linspace(0, 20, 100)
 pl.plot(xs, 10**log_period_model(pars, np.log10(xs*1000), .65), 'k-.',\
         label='$\mathrm{B-V}=0.65~\mathrm{Barnes~(2007)}$', zorder=1, linewidth=lw)
 pl.plot(xs, 10**log_period_model(pars2, np.log10(xs*1000), .65), 'k--',\
         label = '$\mathrm{B-V}=0.65~\mathrm{M\&H~(2008)}$', zorder=1, linewidth=lw)
+# pars3[0] = 0.9  # test other posterior peak
+# pars3[1] = 0.44  # test other posterior peak
+# pars3[0] = 0.405  # ACHF main peak
+# pars3[2] = 0.347  # ACHF main peak
+# pars3[1] = 0.553  # ACHF main peak
+pars3[0] = 7.173650860786437988e-01
+pars3[1] = 4.672578275203704834e-01
+pars3[2] = 3.963981568813323975e-01
+
 pl.plot(xs, 10**log_period_model(pars3, np.log10(xs*1000), .65), 'k',\
         label = '$\mathrm{B-V}=0.65~\mathrm{Angus~\emph{et~al.}~(2014)}$',
         linewidth=lw, zorder=1)

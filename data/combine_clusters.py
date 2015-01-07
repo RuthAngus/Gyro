@@ -4,7 +4,7 @@ from colour_conversion import gr2bv, deredden
 from teff_bv import teff2bv_err
 
 # make up colour errors
-c_err = .04
+c_err = .01
 
 # make up period errors for M 34 - 5% (conservative), multiplicative
 pe = .05
@@ -16,7 +16,7 @@ g_err = .001
 # add hyades
 data = np.genfromtxt("/Users/angusr/Python/Gyro/data/hyades.txt", skip_header=2).T
 bv = data[0]
-bv_err = data[1]*4
+bv_err = data[1]
 p = data[2]
 p_err = data[3]
 a = data[4]
@@ -153,6 +153,7 @@ logg_err = np.ones_like(bv)*g_err
 
 # logg[-5] = 4.57  # alpha cen b
 # logg[-4] = 4.32  # alpha cen a
+
 # logg[-3] = 4.41  # 18 Sco
 # logg[-2] = 4.34  # 16 Cyg B
 # logg[-1] = 4.44  # sun

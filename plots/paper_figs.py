@@ -4,9 +4,9 @@ from teff_bv import teff2bv_err
 from colours import plot_colours
 cols = plot_colours()
 
-plotpar = {'axes.labelsize': 15,
+plotpar = {'axes.labelsize': 18,
            'text.fontsize': 20,
-           'legend.fontsize': 10,
+           'legend.fontsize': 18,
            'xtick.labelsize': 18,
            'ytick.labelsize': 18,
            'text.usetex': True}
@@ -56,25 +56,41 @@ vtfeh_err = data[12]
 vtbv, vtbv_err = teff2bv_err(vtt, vtlogg, vtfeh, vtt_err, vtlogg_err, vtfeh_err)
 
 l = (t1>100)*(logg1>0)
-hot = (t1[l]>6250) * (logg1>4.2)
-sub = logg1[l]<4.2
-cd = (t1[l]<6250) * (logg1[l]>4.2)
+hot = (t1[l]>6250) * (logg1>4.1)
+sub = logg1[l]<4.1
+cd = (t1[l]<6250) * (logg1[l]>4.1)
 pl.clf()
 # pl.errorbar(t1[l][hot], logg1[l][hot], xerr=t1_err[l][hot], yerr=(logg1_errp[l][hot], \
 #         logg1_errm[l][hot]), fmt='r.', capsize=0, ecolor='.7', mec='r', zorder=2)
 # pl.errorbar(t1[l][sub], logg1[l][sub], xerr=t1_err[l][sub], yerr=(logg1_errp[l][sub], \
 #         logg1_errm[l][sub]), fmt='b.', capsize=0, ecolor='.7', mec='b', zorder=3)
+
+# pl.errorbar(t1[l][hot], logg1[l][hot], xerr=t1_err[l][hot],
+#             yerr=(logg1_errp[l][hot], logg1_errm[l][hot]), color='r',
+#             fmt='^', capsize=0, ecolor='.8', mec='r', zorder=2,
+#             label="$\mathrm{Hot~Dwarfs}$", markersize=5)
+# pl.errorbar(t1[l][sub], logg1[l][sub], xerr=t1_err[l][sub], color='b',
+#             yerr=(logg1_errp[l][sub], logg1_errm[l][sub]), fmt='o', capsize=0,
+#             ecolor='.8', mec='b', zorder=1, label="$\mathrm{Subgiants}$",
+#             markersize=4)
+# pl.errorbar(t1[l][cd], logg1[l][cd], xerr=t1_err[l][cd], yerr=(logg1_errp[l][cd],
+#             logg1_errm[l][cd]), fmt='ko', capsize=0, ecolor='.8', mec='k',
+#             zorder=3, label="$\mathrm{Cool~Dwarfs}$", markersize=4)
+
+from colours import plot_colours
+cols = plot_colours()
 pl.errorbar(t1[l][hot], logg1[l][hot], xerr=t1_err[l][hot],
-            yerr=(logg1_errp[l][hot], logg1_errm[l][hot]), color='r',
-            fmt='^', capsize=0, ecolor='.8', mec='r', zorder=2,
-            label="$\mathrm{Hot~Dwarfs}$", markersize=5)
-pl.errorbar(t1[l][sub], logg1[l][sub], xerr=t1_err[l][sub], color='b',
+            yerr=(logg1_errp[l][hot], logg1_errm[l][hot]), color=ocols[0],
+            fmt='o', capsize=0, ecolor='.8', mec=ocols[0], zorder=2,
+            label="$\mathrm{Hot~Dwarfs}$", markersize=4)
+pl.errorbar(t1[l][sub], logg1[l][sub], xerr=t1_err[l][sub], color=ocols[3],
             yerr=(logg1_errp[l][sub], logg1_errm[l][sub]), fmt='o', capsize=0,
-            ecolor='.8', mec='b', zorder=1, label="$\mathrm{Subgiants}$",
+            ecolor='.8', mec=ocols[3], zorder=1, label="$\mathrm{Subgiants}$",
             markersize=4)
 pl.errorbar(t1[l][cd], logg1[l][cd], xerr=t1_err[l][cd], yerr=(logg1_errp[l][cd],
             logg1_errm[l][cd]), fmt='ko', capsize=0, ecolor='.8', mec='k',
             zorder=3, label="$\mathrm{Cool~Dwarfs}$", markersize=4)
+
 print len(t1[l]), len(t1[l][hot]), len(t1[l][sub])
 print len(t1[l])-len(t1[l][hot+sub])
 hot = vtt>6250

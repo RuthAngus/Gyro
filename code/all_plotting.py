@@ -22,7 +22,7 @@ def load_dat(fname, tn, cv):
     p = data[6]
     g = data[8]
 
-    # remove periods <= 0 and teff == 0 FIXME: why is this necessary?
+    # remove periods <= 0 and teff < 100
     l = (p > 0.)*(t > 100.)*(g > 0.)  # *(t<5800)
 
     KID = data[0][l]
@@ -40,19 +40,9 @@ def load_dat(fname, tn, cv):
     feh_err = data[12][l]
     flag = data[13][l]
 
-#     pl.clf()
-#     l = feh!=-0.2
-#     print feh[l]
-#     print feh_err[l]
-#     pl.hist(feh[l]+0.2, 20)
-#     pl.show()
-#     raw_input('enter')
-
     # convert temps to bvs
     bv_obs, bv_err = teff2bv_err(t, g, feh, t_err, .5*(g_errp+g_errm), feh_err)
 
-    # add clusters FIXME: reddening
-#     data = np.genfromtxt("/Users/angusr/Python/noisy-plane/clusters.txt", skip_header=1).T
     data = np.genfromtxt("/Users/angusr/Python/Gyro/code/clusters.txt").T
     bv_obs = np.concatenate((bv_obs, data[0]))
     bv_err = np.concatenate((bv_err, data[1]))
@@ -96,11 +86,11 @@ def load_dat(fname, tn, cv):
     a_err[l] = a_err[l] + diff[l] - np.finfo(float).eps
 
     # remove the sun
-    l = a!=4.568
-    a, a_err, a_errp, a_errm = a[l], a_err[l], a_errp[l], a_errm[l]
-    p, p_err, t, t_err = p[l], p_err[l], t[l], t_err[l]
-    g, g_err, g_errp, g_errm = g[l], g_err[l], g_errp[l], g_errm[l]
-    flag = flag[l]
+#     l = a!=4.568
+#     a, a_err, a_errp, a_errm = a[l], a_err[l], a_errp[l], a_errm[l]
+#     p, p_err, t, t_err = p[l], p_err[l], t[l], t_err[l]
+#     g, g_err, g_errp, g_errm = g[l], g_err[l], g_errp[l], g_errm[l]
+#     flag = flag[l]
 
     # LOO
     if cv:
