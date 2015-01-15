@@ -13,7 +13,7 @@ pl.rcParams.update(plotpar)
 ocols = ['#FF9933','#66CCCC' , '#FF33CC', '#3399FF', '#CC0066', '#9933FF', '#CC0000', '#9933FF', '#99cc99', '#CC0000']
 
 lw = 1
-ms = 3
+ms = 5
 
 def log_period_model(par, log_a, bv):
     return np.log10(par[0]) + par[1] * log_a + par[2] * np.log10(bv - par[3]) # colour
@@ -84,7 +84,7 @@ pars_err = [.0070, .011, .024, 0.]
 pars2 = [.407, .566, .325, .495] # MH
 pars2_err = [0.008, 0.021, 0.024, 0.010]
 pars3_err = np.array([.03, .03, .03, .00])
-params = np.genfromtxt('/Users/angusr/Python/noisy-plane/parametersACHF45_2.txt').T
+params = np.genfromtxt('/Users/angusr/Python/Gyro/code/parametersACHF.txt').T
 pars3 = np.zeros(4)
 err = np.zeros((2, 4))
 pars3[:3] = params[0][:3]
@@ -143,12 +143,22 @@ for i, age in enumerate(ages):
     xs -= .45
     xs, ys2 = iso_calc(pars3+pars3_err, ages[i])
     xs -= .45
-    pl.fill_between(xs, ys1, ys2, facecolor='0.5', alpha=0.3, edgecolor='None',
-            zorder=0)
+#     pl.fill_between(xs, ys1, ys2, facecolor='0.5', alpha=0.3, edgecolor='None',
+#             zorder=0)
+
+    from prob_uncerts import sigmas
+    samples = sigmas("ACHF")
+    for j in range(np.shape(samples)[1]):
+        par_samp = np.zeros(4)
+        par_samp[:3] = samples[:, j]
+        par_samp[3] = 0.45
+        xs, ys = iso_calc(par_samp, ages[i])
+        xs -= 0.45
+        pl.plot(xs, ys, color="k", zorder=0, alpha=.04)
 
     pl.xlabel("$\mathrm{B-V-}~c$")
     pl.ylabel("$\mathrm{P_{rot} (days)}$")
-    pl.xlim(10**-3, 1)
+    pl.xlim(10**-3, 1.)
     pl.ylim(1, 10**2)
     pl.legend(loc='upper left')
     pl.loglog()

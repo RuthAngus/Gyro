@@ -3,9 +3,11 @@ import matplotlib.pyplot as pl
 from teff_bv import teff2bv_orig, teff2bv_err
 import pretty5
 import sys
+from colours import plot_colours
+cols = plot_colours()
 
 plotpar = {'axes.labelsize': 18, 'text.fontsize': 10,
-           'legend.fontsize': 15,
+           'legend.fontsize': 12,
            'xtick.labelsize': 18,
            'ytick.labelsize': 18,
            'text.usetex': True}
@@ -137,9 +139,20 @@ pl.errorbar(bv[l2], p[l2], xerr=bv_err[l2], yerr=p_err[l2], color='k', \
 pl.errorbar(bv[sun], p[sun], xerr=bv_err[sun], yerr=p_err[sun], color='r', \
         fmt='o', mec='r', capsize=0, markersize=10, ecolor='.6')
 
+from prob_uncerts import sigmas
+samples = sigmas(fname)
+for i in range(np.shape(samples)[1]):
+    par_samp = np.zeros(4)
+    par_samp[:3] = samples[:, i]
+    par_samp[3] = 0.45
+    xs, ys = iso_calc(par_samp, age)
+    xs -= 0.45
+    pl.plot(xs, ys, color=c, zorder=0, alpha=.1)
+
 # Add Isochrones
 xs, ys = iso_calc(pars, age)
 xs -= 0.4
+c = "k"
 pl.plot(xs, ys, color=c, linestyle='-.', linewidth=lw, \
         label='$%s~\mathrm{Gyr}$~$\mathrm{(Barnes~2007)}$' %age, zorder=0)
 xs, ys = iso_calc(pars2, age)
@@ -155,8 +168,8 @@ xs, ys1 = iso_calc(pars3-pars3_err, age)
 xs -= 0.45
 xs, ys2 = iso_calc(pars3+pars3_err, age)
 xs -= 0.45
-pl.fill_between(xs, ys1, ys2, facecolor=c, alpha=0.1, edgecolor='None', \
-        zorder=0)
+# pl.fill_between(xs, ys1, ys2, facecolor=c, alpha=0.1, edgecolor='None', \
+#         zorder=0)
 
 pl.xlabel("$\mathrm{B-V-}~c$")
 # pl.xlabel("$\mathrm{B-V}$")
@@ -180,46 +193,41 @@ sun = a==4.568
 
 lw = .5
 # Plot data
-from colours import plot_colours
-cols = plot_colours()
 pl.clf()
 pl.errorbar(a[l], p[l], xerr=a_err[l], yerr=p_err[l], color='k', \
-        fmt='o', mec='k', capsize=0, markersize=5, ecolor='.6', zorder=2)
-# pl.errorbar(a[-5:][l[-5:]], p[-5:][l[-5:]], xerr=a_err[-5:][l[-5:]], yerr=p_err[-5:][l[-5:]], color='b', \
-#         fmt='o', mec='b', capsize=0, markersize=5, ecolor='.6', zorder=2)
+        fmt='o', mec='k', capsize=0, markersize=5, ecolor='.6', zorder=4)
 pl.errorbar(a[-5:][l[-5:]], p[-5:][l[-5:]], xerr=a_err[-5:][l[-5:]],
-            yerr=p_err[-5:][l[-5:]], color=ocols[3], fmt='o', mec=ocols[3],
-            capsize=0, markersize=7, ecolor='.6', zorder=2)
-# pl.errorbar(a[sun], p[sun], xerr=a_err[sun], yerr=p_err[sun], color='r', \
-#         fmt='o', mec='r', capsize=0, markersize=5, ecolor='.6', zorder=2)
-pl.errorbar(a[sun], p[sun], xerr=a_err[sun], yerr=p_err[sun], color=cols.pink, \
-        fmt='o', mec=cols.pink, capsize=0, markersize=7, ecolor='.6', zorder=2)
+            yerr=p_err[-5:][l[-5:]], color="b", fmt='o', mec="b",
+            capsize=0, markersize=7, ecolor='.6', zorder=4)
+pl.errorbar(a[sun], p[sun], xerr=a_err[sun], yerr=p_err[sun], color="r", \
+        fmt='o', mec=cols.pink, capsize=0, markersize=7, ecolor='.6', zorder=4)
 xs = np.linspace(0, 20, 100)
-pl.plot(xs, 10**log_period_model(pars, np.log10(xs*1000), .65), 'k-.',\
-        label='$\mathrm{B-V}=0.65~\mathrm{Barnes~(2007)}$', zorder=1, linewidth=lw)
-pl.plot(xs, 10**log_period_model(pars2, np.log10(xs*1000), .65), 'k--',\
-        label = '$\mathrm{B-V}=0.65~\mathrm{M\&H~(2008)}$', zorder=1, linewidth=lw)
-# pars3[0] = 0.9  # test other posterior peak
-# pars3[1] = 0.44  # test other posterior peak
-# pars3[0] = 0.405  # ACHF main peak
-# pars3[2] = 0.347  # ACHF main peak
-# pars3[1] = 0.553  # ACHF main peak
-pars3[0] = 7.173650860786437988e-01
-pars3[1] = 4.672578275203704834e-01
-pars3[2] = 3.963981568813323975e-01
+pl.plot(xs, 10**log_period_model(pars, np.log10(xs*1000), .65), 'k-.',
+        label='$\mathrm{B-V}=0.65~\mathrm{Barnes~(2007)}$', zorder=3,
+        linewidth=2, color=cols.blue)
+pl.plot(xs, 10**log_period_model(pars2, np.log10(xs*1000), .65), 'k--',
+        label = '$\mathrm{B-V}=0.65~\mathrm{M\&H~(2008)}$', zorder=3,
+        linewidth=2, color=cols.blue)
 
 pl.plot(xs, 10**log_period_model(pars3, np.log10(xs*1000), .65), 'k',\
         label = '$\mathrm{B-V}=0.65~\mathrm{Angus~\emph{et~al.}~(2014)}$',
-        linewidth=lw, zorder=1)
+        linewidth=1, zorder=1)
 ys1 = 10**log_period_model(pars3+pars3_err, np.log10(xs*1000), .65)
 ys2 = 10**log_period_model(pars3-pars3_err, np.log10(xs*1000), .65)
-pl.fill_between(xs, ys1, ys2, facecolor=c, alpha=0.1, edgecolor='None', \
-        zorder=0)
+
+from prob_uncerts import sigmas
+samples = sigmas(fname)
+for i in range(np.shape(samples)[1]):
+    par_samp = np.zeros(4)
+    par_samp[:3] = samples[:, i]
+    par_samp[3] = 0.45
+    pl.plot(xs, 10**log_period_model(par_samp, np.log10(xs*1000), .65), 'k',
+            alpha=.05, zorder=0)
 
 pl.xlabel("$\mathrm{Age~(Gyr)}$")
 pl.ylabel("$\mathrm{P_{rot}~(days)}$")
 pl.xlim(3e-1,20)
-pl.ylim(10**.3, 10**2)
+pl.ylim(10**.6, 10**1.8)
 pl.legend(loc='upper left')
 pl.loglog()
 pl.savefig("/Users/angusr/Python/Gyro/gyro_paper/p_vs_a_solar.pdf")
