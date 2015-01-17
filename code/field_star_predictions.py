@@ -27,15 +27,17 @@ def age_calc(age, age_err, bv, bv_err, p, p_err, flatchain, c):
 if __name__ == "__main__":
 
 #     fnames = ['ACHF45_3', 'ACHF45_3', 'ACHF45_3', 'ACHF45_3', 'ACHF45_3']
-    fnames = ['ACHF45_2', 'ACHF45_2', 'ACHF45_2', 'ACHF45_2', 'ACHF45_2']
+#     fnames = ['ACHF45_2', 'ACHF45_2', 'ACHF45_2', 'ACHF45_2', 'ACHF45_2']
+    fnames = ['ACHF', 'ACHF', 'ACHF', 'ACHF', 'ACHF', 'ACHF']
 
-    # alpha cen, 18 Sco, 16 Cyg B, sun
-    age = [6.0, 6.0, 3.66, 6.4, 4.568]
-    age_err = [1.0, 1.0, 0.2, 0.4, 0.001]
-    bv = [0.69, 0.90, 0.64, 0.66, 0.65]
-    bv_err = [0.01, 0.01, 0.01, 0.01, 0.01]
-    p = [28.8, 38.7, 22.7, 23.2, 26.9]
-    p_err = [2.5, 5.0, 0.5, 7.35, 0.1]
+    star_names = ["alpha cen A", "alpha cen B", "18 Sco", "16 Cyg A",
+                  "16 Cyg B", "sun"]
+    age = [6.0, 6.0, 3.66, 6.8, 6.8, 4.568]
+    age_err = [1.0, 1.0, 0.2, 0.4, 0.4, 0.001]
+    bv = [0.69, 0.90, 0.64, 0.64, 0.66, 0.65]
+    bv_err = [0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
+    p = [28.8, 38.7, 22.7, 23.8, 23.2, 26.9]
+    p_err = [2.5, 5.0, 0.5, 1.65, 7.35, 0.1]
 
     # load samples for each loo iteration
     for i, fname in enumerate(fnames):
@@ -74,7 +76,7 @@ if __name__ == "__main__":
             flatchain2[:, j] = par_err2[j]*np.random.randn(nsamp)+par2[j]
 
 #         for i in range(0, len(age)):
-        print i
+        print star_names[i]
         print age[i], bv[i], p[i]
         gyro_age, samples = age_calc(age[i], age_err[i], bv[i], bv_err[i],
                        p[i], p_err[i], flatchain, 0.45)
