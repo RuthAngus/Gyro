@@ -57,4 +57,6 @@ def lnlike(par, age_samp, temp_samp, period_samp, logg_samp, age_obs, age_err, \
     loglike = np.sum(ll)
     if np.isnan(loglike) == True:
         loglike = -np.inf
+    with open("loglike.txt", "a") as f:
+        f.write("%s " % loglike)
     return loglike

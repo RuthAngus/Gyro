@@ -1,4 +1,5 @@
 import numpy as np
+
 import matplotlib.pyplot as pl
 from teff_bv import teff2bv_orig, teff2bv_err
 import pretty5
@@ -204,10 +205,10 @@ pl.errorbar(a[sun], p[sun], xerr=a_err[sun], yerr=p_err[sun], color="r", \
 xs = np.linspace(0, 20, 100)
 pl.plot(xs, 10**log_period_model(pars, np.log10(xs*1000), .65), 'k-.',
         label='$\mathrm{B-V}=0.65~\mathrm{Barnes~(2007)}$', zorder=3,
-        linewidth=2, color=cols.blue)
+        linewidth=2, color=cols.lightblue)
 pl.plot(xs, 10**log_period_model(pars2, np.log10(xs*1000), .65), 'k--',
         label = '$\mathrm{B-V}=0.65~\mathrm{M\&H~(2008)}$', zorder=3,
-        linewidth=2, color=cols.blue)
+        linewidth=2, color=cols.lightblue)
 
 pl.plot(xs, 10**log_period_model(pars3, np.log10(xs*1000), .65), 'k',\
         label = '$\mathrm{B-V}=0.65~\mathrm{Angus~\emph{et~al.}~(2014)}$',

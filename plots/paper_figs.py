@@ -56,9 +56,9 @@ vtfeh_err = data[12]
 vtbv, vtbv_err = teff2bv_err(vtt, vtlogg, vtfeh, vtt_err, vtlogg_err, vtfeh_err)
 
 l = (t1>100)*(logg1>0)
-hot = (t1[l]>6250) * (logg1>4.1)
-sub = logg1[l]<4.1
-cd = (t1[l]<6250) * (logg1[l]>4.1)
+hot = (t1[l]>6250) * (logg1>4.2)
+sub = logg1[l]<4.2
+cd = (t1[l]<6250) * (logg1[l]>4.2)
 pl.clf()
 # pl.errorbar(t1[l][hot], logg1[l][hot], xerr=t1_err[l][hot], yerr=(logg1_errp[l][hot], \
 #         logg1_errm[l][hot]), fmt='r.', capsize=0, ecolor='.7', mec='r', zorder=2)
@@ -90,7 +90,7 @@ pl.errorbar(t1[l][sub], logg1[l][sub], xerr=t1_err[l][sub], color=ocols[3],
 pl.errorbar(t1[l][cd], logg1[l][cd], xerr=t1_err[l][cd], yerr=(logg1_errp[l][cd],
             logg1_errm[l][cd]), fmt='ko', capsize=0, ecolor='.8', mec='k',
             zorder=3, label="$\mathrm{Cool~Dwarfs}$", markersize=4)
-
+print len(t1[l][cd]), 'cds'
 print len(t1[l]), len(t1[l][hot]), len(t1[l][sub])
 print len(t1[l])-len(t1[l][hot+sub])
 hot = vtt>6250
