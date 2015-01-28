@@ -21,8 +21,6 @@ plotpar = {'axes.labelsize': 20,
 pl.rcParams.update(plotpar)
 
 def lnprior(m):
-#     if 0. < m[0] < .6 and 0. < m[1] < 1. and 0. < m[2] < 1. \
-#     if 0. < m[0] < .65 and .5 < m[1] < 1. and 0. < m[2] < 1. \
     if -10. < m[0] < 10. and .0< m[1] < 1. and 0. < m[2] < 1. \
             and 0 < m[3] < 30. and 0 < m[4] < 100.\
             and 0 < m[5] < 30. and 0 < m[6] < 100.\
@@ -55,7 +53,6 @@ def MCMC(fname, n, c, train, cv, sampling):
         print 'initialising with MAP values'
         print par_true
     except:
-#         par_true = [0.7725, 0.5189, .601, 5., 10., \ # Barnes
         par_true = [0.6, 0.5189, .601, 5., 10., \
                 8., 30., 9., 5., .67] # better initialisation
         print par_true
@@ -63,11 +60,6 @@ def MCMC(fname, n, c, train, cv, sampling):
     # load real data
     age_obs, age_err, age_errp, age_errm, period_obs, period_err, bv_obs, bv_err, \
             logg_obs, logg_err, logg_errp, logg_errm, flag = load_dat(fname, train, cv)
-
-    pl.clf()
-    pl.errorbar(age_obs, period_obs, xerr=age_err, yerr=period_err, fmt='k.',
-                 capsize=0, ecolor='.8')
-#     pl.show()
 
     # Now generate samples
     nsamp = 500
@@ -96,15 +88,11 @@ def MCMC(fname, n, c, train, cv, sampling):
     sampler = emcee.EnsembleSampler(nwalkers, ndim, lnprob, args = args)
 
     print("Burn-in")
-#     p0, lp, state = sampler.run_mcmc(p0, 5000)
     p0, lp, state = sampler.run_mcmc(p0, 10000)
-#     p0, lp, state = sampler.run_mcmc(p0, 300)
     sampler.reset()
     print("Production run")
-#     nstep = 3000
-#     nruns = 500.
     nstep = 100000
-    nruns = 2000.
+    nruns = 2000
 
     for j in range(int(nstep/nruns)):
 
@@ -131,7 +119,6 @@ def MCMC(fname, n, c, train, cv, sampling):
                             logg_samp, age_obs, age_err, bv_obs, bv_err,
                             period_obs, period_err, logg_obs, logg_err, c)
         print 'likelihood = ', likelihood
-#         np.savetxt('likelihood%s%s.txt'%(n, fname), likelihood)
 
     # save parameters and print to screen
     print 'initial values', par_true
@@ -146,28 +133,16 @@ def MCMC(fname, n, c, train, cv, sampling):
     data[:,:] = np.array(sampler.chain)
     f.close()
 
+    # save logprobs
+    f = h5py.File("logprob_%s%s" %(n, fname), "w")
+    data = f.create_dataset("logprob", np.shape(sampler.lnprobability))
+    data[:,:] = np.array(sampler.lnprobability)
+    f.close()
+
 if __name__ == "__main__":
 
     # proper runs
-    fname = 'ACHFP'
+    fname = 'ACHF'
 
     print fname, "fname"
     MCMC(fname, '_', .45, False, False, True)
-
-#     cross_v = False
-#     if cross_v:
-#         # cross validation
-#         folds = 5; n=0
-#         skf = stratifiedkfold(folds, fname)
-#         scores = []
-#         for train, test in skf:
-#             if n>0:
-#                 MCMC(fname, n, .45, train, cross_v, True)
-#             scores.append(scoring(fname, n, test))
-#             print scores[n]
-#             np.savetxt('train%s_%s.txt'%(n, fname), train)
-#             np.savetxt('test%s_%s.txt'%(n, fname), test)
-#             n+=1
-#         np.savetxt('scores_%s.txt'%fname, scores)
-#     else:
-#         MCMC(fname, '_', .45, False, False, True)

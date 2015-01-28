@@ -80,10 +80,10 @@ pl.clf()
 from colours import plot_colours
 cols = plot_colours()
 pl.errorbar(t1[l][hot], logg1[l][hot], xerr=t1_err[l][hot],
-            yerr=(logg1_errp[l][hot], logg1_errm[l][hot]), color=ocols[0],
+            yerr=(logg1_errp[l][hot], logg1_errm[l][hot]), color="r",
             fmt='o', capsize=0, ecolor='.8', mec=ocols[0], zorder=2,
             label="$\mathrm{Hot~Dwarfs}$", markersize=4)
-pl.errorbar(t1[l][sub], logg1[l][sub], xerr=t1_err[l][sub], color=ocols[3],
+pl.errorbar(t1[l][sub], logg1[l][sub], xerr=t1_err[l][sub], color="b",
             yerr=(logg1_errp[l][sub], logg1_errm[l][sub]), fmt='o', capsize=0,
             ecolor='.8', mec=ocols[3], zorder=1, label="$\mathrm{Subgiants}$",
             markersize=4)

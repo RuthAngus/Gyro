@@ -15,9 +15,9 @@ DIR = '/Users/angusr/Python/Gyro'
 # DIR = '/Users/angusr/Python/noisy-plane'
 # with h5py.File("%s/samples_%s" % (DIR, fname), "r") as f:
 with h5py.File("%s/code/samples_%s" % (DIR, fname), "r") as f:
-    samples = f["samples"][:, 500:, :]
+#     samples = f["samples"][:, 500:, :]
 #     samples = f["samples"][:, 45000:, :]
-#     samples = f["samples"][:, 15000:, :]
+    samples = f["samples"][:, 80000:, :]
 print np.shape(samples)
 nwalkers, n, ndim = samples.shape
 flatchain = samples.reshape((-1, ndim))

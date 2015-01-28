@@ -164,7 +164,7 @@ xs, ys = iso_calc(pars3, age)
 xs -= 0.45
 pl.plot(xs, ys, color = c, linestyle='-', linewidth=lw, \
         label = '$%s~\mathrm{Gyr}$~ \
-        $\mathrm{Angus~\emph{et~al.}~(2014)}$' %age, zorder=0)
+        $\mathrm{Angus~\emph{et~al.}~(2015)}$' %age, zorder=0)
 xs, ys1 = iso_calc(pars3-pars3_err, age)
 xs -= 0.45
 xs, ys2 = iso_calc(pars3+pars3_err, age)
@@ -211,7 +211,7 @@ pl.plot(xs, 10**log_period_model(pars2, np.log10(xs*1000), .65), 'k--',
         linewidth=2, color=cols.lightblue)
 
 pl.plot(xs, 10**log_period_model(pars3, np.log10(xs*1000), .65), 'k',\
-        label = '$\mathrm{B-V}=0.65~\mathrm{Angus~\emph{et~al.}~(2014)}$',
+        label = '$\mathrm{B-V}=0.65~\mathrm{Angus~\emph{et~al.}~(2015)}$',
         linewidth=1, zorder=1)
 ys1 = 10**log_period_model(pars3+pars3_err, np.log10(xs*1000), .65)
 ys2 = 10**log_period_model(pars3-pars3_err, np.log10(xs*1000), .65)

@@ -19,6 +19,7 @@ teff, teff_err = irfm, irfm_err
 # Load Astero data from table 1 - KIDs, teffs and feh
 data1 = np.genfromtxt('/Users/angusr/Python/Gyro/data/ApJtable_zeros.txt', \
         skiprows=30, skip_footer=1335, invalid_raise=False, usecols=(0,teff,teff_err,7,8,9,10)).T
+
 KID1 = data1[0]
 IRFM = data1[3]
 # Load Astero data from table 1 - KIDs, teffs and feh

@@ -137,7 +137,7 @@ for i, age in enumerate(ages):
     xs, ys = iso_calc(pars3, ages[i])
     xs -= .45
     pl.plot(xs, ys, color='k', linestyle='-', linewidth=lw,
-            label = '$%s~\mathrm{Gyr}$~$\mathrm{Angus~\emph{et~al.}~(2014)}$'
+            label = '$%s~\mathrm{Gyr}$~$\mathrm{Angus~\emph{et~al.}~(2015)}$'
             % ages[i], zorder=0)
     xs, ys1 = iso_calc(pars3-pars3_err, ages[i])
     xs -= .45
