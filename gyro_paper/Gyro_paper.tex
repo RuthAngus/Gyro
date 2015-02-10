@@ -1294,24 +1294,52 @@ clusters, the Kepler asteroseismic stars, local field stars and the Sun
 resulted in bimodal posterior PDFs.
 The Kepler asteroseismic stars were not well described by the same
 gyrochronology relation as the Sun, field stars and clusters.
-This phenomenon could be caused by observational biases, however, if the cause
-is physical this would provide further evidence that the current form of the
-gyrochronology relation is an over-simplification of the underlying processes.
+There are several potential explanations for the cause of this phenomenon.
+Some if the most likely are:
+the asteroseismic ages or the photometric rotation periods could be
+systematically biased; the rotation periods might be subject to Malmquist bias
+due to incomplete detection; the different populations have different physical
+properties (e.g. metallicity), not accounted for in the gyrochronology model.
 
-The observed variation between the populations of stars in this sample
-is concerning for the reliability of gyrochronology: perhaps it should
-only be used to constrain the ages of populations of stars, rather than for
-providing age estimates for individual stars.
-A future study may benefit from allowing there to be a `width' to the
-gyrochronology plane, i.e. not assuming that there is one `true' value of age
-for a given rotation period and colour, but rather a spread of ages, each with
-some probability.
-The role of metallicity on rotational evolution should also be thoroughly
-investigated as it may have a non-negligable effect.
-The K2 mission will contribute new rotation periods and continued
-asteroseismic studies will produce more precise age measurements enabling
-further improvement of gyrochronology over the coming years.
+% This phenomenon could be caused by observational biases, however, if the cause
+% is physical this would provide further evidence that the current form of the
+% gyrochronology relation is an over-simplification of the underlying processes.
 
+It was the careful and well motivated modelling techniques used in this work
+which allowed us to identify the potential shortcomings of the current
+gyrochronology model.
+Only by conducting MCMC parameter exploration and studying the resulting
+posterior PDFs were we able to identify that different subsets of our data
+sample preferred different model parameters.
+The results are somewhat unsettling---no single model describes the sample as
+a whole, even when dropping some of the clusters and allowing for rather
+complex population subsets.
+This tells us the physical model is probably not good enough, but it - or
+something very similar - is the model everyone has been using in
+gyrochronology studies so far.
+Previous studies did not model multiple cluster and field populations
+simultaneously, or do the modelling in such a detailed way, so the problems
+didn’t come through so clearly.
+In the future better physical models may be developed, better ages may be
+calculated and more sensitive period search methods, not so susceptible to
+Malmquist bias may become available.
+When they do, the prescription we provide will enable the the
+period-colour-age relation to be modelled more sensitively.
+
+% The observed variation between the populations of stars in this sample
+% is concerning for the reliability of gyrochronology.
+% : perhaps it should
+% only be used to constrain the ages of populations of stars, rather than for
+% providing age estimates for individual stars.
+% A future study may benefit from allowing there to be a `width' to the
+% gyrochronology plane, i.e. not assuming that there is one `true' value of age
+% for a given rotation period and colour, but rather a spread of ages, each with
+% some probability.
+% The role of metallicity on rotational evolution should also be thoroughly
+% investigated as it may have a non-negligable effect.
+% The K2 mission will contribute new rotation periods and continued
+% asteroseismic studies will produce more precise age measurements enabling
+% further improvement of gyrochronology over the coming years.
 
 
 The code used in this project can be found at
