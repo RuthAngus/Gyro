@@ -110,38 +110,45 @@
 
 Among the available methods for dating stars, gyrochronology is a powerful one
 because it requires knowledge of only the star's mass and rotation period.
-However, it is not well calibrated at late ages and suffers from large
-systematic uncertainties.
-Asteroseismology provides age measurements for some of the brightest stars
-observed by {\it Kepler}.
-We use rotation period measurements of \nastero$~$stars with asteroseismic
+Until now it has only been calibrated using only young clusters, with the Sun
+providing the only age dependence, and is therefore poorly calibrated at late
+ages.
+Asteroseismic age measurements are now available for some of the brightest
+stars observed by {\it Kepler}.
+We used rotation period measurements of \nastero$~$stars with asteroseismic
 ages, \nHC stars from the Hyades and Coma Berenices clusters and 6 field stars
 (including the Sun) with precise age measurements to calibrate the
-gyrochronology relations.
-We model the relationship between rotation period, age and colour while
+gyrochronology relation.
+We modelled the relationship between rotation period, age and colour while
 accounting for measurement uncertainties in all three quantities.
-Our sample includes both MS stars and subgiants, and straddles the Kraft break.
-Only MS stars cooler than the Kraft break, at approximately 6250 K, are
-expected to follow gyrochronology relations; this must be taken into account
-when modelling the data.
-In principle, our method enables us to estimate an age for any cool MS star
-with a measured rotation period and colour, along with an associated
-uncertainty that reflects both measurement errors and the intrinsic scatter in
-the gyrochronology relations.
-Such an approach is adjustable for any gyrochronology study.
+Our sample includes cool dwarfs, hot dwarfs and subgiants.
+Only main sequence stars cooler than the Kraft break, at approximately 6250 K,
+are expected to follow gyrochronology relations; this had to be taken into
+account when modelling the data.
 We calibrated a relation of the form $P=A^n\times(B-V-c)^b$ where $P$ is
 rotation period in days, $A$ is age in Myr and $B$ and $V$ are magnitudes.
 $a$, $b$ and $n$ are the free parameters of our model.
-We find $a = \gyroa^{+\aerrp}_{-\aerrm}$, $b = \gyrob^{+\berrp}_{-\berrm}$ and
+We found $a = \gyroa^{+\aerrp}_{-\aerrm}$, $b = \gyrob^{+\berrp}_{-\berrm}$ and
 $n = \gyron^{+\nerrp}_{-\nerrm}$.
-We used Markov Chain Monte Carlo (MCMC) to explore posterior probability
-distribution functions of the gyrochronology parameters and carefully checked
-the effects of leaving out parts of our sample, leading us to find that no
-single relation beween rotation period, colour and age can adequately describe
-all the clusters used in this analysis.
+Markov Chain Monte Carlo (MCMC) was used to explore posterior probability
+distribution functions of the gyrochronology parameters and we carefully
+checked the effects of leaving out parts of our sample, leading us to find
+that no single relation beween rotation period, colour and age can adequately
+describe all the subsets of our sample used in this analysis.
+In particular, the Kepler asteroseismic stars and the local field stars
+cannot both be described by the same gyrochronology relation.
+The Kepler asteroseismic stars may be subject to observational biases, however
+we also found that some clusters were not well described by a single
+gyrochronology relation.
 This may have concerning consequences for the overall reliability of
 gyrochronology as a dating method---further investigation into the level of
 intrinsic scatter in the gyrochronology parameters will be required.
+Our method enables us to estimate an age for any cool MS star
+with a measured rotation period and colour, along with an associated
+uncertainty that reflects both measurement errors and the intrinsic scatter in
+the gyrochronology relations.
+The methods used in this work will be applicable to new data that become
+available in the future.
 
 \end{abstract}
 
@@ -1295,7 +1302,7 @@ resulted in bimodal posterior PDFs.
 The Kepler asteroseismic stars were not well described by the same
 gyrochronology relation as the Sun, field stars and clusters.
 There are several potential explanations for the cause of this phenomenon.
-Some if the most likely are:
+Some of the most likely are:
 the asteroseismic ages or the photometric rotation periods could be
 systematically biased; the rotation periods might be subject to Malmquist bias
 due to incomplete detection; the different populations have different physical
@@ -1305,16 +1312,16 @@ properties (e.g. metallicity), not accounted for in the gyrochronology model.
 % is physical this would provide further evidence that the current form of the
 % gyrochronology relation is an over-simplification of the underlying processes.
 
-It was the careful and well motivated modelling techniques used in this work
-which allowed us to identify the potential shortcomings of the current
+The careful and well motivated modelling techniques used in this work
+allowed us to identify the potential shortcomings of the current
 gyrochronology model.
 Only by conducting MCMC parameter exploration and studying the resulting
-posterior PDFs were we able to identify that different subsets of our data
-sample preferred different model parameters.
+posterior PDFs were we able to see that one global gyrochronology relation
+cannot describe all subsets of our sample.
 The results are somewhat unsettling---no single model describes the sample as
 a whole, even when dropping some of the clusters and allowing for rather
 complex population subsets.
-This tells us the physical model is probably not good enough, but it - or
+This tells us that the current model is probably not good enough, but it - or
 something very similar - is the model everyone has been using in
 gyrochronology studies so far.
 Previous studies did not model multiple cluster and field populations
@@ -1350,9 +1357,9 @@ Seventh Framework Programme (FP7/(2007-2013)/ERC Grant Agreement No. 291352).
 We wish to thank the anonymous referee for their valuable and insightful
 feedback and Bill Chaplin for his thoughtful and detailed comments
 which enormously improved this paper.
-We would also like to thank Tsevi Maseh, Eric Mamajek, Marc Pinsonneault,
-Sydney Barnes, Steve Kawaler, Jerome Bouvier, Daniel Mortlock and David Hogg
-for useful insight and discussion that hugely contributed to this paper.
+We would also like to thank Tsevi Maseh, Eric Mamajek, Daniel Mortlock and
+David Hogg for useful insight and discussion that hugely contributed to this
+paper.
 
 \bibliographystyle{mn2e}
 \bibliography{Gyro_paper}
