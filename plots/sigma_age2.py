@@ -22,7 +22,8 @@ def age_model(par, p, bv):
     return (1./par[0]) * p**(1./par[1]) * (bv-par[3])**(-par[2]/par[0])
 
 def iso_calc(pars, age):
-    x = np.linspace(1.6, .4, 10000)
+#     x = np.linspace(1.6, .4, 10000)
+    x = np.linspace(2., .4, 10000)
     y = 10**log_period_model(pars, np.log10(age*1000), x)
     return x, y
 
@@ -158,7 +159,7 @@ for i, age in enumerate(ages):
 
     pl.xlabel("$\mathrm{B-V-}~c$")
     pl.ylabel("$\mathrm{P_{rot} (days)}$")
-    pl.xlim(10**-3, 1.)
+    pl.xlim(10**-3, 1.4)
     pl.ylim(1, 10**2)
     pl.legend(loc='upper left')
     pl.loglog()
