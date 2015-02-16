@@ -78,7 +78,7 @@ pars2_err = [0.008, 0.021, 0.024, 0.010]
 # fnames
 fnames = ['A', 'H', 'P', 'N', 'C', 'F', 'V']
 
-fname = "NF45"
+fname = "CF45"
 
 ck = 0
 
@@ -163,7 +163,7 @@ pl.xlabel('$\mathrm{B-V-}~c$')
 pl.ylabel('$\mathrm{Period~(days)}$')
 # pl.xlim(.2,1.8)
 pl.subplots_adjust(hspace=.3)
-pl.plot(.65-.45, 26.09, 'ro', markersize=6, mec='r')
+pl.plot(.65-.45, 26.09, 'ro', markersize=ms, mec='r')
 # pl.xlim(.2, 1.8)
 pl.xlim(10**-1.6, 10**0.1)
 pl.ylim(10**.6, 10**1.8)
