@@ -135,10 +135,10 @@ distribution functions of the gyrochronology parameters and we carefully
 checked the effects of leaving out parts of our sample, leading us to find
 that no single relation beween rotation period, colour and age can adequately
 describe all the subsets of our sample used in this analysis.
-The Kepler asteroseismic stars, the cluster stars and the local field stars
-cannot all be described by the same gyrochronology relation.
-The Kepler asteroseismic stars may be subject to observational biases, however
-the clusters show unexpected deviations from the predicted behaviour.
+The {\it Kepler} asteroseismic stars, the cluster stars and the local field
+stars cannot all be described by the same gyrochronology relation.
+The {\it Kepler} asteroseismic stars may be subject to observational biases,
+however the clusters show unexpected deviations from the predicted behaviour.
 This may have concerning consequences for the overall reliability of
 gyrochronology as a dating method---further investigation into the level of
 intrinsic scatter in the gyrochronology parameters will be required.
@@ -187,7 +187,7 @@ calibrated and still need refining at large stellar ages.
 {\it Kepler} provides the perfect opportunity to calibrate gyrochronology at
 late ages---it provides surface rotation periods of thousands of stars and new
 age estimates for hundreds of stars via asteroseismology \footnote{Note that
-asteroseismic ages are only available for those Kepler stars which display
+asteroseismic ages are only available for those {\it Kepler} stars which display
 high signal-to-noise Solar-like oscillations in their power
 spectra.
 The majority of stars that fall into this category are around the same
@@ -914,10 +914,10 @@ One might expect metallicity to have an effect on the rotational evolution of
 a star since it impacts its internal structure.
 We have not attempted to calibrate a metallicity-dependent gyrochronology
 relation, because there are no precise metallicity measurements for the
-majority of the Kepler stars, on which this study is chiefly based.
+majority of the {\it Kepler} stars, on which this study is chiefly based.
 In addition, we anticipate that the majority of stars for which this new
-gyrochronology relation will be most useful are Kepler stars, or stars
-targeted by missions like Kepler, again, the majority of which are unlikely to
+gyrochronology relation will be most useful are {\it Kepler} stars, or stars
+targeted by missions like {\it Kepler}, again, the majority of which are unlikely to
 have precise metallicities.  % referee
 
 \begin{figure}
@@ -994,7 +994,7 @@ in order to demonstrate the widths and bimodal natures of these distributions.
 parameters, $a$, $b$ and $n$. Parameters $a$ and $n$ are correlated and their
 posterior PDFs are bimodal. The main peaks in the posterior PDFs of $a$ and
 $n$ correspond to a fit to the Sun and field stars. The smaller peak
-corresponds to a fit to the Kepler asteroseismic stars.
+corresponds to a fit to the {\it Kepler} asteroseismic stars.
 This plot was made using triangle.py
 \citep{Foreman-Mackey_triangle}.
 \label{fig:triangle}}
@@ -1006,10 +1006,19 @@ This plot was made using triangle.py
 \includegraphics[width=6in, clip=true, trim=0 0 0.5in 0]{p_vs_a_solar.pdf}
 \caption{Rotation period vs age for cool dwarfs with colour within 0.1 of the
 	Sun's: 0.65, with gyrochronology relations of \citet{Barnes2007},
-	\citet{Mamajek2008} and this work. The shaded region represents the
-	16th and 84th percentile uncertainties. The Sun is shown in red and the
+	\citet{Mamajek2008} and this work.
+	The Sun is shown in red and the
 	field stars, $\alpha$ Cen A, 18 Sco and 16 Cyg B from left to right,
 	are shown in blue.
+	The black points towards the lower left are cluster stars and those
+	towards the upper right are {\it Kepler} asteroseismic stars.
+	Each of the faint grey lines represents a
+	sample drawn from the posterior probability distributions of $a$, $b$
+	and $n$.
+	Whilst most of these draws come from the large peak in the posterior
+	PDF and fall through the Sun and field stars, some describe the
+	period-age relation of the {\it Kepler} asteroseismic stars.
+	These lines are drawn from the smaller peak in the posterior PDF.
 \label{fig:p_vs_a_solar}}
 \end{center}
 \end{figure*}
@@ -1071,24 +1080,24 @@ representing draws from the parameter posterior PDFs in
 figure \ref{fig:p_vs_a_solar}.
 The majority of these draws fall close to the best-fitting model, which passes
 neatly through the Sun and field stars, however a significant fraction fall
-below the line of best-fit, passing through the Kepler asteroseismic stars
+below the line of best-fit, passing through the {\it Kepler} asteroseismic stars
 which also mostly fall below the line.
 This result is reflected in \citet{Garcia2014} who model the AMP
-Kepler asteroseismic stars from \citet{Metcalfe2014}, without anchoring their
+{\it Kepler} asteroseismic stars from \citet{Metcalfe2014}, without anchoring their
 relation to the Sun.
-They find that the model that best describes the Kepler asteroseismic stars
+They find that the model that best describes the {\it Kepler} asteroseismic stars
 underpredicts the rotation period of the Sun.
 The grey lines that fall beneath our best-fitting model in figure
 \ref{fig:p_vs_a_solar} are drawn from the smaller peak in the posterior PDFs
 of $a$ and $n$ and seem to describe the relation between rotation period and
-age for the Kepler asteroseismic stars.
+age for the {\it Kepler} asteroseismic stars.
 In other words, the bimodal posterior PDFs of $a$ and $n$ are produced by the
-disagreement between the Kepler asteroseismic stars and the Sun and field
+disagreement between the {\it Kepler} asteroseismic stars and the Sun and field
 stars.
 % Although mostly consistent with this model they are not well
 % described by it when taken in isolation.
 One set of gyrochronology parameters is not
-capable of describing the Sun, plus field stars, and the Kepler
+capable of describing the Sun, plus field stars, and the {\it Kepler}
 asteroseismic stars simultaneously.
 There is more than one possible explanation for this result.
 Firstly, the asteroseismic ages could be systematically biased high.
@@ -1104,13 +1113,17 @@ age and, due to the detection bias brought about because shorter periods are
 easier to detect than longer periods, this broad range of rotation periods
 might be truncated at some upper cut-off.
 It would therefore appear as though Solar-colour stars were rotating too
-slowly for their age simply because only rapidly rotating Kepler stars appeared
-in our sample.
-Finally, it is possible that the Kepler asteroseismic stars follow a
+slowly for their age simply because only rapidly rotating {\it Kepler} stars
+appeared in our sample.
+{\it Kepler} systematics hinder our ability to measure longer rotation periods,
+but in addition, more slowly rotating stars tend to be less active, with
+fewer surface features and are therefore more likely to be missing from our
+sample.
+Finally, it is possible that the {\it Kepler} asteroseismic stars follow a
 \emph{different} spin-down relation to the Sun and field stars, perhaps due to
 having different metallicities. % not referee
 Unfortunately it is not currently possible to identify the cause of the
-observed mismatch between the Kepler stars and the field stars and we leave
+observed mismatch between the {\it Kepler} stars and the field stars and we leave
 this question for a future investigation.
 
 The fact that our fit is so heavily dominated by the Sun with its small
@@ -1225,13 +1238,13 @@ could account for this age discrepancy.
 The goal of gyrochronology in general is to provide a means of predicting the
 age of a star given observations of its colour (or mass, or temperature), and
 rotation period.
-The discrepancies in period-colour relations between clusters, Kepler stars
+The discrepancies in period-colour relations between clusters, {\it Kepler} stars
 and nearby field stars in the above analysis does not bode well for the
 current, simple gyrochronology model.
 Until now it has been hoped that one single relation between period, mass and
 age could be used to describe all F, G and K MS stars.
 Even though we are unable to identify the cause of the discrepancy between the
-Kepler stars and the field stars, a different gyrochronology relation still
+{\it Kepler} stars and the field stars, a different gyrochronology relation still
 seems to be required for each cluster.
 % gyrochronology as a dating method: values of $a$, $b$ and $n$ measured for the
 % Hyades and Coma Berenices were not consistent within uncertainties (see table
@@ -1245,6 +1258,9 @@ infinitely narrow plane?
 Unfortunately we cannot fully answer this question here as the asteroseismic
 ages are noisy and observational and intrinsic scatter are ambiguously
 interwoven.
+However, if this sample of stars is subject to Malmquist bias then, by
+definition, there must be a broad range of rotation periods for stars of a
+given mass and age.
 A future study might include an extra parameter that describes the `width' of
 the gyrochronological plane and attempt to detect an element of scatter above
 the noise level.
@@ -1296,16 +1312,20 @@ colour and age does not adequately describe the cluster data.
 For this reason, only the Hyades and Coma Berenices clusters were used to
 calibrate the model.
 Fitting equation \ref{eq:Barnes2007_2} to the Hyades and Coma Berenices
-clusters, the Kepler asteroseismic stars, local field stars and the Sun
+clusters, the {\it Kepler} asteroseismic stars, local field stars and the Sun
 resulted in bimodal posterior PDFs.
-The Kepler asteroseismic stars were not well described by the same
+The {\it Kepler} asteroseismic stars were not well described by the same
 gyrochronology relation as the Sun, field stars and clusters.
 There are several potential explanations for the cause of this phenomenon.
 Some of the most likely are: the asteroseismic ages or the photometric
 rotation periods could be systematically biased; the rotation periods might be
 subject to Malmquist bias due to incomplete detection; and the different
-populations have different physical properties (e.g. metallicity), not
+populations could have different physical properties (e.g. metallicity), not
 accounted for in the gyrochronology model.
+If Malmquist bias is responsible and there truely {\it is} a broad range of
+rotation periods for stars of a given age and colour, this still has
+negative implications for Gyrochronology which relies on the assumption that
+these three properties lie on a neat plane.
 
 % This phenomenon could be caused by observational biases, however, if the cause
 % is physical this would provide further evidence that the current form of the

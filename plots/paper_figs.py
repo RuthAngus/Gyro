@@ -6,7 +6,7 @@ cols = plot_colours()
 
 plotpar = {'axes.labelsize': 18,
            'text.fontsize': 20,
-           'legend.fontsize': 12,
+           'legend.fontsize': 10,
            'xtick.labelsize': 18,
            'ytick.labelsize': 18,
            'text.usetex': True}
