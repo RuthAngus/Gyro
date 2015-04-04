@@ -63,6 +63,7 @@ flag2 = data[8][l]
 # combine astero and cluster
 bv = np.concatenate((bv1, bv2))
 bv_err = np.concatenate((bv_err1, bv_err2))
+t_err = np.concatenate((t_err1, np.zeros_like(bv_err2)))
 p = np.concatenate((p1, p2))
 p_err = np.concatenate((p_err1, p_err2))
 a = np.concatenate((a1, a2))
@@ -133,6 +134,10 @@ l2 = (age-b < a) * (a < age+b) * (bv<.45)
 pl.clf()
 sun = a==4.568
 bv -= 0.45
+print bv_err[l], "\n"
+print t_err[l]
+print logg_err[l]
+print p_err[l], "\n"
 pl.errorbar(bv[l], p[l], xerr=bv_err[l], yerr=p_err[l], color='k', \
         fmt='o', mec='k', capsize=0, markersize=5, ecolor='.6')
 pl.errorbar(bv[l2], p[l2], xerr=bv_err[l2], yerr=p_err[l2], color='k', \
