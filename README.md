@@ -3,7 +3,7 @@ Gyro
 
 Calibrating Gyrochronology using Kepler Asteroseismic targets
 
-This is where I uses rotation periods measured in K-ACF, as well as the
+This is where I use rotation periods measured in K-ACF, as well as the
 asteroseismically determined ages and masses for the 505 stars in Chaplin et
 al, 2013 to calibrate the existing Gyrochronology relations of Barnes (2007)
 and(?) Mamajek and Hillenbrand (2008).
@@ -36,4 +36,3 @@ The answer is that although they start out with different rates of rotation,
 they all undergo different rotational evolution over the first 500 million
 years of their lives: the fast rotators decelerate rapidly and the slow
 rotatators decelerate slowly.
-You can see how, if tuned
