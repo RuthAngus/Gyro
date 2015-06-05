@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
     # load samples for each loo iteration
     for i, fname in enumerate(fnames):
-        with h5py.File("samples_%s" %fname, "r") as f:
+        with h5py.File("samples_%s.h5" %fname, "r") as f:
             samples = f["samples"][:, 50:, :]
         nwalkers, n, ndim = samples.shape
         flatchain = samples.reshape((-1, ndim))
