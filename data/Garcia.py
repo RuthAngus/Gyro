@@ -3,7 +3,7 @@ import matplotlib.pyplot as pl
 
 # load Garcia data
 data = np.genfromtxt("garcia.txt").T
-print np.shape(data)
+print(np.shape(data))
 KID, p, p_err, t, t_err, feh, feh_err, e7, e8, e9, logg, \
         logg_errp, logg_errm, a, a_errp, a_errm, flag, e17, e18 = data
 flag+=3
@@ -66,7 +66,7 @@ for i, kid in enumerate(KID):
     if sum(l):
         table[:5].T[i] = data1.T[:][l]
 #     else:
-#         print kid
+#         print(kid)
     ll = KID2==kid
     if sum(ll):
         table[5:].T[i] = data2.T[:][ll][0]
@@ -92,8 +92,8 @@ for i, kid in enumerate(KID4):
         table[10][l] = data4[5][i]
 
 KID1, t, t_err, feh, feh_err, logg, logg_errp, logg_errm, a, a_errp, a_errm = table
-print KID1[KID1==0]
-print a[a==0]
+print(KID1[KID1==0])
+print(a[a==0])
 
 # # load my data
 # data = np.genfromtxt("all_astero.txt").T
@@ -144,7 +144,7 @@ print a[a==0]
 data = np.genfromtxt("vandt.txt", skip_header=1).T
 for i, kid in enumerate(data[0]):
     l = KID==kid
-    print KID[l]
+    print(KID[l])
     t[l] = data[1][i]
     t_err[l] = data[2][i]
     a[l] = data[3][i]
@@ -160,15 +160,15 @@ for i, kid in enumerate(data[0]):
     flag[l] = 2
 
 f = KID==0
-print KID[f]
-print len(KID)
+print(KID[f])
+print(len(KID))
 l = (a!=0) * (t!=0)
 ll = a==0
 # print KID[ll], a[ll]
 data = np.zeros((14, len(KID[l])))
 data = KID[l], t[l], t_err[l], a[l], a_errp[l], a_errm[l], p[l], p_err[l], logg[l], \
         logg_errp[l], logg_errm[l], feh[l], feh_err[l], flag[l]
-print len(KID[l])
+print(len(KID[l]))
 # print data[ll]
 # np.savetxt("garcia_all_astero.txt", data)
 np.savetxt("garcia_irfm.txt", data)
